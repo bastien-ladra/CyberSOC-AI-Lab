@@ -1,8 +1,10 @@
+import argparse
 import json
 from pathlib import Path
 from typing import Any
 
 from ai_assistant.incident_summarizer import build_incident_analysis_prompt
+from ai_assistant.llm_client import query_ollama
 from detection.log_parser import load_ssh_logs, load_web_logs
 from detection.rules_engine import detect_ssh_bruteforce, detect_web_reconnaissance
 from utils.audit_logger import write_audit_event
@@ -14,13 +16,14 @@ WEB_LOG_FILE = Path("data/sample_logs/web_access.log")
 REPORT_DIR = Path("reports")
 ALERT_DIR = Path("alerts")
 PROMPT_DIR = Path("prompts")
+AI_OUTPUT_DIR = Path("ai_outputs")
 AUDIT_FILE = Path("audit/audit_log.jsonl")
 
 
 def save_alert_json(alert: dict[str, Any], alert_path: Path) -> None:
     alert_path.write_text(
         json.dumps(alert, indent=4, ensure_ascii=False),
-        encoding="utf-8"
+        encoding="utf-8",
     )
 
 
@@ -86,10 +89,33 @@ Une validation humaine est nécessaire avant toute action de blocage ou de remé
     report_path.write_text(report, encoding="utf-8")
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="CyberSOC-AI-Lab — SOC augmenté par IA"
+    )
+
+    parser.add_argument(
+        "--enable-ai",
+        action="store_true",
+        help="Active l'analyse IA locale via Ollama.",
+    )
+
+    parser.add_argument(
+        "--model",
+        default="llama3.2",
+        help="Nom du modèle Ollama à utiliser. Exemple : llama3.2, mistral, phi3.",
+    )
+
+    return parser.parse_args()
+
+
 def main() -> None:
+    args = parse_args()
+
     REPORT_DIR.mkdir(exist_ok=True)
     ALERT_DIR.mkdir(exist_ok=True)
     PROMPT_DIR.mkdir(exist_ok=True)
+    AI_OUTPUT_DIR.mkdir(exist_ok=True)
 
     ssh_events: list[dict[str, Any]] = load_ssh_logs(str(SSH_LOG_FILE))
     web_events: list[dict[str, Any]] = load_web_logs(str(WEB_LOG_FILE))
@@ -106,12 +132,25 @@ def main() -> None:
         alert_path = ALERT_DIR / f"alert_{index:03d}.json"
         report_path = REPORT_DIR / f"incident_{index:03d}.md"
         prompt_path = PROMPT_DIR / f"incident_prompt_{index:03d}.md"
+        ai_output_path = AI_OUTPUT_DIR / f"incident_ai_analysis_{index:03d}.md"
 
         save_alert_json(alert, alert_path)
         generate_markdown_report(alert, report_path)
 
         prompt = build_incident_analysis_prompt(alert)
         prompt_path.write_text(prompt, encoding="utf-8")
+
+        ai_response_generated = False
+
+        if args.enable_ai:
+            ai_response = query_ollama(prompt=prompt, model=args.model)
+
+            if ai_response:
+                ai_output_path.write_text(ai_response, encoding="utf-8")
+                ai_response_generated = True
+                print(f"Analyse IA générée : {ai_output_path}")
+            else:
+                print("Aucune analyse IA générée. Vérifie qu'Ollama est lancé.")
 
         write_audit_event(
             AUDIT_FILE,
@@ -124,7 +163,11 @@ def main() -> None:
                 "alert_file": str(alert_path),
                 "report_file": str(report_path),
                 "prompt_file": str(prompt_path),
-            }
+                "ai_enabled": args.enable_ai,
+                "ai_model": args.model if args.enable_ai else None,
+                "ai_response_generated": ai_response_generated,
+                "ai_output_file": str(ai_output_path) if ai_response_generated else None,
+            },
         )
 
         print(f"Alerte JSON générée : {alert_path}")
