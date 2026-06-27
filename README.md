@@ -15,6 +15,7 @@ Le projet a pour objectif de :
 - préparer et générer une analyse assistée par IA ;
 - évaluer automatiquement les réponses IA ;
 - visualiser les incidents dans une interface SOC simple ;
+- permettre une validation humaine des alertes ;
 - conserver une traçabilité des traitements ;
 - imposer une validation humaine avant toute action sensible.
 
@@ -37,7 +38,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : **MVP v0.6**
+Version actuelle : **MVP v0.7**
 
 Le prototype couvre actuellement deux scénarios :
 
@@ -51,6 +52,9 @@ Cette version intègre également :
 - une évaluation automatique des réponses IA ;
 - un scoring de prudence, structure et contrôle humain ;
 - une interface Streamlit permettant de visualiser les alertes, rapports, analyses IA, scores d’évaluation et événements d’audit ;
+- un workflow de validation humaine des alertes ;
+- un stockage des décisions analyste au format JSON ;
+- une journalisation dédiée des validations humaines ;
 - des tests unitaires ;
 - une pipeline GitHub Actions pour exécuter les tests automatiquement.
 
@@ -76,6 +80,11 @@ Le prototype permet actuellement de :
 - consulter les analyses IA locales ;
 - afficher le score d’évaluation IA ;
 - visualiser le journal d’audit ;
+- enregistrer une décision humaine sur chaque alerte ;
+- ajouter une note analyste ;
+- stocker les validations humaines au format JSON ;
+- journaliser les validations humaines dans un fichier d’audit dédié ;
+- consulter les validations humaines depuis le dashboard ;
 - journaliser les traitements dans un fichier d’audit JSONL ;
 - exécuter des tests unitaires avec pytest ;
 - lancer les tests automatiquement via GitHub Actions.
@@ -106,7 +115,8 @@ CyberSOC-AI-Lab/
 │   └── alert_002.json
 │
 ├── audit/
-│   └── audit_log.jsonl
+│   ├── audit_log.jsonl
+│   └── human_review_log.jsonl
 │
 ├── dashboard/
 │   └── app.py
@@ -126,6 +136,10 @@ CyberSOC-AI-Lab/
 │   ├── evaluation.md
 │   ├── research_notes.md
 │   └── threat_model.md
+│
+├── human_reviews/
+│   ├── review_001.json
+│   └── review_002.json
 │
 ├── prompts/
 │   ├── incident_prompt_001.md
@@ -173,6 +187,10 @@ Analyse IA locale optionnelle via Ollama
 Journalisation dans un fichier d’audit
         ↓
 Visualisation dans un dashboard Streamlit
+        ↓
+Validation humaine par un analyste
+        ↓
+Journalisation de la décision humaine
 ```
 
 ## Scénarios détectés
@@ -254,6 +272,42 @@ Exemple de sortie :
 }
 ```
 
+## Validation humaine
+
+Le projet intègre un workflow de validation humaine dans le dashboard Streamlit.
+
+Pour chaque alerte, un analyste peut :
+
+- valider l’alerte ;
+- rejeter l’alerte ;
+- la classer comme faux positif ;
+- demander une escalade ;
+- ajouter une note analyste ;
+- conserver une trace de la décision.
+
+Les validations humaines sont stockées dans :
+
+```text
+human_reviews/
+```
+
+Exemple :
+
+```text
+human_reviews/review_001.json
+human_reviews/review_002.json
+```
+
+Les décisions humaines sont également journalisées dans :
+
+```text
+audit/human_review_log.jsonl
+```
+
+Ce mécanisme permet de conserver le principe central du projet :
+
+> L’IA assiste l’analyste, mais la décision finale reste humaine.
+
 ## Sorties générées
 
 À l’exécution, le projet génère plusieurs types de fichiers.
@@ -333,12 +387,33 @@ ai_outputs/incident_ai_evaluation_001.json
 ai_outputs/incident_ai_evaluation_002.json
 ```
 
-### Journal d’audit
+### Validations humaines
 
-Les traitements sont journalisés dans :
+Les validations humaines sont stockées dans :
+
+```text
+human_reviews/
+```
+
+Exemple :
+
+```text
+human_reviews/review_001.json
+human_reviews/review_002.json
+```
+
+### Journaux d’audit
+
+Les traitements système sont journalisés dans :
 
 ```text
 audit/audit_log.jsonl
+```
+
+Les validations humaines sont journalisées dans :
+
+```text
+audit/human_review_log.jsonl
 ```
 
 Le format JSONL permet de conserver une trace horodatée des traitements effectués.
@@ -453,7 +528,7 @@ Prompt IA généré : prompts/incident_prompt_002.md
 
 ## Dashboard Streamlit
 
-Le projet inclut une interface simple permettant de visualiser les alertes, rapports, prompts IA, analyses IA, scores d’évaluation et événements d’audit.
+Le projet inclut une interface simple permettant de visualiser les alertes, rapports, prompts IA, analyses IA, scores d’évaluation, événements d’audit et validations humaines.
 
 Lancer le dashboard :
 
@@ -469,7 +544,11 @@ Le dashboard permet de :
 - consulter le prompt IA généré ;
 - afficher l’analyse IA si elle existe ;
 - consulter le score d’évaluation IA ;
-- lire le journal d’audit.
+- enregistrer une décision humaine ;
+- ajouter une note analyste ;
+- consulter une validation humaine existante ;
+- lire le journal d’audit système ;
+- lire le journal d’audit des validations humaines.
 
 ## Tests
 
@@ -568,7 +647,8 @@ CyberSOC-AI-Lab se positionne à l’intersection de plusieurs domaines :
 - gouvernance des systèmes d’IA ;
 - sécurité des systèmes d’information ;
 - évaluation de la fiabilité des réponses IA ;
-- visualisation SOC.
+- visualisation SOC ;
+- validation humaine des décisions assistées par IA.
 
 ## Limites actuelles
 
@@ -582,6 +662,7 @@ Limites identifiées :
 - analyse IA encore basique ;
 - évaluation IA basée sur des règles simples ;
 - interface utilisateur encore simple et exploratoire ;
+- validation humaine encore locale et simple ;
 - absence de données réelles ;
 - absence de comparaison avec un SIEM réel ;
 - absence de validation par un analyste SOC réel.
@@ -590,7 +671,7 @@ Ces limites sont acceptées à ce stade, car l’objectif est de construire prog
 
 ## Roadmap
 
-### MVP v0.6 — État actuel
+### MVP v0.7 — État actuel
 
 - Détection brute force SSH ;
 - Détection reconnaissance web ;
@@ -610,12 +691,18 @@ Ces limites sont acceptées à ce stade, car l’objectif est de construire prog
 - Consultation des analyses IA ;
 - Affichage des scores d’évaluation IA ;
 - Consultation du journal d’audit ;
+- Workflow de validation humaine ;
+- Décision analyste par alerte ;
+- Note analyste ;
+- Stockage des validations humaines au format JSON ;
+- Journalisation des validations humaines ;
+- Consultation des validations dans le dashboard ;
 - Documentation d’architecture ;
 - Threat model ;
 - Notes de recherche ;
 - Méthodologie d’évaluation.
 
-### MVP v0.7 — Scénarios avancés
+### MVP v0.8 — Scénarios avancés
 
 Objectif :
 
@@ -624,7 +711,7 @@ Objectif :
 - ajouter une corrélation de signaux faibles ;
 - ajouter une détection de tentative de prompt injection dans les logs.
 
-### MVP v0.8 — Évaluation avancée
+### MVP v0.9 — Évaluation avancée
 
 Objectif :
 
@@ -635,14 +722,16 @@ Objectif :
 - détecter les réponses non justifiées ;
 - journaliser les corrections humaines.
 
-### MVP v0.9 — Validation humaine
+### MVP v1.0 — Validation humaine avancée
 
 Objectif :
 
-- valider ou rejeter une analyse IA depuis l’interface ;
-- ajouter une note humaine ;
-- tracer la décision finale ;
-- enrichir le journal d’audit avec les décisions humaines.
+- améliorer l’interface de validation humaine ;
+- ajouter un historique des décisions ;
+- ajouter un statut global par incident ;
+- ajouter une exportation des décisions ;
+- préparer une logique multi-analystes ;
+- enrichir le journal d’audit avec les corrections humaines détaillées.
 
 ## Vision long terme
 
