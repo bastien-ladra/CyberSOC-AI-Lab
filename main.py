@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from detection.log_parser import load_ssh_logs
@@ -6,6 +7,17 @@ from detection.rules_engine import detect_ssh_bruteforce
 
 LOG_FILE = Path("data/sample_logs/ssh_auth.log")
 REPORT_DIR = Path("reports")
+ALERT_DIR = Path("alerts")
+
+
+def save_alert_json(alert: dict, alert_path: Path) -> None:
+    """
+    Sauvegarde une alerte au format JSON structuré.
+    """
+    alert_path.write_text(
+        json.dumps(alert, indent=4, ensure_ascii=False),
+        encoding="utf-8"
+    )
 
 
 def generate_markdown_report(alert: dict, report_path: Path) -> None:
@@ -63,6 +75,7 @@ Une validation humaine est nécessaire avant toute action de blocage ou de remé
 
 def main() -> None:
     REPORT_DIR.mkdir(exist_ok=True)
+    ALERT_DIR.mkdir(exist_ok=True)
 
     events = load_ssh_logs(str(LOG_FILE))
     alerts = detect_ssh_bruteforce(events)
@@ -72,9 +85,14 @@ def main() -> None:
         return
 
     for index, alert in enumerate(alerts, start=1):
+        alert_path = ALERT_DIR / f"alert_{index:03d}.json"
         report_path = REPORT_DIR / f"incident_{index:03d}.md"
+
+        save_alert_json(alert, alert_path)
         generate_markdown_report(alert, report_path)
-        print(f"Rapport généré : {report_path}")
+
+        print(f"Alerte JSON générée : {alert_path}")
+        print(f"Rapport Markdown généré : {report_path}")
 
 
 if __name__ == "__main__":

@@ -117,3 +117,15 @@ La problématique associée est :
 Projet en cours de conception.
 
 Première étape : création d’un moteur simple de détection d’incidents à partir de logs simulés.
+
+## État actuel du projet
+
+La première version du prototype permet actuellement de :
+
+- lire un fichier de logs SSH simulés ;
+- parser les événements de connexion ;
+- détecter une tentative de brute force SSH à partir d’une règle simple ;
+- générer une alerte structurée ;
+- produire un rapport d’incident Markdown dans le dossier `reports/`.
+
+Cette version ne contient pas encore d’intelligence artificielle. L’objectif est d’abord de construire une base SOC simple et fiable avant d’ajouter une couche IA pour l’aide à l’analyse, la qualification et la recommandation.
