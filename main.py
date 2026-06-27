@@ -3,11 +3,13 @@ from pathlib import Path
 
 from detection.log_parser import load_ssh_logs
 from detection.rules_engine import detect_ssh_bruteforce
+from ai_assistant.incident_summarizer import build_incident_analysis_prompt
 
 
 LOG_FILE = Path("data/sample_logs/ssh_auth.log")
 REPORT_DIR = Path("reports")
 ALERT_DIR = Path("alerts")
+PROMPT_DIR = Path("prompts")
 
 
 def save_alert_json(alert: dict, alert_path: Path) -> None:
@@ -76,6 +78,7 @@ Une validation humaine est nécessaire avant toute action de blocage ou de remé
 def main() -> None:
     REPORT_DIR.mkdir(exist_ok=True)
     ALERT_DIR.mkdir(exist_ok=True)
+    PROMPT_DIR.mkdir(exist_ok=True)
 
     events = load_ssh_logs(str(LOG_FILE))
     alerts = detect_ssh_bruteforce(events)
@@ -93,6 +96,11 @@ def main() -> None:
 
         print(f"Alerte JSON générée : {alert_path}")
         print(f"Rapport Markdown généré : {report_path}")
+        prompt_path = PROMPT_DIR / f"incident_prompt_{index:03d}.md"
+        prompt = build_incident_analysis_prompt(alert)
+        prompt_path.write_text(prompt, encoding="utf-8")
+
+        print(f"Prompt IA généré : {prompt_path}")
 
 
 if __name__ == "__main__":
