@@ -1,6 +1,6 @@
 # CyberSOC-AI-Lab
 
-Prototype de SOC augmenté par intelligence artificielle pour la détection, la qualification et la réponse aux incidents cyber, avec supervision humaine, traçabilité et garde-fous contre les erreurs de l’IA.
+Prototype de SOC augmenté par intelligence artificielle pour la détection, la qualification et la réponse aux incidents cyber, avec supervision humaine, traçabilité, évaluation des réponses IA et garde-fous contre les erreurs de l’IA.
 
 ## Objectif du projet
 
@@ -12,7 +12,8 @@ Le projet a pour objectif de :
 - détecter des comportements suspects ;
 - générer des alertes structurées ;
 - produire des rapports d’incident ;
-- préparer une analyse assistée par IA ;
+- préparer et générer une analyse assistée par IA ;
+- évaluer automatiquement les réponses IA ;
 - conserver une traçabilité des traitements ;
 - imposer une validation humaine avant toute action sensible.
 
@@ -28,20 +29,28 @@ Cependant, son usage en cybersécurité introduit aussi des risques :
 - prompt injection ;
 - automatisation excessive ;
 - manque d’explicabilité ;
-- perte de contrôle humain.
+- perte de contrôle humain ;
+- surconfiance dans les réponses générées.
 
-Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui reste contrôlé, explicable et auditable.
+Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui reste contrôlé, explicable, auditable et supervisé par l’humain.
 
 ## Statut du projet
 
-Version actuelle : **MVP v0.4**
+Version actuelle : **MVP v0.5**
 
 Le prototype couvre actuellement deux scénarios :
 
 1. Détection d’une tentative de brute force SSH à partir de logs simulés ;
 2. Détection d’une activité de reconnaissance web à partir de logs HTTP simulés.
 
-Cette version ne connecte pas encore directement un modèle IA. Elle prépare cependant des prompts IA sécurisés, structurés et basés uniquement sur les preuves observées.
+Cette version intègre également :
+
+- une connexion optionnelle à un modèle IA local via Ollama ;
+- la génération d’analyses IA pour chaque incident ;
+- une évaluation automatique des réponses IA ;
+- un scoring de prudence, structure et contrôle humain ;
+- des tests unitaires ;
+- une pipeline GitHub Actions pour exécuter les tests automatiquement.
 
 ## Fonctionnalités actuelles
 
@@ -56,15 +65,33 @@ Le prototype permet actuellement de :
 - générer des alertes JSON structurées ;
 - produire des rapports d’incident Markdown ;
 - générer des prompts IA sécurisés basés uniquement sur les preuves observées ;
-- journaliser les traitements dans un fichier d’audit JSONL.
+- générer une analyse IA locale optionnelle via Ollama ;
+- évaluer automatiquement les réponses IA selon des critères de prudence, structure, hallucination et validation humaine ;
+- produire un score d’acceptabilité pour chaque réponse IA ;
+- journaliser les traitements dans un fichier d’audit JSONL ;
+- exécuter des tests unitaires avec pytest ;
+- lancer les tests automatiquement via GitHub Actions.
 
 ## Architecture du projet
 
 ```text
 CyberSOC-AI-Lab/
 │
+├── .github/
+│   └── workflows/
+│       └── tests.yml
+│
 ├── ai_assistant/
-│   └── incident_summarizer.py
+│   ├── __init__.py
+│   ├── incident_summarizer.py
+│   ├── llm_client.py
+│   └── response_evaluator.py
+│
+├── ai_outputs/
+│   ├── incident_ai_analysis_001.md
+│   ├── incident_ai_analysis_002.md
+│   ├── incident_ai_evaluation_001.json
+│   └── incident_ai_evaluation_002.json
 │
 ├── alerts/
 │   ├── alert_001.json
@@ -79,11 +106,13 @@ CyberSOC-AI-Lab/
 │       └── web_access.log
 │
 ├── detection/
+│   ├── __init__.py
 │   ├── log_parser.py
 │   └── rules_engine.py
 │
 ├── docs/
 │   ├── architecture.md
+│   ├── evaluation.md
 │   ├── research_notes.md
 │   └── threat_model.md
 │
@@ -95,10 +124,18 @@ CyberSOC-AI-Lab/
 │   ├── incident_001.md
 │   └── incident_002.md
 │
+├── tests/
+│   ├── __init__.py
+│   ├── test_log_parser.py
+│   ├── test_response_evaluator.py
+│   └── test_rules_engine.py
+│
 ├── utils/
+│   ├── __init__.py
 │   └── audit_logger.py
 │
 ├── main.py
+├── pytest.ini
 ├── requirements.txt
 └── README.md
 ```
@@ -117,6 +154,10 @@ Génération d’alertes JSON structurées
 Génération de rapports Markdown
         ↓
 Génération de prompts IA sécurisés
+        ↓
+Analyse IA locale optionnelle via Ollama
+        ↓
+Évaluation automatique de la réponse IA
         ↓
 Journalisation dans un fichier d’audit
 ```
@@ -173,6 +214,33 @@ L’IA doit :
 - maintenir une validation humaine obligatoire ;
 - permettre une traçabilité complète de l’analyse.
 
+## Évaluation des réponses IA
+
+CyberSOC-AI-Lab ne se contente pas de générer une réponse IA. Le projet évalue aussi automatiquement la réponse produite.
+
+L’évaluation vérifie notamment :
+
+- la présence d’une structure minimale ;
+- la mention d’une validation humaine ;
+- l’absence de recommandations dangereuses ;
+- l’absence d’affirmations trop fortes comme une compromission confirmée sans preuve ;
+- le respect d’une logique prudente et contrôlée.
+
+Chaque réponse IA reçoit un score sur 10.
+
+Exemple de sortie :
+
+```json
+{
+  "score": 8,
+  "max_score": 10,
+  "missing_keywords": [],
+  "dangerous_matches": [],
+  "human_validation_mentioned": true,
+  "is_acceptable": true
+}
+```
+
 ## Sorties générées
 
 À l’exécution, le projet génère plusieurs types de fichiers.
@@ -209,7 +277,7 @@ reports/incident_002.md
 
 ### Prompts IA sécurisés
 
-Les prompts destinés à une future couche IA sont générés dans :
+Les prompts destinés à la couche IA sont générés dans :
 
 ```text
 prompts/
@@ -220,6 +288,36 @@ Exemple :
 ```text
 prompts/incident_prompt_001.md
 prompts/incident_prompt_002.md
+```
+
+### Analyses IA
+
+Lorsque l’option IA est activée, les analyses générées par Ollama sont stockées dans :
+
+```text
+ai_outputs/
+```
+
+Exemple :
+
+```text
+ai_outputs/incident_ai_analysis_001.md
+ai_outputs/incident_ai_analysis_002.md
+```
+
+### Évaluations IA
+
+Les évaluations automatiques des réponses IA sont également stockées dans :
+
+```text
+ai_outputs/
+```
+
+Exemple :
+
+```text
+ai_outputs/incident_ai_evaluation_001.json
+ai_outputs/incident_ai_evaluation_002.json
 ```
 
 ### Journal d’audit
@@ -241,17 +339,19 @@ Le projet utilise actuellement :
 - Markdown ;
 - JSON Lines pour l’audit ;
 - expressions régulières pour le parsing ;
-- règles simples et explicables pour la détection.
+- règles simples et explicables pour la détection ;
+- Ollama pour l’analyse IA locale optionnelle ;
+- pytest pour les tests unitaires ;
+- GitHub Actions pour l’intégration continue.
 
 Technologies prévues ultérieurement :
 
 - Docker ;
 - Streamlit ou FastAPI ;
-- modèle IA local via Ollama ;
-- API IA distante optionnelle ;
 - interface de validation humaine ;
 - enrichissement MITRE ATT&CK ;
-- métriques d’évaluation des réponses IA.
+- métriques d’évaluation plus avancées ;
+- scoring plus fin des hallucinations et recommandations dangereuses.
 
 ## Installation
 
@@ -280,11 +380,9 @@ Installer les dépendances :
 pip install -r requirements.txt
 ```
 
-Pour la version actuelle, aucune dépendance externe n’est obligatoire.
+## Utilisation sans IA
 
-## Utilisation
-
-Lancer le prototype :
+Lancer le prototype sans analyse IA :
 
 ```bash
 python main.py
@@ -303,6 +401,81 @@ Rapport Markdown généré : reports/incident_002.md
 Prompt IA généré : prompts/incident_prompt_002.md
 Événement d'audit ajouté : audit/audit_log.jsonl
 ```
+
+## Utilisation avec IA locale
+
+L’analyse IA est optionnelle et repose sur Ollama en local.
+
+Exemple avec le modèle `llama3.2` :
+
+```bash
+python main.py --enable-ai
+```
+
+Utiliser un autre modèle :
+
+```bash
+python main.py --enable-ai --model mistral
+```
+
+Résultat attendu :
+
+```text
+Analyse IA générée : ai_outputs/incident_ai_analysis_001.md
+Évaluation IA générée : ai_outputs/incident_ai_evaluation_001.json
+Alerte JSON générée : alerts/alert_001.json
+Rapport Markdown généré : reports/incident_001.md
+Prompt IA généré : prompts/incident_prompt_001.md
+Événement d'audit ajouté : audit/audit_log.jsonl
+
+Analyse IA générée : ai_outputs/incident_ai_analysis_002.md
+Évaluation IA générée : ai_outputs/incident_ai_evaluation_002.json
+Alerte JSON générée : alerts/alert_002.json
+Rapport Markdown généré : reports/incident_002.md
+Prompt IA généré : prompts/incident_prompt_002.md
+Événement d'audit ajouté : audit/audit_log.jsonl
+```
+
+## Tests
+
+Lancer les tests unitaires :
+
+```bash
+pytest -q
+```
+
+Résultat attendu :
+
+```text
+8 passed
+```
+
+Les tests couvrent actuellement :
+
+- le parsing des logs SSH ;
+- le parsing des logs HTTP ;
+- la détection brute force SSH ;
+- l’absence de détection sous le seuil ;
+- la détection reconnaissance web ;
+- l’évaluation de réponses IA prudentes ;
+- l’évaluation de réponses IA dangereuses.
+
+## Intégration continue
+
+Le projet contient un workflow GitHub Actions qui exécute automatiquement les tests à chaque push ou pull request.
+
+Fichier :
+
+```text
+.github/workflows/tests.yml
+```
+
+Objectif :
+
+- vérifier que le projet reste fonctionnel ;
+- éviter les régressions ;
+- renforcer la qualité logicielle ;
+- montrer une logique DevSecOps.
 
 ## Documentation
 
@@ -328,6 +501,18 @@ Identifie les risques liés à l’intégration d’une IA dans un contexte SOC 
 
 Présente la problématique de recherche, les hypothèses, les questions de recherche et les pistes d’évolution du projet.
 
+### `docs/evaluation.md`
+
+Décrit la méthodologie d’évaluation du système :
+
+- évaluation du moteur de règles ;
+- évaluation des alertes JSON ;
+- évaluation des rapports Markdown ;
+- évaluation des prompts IA ;
+- évaluation future des réponses IA ;
+- scoring des réponses ;
+- métriques envisageables.
+
 ## Lien avec un projet de recherche
 
 Ce projet sert de base exploratoire à une réflexion plus large sur le rôle de l’intelligence artificielle dans la cybersécurité opérationnelle.
@@ -346,7 +531,8 @@ CyberSOC-AI-Lab se positionne à l’intersection de plusieurs domaines :
 - intelligence artificielle appliquée ;
 - auditabilité ;
 - gouvernance des systèmes d’IA ;
-- sécurité des systèmes d’information.
+- sécurité des systèmes d’information ;
+- évaluation de la fiabilité des réponses IA.
 
 ## Limites actuelles
 
@@ -357,60 +543,49 @@ Limites identifiées :
 - logs simulés uniquement ;
 - deux scénarios d’attaque ;
 - détection basée sur des règles simples ;
-- absence de modèle IA connecté ;
+- analyse IA encore basique ;
+- évaluation IA basée sur des règles simples ;
 - absence d’interface utilisateur ;
-- absence d’évaluation statistique ;
 - absence de données réelles ;
-- absence de comparaison avec un SIEM réel.
+- absence de comparaison avec un SIEM réel ;
+- absence de validation par un analyste SOC réel.
 
 Ces limites sont acceptées à ce stade, car l’objectif est de construire progressivement une base fiable, explicable et auditable.
 
 ## Roadmap
 
-### MVP v0.4 — État actuel
+### MVP v0.5 — État actuel
 
 - Détection brute force SSH ;
 - Détection reconnaissance web ;
 - Alertes JSON ;
 - Rapports Markdown ;
 - Prompts IA sécurisés ;
+- Analyse IA locale optionnelle via Ollama ;
+- Évaluation automatique des réponses IA ;
+- Scoring des réponses selon des critères de prudence, structure et contrôle humain ;
 - Journal d’audit JSONL ;
+- Tests unitaires ;
+- GitHub Actions ;
 - Documentation d’architecture ;
 - Threat model ;
-- Notes de recherche.
+- Notes de recherche ;
+- Méthodologie d’évaluation.
 
-### MVP v0.5 — Évaluation
-
-Objectif :
-
-- créer un document `docs/evaluation.md` ;
-- définir des critères d’évaluation ;
-- mesurer les faux positifs et faux négatifs ;
-- définir une grille d’analyse des réponses IA ;
-- préparer la comparaison entre moteur de règles et assistance IA.
-
-### MVP v0.6 — Connexion IA contrôlée
-
-Objectif :
-
-- connecter un modèle IA local ou distant ;
-- envoyer uniquement des alertes structurées et anonymisées ;
-- comparer la réponse IA aux preuves disponibles ;
-- détecter les réponses non justifiées ;
-- journaliser les réponses IA.
-
-### MVP v0.7 — Interface SOC
+### MVP v0.6 — Interface SOC
 
 Objectif :
 
 - ajouter une interface simple ;
 - afficher les alertes ;
 - consulter les rapports ;
+- consulter les analyses IA ;
+- afficher les scores d’évaluation IA ;
 - valider ou rejeter une analyse ;
 - ajouter une note humaine ;
 - tracer la décision finale.
 
-### MVP v0.8 — Scénarios avancés
+### MVP v0.7 — Scénarios avancés
 
 Objectif :
 
@@ -418,6 +593,17 @@ Objectif :
 - ajouter un scénario d’accès suspect ;
 - ajouter une corrélation de signaux faibles ;
 - ajouter une détection de tentative de prompt injection dans les logs.
+
+### MVP v0.8 — Évaluation avancée
+
+Objectif :
+
+- enrichir la grille d’évaluation IA ;
+- mesurer les faux positifs et faux négatifs ;
+- comparer plusieurs modèles IA ;
+- comparer les réponses IA aux preuves disponibles ;
+- détecter les réponses non justifiées ;
+- journaliser les corrections humaines.
 
 ## Vision long terme
 
@@ -430,7 +616,8 @@ Objectif :
 - évaluer la fiabilité des réponses IA ;
 - tracer chaque décision ;
 - limiter les risques d’hallucination ;
-- intégrer des exigences d’auditabilité et de gouvernance.
+- intégrer des exigences d’auditabilité et de gouvernance ;
+- conserver une supervision humaine sur les décisions sensibles.
 
 Le principe central reste :
 
