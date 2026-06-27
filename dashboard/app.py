@@ -1,20 +1,25 @@
 import json
-from datetime import datetime, timezone
+import sys
 from pathlib import Path
 from typing import Any
-from utils.human_review import save_human_review
 
 import streamlit as st
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
-ALERT_DIR = Path("alerts")
-REPORT_DIR = Path("reports")
-PROMPT_DIR = Path("prompts")
-AI_OUTPUT_DIR = Path("ai_outputs")
-AUDIT_FILE = Path("audit/audit_log.jsonl")
-HUMAN_REVIEW_DIR = Path("human_reviews")
-HUMAN_REVIEW_AUDIT_FILE = Path("audit/human_review_log.jsonl")
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
+from utils.human_review import save_human_review
+
+
+ALERT_DIR = PROJECT_ROOT / "alerts"
+REPORT_DIR = PROJECT_ROOT / "reports"
+PROMPT_DIR = PROJECT_ROOT / "prompts"
+AI_OUTPUT_DIR = PROJECT_ROOT / "ai_outputs"
+AUDIT_FILE = PROJECT_ROOT / "audit" / "audit_log.jsonl"
+HUMAN_REVIEW_DIR = PROJECT_ROOT / "human_reviews"
+HUMAN_REVIEW_AUDIT_FILE = PROJECT_ROOT / "audit" / "human_review_log.jsonl"
 
 st.set_page_config(
     page_title="CyberSOC-AI-Lab",
@@ -37,6 +42,7 @@ def load_text_file(path: Path) -> str:
 def list_alerts() -> list[Path]:
     return sorted(ALERT_DIR.glob("alert_*.json"))
 
+
 st.title("CyberSOC-AI-Lab")
 st.subheader("Prototype de SOC augmenté par IA")
 
@@ -51,7 +57,9 @@ et les validations humaines.
 alert_files = list_alerts()
 
 if not alert_files:
-    st.warning("Aucune alerte trouvée. Lance d'abord `python main.py` ou `python main.py --enable-ai`.")
+    st.warning(
+        "Aucune alerte trouvée. Lance d'abord `python main.py` ou `python main.py --enable-ai`."
+    )
     st.stop()
 
 selected_alert_file = st.sidebar.selectbox(
@@ -77,29 +85,40 @@ col1, col2, col3, col4 = st.columns(4)
 col1.metric("Type", alert.get("alert_type", "N/A"))
 col2.metric("Criticité", alert.get("severity", "N/A"))
 col3.metric("IP source", alert.get("source_ip", "N/A"))
-col4.metric("Validation humaine", str(alert.get("human_validation_required", "N/A")))
+col4.metric(
+    "Validation humaine",
+    str(alert.get("human_validation_required", "N/A")),
+)
 
 if ai_evaluation_path.exists():
     evaluation = load_json_file(ai_evaluation_path)
-
     st.markdown("## Évaluation IA")
 
     col1, col2, col3 = st.columns(3)
 
-    col1.metric("Score IA", f"{evaluation.get('score')}/{evaluation.get('max_score')}")
+    col1.metric(
+        "Score IA",
+        f"{evaluation.get('score')}/{evaluation.get('max_score')}",
+    )
     col2.metric("Acceptable", str(evaluation.get("is_acceptable")))
-    col3.metric("Validation humaine mentionnée", str(evaluation.get("human_validation_mentioned")))
+    col3.metric(
+        "Validation humaine mentionnée",
+        str(evaluation.get("human_validation_mentioned")),
+    )
 
     if evaluation.get("dangerous_matches"):
-        st.error(f"Recommandations dangereuses détectées : {evaluation.get('dangerous_matches')}")
+        st.error(
+            f"Recommandations dangereuses détectées : {evaluation.get('dangerous_matches')}"
+        )
     else:
         st.success("Aucune recommandation dangereuse détectée.")
+else:
+    st.info("Aucune évaluation IA disponible pour cette alerte.")
 
 st.markdown("## Validation humaine")
 
 if human_review_path.exists():
     existing_review = load_json_file(human_review_path)
-
     st.info(
         f"Décision actuelle : **{existing_review.get('decision')}** — "
         f"{existing_review.get('analyst_note', '')}"
@@ -119,7 +138,10 @@ with st.form("human_review_form"):
 
     analyst_note = st.text_area(
         "Note analyste",
-        placeholder="Exemple : activité suspecte cohérente avec une phase de reconnaissance, à corréler avec les logs firewall.",
+        placeholder=(
+            "Exemple : activité suspecte cohérente avec une phase de reconnaissance, "
+            "à corréler avec les logs firewall."
+        ),
     )
 
     submitted = st.form_submit_button("Enregistrer la validation humaine")
@@ -130,6 +152,8 @@ with st.form("human_review_form"):
             alert=alert,
             decision=decision,
             analyst_note=analyst_note,
+            review_dir=HUMAN_REVIEW_DIR,
+            audit_file=HUMAN_REVIEW_AUDIT_FILE,
         )
 
         st.success(f"Validation humaine enregistrée : {review_path}")

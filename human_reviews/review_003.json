@@ -1,0 +1,10 @@
+{
+    "timestamp": "2026-06-27T13:10:49.690715+00:00",
+    "alert_number": "003",
+    "alert_type": "PROMPT_INJECTION_ATTEMPT",
+    "severity": "HIGH",
+    "source_ip": "185.12.45.10",
+    "decision": "Validée",
+    "analyst_note": "Requête compatible avec une tentative de prompt injection intégrée dans un log web. Le contenu contient des instructions visant à influencer un modèle IA. Aucune compromission n’est confirmée, mais ce contenu doit être traité comme une donnée non fiable avant toute transmission à un assistant IA.",
+    "human_validation_required": true
+}
