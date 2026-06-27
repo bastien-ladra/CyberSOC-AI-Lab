@@ -17,12 +17,7 @@ from ai_assistant.response_evaluator import evaluate_ai_response
 SSH_LOG_FILE = Path("data/sample_logs/ssh_auth.log")
 WEB_LOG_FILE = Path("data/sample_logs/web_access.log")
 
-REPORT_DIR = Path("reports")
-ALERT_DIR = Path("alerts")
-PROMPT_DIR = Path("prompts")
-AI_OUTPUT_DIR = Path("ai_outputs")
-AUDIT_FILE = Path("audit/audit_log.jsonl")
-AI_OUTPUT_DIR = Path("ai_outputs")
+DEFAULT_OUTPUT_DIR = Path("runtime")
 
 
 def save_alert_json(alert: dict[str, Any], alert_path: Path) -> None:
@@ -128,16 +123,31 @@ def parse_args() -> argparse.Namespace:
         help="Chemin du fichier de logs web à analyser.",
     )
 
+    parser.add_argument(
+        "--output-dir",
+        default=str(DEFAULT_OUTPUT_DIR),
+        help="Dossier de sortie pour les alertes, rapports, prompts, analyses IA et audits.",
+    )
+
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
 
-    REPORT_DIR.mkdir(exist_ok=True)
-    ALERT_DIR.mkdir(exist_ok=True)
-    PROMPT_DIR.mkdir(exist_ok=True)
-    AI_OUTPUT_DIR.mkdir(exist_ok=True)
+    output_dir = Path(args.output_dir)
+
+    report_dir = output_dir / "reports"
+    alert_dir = output_dir / "alerts"
+    prompt_dir = output_dir / "prompts"
+    ai_output_dir = output_dir / "ai_outputs"
+    audit_file = output_dir / "audit" / "audit_log.jsonl"
+
+    report_dir.mkdir(parents=True, exist_ok=True)
+    alert_dir.mkdir(parents=True, exist_ok=True)
+    prompt_dir.mkdir(parents=True, exist_ok=True)
+    ai_output_dir.mkdir(parents=True, exist_ok=True)
+    audit_file.parent.mkdir(parents=True, exist_ok=True)
 
     ssh_events: list[dict[str, Any]] = load_ssh_logs(args.ssh_log_file)
     web_events: list[dict[str, Any]] = load_web_logs(args.web_log_file)
@@ -152,11 +162,11 @@ def main() -> None:
         return
 
     for index, alert in enumerate(alerts, start=1):
-        alert_path = ALERT_DIR / f"alert_{index:03d}.json"
-        report_path = REPORT_DIR / f"incident_{index:03d}.md"
-        prompt_path = PROMPT_DIR / f"incident_prompt_{index:03d}.md"
-        ai_output_path = AI_OUTPUT_DIR / f"incident_ai_analysis_{index:03d}.md"
-        ai_evaluation_path = AI_OUTPUT_DIR / \
+        alert_path = alert_dir / f"alert_{index:03d}.json"
+        report_path = report_dir / f"incident_{index:03d}.md"
+        prompt_path = prompt_dir / f"incident_prompt_{index:03d}.md"
+        ai_output_path = ai_output_dir / f"incident_ai_analysis_{index:03d}.md"
+        ai_evaluation_path = ai_output_dir / \
             f"incident_ai_evaluation_{index:03d}.json"
 
         save_alert_json(alert, alert_path)
@@ -187,7 +197,7 @@ def main() -> None:
                 print("Aucune analyse IA générée. Vérifie qu'Ollama est lancé.")
 
         write_audit_event(
-            AUDIT_FILE,
+            audit_file,
             event_type="incident_processed",
             details={
                 "alert_type": alert.get("alert_type"),
@@ -209,7 +219,7 @@ def main() -> None:
         print(f"Alerte JSON générée : {alert_path}")
         print(f"Rapport Markdown généré : {report_path}")
         print(f"Prompt IA généré : {prompt_path}")
-        print(f"Événement d'audit ajouté : {AUDIT_FILE}")
+        print(f"Événement d'audit ajouté : {audit_file}")
 
 
 if __name__ == "__main__":

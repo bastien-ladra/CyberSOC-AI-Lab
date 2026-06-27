@@ -227,3 +227,6 @@ data/raw/
 data/external/
 data/real/
 data/private/
+
+# Runtime generated outputs
+runtime/
