@@ -15,21 +15,37 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from utils.human_review import save_human_review
 
+def resolve_data_dir() -> Path:
+    configured_dir = os.getenv("CYBERSOC_OUTPUT_DIR")
 
-runtime_dir_value = os.getenv("CYBERSOC_OUTPUT_DIR", "runtime")
+    if configured_dir:
+        data_dir = Path(configured_dir)
 
-DEFAULT_RUNTIME_DIR = Path(runtime_dir_value)
+        if not data_dir.is_absolute():
+            data_dir = PROJECT_ROOT / data_dir
 
-if not DEFAULT_RUNTIME_DIR.is_absolute():
-    DEFAULT_RUNTIME_DIR = PROJECT_ROOT / DEFAULT_RUNTIME_DIR
+        return data_dir
 
-ALERT_DIR = DEFAULT_RUNTIME_DIR / "alerts"
-REPORT_DIR = DEFAULT_RUNTIME_DIR / "reports"
-PROMPT_DIR = DEFAULT_RUNTIME_DIR / "prompts"
-AI_OUTPUT_DIR = DEFAULT_RUNTIME_DIR / "ai_outputs"
-AUDIT_FILE = DEFAULT_RUNTIME_DIR / "audit" / "audit_log.jsonl"
-HUMAN_REVIEW_DIR = DEFAULT_RUNTIME_DIR / "human_reviews"
-HUMAN_REVIEW_AUDIT_FILE = DEFAULT_RUNTIME_DIR / "audit" / "human_review_log.jsonl"
+    runtime_dir = PROJECT_ROOT / "runtime"
+    examples_dir = PROJECT_ROOT / "examples"
+
+    runtime_alerts_dir = runtime_dir / "alerts"
+
+    if runtime_alerts_dir.exists() and any(runtime_alerts_dir.glob("*.json")):
+        return runtime_dir
+
+    return examples_dir
+
+
+DATA_DIR = resolve_data_dir()
+
+ALERT_DIR = DATA_DIR / "alerts"
+REPORT_DIR = DATA_DIR / "reports"
+PROMPT_DIR = DATA_DIR / "prompts"
+AI_OUTPUT_DIR = DATA_DIR / "ai_outputs"
+AUDIT_FILE = DATA_DIR / "audit" / "audit_log.jsonl"
+HUMAN_REVIEW_DIR = DATA_DIR / "human_reviews"
+HUMAN_REVIEW_AUDIT_FILE = DATA_DIR / "audit" / "human_review_log.jsonl"
 
 st.set_page_config(
     page_title="CyberSOC-AI-Lab",
@@ -37,6 +53,7 @@ st.set_page_config(
     layout="wide",
 )
 
+st.caption(f"Dossier de données utilisé : `{DATA_DIR}`")
 
 def load_json_file(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as file:
@@ -68,7 +85,7 @@ alert_files = list_alerts()
 
 if not alert_files:
     st.warning(
-    f"Aucune alerte trouvée dans `{DEFAULT_RUNTIME_DIR}`. Lance d'abord `python main.py` ou `python main.py --enable-ai`."
+    f"Aucune alerte trouvée dans `{DATA_DIR}`. Lance `python main.py` ou vérifie le dossier configuré."
     )
     st.stop()
 
