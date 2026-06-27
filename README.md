@@ -355,6 +355,33 @@ Ce mécanisme permet de conserver le principe central du projet :
 
 > L’IA assiste l’analyste, mais la décision finale reste humaine.
 
+## Configuration du dossier de sortie
+
+Par défaut, les sorties générées sont écrites dans le dossier `runtime/`.
+
+Il est possible de modifier ce dossier avec l’option `--output-dir` :
+
+```bash
+python main.py --output-dir runtime-test
+```
+
+Le dashboard lit `runtime/` par défaut.
+
+Pour faire lire un autre dossier au dashboard, il faut définir la variable d’environnement `CYBERSOC_OUTPUT_DIR`.
+
+Exemple PowerShell :
+
+```powershell
+$env:CYBERSOC_OUTPUT_DIR="runtime-test"
+streamlit run dashboard/app.py
+```
+
+Pour revenir au comportement par défaut :
+
+```powershell
+Remove-Item Env:\CYBERSOC_OUTPUT_DIR
+```
+
 ## Sorties générées
 
 À l’exécution, le projet génère plusieurs types de fichiers.

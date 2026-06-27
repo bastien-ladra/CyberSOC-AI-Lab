@@ -1,5 +1,24 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v0.9.5 — Dossier runtime configurable pour le dashboard
+
+### Ajouté
+
+- Le dashboard peut maintenant lire un dossier de sortie personnalisé via la variable d’environnement `CYBERSOC_OUTPUT_DIR`.
+- Cette configuration permet d’utiliser le dashboard avec les sorties générées par `main.py --output-dir`.
+
+### Exemple
+
+```powershell
+$env:CYBERSOC_OUTPUT_DIR="runtime-test"
+python main.py --output-dir runtime-test --enable-ai
+streamlit run dashboard/app.py
+```
+
+### Objectif
+
+Rendre cohérente l’option `--output-dir` du pipeline avec le dashboard Streamlit.
+
 ## v0.9.2 — Sorties runtime isolées
 
 ### Modifié
