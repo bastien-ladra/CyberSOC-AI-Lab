@@ -132,7 +132,9 @@ CyberSOC-AI-Lab/
 ├── data/
 │   └── sample_logs/
 │       ├── ssh_auth.log
-│       └── web_access.log
+│       ├── web_access.log
+│       ├── benign_ssh_auth.log
+│       └── benign_web_access.log
 │
 ├── detection/
 │   ├── __init__.py
@@ -550,6 +552,29 @@ Prompt IA généré : prompts/incident_prompt_003.md
 Événement d'audit ajouté : audit/audit_log.jsonl
 ```
 
+## Utilisation avec fichiers de logs personnalisés
+
+Par défaut, le projet analyse les fichiers suivants :
+
+data/sample_logs/ssh_auth.log
+data/sample_logs/web_access.log
+
+Il est aussi possible de fournir d’autres fichiers de logs depuis la ligne de commande.
+
+Exemple avec les logs bénins :
+
+```text
+python main.py --ssh-log-file data/sample_logs/benign_ssh_auth.log --web-log-file data/sample_logs/benign_web_access.log
+```
+
+Résultat attendu :
+
+```text
+Aucune alerte détectée.
+```
+
+Cette option permet de tester le moteur de détection sur différents jeux de logs, notamment pour vérifier l’absence de faux positifs sur du trafic normal.
+
 ## Utilisation avec IA locale
 
 L’analyse IA est optionnelle et repose sur Ollama en local.
@@ -642,6 +667,10 @@ Les tests couvrent actuellement :
 - la construction d’une validation humaine ;
 - la sauvegarde d’une validation humaine ;
 - la journalisation d’une validation humaine.
+- l’absence d’alerte sur des logs SSH bénins ;
+- l’absence d’alerte sur des logs web bénins ;
+- la non-détection de prompt injection sur du trafic web normal ;
+- l’exécution du moteur sur des logs bénins via des fichiers séparés.
 
 ## Intégration continue
 
@@ -776,9 +805,6 @@ Ces limites sont acceptées à ce stade, car l’objectif est de construire prog
 - Threat model ;
 - Notes de recherche ;
 - Méthodologie d’évaluation.
-- l’absence d’alerte sur des logs SSH bénins ;
-- l’absence d’alerte sur des logs web bénins ;
-- la non-détection de prompt injection sur du trafic web normal.
 
 ### MVP v0.9 — Scénarios avancés
 
