@@ -1,37 +1,29 @@
-**Analyse de l'alerte SSH_BRUTE_FORCE**
+**Analyse de l'incident**
 
-**Résumé de l'incident**
+### Résumé de l'incident
+Une alerte SSH_brute_force a été déclenchée après 6 tentatives échouées d'accès par brute-force sur une adresse IP source connue.
 
-Une alerte SSH_BRUTE_FORCE a été générée par le moteur de règles, indiquant une tentative de connexion brute-force sur plusieurs comptes administratifs d'un serveur. L'alerte concerne un seul adresse IP source (185.12.45.10) et six comptes ciblés : admin, root, test, ubuntu, deploy et postgres.
+### Hypothèse d'attaque probable
+L'hypothèse d'attaque probable est qu'une attaquant utilise des logiciels de brute-force pour essayer de deviner les mots de passe des utilisateurs du serveur SSH.
 
-**Hypothèse d'attaque probable**
+### Justification basée uniquement sur les preuves
+Les 6 tentatives échouées d'accès par brute-force, ainsi que les messages d'erreur spécifiques mentionnant des mots de passe invalides pour des utilisateurs tels que `admin`, `root`, `test`, `ubuntu` et `deploy`, suggèrent une attaque de type brute-force. De plus, l'utilisation de ports différents (53321 à 53326) pour chaque tentative échouée, indique que l'attaquant utilise un script d'attaque automatisé.
 
-Il est probable que l'attaque soit une tentative de connexion brute-force visant à accéder aux comptes administratifs du serveur. L'adresse IP source est connue mais il n'est pas possible de déterminer s'il s'agit d'un attaquant individuel ou d'une attaque automatisée.
+### Niveau de confiance
+Le niveau de confiance est basé sur la fréquence et la rapidité des tentatives échouées (6 tentatives en moins de 2 minutes), ce qui est indiqué par une confiance de 0,87. Cependant, il est important de noter que cette confiance ne peut pas être déterminée avec certitude sans plus d'informations.
 
-**Justification basée uniquement sur les preuves**
+### Actions recommandées
+- Bloquer temporairement l'adresse IP source après validation humaine.
+- Vérifier les comptes ciblés pour détecter les utilisateurs vulnérables.
+- Contrôler les connexions réussies récentes pour identifier les utilisateurs authentifiés.
+- Renforcer l'authentification MFA si elle n'est pas active.
 
-Les logs détaillent six tentatives de connexion brute-force sur différents comptes administratifs, avec des adresses IP différentes pour chaque tentative. Les temps de connexion sont courts (de 1 à 2 secondes). La fréquence des tentatives est importante, avec quatre tentatives par minute. Cela suggère une attaque automatisée.
+### Limites de l'analyse
+- L'analyse ne peut pas déterminer avec certitude la nature exacte de l'attaque, car les logs ne contiennent aucune information sur l'appareil ou la méthode utilisée par l'attaquant.
+- Il est possible que le moteur de règles ait généré des recommandations pré-générées basées sur des modèles d'attaque courants, plutôt que sur une analyse détaillée des preuves.
 
-**Niveau de confiance**
-
-Le niveau de confiance est élevé (0,87) en raison de la fréquence et de la rapidité des tentatives de connexion brute-force. Cette valeur correspond à la confiance attribuée par le moteur de règles pour ce type d'alerte.
-
-**Actions recommandées**
-
-1. **Bloquer temporairement l'adresse IP source** après validation humaine.
-2. **Vérifier les comptes ciblés** : vérifier si les comptes administratifs sont effectivement utilisés par les utilisateurs concernés et si les mots de passe correspondent aux attentes.
-3. **Contrôler les connexions réussies récentes**: surveiller les connexions réussies sur la même fenêtre temporelle pour détecter les comportements suspects.
-4. **Renforcer l'authentification MFA** si elle n'est pas active : considérer la mise en place d'une authentification à deux facteurs (MFA) pour renforcer la sécurité des comptes administratifs.
-
-**Limites de l'analyse**
-
-* Il est possible que cette attaque soit le résultat d'un test ou d'une démonstration, plutôt qu'une attaque réelle.
-* L'adresse IP source n'est pas connue avec certitude ; il est possible qu'il s'agisse d'une adresse IP temporaire utilisée pour l'attaque.
-
-**Points à vérifier par un humain**
-
-1. **Vérification des comptes ciblés** : confirmer les informations sur les comptes administratifs et leurs mots de passe.
-2. **Analyse du contexte réseau** : évaluer la situation dans lequel se situe l'attaque (ex: si elle concerne un serveur ou une application spécifique).
-3. **Validation humaine** : confirmer que l'adresse IP source est bien une adresse IP temporaire et non une attaque réelle.
-
-Il est important de rappeler qu'une validation humaine est nécessaire pour confirmer les informations et prendre des décisions éclairées.
+### Points à vérifier par un humain
+- Vérification du contenu des logs pour s'assurer qu'ils sont exacts et non falsifiés.
+- Validation de la confiance indiquée par le moteur de règles, en fonction des circonstances spécifiques de l'incident.
+- Contrôle des comptes ciblés et vérification de leur état actuel.
+- Vérification de l'authentification MFA pour s'assurer qu'elle est active et fonctionnelle.
