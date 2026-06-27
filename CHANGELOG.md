@@ -1,5 +1,18 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v0.9.6 — Documentation du dossier runtime configurable
+
+### Ajouté
+
+- Documentation de la variable d’environnement `CYBERSOC_OUTPUT_DIR`.
+- Documentation de l’utilisation conjointe de `main.py --output-dir` et du dashboard Streamlit.
+- Mise à jour du README avec un exemple PowerShell.
+- Mise à jour de la documentation d’architecture concernant le dossier `runtime/`.
+
+### Objectif
+
+Clarifier l’utilisation d’un dossier de sortie personnalisé et rendre le comportement du pipeline et du dashboard plus compréhensible pour un utilisateur externe.
+
 ## v0.9.5 — Dossier runtime configurable pour le dashboard
 
 ### Ajouté
