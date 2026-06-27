@@ -220,3 +220,20 @@ __marimo__/
 __pycache__/
 .pytest_cache/
 *.pyc
+
+# Project generated runtime files
+.streamlit/secrets.toml
+
+# Keep sample logs versioned, but ignore future raw datasets
+!data/
+!data/sample_logs/
+!data/sample_logs/*.log
+data/raw/
+data/external/
+data/real/
+data/private/
+
+# Python cache
+__pycache__/
+.pytest_cache/
+*.pyc
