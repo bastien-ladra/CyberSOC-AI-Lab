@@ -5,21 +5,25 @@ from typing import Any
 
 import streamlit as st
 
+
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
+
 from utils.human_review import save_human_review
 
 
-ALERT_DIR = PROJECT_ROOT / "alerts"
-REPORT_DIR = PROJECT_ROOT / "reports"
-PROMPT_DIR = PROJECT_ROOT / "prompts"
-AI_OUTPUT_DIR = PROJECT_ROOT / "ai_outputs"
-AUDIT_FILE = PROJECT_ROOT / "audit" / "audit_log.jsonl"
-HUMAN_REVIEW_DIR = PROJECT_ROOT / "human_reviews"
-HUMAN_REVIEW_AUDIT_FILE = PROJECT_ROOT / "audit" / "human_review_log.jsonl"
+DEFAULT_RUNTIME_DIR = PROJECT_ROOT / "runtime"
+
+ALERT_DIR = DEFAULT_RUNTIME_DIR / "alerts"
+REPORT_DIR = DEFAULT_RUNTIME_DIR / "reports"
+PROMPT_DIR = DEFAULT_RUNTIME_DIR / "prompts"
+AI_OUTPUT_DIR = DEFAULT_RUNTIME_DIR / "ai_outputs"
+AUDIT_FILE = DEFAULT_RUNTIME_DIR / "audit" / "audit_log.jsonl"
+HUMAN_REVIEW_DIR = DEFAULT_RUNTIME_DIR / "human_reviews"
+HUMAN_REVIEW_AUDIT_FILE = DEFAULT_RUNTIME_DIR / "audit" / "human_review_log.jsonl"
 
 st.set_page_config(
     page_title="CyberSOC-AI-Lab",
@@ -58,7 +62,7 @@ alert_files = list_alerts()
 
 if not alert_files:
     st.warning(
-        "Aucune alerte trouvée. Lance d'abord `python main.py` ou `python main.py --enable-ai`."
+        "Aucune alerte trouvée dans `runtime/`. Lance d'abord `python main.py` ou `python main.py --enable-ai`."
     )
     st.stop()
 
@@ -75,7 +79,8 @@ alert_number = selected_alert_file.stem.split("_")[-1]
 report_path = REPORT_DIR / f"incident_{alert_number}.md"
 prompt_path = PROMPT_DIR / f"incident_prompt_{alert_number}.md"
 ai_analysis_path = AI_OUTPUT_DIR / f"incident_ai_analysis_{alert_number}.md"
-ai_evaluation_path = AI_OUTPUT_DIR / f"incident_ai_evaluation_{alert_number}.json"
+ai_evaluation_path = AI_OUTPUT_DIR / \
+    f"incident_ai_evaluation_{alert_number}.json"
 human_review_path = HUMAN_REVIEW_DIR / f"review_{alert_number}.json"
 
 st.markdown("## Vue synthétique")
