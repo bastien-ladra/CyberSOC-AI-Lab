@@ -1,0 +1,10 @@
+{
+    "timestamp": "2026-06-27T12:25:41.886379+00:00",
+    "alert_number": "001",
+    "alert_type": "SSH_BRUTE_FORCE",
+    "severity": "HIGH",
+    "source_ip": "185.12.45.10",
+    "decision": "Validée",
+    "analyst_note": "Activité compatible avec une tentative de brute force SSH. Plusieurs échecs de connexion sont observés depuis la même adresse IP vers différents comptes utilisateurs sur une courte période. Aucune compromission n’est confirmée à ce stade. Recommandé : corréler avec les connexions réussies, vérifier les comptes ciblés et envisager un blocage temporaire de l’IP après validation.",
+    "human_validation_required": true
+}

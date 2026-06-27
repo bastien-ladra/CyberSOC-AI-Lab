@@ -1,5 +1,7 @@
 import json
+from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
 import streamlit as st
 
@@ -9,6 +11,8 @@ REPORT_DIR = Path("reports")
 PROMPT_DIR = Path("prompts")
 AI_OUTPUT_DIR = Path("ai_outputs")
 AUDIT_FILE = Path("audit/audit_log.jsonl")
+HUMAN_REVIEW_DIR = Path("human_reviews")
+HUMAN_REVIEW_AUDIT_FILE = Path("audit/human_review_log.jsonl")
 
 
 st.set_page_config(
@@ -18,7 +22,7 @@ st.set_page_config(
 )
 
 
-def load_json_file(path: Path) -> dict:
+def load_json_file(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as file:
         return json.load(file)
 
@@ -33,13 +37,67 @@ def list_alerts() -> list[Path]:
     return sorted(ALERT_DIR.glob("alert_*.json"))
 
 
+def save_json_file(path: Path, data: dict[str, Any]) -> None:
+    path.parent.mkdir(exist_ok=True)
+    path.write_text(
+        json.dumps(data, indent=4, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+
+def append_jsonl(path: Path, data: dict[str, Any]) -> None:
+    path.parent.mkdir(exist_ok=True)
+
+    with path.open("a", encoding="utf-8") as file:
+        file.write(json.dumps(data, ensure_ascii=False) + "\n")
+
+
+def save_human_review(
+    alert_number: str,
+    alert: dict[str, Any],
+    decision: str,
+    analyst_note: str,
+) -> Path:
+    review = {
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "alert_number": alert_number,
+        "alert_type": alert.get("alert_type"),
+        "severity": alert.get("severity"),
+        "source_ip": alert.get("source_ip"),
+        "decision": decision,
+        "analyst_note": analyst_note,
+        "human_validation_required": alert.get("human_validation_required"),
+    }
+
+    review_path = HUMAN_REVIEW_DIR / f"review_{alert_number}.json"
+    save_json_file(review_path, review)
+
+    audit_event = {
+        "timestamp": review["timestamp"],
+        "event_type": "human_review_submitted",
+        "details": {
+            "alert_number": alert_number,
+            "alert_type": alert.get("alert_type"),
+            "severity": alert.get("severity"),
+            "source_ip": alert.get("source_ip"),
+            "decision": decision,
+            "review_file": str(review_path),
+        },
+    }
+
+    append_jsonl(HUMAN_REVIEW_AUDIT_FILE, audit_event)
+
+    return review_path
+
+
 st.title("CyberSOC-AI-Lab")
 st.subheader("Prototype de SOC augmenté par IA")
 
 st.markdown(
     """
 Ce tableau de bord permet de visualiser les alertes détectées, les rapports générés,
-les prompts IA, les analyses IA locales et les évaluations automatiques des réponses IA.
+les prompts IA, les analyses IA locales, les évaluations automatiques des réponses IA
+et les validations humaines.
 """
 )
 
@@ -63,6 +121,7 @@ report_path = REPORT_DIR / f"incident_{alert_number}.md"
 prompt_path = PROMPT_DIR / f"incident_prompt_{alert_number}.md"
 ai_analysis_path = AI_OUTPUT_DIR / f"incident_ai_analysis_{alert_number}.md"
 ai_evaluation_path = AI_OUTPUT_DIR / f"incident_ai_evaluation_{alert_number}.json"
+human_review_path = HUMAN_REVIEW_DIR / f"review_{alert_number}.json"
 
 st.markdown("## Vue synthétique")
 
@@ -89,13 +148,53 @@ if ai_evaluation_path.exists():
     else:
         st.success("Aucune recommandation dangereuse détectée.")
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs(
+st.markdown("## Validation humaine")
+
+if human_review_path.exists():
+    existing_review = load_json_file(human_review_path)
+
+    st.info(
+        f"Décision actuelle : **{existing_review.get('decision')}** — "
+        f"{existing_review.get('analyst_note', '')}"
+    )
+
+with st.form("human_review_form"):
+    decision = st.selectbox(
+        "Décision analyste",
+        [
+            "À revoir",
+            "Validée",
+            "Rejetée",
+            "Faux positif",
+            "Escalade nécessaire",
+        ],
+    )
+
+    analyst_note = st.text_area(
+        "Note analyste",
+        placeholder="Exemple : activité suspecte cohérente avec une phase de reconnaissance, à corréler avec les logs firewall.",
+    )
+
+    submitted = st.form_submit_button("Enregistrer la validation humaine")
+
+    if submitted:
+        review_path = save_human_review(
+            alert_number=alert_number,
+            alert=alert,
+            decision=decision,
+            analyst_note=analyst_note,
+        )
+
+        st.success(f"Validation humaine enregistrée : {review_path}")
+
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
     [
         "Alerte JSON",
         "Rapport",
         "Prompt IA",
         "Analyse IA",
         "Audit",
+        "Validation humaine",
     ]
 )
 
@@ -115,7 +214,22 @@ with tab4:
         st.info("Aucune analyse IA disponible. Lance `python main.py --enable-ai`.")
 
 with tab5:
+    st.markdown("### Audit système")
+
     if AUDIT_FILE.exists():
         st.code(load_text_file(AUDIT_FILE), language="json")
     else:
-        st.info("Aucun journal d'audit disponible.")
+        st.info("Aucun journal d'audit système disponible.")
+
+    st.markdown("### Audit des validations humaines")
+
+    if HUMAN_REVIEW_AUDIT_FILE.exists():
+        st.code(load_text_file(HUMAN_REVIEW_AUDIT_FILE), language="json")
+    else:
+        st.info("Aucun journal de validation humaine disponible.")
+
+with tab6:
+    if human_review_path.exists():
+        st.json(load_json_file(human_review_path))
+    else:
+        st.info("Aucune validation humaine enregistrée pour cette alerte.")
