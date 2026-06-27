@@ -1,4 +1,5 @@
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Any
@@ -15,7 +16,12 @@ if str(PROJECT_ROOT) not in sys.path:
 from utils.human_review import save_human_review
 
 
-DEFAULT_RUNTIME_DIR = PROJECT_ROOT / "runtime"
+runtime_dir_value = os.getenv("CYBERSOC_OUTPUT_DIR", "runtime")
+
+DEFAULT_RUNTIME_DIR = Path(runtime_dir_value)
+
+if not DEFAULT_RUNTIME_DIR.is_absolute():
+    DEFAULT_RUNTIME_DIR = PROJECT_ROOT / DEFAULT_RUNTIME_DIR
 
 ALERT_DIR = DEFAULT_RUNTIME_DIR / "alerts"
 REPORT_DIR = DEFAULT_RUNTIME_DIR / "reports"
@@ -62,7 +68,7 @@ alert_files = list_alerts()
 
 if not alert_files:
     st.warning(
-        "Aucune alerte trouvée dans `runtime/`. Lance d'abord `python main.py` ou `python main.py --enable-ai`."
+    f"Aucune alerte trouvée dans `{DEFAULT_RUNTIME_DIR}`. Lance d'abord `python main.py` ou `python main.py --enable-ai`."
     )
     st.stop()
 
