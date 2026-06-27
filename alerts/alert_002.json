@@ -1,0 +1,31 @@
+{
+    "alert_type": "WEB_RECONNAISSANCE",
+    "severity": "MEDIUM",
+    "source_ip": "185.12.45.10",
+    "suspicious_requests": 6,
+    "targeted_paths": [
+        "/.env",
+        "/admin",
+        "/backup.zip",
+        "/config.php",
+        "/phpmyadmin",
+        "/wp-admin"
+    ],
+    "confidence": 0.82,
+    "evidence": [
+        "185.12.45.10 - - [24/Jun/2026:11:01:12 +0000] \"GET /admin HTTP/1.1\" 404 512 \"-\" \"curl/8.0\"",
+        "185.12.45.10 - - [24/Jun/2026:11:01:14 +0000] \"GET /wp-admin HTTP/1.1\" 404 512 \"-\" \"curl/8.0\"",
+        "185.12.45.10 - - [24/Jun/2026:11:01:16 +0000] \"GET /.env HTTP/1.1\" 404 512 \"-\" \"curl/8.0\"",
+        "185.12.45.10 - - [24/Jun/2026:11:01:18 +0000] \"GET /phpmyadmin HTTP/1.1\" 404 512 \"-\" \"curl/8.0\"",
+        "185.12.45.10 - - [24/Jun/2026:11:01:20 +0000] \"GET /backup.zip HTTP/1.1\" 404 512 \"-\" \"curl/8.0\"",
+        "185.12.45.10 - - [24/Jun/2026:11:01:22 +0000] \"GET /config.php HTTP/1.1\" 404 512 \"-\" \"curl/8.0\""
+    ],
+    "human_validation_required": true,
+    "recommended_actions": [
+        "Vérifier si l'adresse IP source est connue ou légitime.",
+        "Analyser les chemins ciblés et les codes HTTP retournés.",
+        "Corréler avec d'autres logs applicatifs ou firewall.",
+        "Mettre en place une limitation de débit si nécessaire.",
+        "Surveiller une éventuelle tentative d'exploitation après la phase de reconnaissance."
+    ]
+}

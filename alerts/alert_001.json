@@ -22,7 +22,7 @@
     ],
     "human_validation_required": true,
     "recommended_actions": [
-        "Bloquer temporairement l'adresse IP source.",
+        "Bloquer temporairement l'adresse IP source après validation humaine.",
         "Vérifier les comptes ciblés.",
         "Contrôler les connexions réussies récentes.",
         "Renforcer l'authentification MFA si elle n'est pas active.",

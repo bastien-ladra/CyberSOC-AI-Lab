@@ -2,23 +2,17 @@
 
 ## Résumé
 
-Une tentative probable de brute force SSH a été détectée depuis l'adresse IP `185.12.45.10`.
-
-## Criticité
-
-**HIGH**
-
-## Score de confiance
-
-**87 %**
+Une alerte de type `SSH_BRUTE_FORCE` a été détectée depuis l'adresse IP `185.12.45.10`.
 
 ## Détails de l'incident
 
 - Type d'alerte : `SSH_BRUTE_FORCE`
+- Criticité : `HIGH`
 - Adresse IP source : `185.12.45.10`
+- Score de confiance : `87 %`
+- Validation humaine requise : `True`
 - Nombre d'échecs de connexion : `6`
 - Comptes ciblés : `admin, deploy, postgres, root, test, ubuntu`
-- Validation humaine requise : `True`
 
 ## Preuves observées
 
@@ -31,11 +25,11 @@ Une tentative probable de brute force SSH a été détectée depuis l'adresse IP
 
 ## Analyse
 
-Le nombre élevé d'échecs de connexion SSH depuis une même adresse IP indique un comportement compatible avec une attaque par force brute.
+Le comportement observé est compatible avec une activité suspecte nécessitant une vérification par un analyste humain.
 
 ## Recommandations
 
-- Bloquer temporairement l'adresse IP source.
+- Bloquer temporairement l'adresse IP source après validation humaine.
 - Vérifier les comptes ciblés.
 - Contrôler les connexions réussies récentes.
 - Renforcer l'authentification MFA si elle n'est pas active.
@@ -43,6 +37,6 @@ Le nombre élevé d'échecs de connexion SSH depuis une même adresse IP indique
 
 ## Limites de l'analyse
 
-Cette détection repose sur une règle simple basée sur le nombre d'échecs de connexion.
+Cette détection repose sur des règles simples et explicables.
 Une validation humaine est nécessaire avant toute action de blocage ou de remédiation.
 

@@ -1,5 +1,5 @@
 import re
-from typing import Dict, List
+from typing import Any
 
 
 SSH_FAILED_PATTERN = re.compile(
@@ -10,12 +10,13 @@ SSH_ACCEPTED_PATTERN = re.compile(
     r"Accepted password for (?P<user>\w+) from (?P<ip>[\d\.]+) port (?P<port>\d+)"
 )
 
+WEB_ACCESS_PATTERN = re.compile(
+    r'(?P<ip>[\d\.]+) - - \[(?P<timestamp>[^\]]+)\] "(?P<method>\w+) (?P<path>[^ ]+) (?P<protocol>[^"]+)" (?P<status>\d+) (?P<size>\d+) "[^"]*" "(?P<user_agent>[^"]*)"'
+)
 
-def parse_ssh_log_line(line: str) -> Dict:
-    """
-    Parse une ligne de log SSH simple et retourne un événement structuré.
-    """
-    event = {
+
+def parse_ssh_log_line(line: str) -> dict[str, Any]:
+    event: dict[str, Any] = {
         "raw": line.strip(),
         "event_type": "unknown",
         "user": None,
@@ -42,15 +43,47 @@ def parse_ssh_log_line(line: str) -> Dict:
     return event
 
 
-def load_ssh_logs(file_path: str) -> List[Dict]:
-    """
-    Charge un fichier de logs SSH et retourne une liste d'événements structurés.
-    """
-    events = []
+def parse_web_log_line(line: str) -> dict[str, Any]:
+    event: dict[str, Any] = {
+        "raw": line.strip(),
+        "event_type": "unknown",
+        "source_ip": None,
+        "method": None,
+        "path": None,
+        "status": None,
+        "user_agent": None,
+    }
+
+    match = WEB_ACCESS_PATTERN.search(line)
+    if match:
+        event["event_type"] = "web_access"
+        event["source_ip"] = match.group("ip")
+        event["method"] = match.group("method")
+        event["path"] = match.group("path")
+        event["status"] = int(match.group("status"))
+        event["user_agent"] = match.group("user_agent")
+        return event
+
+    return event
+
+
+def load_ssh_logs(file_path: str) -> list[dict[str, Any]]:
+    events: list[dict[str, Any]] = []
 
     with open(file_path, "r", encoding="utf-8") as file:
         for line in file:
             if line.strip():
                 events.append(parse_ssh_log_line(line))
+
+    return events
+
+
+def load_web_logs(file_path: str) -> list[dict[str, Any]]:
+    events: list[dict[str, Any]] = []
+
+    with open(file_path, "r", encoding="utf-8") as file:
+        for line in file:
+            if line.strip():
+                events.append(parse_web_log_line(line))
 
     return events
