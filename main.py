@@ -4,12 +4,14 @@ from pathlib import Path
 from detection.log_parser import load_ssh_logs
 from detection.rules_engine import detect_ssh_bruteforce
 from ai_assistant.incident_summarizer import build_incident_analysis_prompt
+from utils.audit_logger import write_audit_event
 
 
 LOG_FILE = Path("data/sample_logs/ssh_auth.log")
 REPORT_DIR = Path("reports")
 ALERT_DIR = Path("alerts")
 PROMPT_DIR = Path("prompts")
+AUDIT_FILE = Path("audit/audit_log.jsonl")
 
 
 def save_alert_json(alert: dict, alert_path: Path) -> None:
@@ -96,11 +98,29 @@ def main() -> None:
 
         print(f"Alerte JSON générée : {alert_path}")
         print(f"Rapport Markdown généré : {report_path}")
+        
         prompt_path = PROMPT_DIR / f"incident_prompt_{index:03d}.md"
         prompt = build_incident_analysis_prompt(alert)
         prompt_path.write_text(prompt, encoding="utf-8")
 
         print(f"Prompt IA généré : {prompt_path}")
+        
+        write_audit_event(
+            AUDIT_FILE,
+            event_type="incident_processed",
+            details={
+                "alert_type": alert["alert_type"],
+                "severity": alert["severity"],
+                "source_ip": alert["source_ip"],
+                "failed_attempts": alert["failed_attempts"],
+                "human_validation_required": alert["human_validation_required"],
+                "alert_file": str(alert_path),
+                "report_file": str(report_path),
+                "prompt_file": str(prompt_path),
+            }
+        )
+
+        print(f"Événement d'audit ajouté : {AUDIT_FILE}")
 
 
 if __name__ == "__main__":

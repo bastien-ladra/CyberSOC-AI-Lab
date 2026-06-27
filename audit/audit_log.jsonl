@@ -1,0 +1,1 @@
+{"timestamp": "2026-06-27T10:20:56.911081+00:00", "event_type": "incident_processed", "details": {"alert_type": "SSH_BRUTE_FORCE", "severity": "HIGH", "source_ip": "185.12.45.10", "failed_attempts": 6, "human_validation_required": true, "alert_file": "alerts\\alert_001.json", "report_file": "reports\\incident_001.md", "prompt_file": "prompts\\incident_prompt_001.md"}}
