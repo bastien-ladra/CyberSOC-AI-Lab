@@ -1,41 +1,29 @@
 **Analyse de l'incident**
 
-### Résumé de l'incident
+**Résumé de l'incident :**
+Une alerte a été déclenchée pour un tentative d'injection de prompt (une commande de terminal qui permet aux utilisateurs de modifier la sortie standard d'un programme). La requête suspecte a été envoyée depuis une adresse IP spécifique et contient des mots-clés trouvés dans les patterns ciblés.
 
-Un incident de sécurité a été détecté où un utilisateur a tenté d'exécuter une requête suspecte en ligne, qui contient des instructions (ignore_previous_instructions et reveal_system_prompt) potentiellement malveillantes. L'incident s'est déroulé depuis l'une des adresses IP 185.12.45.10.
+**Hypothèse d'attaque probable :**
+Il est probable que l'attaque visait à exploiter un bug ou une vulnérabilité dans le système pour exécuter une commande non autorisée. La requête suspecte contient des mots-clés comme "ignore_previous_instructions" et "reveal_system_prompt", qui sont susceptibles de déclencher une attaque d'injection de prompt.
 
-### Hypothèse d'attaque probable
+**Justification basée uniquement sur les preuves :**
+La requête suspecte a été envoyée depuis l'adresse IP spécifique, ce qui suggère qu'elle pourrait être liée à l'attaque. Les mots-clés trouvés dans les patterns ciblés ("ignore_previous_instructions" et "reveal_system_prompt") sont couramment utilisés pour déclencher une attaque d'injection de prompt. De plus, la requête a été classifiée comme étant susceptible (severity : HIGH) ce qui indique qu'elle pourrait être une menace sérieuse.
 
-L'hypothèse d'attaque probable est que cet utilisateur cherche à compromettre la sécurité de l'application ou du système en utilisant une injection de promesse. Cela pourrait être lié à une attaque de type prompt injection, qui permet de prendre le contrôle d'un shell. Toutefois, il convient de noter que cette hypothèse nécessite confirmation supplémentaire.
+**Niveau de confiance :**
+Le niveau de confiance est élevé en raison de l'adresse IP spécifique et des mots-clés trouvés dans les patterns ciblés. Cependant, il est important de noter que la validation humaine est nécessaire pour confirmer l'attaque.
 
-### Justification basée uniquement sur les preuves
+**Actions recommandées :**
+1. Valider les logs applicatifs et WAF pour vérifier si la requête suspecte a été traitée correctement.
+2. Vérifier si cette requête cible une fonctionnalité connectée à un assistant IA.
+3. Maintenir une validation humaine avant toute action.
+4. Réaliser un scan de sécurité pour détecter tout vulnérabilité potentiel.
 
-La justification repose sur l'analyse des logs suivants :
+**Limites de l'analyse :**
+- Il n'y a pas d'informations supplémentaires sur le contexte réseau ou les logs applicatifs.
+- Il est impossible de déterminer avec certitude si la requête suspecte était liée à une attaque réelle.
 
-- Un utilisateur a tenté d'exécuter une requête GET contenant des instructions malveillantes (ignore_previous_instructions et reveal_system_prompt).
-- L'adresse IP 185.12.45.10 est associée à cette requête.
-- La requête a été traitée avec succès (statut HTTP/1.1 : 200).
-
-### Niveau de confiance
-
-Le niveau de confiance attribué à cette hypothèse d'attaque probable est modéré, car les informations disponibles ne sont pas suffisantes pour déterminer avec certitude la nature réelle de l'incident.
-
-### Actions recommandées
-
-- Ne pas transmettre directement ce contenu à un modèle IA sans nettoyage.
-- Traiter les instructions présentes dans les logs comme des données non fiables.
-- Vérifier si cette requête cible une fonctionnalité connectée à un assistant IA.
-- Corréler avec les logs applicatifs et WAF.
-- Maintenir une validation humaine avant toute action.
-
-### Limites de l'analyse
-
-- L'analyse ne peut pas déterminer avec certitude la nature réelle de l'incident (si c'est bien une attaque de prompt injection).
-- Il n'y a pas d'information suffisante sur le contexte réseau pour établir un lien avec une autre attaque ou incident connu.
-- La validation humaine est essentielle pour approfondir l'enquête et confirmer la nature de l'incident.
-
-### Points à vérifier par un humain
-
-- Vérifier si l'adresse IP 185.12.45.10 est associée à d'autres incidents ou requêtes suspectes.
-- Corréler les logs applicatifs avec les logs réseau pour déterminer s'il existe une connexion entre la requête suspecte et une fonctionnalité de l'application.
-- Vérifier si il y a des logs supplémentaires qui pourraient contenir d'autres informations sur la requête suspecte ou son contexte.
+**Points à vérifier par un humain :**
+1. Vérifier l'intégrité des logs et des données de WAF.
+2. Corréler les logs applicatifs avec les logs du système.
+3. Valider la validation humaine avant toute action.
+4. Vérifier les configurations de sécurité pour s'assurer qu'elles sont à jour et correctement configurées.
