@@ -626,7 +626,7 @@ pytest -q
 Résultat attendu :
 
 ```text
-11 passed
+13 passed
 ```
 
 Les tests couvrent actuellement :
@@ -776,6 +776,9 @@ Ces limites sont acceptées à ce stade, car l’objectif est de construire prog
 - Threat model ;
 - Notes de recherche ;
 - Méthodologie d’évaluation.
+- l’absence d’alerte sur des logs SSH bénins ;
+- l’absence d’alerte sur des logs web bénins ;
+- la non-détection de prompt injection sur du trafic web normal.
 
 ### MVP v0.9 — Scénarios avancés
 
