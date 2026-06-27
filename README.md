@@ -14,6 +14,7 @@ Le projet a pour objectif de :
 - produire des rapports d’incident ;
 - préparer et générer une analyse assistée par IA ;
 - évaluer automatiquement les réponses IA ;
+- visualiser les incidents dans une interface SOC simple ;
 - conserver une traçabilité des traitements ;
 - imposer une validation humaine avant toute action sensible.
 
@@ -36,7 +37,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : **MVP v0.5**
+Version actuelle : **MVP v0.6**
 
 Le prototype couvre actuellement deux scénarios :
 
@@ -49,6 +50,7 @@ Cette version intègre également :
 - la génération d’analyses IA pour chaque incident ;
 - une évaluation automatique des réponses IA ;
 - un scoring de prudence, structure et contrôle humain ;
+- une interface Streamlit permettant de visualiser les alertes, rapports, analyses IA, scores d’évaluation et événements d’audit ;
 - des tests unitaires ;
 - une pipeline GitHub Actions pour exécuter les tests automatiquement.
 
@@ -68,6 +70,12 @@ Le prototype permet actuellement de :
 - générer une analyse IA locale optionnelle via Ollama ;
 - évaluer automatiquement les réponses IA selon des critères de prudence, structure, hallucination et validation humaine ;
 - produire un score d’acceptabilité pour chaque réponse IA ;
+- afficher les alertes dans une interface Streamlit ;
+- consulter les rapports d’incident depuis le dashboard ;
+- consulter les prompts IA générés ;
+- consulter les analyses IA locales ;
+- afficher le score d’évaluation IA ;
+- visualiser le journal d’audit ;
 - journaliser les traitements dans un fichier d’audit JSONL ;
 - exécuter des tests unitaires avec pytest ;
 - lancer les tests automatiquement via GitHub Actions.
@@ -99,6 +107,9 @@ CyberSOC-AI-Lab/
 │
 ├── audit/
 │   └── audit_log.jsonl
+│
+├── dashboard/
+│   └── app.py
 │
 ├── data/
 │   └── sample_logs/
@@ -160,6 +171,8 @@ Analyse IA locale optionnelle via Ollama
 Évaluation automatique de la réponse IA
         ↓
 Journalisation dans un fichier d’audit
+        ↓
+Visualisation dans un dashboard Streamlit
 ```
 
 ## Scénarios détectés
@@ -341,17 +354,19 @@ Le projet utilise actuellement :
 - expressions régulières pour le parsing ;
 - règles simples et explicables pour la détection ;
 - Ollama pour l’analyse IA locale optionnelle ;
+- Streamlit pour le dashboard ;
 - pytest pour les tests unitaires ;
 - GitHub Actions pour l’intégration continue.
 
 Technologies prévues ultérieurement :
 
 - Docker ;
-- Streamlit ou FastAPI ;
-- interface de validation humaine ;
+- FastAPI ;
+- interface de validation humaine enrichie ;
 - enrichissement MITRE ATT&CK ;
 - métriques d’évaluation plus avancées ;
-- scoring plus fin des hallucinations et recommandations dangereuses.
+- scoring plus fin des hallucinations et recommandations dangereuses ;
+- comparaison entre plusieurs modèles IA.
 
 ## Installation
 
@@ -435,6 +450,26 @@ Rapport Markdown généré : reports/incident_002.md
 Prompt IA généré : prompts/incident_prompt_002.md
 Événement d'audit ajouté : audit/audit_log.jsonl
 ```
+
+## Dashboard Streamlit
+
+Le projet inclut une interface simple permettant de visualiser les alertes, rapports, prompts IA, analyses IA, scores d’évaluation et événements d’audit.
+
+Lancer le dashboard :
+
+```bash
+streamlit run dashboard/app.py
+```
+
+Le dashboard permet de :
+
+- sélectionner une alerte ;
+- visualiser son contenu JSON ;
+- lire le rapport d’incident ;
+- consulter le prompt IA généré ;
+- afficher l’analyse IA si elle existe ;
+- consulter le score d’évaluation IA ;
+- lire le journal d’audit.
 
 ## Tests
 
@@ -532,7 +567,8 @@ CyberSOC-AI-Lab se positionne à l’intersection de plusieurs domaines :
 - auditabilité ;
 - gouvernance des systèmes d’IA ;
 - sécurité des systèmes d’information ;
-- évaluation de la fiabilité des réponses IA.
+- évaluation de la fiabilité des réponses IA ;
+- visualisation SOC.
 
 ## Limites actuelles
 
@@ -545,7 +581,7 @@ Limites identifiées :
 - détection basée sur des règles simples ;
 - analyse IA encore basique ;
 - évaluation IA basée sur des règles simples ;
-- absence d’interface utilisateur ;
+- interface utilisateur encore simple et exploratoire ;
 - absence de données réelles ;
 - absence de comparaison avec un SIEM réel ;
 - absence de validation par un analyste SOC réel.
@@ -554,7 +590,7 @@ Ces limites sont acceptées à ce stade, car l’objectif est de construire prog
 
 ## Roadmap
 
-### MVP v0.5 — État actuel
+### MVP v0.6 — État actuel
 
 - Détection brute force SSH ;
 - Détection reconnaissance web ;
@@ -567,23 +603,17 @@ Ces limites sont acceptées à ce stade, car l’objectif est de construire prog
 - Journal d’audit JSONL ;
 - Tests unitaires ;
 - GitHub Actions ;
+- Interface Streamlit ;
+- Visualisation des alertes ;
+- Consultation des rapports ;
+- Consultation des prompts IA ;
+- Consultation des analyses IA ;
+- Affichage des scores d’évaluation IA ;
+- Consultation du journal d’audit ;
 - Documentation d’architecture ;
 - Threat model ;
 - Notes de recherche ;
 - Méthodologie d’évaluation.
-
-### MVP v0.6 — Interface SOC
-
-Objectif :
-
-- ajouter une interface simple ;
-- afficher les alertes ;
-- consulter les rapports ;
-- consulter les analyses IA ;
-- afficher les scores d’évaluation IA ;
-- valider ou rejeter une analyse ;
-- ajouter une note humaine ;
-- tracer la décision finale.
 
 ### MVP v0.7 — Scénarios avancés
 
@@ -604,6 +634,15 @@ Objectif :
 - comparer les réponses IA aux preuves disponibles ;
 - détecter les réponses non justifiées ;
 - journaliser les corrections humaines.
+
+### MVP v0.9 — Validation humaine
+
+Objectif :
+
+- valider ou rejeter une analyse IA depuis l’interface ;
+- ajouter une note humaine ;
+- tracer la décision finale ;
+- enrichir le journal d’audit avec les décisions humaines.
 
 ## Vision long terme
 
