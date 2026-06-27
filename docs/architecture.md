@@ -401,6 +401,58 @@ audit/audit_log.jsonl
 audit/human_review_log.jsonl
 ```
 
+## Gestion des sorties runtime
+
+Depuis la version v0.9.2, les sorties générées par le pipeline ne sont plus écrites directement dans les dossiers versionnés du projet.
+
+Par défaut, `main.py` écrit les fichiers générés dans le dossier :
+
+```text
+runtime/
+```
+
+Ce dossier contient les sorties produites lors d’une exécution locale :
+
+```text
+runtime/
+├── alerts/
+├── reports/
+├── prompts/
+├── ai_outputs/
+├── audit/
+└── human_reviews/
+```
+
+Le dossier `runtime/` est ignoré par Git afin d’éviter que chaque exécution locale modifie le dépôt.
+
+Le dashboard Streamlit lit également les données depuis `runtime/`.
+
+Ce choix permet de séparer :
+
+```text
+fichiers d’exemple versionnés
+→ utiles pour la démonstration et la documentation
+
+sorties runtime locales
+→ générées à l’exécution et ignorées par Git
+```
+
+Il est possible de modifier le dossier de sortie avec l’option :
+
+```bash
+python main.py --output-dir chemin/du/dossier
+```
+
+Exemple :
+
+```bash
+python main.py --output-dir runtime-test
+```
+
+Dans ce cas, les sorties sont générées dans `runtime-test/`.
+
+À ce stade, le dashboard lit `runtime/` par défaut. Pour visualiser des sorties générées dans un autre dossier, il faut soit relancer le pipeline avec le dossier par défaut, soit faire évoluer le dashboard pour accepter un dossier de sortie configurable.
+
 ## Séparation des responsabilités
 
 Le projet suit une séparation simple des responsabilités :
