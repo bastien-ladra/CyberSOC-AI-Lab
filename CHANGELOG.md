@@ -1,5 +1,17 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v0.9.2 — Sorties runtime isolées
+
+### Modifié
+
+- Les sorties générées par `main.py` sont maintenant écrites dans `runtime/`.
+- Le dashboard Streamlit lit les alertes, rapports, prompts, analyses IA, audits et validations humaines depuis `runtime/`.
+- Le dossier `runtime/` est ignoré par Git.
+
+### Objectif
+
+Éviter que les exécutions locales modifient les fichiers versionnés et garder un dépôt propre après chaque test.
+
 ## v0.9.0 — Support Docker
 
 ### Ajouté

@@ -358,6 +358,20 @@ Ce mécanisme permet de conserver le principe central du projet :
 ## Sorties générées
 
 À l’exécution, le projet génère plusieurs types de fichiers.
+Depuis la version v0.9.2, les sorties générées à l’exécution sont écrites par défaut dans le dossier `runtime/`.
+
+Ce dossier est ignoré par Git afin d’éviter que les exécutions locales modifient les fichiers versionnés.
+
+Exemple :
+
+```text
+runtime/alerts/
+runtime/reports/
+runtime/prompts/
+runtime/ai_outputs/
+runtime/audit/
+runtime/human_reviews/
+```
 
 ### Alertes JSON
 
