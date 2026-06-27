@@ -1,5 +1,17 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v0.9.7 — Séparation des exemples versionnés
+
+### Modifié
+
+- Déplacement des sorties d’exemple versionnées dans le dossier `examples/`.
+- Conservation des sorties runtime locales dans `runtime/`.
+- Clarification de la séparation entre données de démonstration et fichiers générés localement.
+
+### Objectif
+
+Rendre le dépôt plus lisible pour un utilisateur externe en distinguant les exemples consultables des sorties générées à l’exécution.
+
 ## v0.9.6 — Documentation du dossier runtime configurable
 
 ### Ajouté

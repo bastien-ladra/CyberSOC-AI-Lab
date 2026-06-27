@@ -400,6 +400,24 @@ runtime/audit/
 runtime/human_reviews/
 ```
 
+## Exemples versionnés
+
+Le dossier `examples/` contient des exemples de sorties générées par le projet.
+
+Ces fichiers sont conservés dans Git afin de permettre à un recruteur, un évaluateur ou un contributeur de consulter rapidement le résultat attendu du pipeline sans devoir exécuter immédiatement le projet.
+
+```text
+examples/
+├── alerts/
+├── reports/
+├── prompts/
+├── ai_outputs/
+├── audit/
+└── human_reviews/
+```
+
+Les nouvelles exécutions locales écrivent dans `runtime/`, qui est ignoré par Git.
+
 ### Alertes JSON
 
 Les alertes structurées sont générées dans :

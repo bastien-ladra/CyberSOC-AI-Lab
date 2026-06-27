@@ -452,6 +452,19 @@ python main.py --output-dir runtime-test
 Dans ce cas, les sorties sont générées dans `runtime-test/`.
 
 À ce stade, le dashboard lit `runtime/` par défaut. Pour visualiser des sorties générées dans un autre dossier, il faut soit relancer le pipeline avec le dossier par défaut, soit faire évoluer le dashboard pour accepter un dossier de sortie configurable.
+Les fichiers d’exemple anciennement générés sont conservés dans le dossier `examples/`.
+
+Ce dossier sert de référence démonstrative versionnée, tandis que `runtime/` sert aux exécutions locales.
+
+```text
+examples/
+├── alerts/
+├── reports/
+├── prompts/
+├── ai_outputs/
+├── audit/
+└── human_reviews/
+```
 
 ## Séparation des responsabilités
 
