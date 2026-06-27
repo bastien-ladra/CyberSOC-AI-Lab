@@ -1,30 +1,37 @@
-**Analyse de l'incident**
+**Analyse de l'alerte SSH_BRUTE_FORCE**
 
-1. **Résumé de l'incident**
-L'incident rapporté implique un essai de force brute SSH contre plusieurs comptes administratifs sur une machine serveur avec succès. Les tentatives ont été effectuées à partir d'une adresse IP spécifique.
+**Résumé de l'incident**
 
-2. **Hypothèse d'attaque probable**
-L'hypothèse d'attaque probable est que l'attaque est un essai de force brute SSH ciblant des comptes administratifs pour accéder au système serveur. Cela se vérifie avec les tentatives réussies contre plusieurs comptes et l'adresse IP source.
+Une alerte SSH_BRUTE_FORCE a été générée par le moteur de règles, indiquant une tentative de connexion brute-force sur plusieurs comptes administratifs d'un serveur. L'alerte concerne un seul adresse IP source (185.12.45.10) et six comptes ciblés : admin, root, test, ubuntu, deploy et postgres.
 
-3. **Justification basée uniquement sur les preuves**
-Les justifications basées sur les preuves sont les logs de tentative de connexion réussie pour chaque compte ciblé, ainsi que la fréquence et la rapidité des tentatives. Ces informations suggèrent une stratégie d'essai de force brute, avec une tentative réussie contre chacun des comptes suivant un rythme similaire.
+**Hypothèse d'attaque probable**
 
-4. **Niveau de confiance**
-Le niveau de confiance est de 0,87 selon les informations fournies, indiquant une probabilité relativement élevée que cette attaque soit effectivement une force brute.
+Il est probable que l'attaque soit une tentative de connexion brute-force visant à accéder aux comptes administratifs du serveur. L'adresse IP source est connue mais il n'est pas possible de déterminer s'il s'agit d'un attaquant individuel ou d'une attaque automatisée.
 
-5. **Actions recommandées**
-- Bloquer temporairement l'adresse IP source après validation humaine pour empêcher de futurs essais de force brute.
-- Vérifier les comptes ciblés et leurs permissions pour comprendre les risques potentiels d'accès non autorisé.
-- Contrôler les connexions réussies récentes pour détecter tout usage abusif ou suspect.
-- Renforcer l'authentification MFA si elle n'est pas active, pour augmenter la sécurité de l'accès.
+**Justification basée uniquement sur les preuves**
 
-6. **Limites de l'analyse**
-- La analyse ne peut confirmer avec certitude que l'attaque est effectivement une force brute sans plus d'informations.
-- L'analyse ne prend en compte qu'une fenêtre temporelle spécifique et ne vise pas à détecter tout essai de connexion non autorisé.
+Les logs détaillent six tentatives de connexion brute-force sur différents comptes administratifs, avec des adresses IP différentes pour chaque tentative. Les temps de connexion sont courts (de 1 à 2 secondes). La fréquence des tentatives est importante, avec quatre tentatives par minute. Cela suggère une attaque automatisée.
 
-7. **Points à vérifier par un humain**
-- Vérification des comptes ciblés et leurs permissions pour une analyse complète.
-- Validation humaine de l'adresse IP source pour confirmer que l'attaque est effectivement une force brute.
-- Contrôle complet des connexions récentes pour être sûr d’identifier tout usage abusif ou suspect.
+**Niveau de confiance**
 
-**Note importante**: Toute action doit être prise après validation et confirmation par un humain, car une automatisation sans confirmation peut introduire des risques de sécurité supplémentaires.
+Le niveau de confiance est élevé (0,87) en raison de la fréquence et de la rapidité des tentatives de connexion brute-force. Cette valeur correspond à la confiance attribuée par le moteur de règles pour ce type d'alerte.
+
+**Actions recommandées**
+
+1. **Bloquer temporairement l'adresse IP source** après validation humaine.
+2. **Vérifier les comptes ciblés** : vérifier si les comptes administratifs sont effectivement utilisés par les utilisateurs concernés et si les mots de passe correspondent aux attentes.
+3. **Contrôler les connexions réussies récentes**: surveiller les connexions réussies sur la même fenêtre temporelle pour détecter les comportements suspects.
+4. **Renforcer l'authentification MFA** si elle n'est pas active : considérer la mise en place d'une authentification à deux facteurs (MFA) pour renforcer la sécurité des comptes administratifs.
+
+**Limites de l'analyse**
+
+* Il est possible que cette attaque soit le résultat d'un test ou d'une démonstration, plutôt qu'une attaque réelle.
+* L'adresse IP source n'est pas connue avec certitude ; il est possible qu'il s'agisse d'une adresse IP temporaire utilisée pour l'attaque.
+
+**Points à vérifier par un humain**
+
+1. **Vérification des comptes ciblés** : confirmer les informations sur les comptes administratifs et leurs mots de passe.
+2. **Analyse du contexte réseau** : évaluer la situation dans lequel se situe l'attaque (ex: si elle concerne un serveur ou une application spécifique).
+3. **Validation humaine** : confirmer que l'adresse IP source est bien une adresse IP temporaire et non une attaque réelle.
+
+Il est important de rappeler qu'une validation humaine est nécessaire pour confirmer les informations et prendre des décisions éclairées.

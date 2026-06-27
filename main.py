@@ -8,6 +8,7 @@ from ai_assistant.llm_client import query_ollama
 from detection.log_parser import load_ssh_logs, load_web_logs
 from detection.rules_engine import detect_ssh_bruteforce, detect_web_reconnaissance
 from utils.audit_logger import write_audit_event
+from ai_assistant.response_evaluator import evaluate_ai_response
 
 
 SSH_LOG_FILE = Path("data/sample_logs/ssh_auth.log")
@@ -18,6 +19,7 @@ ALERT_DIR = Path("alerts")
 PROMPT_DIR = Path("prompts")
 AI_OUTPUT_DIR = Path("ai_outputs")
 AUDIT_FILE = Path("audit/audit_log.jsonl")
+AI_OUTPUT_DIR = Path("ai_outputs")
 
 
 def save_alert_json(alert: dict[str, Any], alert_path: Path) -> None:
@@ -133,6 +135,7 @@ def main() -> None:
         report_path = REPORT_DIR / f"incident_{index:03d}.md"
         prompt_path = PROMPT_DIR / f"incident_prompt_{index:03d}.md"
         ai_output_path = AI_OUTPUT_DIR / f"incident_ai_analysis_{index:03d}.md"
+        ai_evaluation_path = AI_OUTPUT_DIR / f"incident_ai_evaluation_{index:03d}.json"
 
         save_alert_json(alert, alert_path)
         generate_markdown_report(alert, report_path)
@@ -141,6 +144,7 @@ def main() -> None:
         prompt_path.write_text(prompt, encoding="utf-8")
 
         ai_response_generated = False
+        ai_evaluation_generated = False
 
         if args.enable_ai:
             ai_response = query_ollama(prompt=prompt, model=args.model)
@@ -149,6 +153,14 @@ def main() -> None:
                 ai_output_path.write_text(ai_response, encoding="utf-8")
                 ai_response_generated = True
                 print(f"Analyse IA générée : {ai_output_path}")
+
+                ai_evaluation = evaluate_ai_response(ai_response)
+                ai_evaluation_path.write_text(
+                    json.dumps(ai_evaluation, indent=4, ensure_ascii=False),
+                    encoding="utf-8",
+                )
+                ai_evaluation_generated = True
+                print(f"Évaluation IA générée : {ai_evaluation_path}")
             else:
                 print("Aucune analyse IA générée. Vérifie qu'Ollama est lancé.")
 
@@ -167,6 +179,8 @@ def main() -> None:
                 "ai_model": args.model if args.enable_ai else None,
                 "ai_response_generated": ai_response_generated,
                 "ai_output_file": str(ai_output_path) if ai_response_generated else None,
+                "ai_evaluation_generated": ai_evaluation_generated,
+                "ai_evaluation_file": str(ai_evaluation_path) if ai_evaluation_generated else None,
             },
         )
 
