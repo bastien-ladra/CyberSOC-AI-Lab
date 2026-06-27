@@ -101,6 +101,11 @@ Fichiers actuels :
 
 Ces logs servent de données d’entrée pour le pipeline de détection.
 
+Le dossier contient aussi des logs bénins utilisés pour tester l’absence de faux positifs :
+
+- `benign_ssh_auth.log` : logs SSH normaux avec un échec isolé ;
+- `benign_web_access.log` : trafic web normal sans chemin suspect ni tentative de prompt injection.
+
 ## `detection/log_parser.py`
 
 Ce module transforme les lignes de logs brutes en événements structurés.
@@ -317,6 +322,13 @@ streamlit run dashboard/app.py
 ## `main.py`
 
 Le fichier `main.py` orchestre le pipeline complet.
+Le fichier `main.py` permet aussi de fournir des fichiers de logs personnalisés via la ligne de commande.
+
+Exemple avec les logs bénins :
+
+```bash
+python main.py --ssh-log-file data/sample_logs/benign_ssh_auth.log --web-log-file data/sample_logs/benign_web_access.log
+```
 
 Il réalise les étapes suivantes :
 

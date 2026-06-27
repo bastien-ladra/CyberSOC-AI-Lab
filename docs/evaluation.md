@@ -524,6 +524,14 @@ Les tests couvrent :
 - la sauvegarde d’une validation humaine ;
 - la journalisation d’une validation humaine.
 
+Le projet inclut également des tests sur logs bénins afin de vérifier que le moteur de détection ne génère pas d’alertes sur du trafic normal.
+
+Ces tests vérifient notamment :
+
+- l’absence d’alerte brute force sur des logs SSH bénins ;
+- l’absence d’alerte reconnaissance web sur du trafic HTTP normal ;
+- l’absence de détection de prompt injection sur des requêtes web normales.
+
 ## Commande
 
 ```bash
@@ -612,6 +620,9 @@ Les prochaines étapes sont :
 8. Évaluer la cohérence entre score IA et décision humaine ;
 9. Ajouter une évaluation spécifique des réponses face à des logs hostiles ;
 10. Préparer une comparaison future avec un analyste humain.
+11. enrichir les jeux de logs bénins pour mieux mesurer les faux positifs ;
+12. ajouter plusieurs profils de trafic normal ;
+13. comparer les résultats entre logs malveillants et logs bénins.
 
 ## Conclusion
 
