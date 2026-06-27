@@ -1,5 +1,18 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v0.9.0 — Support Docker
+
+### Ajouté
+
+- Ajout d’un `Dockerfile`.
+- Ajout d’un `.dockerignore`.
+- Possibilité de lancer le dashboard Streamlit dans un conteneur Docker.
+- Possibilité d’exécuter le pipeline depuis Docker.
+
+### Objectif
+
+Faciliter l’exécution du projet sur une autre machine et préparer une future industrialisation.
+
 ## v0.8.4 — Documentation alignée et logs personnalisés
 
 ### Ajouté

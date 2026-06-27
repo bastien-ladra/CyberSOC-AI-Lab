@@ -525,6 +525,16 @@ Installer les dépendances :
 pip install -r requirements.txt
 ```
 
+## Utilisation avec Docker
+
+Le projet peut être lancé dans un conteneur Docker.
+
+Construire l’image :
+
+```bash
+docker build -t cybersoc-ai-lab .
+```
+
 ## Utilisation sans IA
 
 Lancer le prototype sans analyse IA :
