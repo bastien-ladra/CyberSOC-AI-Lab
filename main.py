@@ -116,6 +116,18 @@ def parse_args() -> argparse.Namespace:
         help="Nom du modèle Ollama à utiliser. Exemple : llama3.2, mistral, phi3.",
     )
 
+    parser.add_argument(
+        "--ssh-log-file",
+        default=str(SSH_LOG_FILE),
+        help="Chemin du fichier de logs SSH à analyser.",
+    )
+
+    parser.add_argument(
+        "--web-log-file",
+        default=str(WEB_LOG_FILE),
+        help="Chemin du fichier de logs web à analyser.",
+    )
+
     return parser.parse_args()
 
 
@@ -127,8 +139,8 @@ def main() -> None:
     PROMPT_DIR.mkdir(exist_ok=True)
     AI_OUTPUT_DIR.mkdir(exist_ok=True)
 
-    ssh_events: list[dict[str, Any]] = load_ssh_logs(str(SSH_LOG_FILE))
-    web_events: list[dict[str, Any]] = load_web_logs(str(WEB_LOG_FILE))
+    ssh_events: list[dict[str, Any]] = load_ssh_logs(args.ssh_log_file)
+    web_events: list[dict[str, Any]] = load_web_logs(args.web_log_file)
 
     alerts: list[dict[str, Any]] = []
     alerts.extend(detect_ssh_bruteforce(ssh_events))

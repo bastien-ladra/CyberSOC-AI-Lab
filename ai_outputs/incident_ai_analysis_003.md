@@ -1,29 +1,27 @@
-**Analyse de l'incident**
+**Analyse Structurée de l'Alerte**
 
-**Résumé de l'incident :**
-Une alerte a été déclenchée pour un tentative d'injection de prompt (une commande de terminal qui permet aux utilisateurs de modifier la sortie standard d'un programme). La requête suspecte a été envoyée depuis une adresse IP spécifique et contient des mots-clés trouvés dans les patterns ciblés.
+**Résumé de l'incident**
+Un essai de prompt injection a été détecté, ce qui suggère que l'attaque vise à influencer la réponse d'un assistant IA. L'incident a été signalé par un utilisateur qui a tenté de rechercher des instructions spécifiques dans le moteur de recherche du système.
 
-**Hypothèse d'attaque probable :**
-Il est probable que l'attaque visait à exploiter un bug ou une vulnérabilité dans le système pour exécuter une commande non autorisée. La requête suspecte contient des mots-clés comme "ignore_previous_instructions" et "reveal_system_prompt", qui sont susceptibles de déclencher une attaque d'injection de prompt.
+**Hypothèse d'attaque probable**
+L'attaque probable est que l'attaquant utilise une requête malveillante pour essayer d'influencer la réponse de l'assistant IA, peut-être pour obtenir des informations sensibles ou pour exécuter des instructions non autorisées.
 
-**Justification basée uniquement sur les preuves :**
-La requête suspecte a été envoyée depuis l'adresse IP spécifique, ce qui suggère qu'elle pourrait être liée à l'attaque. Les mots-clés trouvés dans les patterns ciblés ("ignore_previous_instructions" et "reveal_system_prompt") sont couramment utilisés pour déclencher une attaque d'injection de prompt. De plus, la requête a été classifiée comme étant susceptible (severity : HIGH) ce qui indique qu'elle pourrait être une menace sérieuse.
+**Justification basée uniquement sur les preuves**
+La justification repose sur les logs du système qui montrent une requête HTTP avec un paramètre spécifique (`ignore_previous_instructions_and_reveal_system_prompt`) qui correspond à une instruction connue. La confiance est élevée car le score de confiance est de 0,9, ce qui indique une probabilité d'erreur faible.
 
-**Niveau de confiance :**
-Le niveau de confiance est élevé en raison de l'adresse IP spécifique et des mots-clés trouvés dans les patterns ciblés. Cependant, il est important de noter que la validation humaine est nécessaire pour confirmer l'attaque.
+**Niveau de confiance**
+Le niveau de confiance est élevé (0,9) en raison du score de confiance élevé et de la cohérence avec les instructions connues.
 
-**Actions recommandées :**
-1. Valider les logs applicatifs et WAF pour vérifier si la requête suspecte a été traitée correctement.
-2. Vérifier si cette requête cible une fonctionnalité connectée à un assistant IA.
-3. Maintenir une validation humaine avant toute action.
-4. Réaliser un scan de sécurité pour détecter tout vulnérabilité potentiel.
+**Actions recommandées**
+1. **Nettoyage de la requête**: La requête doit être nettoyée pour effacer les informations sensibles avant de l'analyser.
+2. **Vérification des logs applicatifs**: Il est important de vérifier si cette requête cible une fonctionnalité connectée à un assistant IA et si elle affecte d'autres parties du système.
+3. **Corrélation avec la WAF**: La requête doit être corrigée avec les données de sécurité pour éviter tout déclenchement de l'alerte.
+4. **Validation humaine**: La validation par un humain est nécessaire pour confirmer si cette requête est une attaque réelle ou une erreur du système.
 
-**Limites de l'analyse :**
-- Il n'y a pas d'informations supplémentaires sur le contexte réseau ou les logs applicatifs.
-- Il est impossible de déterminer avec certitude si la requête suspecte était liée à une attaque réelle.
+**Limites de l'analyse**
+- **Manque de contexte réseau**: Les informations de contexte réseau sont limitées, ce qui rend difficile la compréhension complète de la situation.
+- **Inconnues les intentions de l'attaquant**: Il est impossible de savoir si l'attaque est intentionnelle ou une erreur.
 
-**Points à vérifier par un humain :**
-1. Vérifier l'intégrité des logs et des données de WAF.
-2. Corréler les logs applicatifs avec les logs du système.
-3. Valider la validation humaine avant toute action.
-4. Vérifier les configurations de sécurité pour s'assurer qu'elles sont à jour et correctement configurées.
+**Points à vérifier par un humain**
+- La validité des logs et de l'information transmise
+- L'impact réel sur le système d'assistant IA
