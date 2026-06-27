@@ -1,29 +1,35 @@
 **Analyse de l'incident**
 
-### Résumé de l'incident
-Une alerte SSH_brute_force a été déclenchée après 6 tentatives échouées d'accès par brute-force sur une adresse IP source connue.
+**Résumé de l'incident :**
+Une alerte SSH bruteforce a été détectée, avec 6 tentatives de connexion réussies en une minute et un taux de confiance de 0,87.
 
-### Hypothèse d'attaque probable
-L'hypothèse d'attaque probable est qu'une attaquant utilise des logiciels de brute-force pour essayer de deviner les mots de passe des utilisateurs du serveur SSH.
+**Hypothèse d'attaque probable :**
+Il est probable que cet incident soit lié à une attaque brute force contre des comptes administratifs ou de gestion de réseau.
 
-### Justification basée uniquement sur les preuves
-Les 6 tentatives échouées d'accès par brute-force, ainsi que les messages d'erreur spécifiques mentionnant des mots de passe invalides pour des utilisateurs tels que `admin`, `root`, `test`, `ubuntu` et `deploy`, suggèrent une attaque de type brute-force. De plus, l'utilisation de ports différents (53321 à 53326) pour chaque tentative échouée, indique que l'attaquant utilise un script d'attaque automatisé.
+**Justification basée uniquement sur les preuves :**
 
-### Niveau de confiance
-Le niveau de confiance est basé sur la fréquence et la rapidité des tentatives échouées (6 tentatives en moins de 2 minutes), ce qui est indiqué par une confiance de 0,87. Cependant, il est important de noter que cette confiance ne peut pas être déterminée avec certitude sans plus d'informations.
+* Les tentatives de connexion successives avec des combinaisons d'utilisateurs et de mots de passe invalides sont caractéristiques d'une attaque brute force.
+* L'origine IP du coup (185.12.45.10) n'est pas connue, mais il est possible qu'elle soit associée à une adresse public ou privée qui a été compromise dans le passé.
+* Les ports utilisés (53321-53326) sont allés de 0 à 26, ce qui suggère que l'attaque est une tentative de déstabiliser les systèmes.
 
-### Actions recommandées
-- Bloquer temporairement l'adresse IP source après validation humaine.
-- Vérifier les comptes ciblés pour détecter les utilisateurs vulnérables.
-- Contrôler les connexions réussies récentes pour identifier les utilisateurs authentifiés.
-- Renforcer l'authentification MFA si elle n'est pas active.
+**Niveau de confiance :**
+Le niveau de confiance est élevé en raison du nombre important d'essais réussis et des caractéristiques de l'attaque qui sont typiques d'une attaque brute force. Cependant, sans plus de contexte sur la source IP et les utilisateurs concernés, il est difficile de déterminer avec certitude si cet incident est effectivement une attaque brute force.
 
-### Limites de l'analyse
-- L'analyse ne peut pas déterminer avec certitude la nature exacte de l'attaque, car les logs ne contiennent aucune information sur l'appareil ou la méthode utilisée par l'attaquant.
-- Il est possible que le moteur de règles ait généré des recommandations pré-générées basées sur des modèles d'attaque courants, plutôt que sur une analyse détaillée des preuves.
+**Actions recommandées :**
 
-### Points à vérifier par un humain
-- Vérification du contenu des logs pour s'assurer qu'ils sont exacts et non falsifiés.
-- Validation de la confiance indiquée par le moteur de règles, en fonction des circonstances spécifiques de l'incident.
-- Contrôle des comptes ciblés et vérification de leur état actuel.
-- Vérification de l'authentification MFA pour s'assurer qu'elle est active et fonctionnelle.
+* Bloquer temporairement l'adresse IP source après validation humaine.
+* Vérifier les comptes ciblés pour garantir qu'ils sont sécurisés et que leurs mots de passe ont été mis à jour.
+* Contrôler les connexions réussies récentes pour détecter toute activité suspecte.
+* Renforcer l'authentification MFA si elle n'est pas active sur le système ou les comptes concernés.
+
+**Limites de l'analyse :**
+
+* La source IP est inconnue et pourrait être associée à une adresse public ou privée qui a été compromise dans le passé.
+* Il n'y a pas d'informations sur les utilisateurs ciblés ou leurs mots de passe.
+
+**Points à vérifier par un humain :**
+
+* Vérification de la source IP pour déterminer si elle est effectivement associée à une adresse compromisée.
+* Vérification des comptes ciblés et de leurs mots de passe pour garantir qu'ils sont sécurisés.
+* Analyse plus approfondie des logs pour détecter toute activité suspecte.
+* Validation humaine de l'incident avant de prendre des mesures.
