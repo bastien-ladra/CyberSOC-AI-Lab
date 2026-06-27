@@ -217,23 +217,13 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-__pycache__/
-.pytest_cache/
-*.pyc
-
-# Project generated runtime files
-.streamlit/secrets.toml
-
-# Keep sample logs versioned, but ignore future raw datasets
+# Keep sample logs versioned for the demo MVP
 !data/
 !data/sample_logs/
 !data/sample_logs/*.log
+
+# Ignore future real/private datasets
 data/raw/
 data/external/
 data/real/
 data/private/
-
-# Python cache
-__pycache__/
-.pytest_cache/
-*.pyc
