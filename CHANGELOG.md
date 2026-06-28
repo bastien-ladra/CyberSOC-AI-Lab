@@ -1,5 +1,20 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.3.0 — Séparation lecture / écriture du dashboard
+
+### Corrigé
+
+- Le dashboard peut lire les données depuis `examples/` sans écrire dans ce dossier.
+- Les validations humaines créées depuis le dashboard sont écrites dans `runtime/` lorsque les données lues proviennent des exemples.
+- Ajout d’un dossier de lecture et d’un dossier d’écriture distincts dans l’interface.
+- Préservation des exemples versionnés contre les modifications locales.
+
+### Objectif
+
+Permettre d’utiliser `examples/` comme source de démonstration sans salir le dépôt Git avec de nouvelles validations humaines.
+
+---
+
 ## v1.2.0 — Recommandations analyste dans le dashboard
 
 ### Ajouté

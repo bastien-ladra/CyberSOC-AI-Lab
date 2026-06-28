@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.2.0 — Recommandations analyste dans le dashboard
+Version actuelle : v1.3.0 — Séparation lecture / écriture du dashboard
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -842,6 +842,22 @@ streamlit run dashboard/app.py
 ```
 
 Si aucune sortie locale n’a encore été générée, le dashboard affiche les exemples versionnés présents dans `examples/`.
+
+### Lecture et écriture des données
+
+Le dashboard distingue désormais le dossier utilisé pour lire les données et le dossier utilisé pour écrire les validations humaines.
+
+Lorsqu’il lit les données depuis `runtime/`, les validations humaines sont écrites dans `runtime/`.
+
+Lorsqu’il lit les données depuis `examples/`, les validations humaines nouvellement créées sont écrites dans `runtime/` afin de ne pas modifier les exemples versionnés.
+
+```text
+Lecture depuis examples/
+→ affichage des exemples versionnés
+
+Écriture dans runtime/
+→ nouvelles validations humaines locales
+```
 
 ## Utilisation avec Docker
 
