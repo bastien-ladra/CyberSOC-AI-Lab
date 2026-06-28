@@ -1,5 +1,33 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.0.0 — MVP stable
+
+### Statut
+
+Première version stable du MVP CyberSOC-AI-Lab.
+
+### Inclus
+
+- Parsing de logs SSH et web simulés.
+- Détection de brute force SSH.
+- Détection de reconnaissance web.
+- Détection de tentative de prompt injection dans les logs.
+- Génération d’alertes JSON.
+- Génération de rapports Markdown.
+- Génération de prompts IA sécurisés.
+- Analyse IA locale optionnelle via Ollama.
+- Évaluation automatique des réponses IA.
+- Journalisation d’audit.
+- Validation humaine via dashboard Streamlit.
+- Séparation entre exemples versionnés et sorties runtime locales.
+- Fallback automatique du dashboard vers les exemples versionnés.
+- Support Docker.
+- Tests unitaires et GitHub Actions.
+
+### Objectif
+
+Fournir un prototype démontrable, reproductible et auditable de SOC augmenté par IA avec supervision humaine.
+
 ## v0.9.9 — Fallback du dashboard vers les exemples
 
 ### Ajouté

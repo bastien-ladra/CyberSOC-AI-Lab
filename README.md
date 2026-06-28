@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : **MVP v0.8**
+Version actuelle : v1.0.0 — MVP stable
 
 Le prototype couvre actuellement trois scénarios :
 
