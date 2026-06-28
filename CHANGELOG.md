@@ -1,5 +1,17 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v0.9.9 — Fallback du dashboard vers les exemples
+
+### Ajouté
+
+- Le dashboard Streamlit lit désormais `runtime/` lorsque des alertes locales sont disponibles.
+- Si aucune alerte runtime n’est disponible, le dashboard utilise automatiquement les exemples versionnés dans `examples/`.
+- Le dossier utilisé est affiché dans l’interface du dashboard.
+
+### Objectif
+
+Permettre à un utilisateur externe de lancer directement le dashboard après clonage du dépôt, sans devoir exécuter immédiatement le pipeline de génération.
+
 ## v0.9.7 — Séparation des exemples versionnés
 
 ### Modifié

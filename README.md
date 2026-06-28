@@ -709,6 +709,24 @@ Le dashboard permet de :
 - lire le journal d’audit système ;
 - lire le journal d’audit des validations humaines.
 
+### Source de données du dashboard
+
+Le dashboard lit les données dans l’ordre suivant :
+
+```text
+1. Dossier défini par CYBERSOC_OUTPUT_DIR
+2. runtime/ si des alertes locales existent
+3. examples/ comme fallback de démonstration
+```
+
+Cela permet de lancer directement le dashboard après clonage du dépôt :
+
+```bash
+streamlit run dashboard/app.py
+```
+
+Si aucune sortie locale n’a encore été générée, le dashboard affiche les exemples versionnés présents dans `examples/`.
+
 ## Tests
 
 Lancer les tests unitaires :
