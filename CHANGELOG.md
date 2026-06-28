@@ -1,5 +1,21 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.0.1 — Nettoyage documentation README
+
+### Corrigé
+
+- Alignement de l’arborescence README avec la structure réelle du projet.
+- Correction des chemins de sortie vers `runtime/`.
+- Clarification du rôle de `examples/`.
+- Mise à jour de la stack technique avec Docker comme fonctionnalité actuelle.
+- Nettoyage de la roadmap après la stabilisation du MVP v1.0.0.
+
+### Objectif
+
+Rendre la documentation cohérente avec l’état réel du projet avant publication du dépôt.
+
+---
+
 ## v1.0.0 — MVP stable
 
 ### Statut
@@ -28,6 +44,25 @@ Première version stable du MVP CyberSOC-AI-Lab.
 
 Fournir un prototype démontrable, reproductible et auditable de SOC augmenté par IA avec supervision humaine.
 
+---
+
+## v0.9.10 — Documentation du fallback dashboard
+
+### Ajouté
+
+- Documentation du fallback automatique du dashboard vers `examples/`.
+- Clarification de l’ordre de lecture des données du dashboard :
+  - `CYBERSOC_OUTPUT_DIR` si défini ;
+  - `runtime/` si des alertes locales existent ;
+  - `examples/` comme fallback de démonstration.
+- Mise à jour du README avec une section dédiée à la source de données du dashboard.
+
+### Objectif
+
+Permettre à un utilisateur externe de comprendre qu’il peut lancer directement le dashboard après clonage du dépôt, sans exécuter immédiatement le pipeline.
+
+---
+
 ## v0.9.9 — Fallback du dashboard vers les exemples
 
 ### Ajouté
@@ -40,17 +75,36 @@ Fournir un prototype démontrable, reproductible et auditable de SOC augmenté p
 
 Permettre à un utilisateur externe de lancer directement le dashboard après clonage du dépôt, sans devoir exécuter immédiatement le pipeline de génération.
 
+---
+
+## v0.9.8 — Documentation des exemples versionnés
+
+### Ajouté
+
+- Ajout d’un fichier `examples/README.md`.
+- Documentation du rôle du dossier `examples/`.
+- Clarification de la différence entre `examples/` et `runtime/`.
+
+### Objectif
+
+Rendre les sorties d’exemple plus compréhensibles pour un recruteur, un évaluateur ou un contributeur.
+
+---
+
 ## v0.9.7 — Séparation des exemples versionnés
 
 ### Modifié
 
 - Déplacement des sorties d’exemple versionnées dans le dossier `examples/`.
 - Conservation des sorties runtime locales dans `runtime/`.
+- Ignorance des dossiers de sortie personnalisés de type `runtime-*/`.
 - Clarification de la séparation entre données de démonstration et fichiers générés localement.
 
 ### Objectif
 
 Rendre le dépôt plus lisible pour un utilisateur externe en distinguant les exemples consultables des sorties générées à l’exécution.
+
+---
 
 ## v0.9.6 — Documentation du dossier runtime configurable
 
@@ -64,6 +118,8 @@ Rendre le dépôt plus lisible pour un utilisateur externe en distinguant les ex
 ### Objectif
 
 Clarifier l’utilisation d’un dossier de sortie personnalisé et rendre le comportement du pipeline et du dashboard plus compréhensible pour un utilisateur externe.
+
+---
 
 ## v0.9.5 — Dossier runtime configurable pour le dashboard
 
@@ -84,6 +140,36 @@ streamlit run dashboard/app.py
 
 Rendre cohérente l’option `--output-dir` du pipeline avec le dashboard Streamlit.
 
+---
+
+## v0.9.4 — Documentation de l’architecture runtime
+
+### Ajouté
+
+- Documentation du dossier `runtime/` dans `docs/architecture.md`.
+- Explication de la séparation entre fichiers versionnés et sorties locales générées.
+- Documentation de l’option `--output-dir`.
+
+### Objectif
+
+Rendre l’architecture du projet plus claire concernant la gestion des fichiers générés.
+
+---
+
+## v0.9.3 — Documentation du dossier runtime
+
+### Ajouté
+
+- Mise à jour du README pour expliquer le dossier `runtime/`.
+- Mise à jour du CHANGELOG pour documenter l’isolation des sorties générées.
+- Clarification du fait que `runtime/` est ignoré par Git.
+
+### Objectif
+
+Aligner la documentation avec le nouveau comportement du pipeline.
+
+---
+
 ## v0.9.2 — Sorties runtime isolées
 
 ### Modifié
@@ -95,6 +181,22 @@ Rendre cohérente l’option `--output-dir` du pipeline avec le dashboard Stream
 ### Objectif
 
 Éviter que les exécutions locales modifient les fichiers versionnés et garder un dépôt propre après chaque test.
+
+---
+
+## v0.9.1 — Documentation Docker
+
+### Ajouté
+
+- Documentation de l’utilisation Docker dans le README.
+- Documentation des commandes de build et d’exécution Docker.
+- Clarification de l’exécution du dashboard Streamlit via conteneur.
+
+### Objectif
+
+Faciliter le lancement du projet sur une autre machine.
+
+---
 
 ## v0.9.0 — Support Docker
 
@@ -108,6 +210,22 @@ Rendre cohérente l’option `--output-dir` du pipeline avec le dashboard Stream
 ### Objectif
 
 Faciliter l’exécution du projet sur une autre machine et préparer une future industrialisation.
+
+---
+
+## v0.8.5 — Changelog initial
+
+### Ajouté
+
+- Création du fichier `CHANGELOG.md`.
+- Documentation de l’historique des versions du prototype.
+- Structuration des évolutions du projet par versions.
+
+### Objectif
+
+Rendre l’évolution du projet plus lisible et mieux valorisable.
+
+---
 
 ## v0.8.4 — Documentation alignée et logs personnalisés
 
@@ -125,6 +243,10 @@ Faciliter l’exécution du projet sur une autre machine et préparer une future
 - Les logs d’attaque génèrent les alertes attendues.
 - Le pipeline IA reste fonctionnel.
 - Le dashboard Streamlit reste fonctionnel.
+
+### Objectif
+
+Aligner la documentation avec les fonctionnalités réellement présentes dans le MVP.
 
 ---
 
@@ -150,6 +272,10 @@ python main.py --ssh-log-file data/sample_logs/benign_ssh_auth.log --web-log-fil
 Aucune alerte détectée.
 ```
 
+### Objectif
+
+Permettre de tester facilement le moteur de détection sur plusieurs jeux de logs.
+
 ---
 
 ## v0.8.2 — Logs bénins et tests faux positifs
@@ -159,6 +285,7 @@ Aucune alerte détectée.
 - Ajout de logs SSH bénins.
 - Ajout de logs web bénins.
 - Ajout de tests vérifiant l’absence de fausses alertes sur trafic normal.
+- Ajout d’un test de non-détection de prompt injection sur trafic web normal.
 
 ### Objectif
 
@@ -204,6 +331,7 @@ Traiter un risque spécifique aux SOC augmentés par IA : la présence de donné
 - Note analyste.
 - Stockage des validations humaines au format JSON.
 - Journalisation des validations humaines dans un fichier dédié.
+- Consultation des validations humaines existantes depuis le dashboard.
 
 ### Objectif
 
