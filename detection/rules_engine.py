@@ -28,7 +28,45 @@ PROMPT_INJECTION_PATTERNS = [
     "override instructions",
 ]
 
+MITRE_ATTACK_MAPPINGS = {
+    "SSH_BRUTE_FORCE": {
+        "framework": "MITRE ATT&CK Enterprise",
+        "tactic": "Credential Access",
+        "technique": "Brute Force",
+        "technique_id": "T1110",
+        "reference_url": "https://attack.mitre.org/techniques/T1110/",
+    },
+    "WEB_RECONNAISSANCE": {
+        "framework": "MITRE ATT&CK Enterprise",
+        "tactic": "Reconnaissance",
+        "technique": "Active Scanning",
+        "technique_id": "T1595",
+        "reference_url": "https://attack.mitre.org/techniques/T1595/",
+    },
+    "PROMPT_INJECTION_ATTEMPT": {
+        "framework": "AI security risk",
+        "tactic": "Prompt manipulation",
+        "technique": "Prompt Injection",
+        "technique_id": "AI-PROMPT-INJECTION",
+        "reference_url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+    },
+}
 
+def get_mitre_mapping(alert_type: str) -> dict[str, str]:
+    """
+    Return MITRE ATT&CK or AI-security mapping for a given alert type.
+    """
+    return MITRE_ATTACK_MAPPINGS.get(
+        alert_type,
+        {
+            "framework": "Unknown",
+            "tactic": "Unknown",
+            "technique": "Unknown",
+            "technique_id": "Unknown",
+            "reference_url": "",
+        },
+    )
+    
 def detect_ssh_bruteforce(
     events: list[dict[str, Any]],
     threshold: int = 5,
@@ -66,6 +104,7 @@ def detect_ssh_bruteforce(
             alerts.append(
                 {
                     "alert_type": "SSH_BRUTE_FORCE",
+                    "mitre_attack": get_mitre_mapping("SSH_BRUTE_FORCE"),
                     "severity": "HIGH",
                     "source_ip": source_ip,
                     "failed_attempts": len(failed_events),
@@ -133,6 +172,7 @@ def detect_web_reconnaissance(
             alerts.append(
                 {
                     "alert_type": "WEB_RECONNAISSANCE",
+                    "mitre_attack": get_mitre_mapping("WEB_RECONNAISSANCE"),
                     "severity": "MEDIUM",
                     "source_ip": source_ip,
                     "suspicious_requests": len(suspicious_events),
@@ -206,6 +246,7 @@ def detect_prompt_injection_attempt(
             alerts.append(
                 {
                     "alert_type": "PROMPT_INJECTION_ATTEMPT",
+                    "mitre_attack": get_mitre_mapping("PROMPT_INJECTION_ATTEMPT"),
                     "severity": "HIGH",
                     "source_ip": source_ip,
                     "suspicious_events": len(suspicious_events),
