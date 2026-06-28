@@ -1,5 +1,33 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.4.0 — Score de priorité incident
+
+### Ajouté
+
+- Ajout d’un score de priorité numérique `priority_score` sur 100 pour chaque alerte.
+- Ajout d’un label de priorité `priority_label`.
+- Calcul de priorité basé sur la criticité et la confiance de détection.
+- Affichage de la priorité et du score dans le dashboard Streamlit.
+- Mise à jour des exemples versionnés dans `examples/`.
+- Ajout de tests unitaires pour vérifier le calcul du score de priorité.
+
+### Objectif
+
+Aider l’analyste à prioriser les incidents en ajoutant une couche de tri simple, explicable et visible dans le dashboard.
+
+Cette évolution renforce le workflow SOC du projet :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ recommandations analyste
+→ validation humaine
+→ traçabilité
+```
+
+---
+
 ## v1.3.0 — Séparation lecture / écriture du dashboard
 
 ### Corrigé

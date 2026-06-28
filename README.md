@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.3.0 — Séparation lecture / écriture du dashboard
+Version actuelle : v1.4.0 — Score de priorité incident
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -359,6 +359,56 @@ détection
 ```
 
 Les recommandations restent indicatives : aucune action sensible ne doit être appliquée sans validation humaine.
+
+## Score de priorité incident
+
+Depuis la version v1.4.0, chaque alerte contient un score de priorité permettant d’aider l’analyste à prioriser les incidents.
+
+Le score est stocké dans les champs suivants :
+
+```json
+{
+  "priority_score": 92,
+  "priority_label": "CRITICAL"
+}
+```
+
+Le score est calculé à partir de deux éléments :
+
+```text
+criticité de l’alerte
++ niveau de confiance de la détection
+```
+
+Exemple :
+
+```text
+SSH_BRUTE_FORCE
+Criticité : HIGH
+Confiance : 0.87
+Score de priorité : 92/100
+Label : CRITICAL
+```
+
+Le dashboard Streamlit affiche directement ces informations dans la vue synthétique de l’alerte :
+
+```text
+Priorité : CRITICAL
+Score : 92/100
+```
+
+Ce mécanisme permet de renforcer la logique SOC du projet :
+
+```text
+détection
+→ qualification MITRE / sécurité IA
+→ score de priorité
+→ recommandations analyste
+→ validation humaine
+→ traçabilité
+```
+
+Le score reste volontairement simple et explicable. Il ne remplace pas l’analyse humaine.
 
 ## Garde-fous IA
 
@@ -900,7 +950,7 @@ pytest -q
 Résultat attendu :
 
 ```text
-18 passed
+24 passed
 ```
 
 Les tests couvrent actuellement :
