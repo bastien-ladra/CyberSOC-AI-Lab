@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.1.0 — Enrichissement MITRE ATT&CK
+Version actuelle : v1.2.0 — Recommandations analyste dans le dashboard
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -321,6 +321,44 @@ détection
 → recommandations analyste
 → validation humaine
 ```
+
+## Recommandations analyste
+
+Depuis la version v1.2.0, le dashboard Streamlit affiche les recommandations analyste associées à chaque alerte.
+
+Ces recommandations sont générées par le moteur de détection et intégrées directement dans les alertes JSON via le champ :
+
+```json
+"recommended_actions": []
+```
+
+Exemple pour une alerte de brute force SSH :
+
+```text
+- Bloquer temporairement l'adresse IP source après validation humaine.
+- Vérifier les comptes ciblés.
+- Contrôler les connexions réussies récentes.
+- Renforcer l'authentification MFA si elle n'est pas active.
+- Analyser les logs sur la même fenêtre temporelle.
+```
+
+Le dashboard affiche ces actions dans une section dédiée :
+
+```text
+Recommandations analyste
+```
+
+Cette évolution renforce la logique opérationnelle du projet :
+
+```text
+détection
+→ qualification MITRE / sécurité IA
+→ recommandations analyste
+→ validation humaine
+→ traçabilité
+```
+
+Les recommandations restent indicatives : aucune action sensible ne doit être appliquée sans validation humaine.
 
 ## Garde-fous IA
 

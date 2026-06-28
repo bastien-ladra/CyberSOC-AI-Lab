@@ -1,5 +1,22 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.2.0 — Recommandations analyste dans le dashboard
+
+### Ajouté
+
+- Affichage des recommandations analyste dans le dashboard Streamlit.
+- Mise en avant du champ `recommended_actions` déjà présent dans les alertes.
+- Visualisation directe des actions suggérées pour chaque type d’incident.
+- Documentation du rôle des recommandations analyste dans le README.
+
+### Objectif
+
+Rendre le dashboard plus utile pour un workflow SOC en affichant non seulement la détection et la qualification, mais aussi les actions recommandées à l’analyste.
+
+Les recommandations restent soumises à validation humaine avant toute action sensible.
+
+---
+
 ## v1.1.0 — Enrichissement MITRE ATT&CK des alertes
 
 ### Ajouté
