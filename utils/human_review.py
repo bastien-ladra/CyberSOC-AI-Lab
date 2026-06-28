@@ -25,12 +25,20 @@ def build_human_review(
     decision: str,
     analyst_note: str,
 ) -> dict[str, Any]:
+    mitre_attack = alert.get("mitre_attack", {})
+
     return {
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "alert_number": alert_number,
         "alert_type": alert.get("alert_type"),
         "severity": alert.get("severity"),
+        "priority_score": alert.get("priority_score"),
+        "priority_label": alert.get("priority_label"),
         "source_ip": alert.get("source_ip"),
+        "mitre_framework": mitre_attack.get("framework"),
+        "mitre_tactic": mitre_attack.get("tactic"),
+        "mitre_technique": mitre_attack.get("technique"),
+        "mitre_technique_id": mitre_attack.get("technique_id"),
         "decision": decision,
         "analyst_note": analyst_note,
         "human_validation_required": alert.get("human_validation_required"),
@@ -58,10 +66,12 @@ def save_human_review(
     audit_event = {
         "timestamp": review["timestamp"],
         "event_type": "human_review_submitted",
-        "details": {
+                "details": {
             "alert_number": alert_number,
             "alert_type": alert.get("alert_type"),
             "severity": alert.get("severity"),
+            "priority_score": alert.get("priority_score"),
+            "priority_label": alert.get("priority_label"),
             "source_ip": alert.get("source_ip"),
             "decision": decision,
             "review_file": str(review_path),
