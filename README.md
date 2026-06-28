@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.9.0 — Export CSV des alertes filtrées
+Version actuelle : v1.10.0 — Statut de revue analyste dans le dashboard
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -607,6 +607,61 @@ détection
 
 L’export permet de réutiliser les alertes dans un tableur, un rapport ou un outil d’analyse externe.
 
+## Statut de revue analyste dans le dashboard
+
+Depuis la version v1.10.0, le dashboard Streamlit affiche le statut de revue analyste pour chaque alerte.
+
+La vue tableau indique désormais si une alerte a déjà été revue ou non.
+
+Exemples de statuts possibles :
+
+```text
+Non revue
+À revoir
+Validée
+Rejetée
+Faux positif
+Escalade nécessaire
+```
+
+Le statut de revue est affiché dans la colonne :
+
+```text
+Décision analyste
+```
+
+Les filtres du dashboard permettent également de filtrer les alertes selon leur décision analyste.
+
+Exemples :
+
+```text
+Afficher uniquement les alertes non revues
+Afficher uniquement les alertes validées
+Afficher uniquement les faux positifs
+Afficher uniquement les alertes nécessitant une escalade
+```
+
+Les indicateurs SOC affichent aussi :
+
+```text
+Revues
+Non revues
+```
+
+Cette évolution renforce le workflow analyste :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ investigation
+→ décision analyste
+→ suivi des revues
+→ traçabilité
+```
+
+Le dashboard permet maintenant de distinguer rapidement les alertes déjà traitées de celles qui restent à analyser.
+
 ## Garde-fous IA
 
 Le projet adopte une logique de sécurité stricte pour l’usage de l’IA.
@@ -1076,6 +1131,9 @@ Le dashboard permet de :
 - filtrer les alertes par type, criticité et priorité ;
 - afficher des indicateurs SOC dynamiques selon les filtres sélectionnés ;
 - exporter les alertes filtrées au format CSV ;
+- afficher la décision analyste associée à chaque alerte ;
+- filtrer les alertes selon leur statut de revue analyste ;
+- distinguer les alertes revues et non revues dans les indicateurs SOC ;
 
 ### Source de données du dashboard
 

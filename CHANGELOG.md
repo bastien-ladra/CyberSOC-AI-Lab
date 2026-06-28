@@ -1,5 +1,34 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.10.0 — Statut de revue analyste dans le dashboard
+
+### Ajouté
+
+- Affichage de la décision analyste dans la vue tableau des alertes.
+- Ajout d’un filtre par décision analyste dans la sidebar du dashboard.
+- Ajout d’indicateurs SOC pour distinguer les alertes revues et non revues.
+- Réutilisation centralisée du chemin de validation humaine pour éviter la duplication de logique.
+- Prise en compte des validations existantes dans `runtime/` ou `examples/`.
+- Documentation du statut de revue analyste dans le README.
+
+### Objectif
+
+Améliorer le suivi opérationnel des alertes en distinguant clairement les incidents déjà revus de ceux qui restent à analyser.
+
+Cette évolution renforce la logique analyste du dashboard :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ investigation
+→ décision analyste
+→ suivi des revues
+→ traçabilité
+```
+
+---
+
 ## v1.9.0 — Export CSV des alertes filtrées
 
 ### Ajouté
