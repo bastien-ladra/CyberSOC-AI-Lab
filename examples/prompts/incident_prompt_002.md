@@ -29,6 +29,8 @@ Si une information manque, indique clairement qu'elle est inconnue.
     "/wp-admin"
   ],
   "confidence": 0.82,
+  "priority_score": 66,
+  "priority_label": "MEDIUM",
   "human_validation_required": true
 }
 ```

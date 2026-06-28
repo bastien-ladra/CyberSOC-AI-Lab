@@ -19,6 +19,8 @@
         "/wp-admin"
     ],
     "confidence": 0.82,
+    "priority_score": 66,
+    "priority_label": "MEDIUM",
     "evidence": [
         "{'raw': '185.12.45.10 - - [24/Jun/2026:11:01:12 +0000] \"GET /admin HTTP/1.1\" 404 512 \"-\" \"curl/8.0\"', 'event_type': 'web_access', 'source_ip': '185.12.45.10', 'method': 'GET', 'path': '/admin', 'status': 404, 'user_agent': 'curl/8.0'}",
         "{'raw': '185.12.45.10 - - [24/Jun/2026:11:01:14 +0000] \"GET /wp-admin HTTP/1.1\" 404 512 \"-\" \"curl/8.0\"', 'event_type': 'web_access', 'source_ip': '185.12.45.10', 'method': 'GET', 'path': '/wp-admin', 'status': 404, 'user_agent': 'curl/8.0'}",

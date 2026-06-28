@@ -22,6 +22,8 @@ Si une information manque, indique clairement qu'elle est inconnue.
   "failed_attempts": 6,
   "targeted_users": [],
   "confidence": 0.87,
+  "priority_score": 92,
+  "priority_label": "CRITICAL",
   "human_validation_required": true
 }
 ```

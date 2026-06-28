@@ -25,6 +25,8 @@ Si une information manque, indique clairement qu'elle est inconnue.
     "reveal_system_prompt"
   ],
   "confidence": 0.9,
+  "priority_score": 93,
+  "priority_label": "CRITICAL",
   "human_validation_required": true
 }
 ```
