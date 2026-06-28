@@ -1,5 +1,34 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.9.0 — Export CSV des alertes filtrées
+
+### Ajouté
+
+- Ajout d’un bouton d’export CSV dans le dashboard Streamlit.
+- Export de la vue tableau des alertes.
+- Respect des filtres actifs lors de l’export.
+- Génération d’un fichier `cybersoc_alerts_filtered.csv`.
+- Encodage compatible avec les accents pour une ouverture plus fiable dans Excel.
+- Documentation de l’export CSV dans le README.
+
+### Objectif
+
+Permettre à un analyste d’extraire les alertes filtrées pour les exploiter dans un tableur, un rapport ou un outil externe.
+
+Cette évolution renforce l’usage opérationnel du dashboard :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ filtrage
+→ tableau
+→ export CSV
+→ exploitation analyste
+```
+
+---
+
 ## v1.8.0 — Indicateurs SOC dans le dashboard
 
 ### Ajouté

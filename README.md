@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.8.0 — Indicateurs SOC dans le dashboard
+Version actuelle : v1.9.0 — Export CSV des alertes filtrées
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -558,6 +558,55 @@ détection
 
 Le dashboard devient plus lisible pour une analyse rapide de la situation.
 
+## Export CSV des alertes filtrées
+
+Depuis la version v1.9.0, le dashboard Streamlit permet d’exporter les alertes affichées au format CSV.
+
+L’export respecte les filtres actifs dans la sidebar.
+
+Exemples :
+
+```text
+Exporter toutes les alertes
+Exporter uniquement les alertes CRITICAL
+Exporter uniquement les alertes SSH_BRUTE_FORCE
+Exporter uniquement les alertes nécessitant une validation humaine
+```
+
+Le fichier généré contient les colonnes de la vue tableau :
+
+```text
+Fichier
+Type
+Criticité
+Priorité
+Score
+IP source
+Technique
+ID technique
+Validation humaine
+```
+
+Le fichier exporté est nommé :
+
+```text
+cybersoc_alerts_filtered.csv
+```
+
+Cette évolution améliore l’usage analyste du dashboard :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ filtrage
+→ vue tableau
+→ export CSV
+→ analyse externe
+```
+
+L’export permet de réutiliser les alertes dans un tableur, un rapport ou un outil d’analyse externe.
+
 ## Garde-fous IA
 
 Le projet adopte une logique de sécurité stricte pour l’usage de l’IA.
@@ -1026,6 +1075,7 @@ Le dashboard permet de :
 - afficher une vue tableau récapitulative des alertes ;
 - filtrer les alertes par type, criticité et priorité ;
 - afficher des indicateurs SOC dynamiques selon les filtres sélectionnés ;
+- exporter les alertes filtrées au format CSV ;
 
 ### Source de données du dashboard
 
