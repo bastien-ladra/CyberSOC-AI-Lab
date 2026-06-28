@@ -142,6 +142,69 @@ def build_alert_summary(alert_files: list[Path]) -> list[dict[str, Any]]:
 
     return summary
 
+def get_alert_filter_options(
+    alert_files: list[Path],
+) -> tuple[list[str], list[str], list[str]]:
+    alert_types = set()
+    severities = set()
+    priority_labels = set()
+
+    for path in alert_files:
+        try:
+            alert_data = load_json_file(path)
+        except (OSError, json.JSONDecodeError):
+            continue
+
+        alert_types.add(str(alert_data.get("alert_type", "N/A")))
+        severities.add(str(alert_data.get("severity", "N/A")))
+        priority_labels.add(str(alert_data.get("priority_label", "N/A")))
+
+    priority_order = {
+        "CRITICAL": 0,
+        "HIGH": 1,
+        "MEDIUM": 2,
+        "LOW": 3,
+        "N/A": 99,
+    }
+
+    return (
+        sorted(alert_types),
+        sorted(severities),
+        sorted(priority_labels, key=lambda value: priority_order.get(value, 98)),
+    )
+
+
+def filter_alert_files(
+    alert_files: list[Path],
+    selected_alert_types: list[str],
+    selected_severities: list[str],
+    selected_priority_labels: list[str],
+) -> list[Path]:
+    filtered_files = []
+
+    for path in alert_files:
+        try:
+            alert_data = load_json_file(path)
+        except (OSError, json.JSONDecodeError):
+            continue
+
+        alert_type = str(alert_data.get("alert_type", "N/A"))
+        severity = str(alert_data.get("severity", "N/A"))
+        priority_label = str(alert_data.get("priority_label", "N/A"))
+
+        if alert_type not in selected_alert_types:
+            continue
+
+        if severity not in selected_severities:
+            continue
+
+        if priority_label not in selected_priority_labels:
+            continue
+
+        filtered_files.append(path)
+
+    return filtered_files
+
 st.title("CyberSOC-AI-Lab")
 st.subheader("Prototype de SOC augmenté par IA")
 
@@ -161,7 +224,40 @@ if not alert_files:
     )
     st.stop()
 
-alert_summary = build_alert_summary(alert_files)
+alert_types, severities, priority_labels = get_alert_filter_options(alert_files)
+
+st.sidebar.markdown("## Filtres")
+
+selected_alert_types = st.sidebar.multiselect(
+    "Type d'alerte",
+    alert_types,
+    default=alert_types,
+)
+
+selected_severities = st.sidebar.multiselect(
+    "Criticité",
+    severities,
+    default=severities,
+)
+
+selected_priority_labels = st.sidebar.multiselect(
+    "Priorité",
+    priority_labels,
+    default=priority_labels,
+)
+
+filtered_alert_files = filter_alert_files(
+    alert_files,
+    selected_alert_types,
+    selected_severities,
+    selected_priority_labels,
+)
+
+if not filtered_alert_files:
+    st.warning("Aucune alerte ne correspond aux filtres sélectionnés.")
+    st.stop()
+
+alert_summary = build_alert_summary(filtered_alert_files)
 
 if alert_summary:
     st.markdown("## Vue d'ensemble des alertes")
@@ -169,7 +265,7 @@ if alert_summary:
 
 selected_alert_file = st.sidebar.selectbox(
     "Sélectionner une alerte",
-    alert_files,
+    filtered_alert_files,
     format_func=format_alert_option,
 )
 
