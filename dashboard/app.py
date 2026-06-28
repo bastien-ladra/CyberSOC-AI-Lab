@@ -36,16 +36,31 @@ def resolve_data_dir() -> Path:
 
     return examples_dir
 
+def resolve_write_dir(data_dir: Path) -> Path:
+    configured_dir = os.getenv("CYBERSOC_OUTPUT_DIR")
+
+    if configured_dir:
+        return data_dir
+
+    if data_dir == PROJECT_ROOT / "examples":
+        return PROJECT_ROOT / "runtime"
+
+    return data_dir
 
 DATA_DIR = resolve_data_dir()
+WRITE_DIR = resolve_write_dir(DATA_DIR)
 
 ALERT_DIR = DATA_DIR / "alerts"
 REPORT_DIR = DATA_DIR / "reports"
 PROMPT_DIR = DATA_DIR / "prompts"
 AI_OUTPUT_DIR = DATA_DIR / "ai_outputs"
 AUDIT_FILE = DATA_DIR / "audit" / "audit_log.jsonl"
-HUMAN_REVIEW_DIR = DATA_DIR / "human_reviews"
-HUMAN_REVIEW_AUDIT_FILE = DATA_DIR / "audit" / "human_review_log.jsonl"
+
+HUMAN_REVIEW_READ_DIR = DATA_DIR / "human_reviews"
+HUMAN_REVIEW_READ_AUDIT_FILE = DATA_DIR / "audit" / "human_review_log.jsonl"
+
+HUMAN_REVIEW_WRITE_DIR = WRITE_DIR / "human_reviews"
+HUMAN_REVIEW_WRITE_AUDIT_FILE = WRITE_DIR / "audit" / "human_review_log.jsonl"
 
 st.set_page_config(
     page_title="CyberSOC-AI-Lab",
@@ -53,7 +68,8 @@ st.set_page_config(
     layout="wide",
 )
 
-st.caption(f"Dossier de données utilisé : `{DATA_DIR}`")
+st.caption(f"Dossier de données lu : `{DATA_DIR}`")
+st.caption(f"Dossier d'écriture des validations : `{WRITE_DIR}`")
 
 def load_json_file(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as file:
@@ -104,7 +120,14 @@ prompt_path = PROMPT_DIR / f"incident_prompt_{alert_number}.md"
 ai_analysis_path = AI_OUTPUT_DIR / f"incident_ai_analysis_{alert_number}.md"
 ai_evaluation_path = AI_OUTPUT_DIR / \
     f"incident_ai_evaluation_{alert_number}.json"
-human_review_path = HUMAN_REVIEW_DIR / f"review_{alert_number}.json"
+human_review_write_path = HUMAN_REVIEW_WRITE_DIR / f"review_{alert_number}.json"
+human_review_read_path = HUMAN_REVIEW_READ_DIR / f"review_{alert_number}.json"
+
+human_review_path = (
+    human_review_write_path
+    if human_review_write_path.exists()
+    else human_review_read_path
+)
 
 st.markdown("## Vue synthétique")
 
@@ -201,13 +224,13 @@ with st.form("human_review_form"):
 
     if submitted:
         review_path = save_human_review(
-            alert_number=alert_number,
-            alert=alert,
-            decision=decision,
-            analyst_note=analyst_note,
-            review_dir=HUMAN_REVIEW_DIR,
-            audit_file=HUMAN_REVIEW_AUDIT_FILE,
-        )
+        alert_number=alert_number,
+        alert=alert,
+        decision=decision,
+        analyst_note=analyst_note,
+        review_dir=HUMAN_REVIEW_WRITE_DIR,
+        audit_file=HUMAN_REVIEW_WRITE_AUDIT_FILE,
+    )
 
         st.success(f"Validation humaine enregistrée : {review_path}")
 
@@ -247,8 +270,14 @@ with tab5:
 
     st.markdown("### Audit des validations humaines")
 
-    if HUMAN_REVIEW_AUDIT_FILE.exists():
-        st.code(load_text_file(HUMAN_REVIEW_AUDIT_FILE), language="json")
+    human_review_audit_file = (
+    HUMAN_REVIEW_WRITE_AUDIT_FILE
+    if HUMAN_REVIEW_WRITE_AUDIT_FILE.exists()
+    else HUMAN_REVIEW_READ_AUDIT_FILE
+    )
+
+    if human_review_audit_file.exists():
+        st.code(load_text_file(human_review_audit_file), language="json")
     else:
         st.info("Aucun journal de validation humaine disponible.")
 
