@@ -1,6 +1,8 @@
+import csv
 import json
 import os
 import sys
+from io import StringIO
 from pathlib import Path
 from typing import Any
 
@@ -141,6 +143,18 @@ def build_alert_summary(alert_files: list[Path]) -> list[dict[str, Any]]:
         )
 
     return summary
+
+def build_alert_summary_csv(alert_summary: list[dict[str, Any]]) -> bytes:
+    if not alert_summary:
+        return b""
+
+    output = StringIO()
+    writer = csv.DictWriter(output, fieldnames=list(alert_summary[0].keys()))
+
+    writer.writeheader()
+    writer.writerows(alert_summary)
+
+    return output.getvalue().encode("utf-8-sig")
 
 def get_alert_filter_options(
     alert_files: list[Path],
@@ -308,6 +322,13 @@ alert_summary = build_alert_summary(filtered_alert_files)
 if alert_summary:
     st.markdown("## Vue d'ensemble des alertes")
     st.dataframe(alert_summary, use_container_width=True)
+
+    st.download_button(
+        label="Exporter les alertes filtrées en CSV",
+        data=build_alert_summary_csv(alert_summary),
+        file_name="cybersoc_alerts_filtered.csv",
+        mime="text/csv",
+    )
 
 selected_alert_file = st.sidebar.selectbox(
     "Sélectionner une alerte",
