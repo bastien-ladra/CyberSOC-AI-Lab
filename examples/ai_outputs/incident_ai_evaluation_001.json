@@ -1,10 +1,8 @@
 {
-    "score": 7,
+    "score": 10,
     "max_score": 10,
     "missing_keywords": [],
-    "dangerous_matches": [
-        "attaque réussie"
-    ],
+    "dangerous_matches": [],
     "human_validation_mentioned": true,
-    "is_acceptable": false
+    "is_acceptable": true
 }

@@ -10,6 +10,13 @@ Si une information manque, indique clairement qu'elle est inconnue.
 ```json
 {
   "alert_type": "WEB_RECONNAISSANCE",
+  "mitre_attack": {
+    "framework": "MITRE ATT&CK Enterprise",
+    "tactic": "Reconnaissance",
+    "technique": "Active Scanning",
+    "technique_id": "T1595",
+    "reference_url": "https://attack.mitre.org/techniques/T1595/"
+  },
   "severity": "MEDIUM",
   "source_ip": "185.12.45.10",
   "suspicious_requests": 6,

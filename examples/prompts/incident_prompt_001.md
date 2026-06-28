@@ -10,6 +10,13 @@ Si une information manque, indique clairement qu'elle est inconnue.
 ```json
 {
   "alert_type": "SSH_BRUTE_FORCE",
+  "mitre_attack": {
+    "framework": "MITRE ATT&CK Enterprise",
+    "tactic": "Credential Access",
+    "technique": "Brute Force",
+    "technique_id": "T1110",
+    "reference_url": "https://attack.mitre.org/techniques/T1110/"
+  },
   "severity": "HIGH",
   "source_ip": "185.12.45.10",
   "failed_attempts": 6,

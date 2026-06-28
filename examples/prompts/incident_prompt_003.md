@@ -10,6 +10,13 @@ Si une information manque, indique clairement qu'elle est inconnue.
 ```json
 {
   "alert_type": "PROMPT_INJECTION_ATTEMPT",
+  "mitre_attack": {
+    "framework": "AI security risk",
+    "tactic": "Prompt manipulation",
+    "technique": "Prompt Injection",
+    "technique_id": "AI-PROMPT-INJECTION",
+    "reference_url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/"
+  },
   "severity": "HIGH",
   "source_ip": "185.12.45.10",
   "suspicious_events": 1,
