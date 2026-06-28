@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.0.1 — MVP stable documenté
+Version actuelle : v1.1.0 — Enrichissement MITRE ATT&CK
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -263,6 +263,64 @@ Validation humaine requise : true
 ```
 
 Ce scénario est particulièrement important dans un SOC augmenté par IA, car les logs doivent être considérés comme des données non fiables. Une requête malveillante peut contenir des instructions destinées à manipuler l’assistant IA si le contenu est transmis directement au modèle.
+
+## Enrichissement MITRE ATT&CK et sécurité IA
+
+Depuis la version v1.1.0, chaque alerte générée par le moteur de détection est enrichie avec un contexte de qualification.
+
+Cet enrichissement permet de rapprocher les alertes de référentiels cyber connus et de fournir plus de contexte à l’analyste.
+
+Exemple pour une alerte de brute force SSH :
+
+```json
+{
+  "mitre_attack": {
+    "framework": "MITRE ATT&CK Enterprise",
+    "tactic": "Credential Access",
+    "technique": "Brute Force",
+    "technique_id": "T1110",
+    "reference_url": "https://attack.mitre.org/techniques/T1110/"
+  }
+}
+```
+
+Mappings utilisés :
+
+```text
+SSH_BRUTE_FORCE
+→ MITRE ATT&CK Enterprise
+→ Credential Access
+→ Brute Force
+→ T1110
+
+WEB_RECONNAISSANCE
+→ MITRE ATT&CK Enterprise
+→ Reconnaissance
+→ Active Scanning
+→ T1595
+
+PROMPT_INJECTION_ATTEMPT
+→ AI security risk
+→ Prompt manipulation
+→ Prompt Injection
+→ AI-PROMPT-INJECTION
+```
+
+Le dashboard Streamlit affiche cet enrichissement dans une section dédiée :
+
+```text
+Enrichissement MITRE / Sécurité IA
+```
+
+Cette évolution renforce la logique SOC du projet :
+
+```text
+détection
+→ qualification
+→ contexte MITRE / sécurité IA
+→ recommandations analyste
+→ validation humaine
+```
 
 ## Garde-fous IA
 
@@ -788,7 +846,7 @@ pytest -q
 Résultat attendu :
 
 ```text
-13 passed
+18 passed
 ```
 
 Les tests couvrent actuellement :

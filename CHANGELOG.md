@@ -1,5 +1,33 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.1.0 — Enrichissement MITRE ATT&CK des alertes
+
+### Ajouté
+
+- Ajout d’un mapping MITRE ATT&CK pour les alertes `SSH_BRUTE_FORCE`.
+- Ajout d’un mapping MITRE ATT&CK pour les alertes `WEB_RECONNAISSANCE`.
+- Ajout d’un mapping de sécurité IA pour les alertes `PROMPT_INJECTION_ATTEMPT`.
+- Ajout d’un champ `mitre_attack` dans les alertes générées.
+- Affichage de l’enrichissement MITRE / sécurité IA dans le dashboard Streamlit.
+- Mise à jour des exemples versionnés dans `examples/`.
+- Ajout de tests unitaires pour vérifier les mappings MITRE et sécurité IA.
+
+### Objectif
+
+Renforcer la valeur SOC du prototype en ajoutant un contexte de qualification cyber aux alertes générées.
+
+Cette version rapproche le projet d’un workflow SOC plus réaliste :
+
+```text
+détection
+→ qualification
+→ contexte MITRE / sécurité IA
+→ recommandations analyste
+→ validation humaine
+```
+
+---
+
 ## v1.0.1 — Nettoyage documentation README
 
 ### Corrigé
