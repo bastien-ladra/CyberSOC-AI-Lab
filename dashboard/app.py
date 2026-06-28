@@ -115,6 +115,33 @@ def format_alert_option(path: Path) -> str:
 
     return f"{path.name} — {alert_type} — {priority_label} ({priority_score}/100) — {source_ip}"
 
+def build_alert_summary(alert_files: list[Path]) -> list[dict[str, Any]]:
+    summary = []
+
+    for path in alert_files:
+        try:
+            alert_data = load_json_file(path)
+        except (OSError, json.JSONDecodeError):
+            continue
+
+        mitre_attack = alert_data.get("mitre_attack", {})
+
+        summary.append(
+            {
+                "Fichier": path.name,
+                "Type": alert_data.get("alert_type", "N/A"),
+                "Criticité": alert_data.get("severity", "N/A"),
+                "Priorité": alert_data.get("priority_label", "N/A"),
+                "Score": alert_data.get("priority_score", "N/A"),
+                "IP source": alert_data.get("source_ip", "N/A"),
+                "Technique": mitre_attack.get("technique", "N/A"),
+                "ID technique": mitre_attack.get("technique_id", "N/A"),
+                "Validation humaine": alert_data.get("human_validation_required", "N/A"),
+            }
+        )
+
+    return summary
+
 st.title("CyberSOC-AI-Lab")
 st.subheader("Prototype de SOC augmenté par IA")
 
@@ -133,6 +160,12 @@ if not alert_files:
     f"Aucune alerte trouvée dans `{DATA_DIR}`. Lance `python main.py` ou vérifie le dossier configuré."
     )
     st.stop()
+
+alert_summary = build_alert_summary(alert_files)
+
+if alert_summary:
+    st.markdown("## Vue d'ensemble des alertes")
+    st.dataframe(alert_summary, use_container_width=True)
 
 selected_alert_file = st.sidebar.selectbox(
     "Sélectionner une alerte",
