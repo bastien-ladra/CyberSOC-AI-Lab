@@ -205,6 +205,40 @@ def filter_alert_files(
 
     return filtered_files
 
+def build_alert_metrics(alert_files: list[Path]) -> dict[str, int]:
+    metrics = {
+        "total": 0,
+        "critical": 0,
+        "high": 0,
+        "medium": 0,
+        "low": 0,
+        "human_validation_required": 0,
+    }
+
+    for path in alert_files:
+        try:
+            alert_data = load_json_file(path)
+        except (OSError, json.JSONDecodeError):
+            continue
+
+        metrics["total"] += 1
+
+        priority_label = str(alert_data.get("priority_label", "")).upper()
+
+        if priority_label == "CRITICAL":
+            metrics["critical"] += 1
+        elif priority_label == "HIGH":
+            metrics["high"] += 1
+        elif priority_label == "MEDIUM":
+            metrics["medium"] += 1
+        elif priority_label == "LOW":
+            metrics["low"] += 1
+
+        if alert_data.get("human_validation_required") is True:
+            metrics["human_validation_required"] += 1
+
+    return metrics
+
 st.title("CyberSOC-AI-Lab")
 st.subheader("Prototype de SOC augmenté par IA")
 
@@ -256,6 +290,18 @@ filtered_alert_files = filter_alert_files(
 if not filtered_alert_files:
     st.warning("Aucune alerte ne correspond aux filtres sélectionnés.")
     st.stop()
+
+alert_metrics = build_alert_metrics(filtered_alert_files)
+
+st.markdown("## Indicateurs SOC")
+
+col1, col2, col3, col4, col5 = st.columns(5)
+
+col1.metric("Alertes affichées", alert_metrics["total"])
+col2.metric("CRITICAL", alert_metrics["critical"])
+col3.metric("HIGH", alert_metrics["high"])
+col4.metric("MEDIUM", alert_metrics["medium"])
+col5.metric("Validation humaine", alert_metrics["human_validation_required"])
 
 alert_summary = build_alert_summary(filtered_alert_files)
 
