@@ -135,6 +135,14 @@ if mitre_attack:
     if reference_url:
         st.markdown(f"[Référence]({reference_url})")
 
+recommended_actions = alert.get("recommended_actions", [])
+
+if recommended_actions:
+    st.markdown("## Recommandations analyste")
+
+    for action in recommended_actions:
+        st.markdown(f"- {action}")
+        
 if ai_evaluation_path.exists():
     evaluation = load_json_file(ai_evaluation_path)
     st.markdown("## Évaluation IA")
