@@ -131,12 +131,21 @@ human_review_path = (
 
 st.markdown("## Vue synthétique")
 
-col1, col2, col3, col4 = st.columns(4)
+priority_score = alert.get("priority_score", "N/A")
+
+if isinstance(priority_score, int):
+    priority_score_display = f"{priority_score}/100"
+else:
+    priority_score_display = str(priority_score)
+
+col1, col2, col3, col4, col5, col6 = st.columns(6)
 
 col1.metric("Type", alert.get("alert_type", "N/A"))
 col2.metric("Criticité", alert.get("severity", "N/A"))
 col3.metric("IP source", alert.get("source_ip", "N/A"))
-col4.metric(
+col4.metric("Priorité", alert.get("priority_label", "N/A"))
+col5.metric("Score", priority_score_display)
+col6.metric(
     "Validation humaine",
     str(alert.get("human_validation_required", "N/A")),
 )

@@ -66,6 +66,47 @@ def get_mitre_mapping(alert_type: str) -> dict[str, str]:
             "reference_url": "",
         },
     )
+
+SEVERITY_BASE_SCORES = {
+    "LOW": 25,
+    "MEDIUM": 50,
+    "HIGH": 75,
+    "CRITICAL": 90,
+}
+
+
+def calculate_priority_score(severity: str, confidence: float) -> int:
+    """
+    Calculate an incident priority score from severity and confidence.
+
+    The score is intentionally simple and explainable:
+    - severity gives the base score
+    - confidence adds a bounded bonus
+    - the final score is capped at 100
+    """
+    normalized_severity = severity.upper()
+    base_score = SEVERITY_BASE_SCORES.get(normalized_severity, 0)
+
+    bounded_confidence = max(0.0, min(confidence, 1.0))
+    confidence_bonus = int(bounded_confidence * 20)
+
+    return min(100, base_score + confidence_bonus)
+
+
+def get_priority_label(priority_score: int) -> str:
+    """
+    Return a readable priority label from a numeric priority score.
+    """
+    if priority_score >= 90:
+        return "CRITICAL"
+
+    if priority_score >= 75:
+        return "HIGH"
+
+    if priority_score >= 50:
+        return "MEDIUM"
+
+    return "LOW"
     
 def detect_ssh_bruteforce(
     events: list[dict[str, Any]],
@@ -100,7 +141,8 @@ def detect_ssh_bruteforce(
                 str(event.get("raw_log", event))
                 for event in failed_events
             ]
-
+            confidence = 0.87
+            priority_score = calculate_priority_score("HIGH", confidence)
             alerts.append(
                 {
                     "alert_type": "SSH_BRUTE_FORCE",
@@ -109,7 +151,9 @@ def detect_ssh_bruteforce(
                     "source_ip": source_ip,
                     "failed_attempts": len(failed_events),
                     "targeted_users": targeted_users,
-                    "confidence": 0.87,
+                    "confidence": confidence,
+                    "priority_score": priority_score,
+                    "priority_label": get_priority_label(priority_score),
                     "evidence": evidence,
                     "human_validation_required": True,
                     "recommended_actions": [
@@ -168,7 +212,8 @@ def detect_web_reconnaissance(
                 str(event.get("raw_log", event))
                 for event in suspicious_events
             ]
-
+            confidence = 0.82
+            priority_score = calculate_priority_score("MEDIUM", confidence)
             alerts.append(
                 {
                     "alert_type": "WEB_RECONNAISSANCE",
@@ -177,7 +222,9 @@ def detect_web_reconnaissance(
                     "source_ip": source_ip,
                     "suspicious_requests": len(suspicious_events),
                     "targeted_paths": targeted_paths,
-                    "confidence": 0.82,
+                    "confidence": confidence,
+                    "priority_score": priority_score,
+                    "priority_label": get_priority_label(priority_score),
                     "evidence": evidence,
                     "human_validation_required": True,
                     "recommended_actions": [
@@ -242,7 +289,8 @@ def detect_prompt_injection_attempt(
                     for pattern in event.get("matched_patterns", [])
                 }
             )
-
+            confidence = 0.9
+            priority_score = calculate_priority_score("HIGH", confidence)
             alerts.append(
                 {
                     "alert_type": "PROMPT_INJECTION_ATTEMPT",
@@ -251,7 +299,9 @@ def detect_prompt_injection_attempt(
                     "source_ip": source_ip,
                     "suspicious_events": len(suspicious_events),
                     "matched_patterns": matched_patterns,
-                    "confidence": 0.9,
+                    "confidence": confidence,
+                    "priority_score": priority_score,
+                    "priority_label": get_priority_label(priority_score),
                     "evidence": evidence,
                     "human_validation_required": True,
                     "recommended_actions": [
