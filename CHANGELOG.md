@@ -1,5 +1,34 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.8.0 — Indicateurs SOC dans le dashboard
+
+### Ajouté
+
+- Ajout d’indicateurs SOC dans le dashboard Streamlit.
+- Affichage du nombre total d’alertes actuellement affichées.
+- Affichage du nombre d’alertes `CRITICAL`, `HIGH` et `MEDIUM`.
+- Affichage du nombre d’alertes nécessitant une validation humaine.
+- Mise à jour dynamique des indicateurs selon les filtres sélectionnés.
+- Documentation des indicateurs SOC dans le README.
+
+### Objectif
+
+Améliorer la lisibilité opérationnelle du dashboard en donnant une vue rapide de l’état des alertes affichées.
+
+Cette évolution renforce la logique SOC du projet :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ filtrage
+→ indicateurs SOC
+→ investigation analyste
+→ validation humaine
+```
+
+---
+
 ## v1.7.0 — Filtres analyste dans le dashboard
 
 ### Ajouté

@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.7.0 — Filtres analyste dans le dashboard
+Version actuelle : v1.8.0 — Indicateurs SOC dans le dashboard
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -516,6 +516,48 @@ détection
 
 Le dashboard devient plus exploitable lorsqu’il contient plusieurs alertes.
 
+## Indicateurs SOC dans le dashboard
+
+Depuis la version v1.8.0, le dashboard Streamlit affiche des indicateurs SOC en haut de l’interface.
+
+Ces indicateurs permettent d’avoir une vue rapide de l’état des alertes actuellement affichées.
+
+Indicateurs disponibles :
+
+```text
+Alertes affichées
+CRITICAL
+HIGH
+MEDIUM
+Validation humaine
+```
+
+Les indicateurs tiennent compte des filtres sélectionnés dans la sidebar.
+
+Exemple :
+
+```text
+Alertes affichées : 3
+CRITICAL : 2
+HIGH : 0
+MEDIUM : 1
+Validation humaine : 3
+```
+
+Cette évolution améliore la lecture opérationnelle du dashboard :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ filtrage
+→ indicateurs SOC
+→ investigation ciblée
+→ validation humaine
+```
+
+Le dashboard devient plus lisible pour une analyse rapide de la situation.
+
 ## Garde-fous IA
 
 Le projet adopte une logique de sécurité stricte pour l’usage de l’IA.
@@ -983,6 +1025,7 @@ Le dashboard permet de :
 - trier les alertes par score de priorité décroissant ;
 - afficher une vue tableau récapitulative des alertes ;
 - filtrer les alertes par type, criticité et priorité ;
+- afficher des indicateurs SOC dynamiques selon les filtres sélectionnés ;
 
 ### Source de données du dashboard
 
