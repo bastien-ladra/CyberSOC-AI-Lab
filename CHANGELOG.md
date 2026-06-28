@@ -1,5 +1,31 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.5.0 — Tri des alertes par priorité
+
+### Ajouté
+
+- Tri automatique des alertes par score de priorité décroissant dans le dashboard Streamlit.
+- Amélioration de l’affichage des alertes dans la sidebar.
+- Affichage du type d’alerte, du label de priorité, du score et de l’adresse IP source dans la liste de sélection.
+- Documentation du tri des alertes dans le README.
+
+### Objectif
+
+Améliorer l’expérience analyste en affichant en premier les alertes les plus prioritaires.
+
+Cette évolution rend le dashboard plus proche d’une logique SOC opérationnelle :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ tri des alertes
+→ investigation analyste
+→ validation humaine
+```
+
+---
+
 ## v1.4.0 — Score de priorité incident
 
 ### Ajouté

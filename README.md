@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.4.0 — Score de priorité incident
+Version actuelle : v1.5.0 — Tri des alertes par priorité
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -409,6 +409,33 @@ détection
 ```
 
 Le score reste volontairement simple et explicable. Il ne remplace pas l’analyse humaine.
+
+## Tri des alertes par priorité
+
+Depuis la version v1.5.0, le dashboard Streamlit trie automatiquement les alertes par score de priorité décroissant.
+
+Les incidents les plus prioritaires apparaissent donc en premier dans la barre latérale du dashboard.
+
+Exemple d’affichage :
+
+```text
+alert_003.json — PROMPT_INJECTION_ATTEMPT — CRITICAL (93/100) — 185.12.45.10
+alert_001.json — SSH_BRUTE_FORCE — CRITICAL (92/100) — 185.12.45.10
+alert_002.json — WEB_RECONNAISSANCE — MEDIUM (66/100) — 185.12.45.10
+```
+
+Cette évolution améliore la lisibilité opérationnelle du dashboard :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ affichage trié
+→ investigation analyste
+→ validation humaine
+```
+
+Le tri reste basé sur un score simple et explicable afin de conserver une logique transparente pour l’analyste.
 
 ## Garde-fous IA
 
@@ -874,6 +901,7 @@ Le dashboard permet de :
 - consulter une validation humaine existante ;
 - lire le journal d’audit système ;
 - lire le journal d’audit des validations humaines.
+- trier les alertes par score de priorité décroissant ;
 
 ### Source de données du dashboard
 
