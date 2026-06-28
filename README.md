@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.0.0 — MVP stable
+Version actuelle : v1.0.1 — MVP stable documenté
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -58,6 +58,9 @@ Cette version intègre également :
 - un workflow de validation humaine des alertes ;
 - un stockage des décisions analyste au format JSON ;
 - une journalisation dédiée des validations humaines ;
+- une séparation entre exemples versionnés et sorties runtime locales ;
+- un fallback automatique du dashboard vers les exemples versionnés ;
+- un support Docker ;
 - des tests unitaires ;
 - une pipeline GitHub Actions pour exécuter les tests automatiquement.
 
@@ -92,7 +95,8 @@ Le prototype permet actuellement de :
 - journaliser les validations humaines dans un fichier d’audit dédié ;
 - consulter les validations humaines depuis le dashboard ;
 - exécuter des tests unitaires avec pytest ;
-- lancer les tests automatiquement via GitHub Actions.
+- lancer les tests automatiquement via GitHub Actions ;
+- lancer le projet avec Docker.
 
 ## Architecture du projet
 
@@ -108,23 +112,6 @@ CyberSOC-AI-Lab/
 │   ├── incident_summarizer.py
 │   ├── llm_client.py
 │   └── response_evaluator.py
-│
-├── ai_outputs/
-│   ├── incident_ai_analysis_001.md
-│   ├── incident_ai_analysis_002.md
-│   ├── incident_ai_analysis_003.md
-│   ├── incident_ai_evaluation_001.json
-│   ├── incident_ai_evaluation_002.json
-│   └── incident_ai_evaluation_003.json
-│
-├── alerts/
-│   ├── alert_001.json
-│   ├── alert_002.json
-│   └── alert_003.json
-│
-├── audit/
-│   ├── audit_log.jsonl
-│   └── human_review_log.jsonl
 │
 ├── dashboard/
 │   └── app.py
@@ -147,23 +134,17 @@ CyberSOC-AI-Lab/
 │   ├── research_notes.md
 │   └── threat_model.md
 │
-├── human_reviews/
-│   ├── review_001.json
-│   ├── review_002.json
-│   └── review_003.json
-│
-├── prompts/
-│   ├── incident_prompt_001.md
-│   ├── incident_prompt_002.md
-│   └── incident_prompt_003.md
-│
-├── reports/
-│   ├── incident_001.md
-│   ├── incident_002.md
-│   └── incident_003.md
+├── examples/
+│   ├── alerts/
+│   ├── reports/
+│   ├── prompts/
+│   ├── ai_outputs/
+│   ├── audit/
+│   └── human_reviews/
 │
 ├── tests/
 │   ├── __init__.py
+│   ├── test_benign_logs.py
 │   ├── test_human_review.py
 │   ├── test_log_parser.py
 │   ├── test_response_evaluator.py
@@ -174,10 +155,26 @@ CyberSOC-AI-Lab/
 │   ├── audit_logger.py
 │   └── human_review.py
 │
+├── .dockerignore
+├── .gitignore
+├── CHANGELOG.md
+├── Dockerfile
 ├── main.py
 ├── pytest.ini
 ├── requirements.txt
 └── README.md
+```
+
+Le dossier `runtime/` est généré localement à l’exécution et ignoré par Git.
+
+```text
+runtime/
+├── alerts/
+├── reports/
+├── prompts/
+├── ai_outputs/
+├── audit/
+└── human_reviews/
 ```
 
 ## Pipeline actuel
@@ -218,7 +215,7 @@ Journalisation de la décision humaine
 
 ### 1. Brute force SSH
 
-Le prototype détecte une tentative de brute force SSH lorsque plusieurs échecs de connexion sont observés depuis une même adresse IP.
+Le prototype détecte une tentative de brute force SSH lorsqu’une même adresse IP génère plusieurs échecs de connexion.
 
 Exemple de sortie attendue :
 
@@ -331,24 +328,30 @@ Pour chaque alerte, un analyste peut :
 - ajouter une note analyste ;
 - conserver une trace de la décision.
 
-Les validations humaines sont stockées dans :
+Les validations humaines générées localement sont stockées dans :
 
 ```text
-human_reviews/
+runtime/human_reviews/
 ```
 
 Exemple :
 
 ```text
-human_reviews/review_001.json
-human_reviews/review_002.json
-human_reviews/review_003.json
+runtime/human_reviews/review_001.json
+runtime/human_reviews/review_002.json
+runtime/human_reviews/review_003.json
+```
+
+Les exemples versionnés sont disponibles dans :
+
+```text
+examples/human_reviews/
 ```
 
 Les décisions humaines sont également journalisées dans :
 
 ```text
-audit/human_review_log.jsonl
+runtime/audit/human_review_log.jsonl
 ```
 
 Ce mécanisme permet de conserver le principe central du projet :
@@ -385,6 +388,7 @@ Remove-Item Env:\CYBERSOC_OUTPUT_DIR
 ## Sorties générées
 
 À l’exécution, le projet génère plusieurs types de fichiers.
+
 Depuis la version v0.9.2, les sorties générées à l’exécution sont écrites par défaut dans le dossier `runtime/`.
 
 Ce dossier est ignoré par Git afin d’éviter que les exécutions locales modifient les fichiers versionnés.
@@ -420,18 +424,24 @@ Les nouvelles exécutions locales écrivent dans `runtime/`, qui est ignoré par
 
 ### Alertes JSON
 
-Les alertes structurées sont générées dans :
+Les alertes structurées générées localement sont écrites dans :
 
 ```text
-alerts/
+runtime/alerts/
 ```
 
 Exemple :
 
 ```text
-alerts/alert_001.json
-alerts/alert_002.json
-alerts/alert_003.json
+runtime/alerts/alert_001.json
+runtime/alerts/alert_002.json
+runtime/alerts/alert_003.json
+```
+
+Les exemples versionnés sont disponibles dans :
+
+```text
+examples/alerts/
 ```
 
 ### Rapports Markdown
@@ -439,15 +449,21 @@ alerts/alert_003.json
 Les rapports lisibles par un analyste sont générés dans :
 
 ```text
-reports/
+runtime/reports/
 ```
 
 Exemple :
 
 ```text
-reports/incident_001.md
-reports/incident_002.md
-reports/incident_003.md
+runtime/reports/incident_001.md
+runtime/reports/incident_002.md
+runtime/reports/incident_003.md
+```
+
+Les exemples versionnés sont disponibles dans :
+
+```text
+examples/reports/
 ```
 
 ### Prompts IA sécurisés
@@ -455,15 +471,21 @@ reports/incident_003.md
 Les prompts destinés à la couche IA sont générés dans :
 
 ```text
-prompts/
+runtime/prompts/
 ```
 
 Exemple :
 
 ```text
-prompts/incident_prompt_001.md
-prompts/incident_prompt_002.md
-prompts/incident_prompt_003.md
+runtime/prompts/incident_prompt_001.md
+runtime/prompts/incident_prompt_002.md
+runtime/prompts/incident_prompt_003.md
+```
+
+Les exemples versionnés sont disponibles dans :
+
+```text
+examples/prompts/
 ```
 
 ### Analyses IA
@@ -471,15 +493,21 @@ prompts/incident_prompt_003.md
 Lorsque l’option IA est activée, les analyses générées par Ollama sont stockées dans :
 
 ```text
-ai_outputs/
+runtime/ai_outputs/
 ```
 
 Exemple :
 
 ```text
-ai_outputs/incident_ai_analysis_001.md
-ai_outputs/incident_ai_analysis_002.md
-ai_outputs/incident_ai_analysis_003.md
+runtime/ai_outputs/incident_ai_analysis_001.md
+runtime/ai_outputs/incident_ai_analysis_002.md
+runtime/ai_outputs/incident_ai_analysis_003.md
+```
+
+Les exemples versionnés sont disponibles dans :
+
+```text
+examples/ai_outputs/
 ```
 
 ### Évaluations IA
@@ -487,15 +515,15 @@ ai_outputs/incident_ai_analysis_003.md
 Les évaluations automatiques des réponses IA sont également stockées dans :
 
 ```text
-ai_outputs/
+runtime/ai_outputs/
 ```
 
 Exemple :
 
 ```text
-ai_outputs/incident_ai_evaluation_001.json
-ai_outputs/incident_ai_evaluation_002.json
-ai_outputs/incident_ai_evaluation_003.json
+runtime/ai_outputs/incident_ai_evaluation_001.json
+runtime/ai_outputs/incident_ai_evaluation_002.json
+runtime/ai_outputs/incident_ai_evaluation_003.json
 ```
 
 ### Validations humaines
@@ -503,15 +531,15 @@ ai_outputs/incident_ai_evaluation_003.json
 Les validations humaines sont stockées dans :
 
 ```text
-human_reviews/
+runtime/human_reviews/
 ```
 
 Exemple :
 
 ```text
-human_reviews/review_001.json
-human_reviews/review_002.json
-human_reviews/review_003.json
+runtime/human_reviews/review_001.json
+runtime/human_reviews/review_002.json
+runtime/human_reviews/review_003.json
 ```
 
 ### Journaux d’audit
@@ -519,13 +547,13 @@ human_reviews/review_003.json
 Les traitements système sont journalisés dans :
 
 ```text
-audit/audit_log.jsonl
+runtime/audit/audit_log.jsonl
 ```
 
 Les validations humaines sont journalisées dans :
 
 ```text
-audit/human_review_log.jsonl
+runtime/audit/human_review_log.jsonl
 ```
 
 Le format JSONL permet de conserver une trace horodatée des traitements effectués.
@@ -543,11 +571,11 @@ Le projet utilise actuellement :
 - Ollama pour l’analyse IA locale optionnelle ;
 - Streamlit pour le dashboard ;
 - pytest pour les tests unitaires ;
-- GitHub Actions pour l’intégration continue.
+- GitHub Actions pour l’intégration continue ;
+- Docker pour l’exécution conteneurisée.
 
-Technologies prévues ultérieurement :
+Évolutions possibles :
 
-- Docker ;
 - FastAPI ;
 - interface de validation humaine enrichie ;
 - enrichissement MITRE ATT&CK ;
@@ -584,16 +612,6 @@ Installer les dépendances :
 pip install -r requirements.txt
 ```
 
-## Utilisation avec Docker
-
-Le projet peut être lancé dans un conteneur Docker.
-
-Construire l’image :
-
-```bash
-docker build -t cybersoc-ai-lab .
-```
-
 ## Utilisation sans IA
 
 Lancer le prototype sans analyse IA :
@@ -605,34 +623,36 @@ python main.py
 Résultat attendu :
 
 ```text
-Alerte JSON générée : alerts/alert_001.json
-Rapport Markdown généré : reports/incident_001.md
-Prompt IA généré : prompts/incident_prompt_001.md
-Événement d'audit ajouté : audit/audit_log.jsonl
+Alerte JSON générée : runtime/alerts/alert_001.json
+Rapport Markdown généré : runtime/reports/incident_001.md
+Prompt IA généré : runtime/prompts/incident_prompt_001.md
+Événement d'audit ajouté : runtime/audit/audit_log.jsonl
 
-Alerte JSON générée : alerts/alert_002.json
-Rapport Markdown généré : reports/incident_002.md
-Prompt IA généré : prompts/incident_prompt_002.md
-Événement d'audit ajouté : audit/audit_log.jsonl
+Alerte JSON générée : runtime/alerts/alert_002.json
+Rapport Markdown généré : runtime/reports/incident_002.md
+Prompt IA généré : runtime/prompts/incident_prompt_002.md
+Événement d'audit ajouté : runtime/audit/audit_log.jsonl
 
-Alerte JSON générée : alerts/alert_003.json
-Rapport Markdown généré : reports/incident_003.md
-Prompt IA généré : prompts/incident_prompt_003.md
-Événement d'audit ajouté : audit/audit_log.jsonl
+Alerte JSON générée : runtime/alerts/alert_003.json
+Rapport Markdown généré : runtime/reports/incident_003.md
+Prompt IA généré : runtime/prompts/incident_prompt_003.md
+Événement d'audit ajouté : runtime/audit/audit_log.jsonl
 ```
 
 ## Utilisation avec fichiers de logs personnalisés
 
 Par défaut, le projet analyse les fichiers suivants :
 
+```text
 data/sample_logs/ssh_auth.log
 data/sample_logs/web_access.log
+```
 
 Il est aussi possible de fournir d’autres fichiers de logs depuis la ligne de commande.
 
 Exemple avec les logs bénins :
 
-```text
+```bash
 python main.py --ssh-log-file data/sample_logs/benign_ssh_auth.log --web-log-file data/sample_logs/benign_web_access.log
 ```
 
@@ -663,26 +683,26 @@ python main.py --enable-ai --model mistral
 Résultat attendu :
 
 ```text
-Analyse IA générée : ai_outputs/incident_ai_analysis_001.md
-Évaluation IA générée : ai_outputs/incident_ai_evaluation_001.json
-Alerte JSON générée : alerts/alert_001.json
-Rapport Markdown généré : reports/incident_001.md
-Prompt IA généré : prompts/incident_prompt_001.md
-Événement d'audit ajouté : audit/audit_log.jsonl
+Analyse IA générée : runtime/ai_outputs/incident_ai_analysis_001.md
+Évaluation IA générée : runtime/ai_outputs/incident_ai_evaluation_001.json
+Alerte JSON générée : runtime/alerts/alert_001.json
+Rapport Markdown généré : runtime/reports/incident_001.md
+Prompt IA généré : runtime/prompts/incident_prompt_001.md
+Événement d'audit ajouté : runtime/audit/audit_log.jsonl
 
-Analyse IA générée : ai_outputs/incident_ai_analysis_002.md
-Évaluation IA générée : ai_outputs/incident_ai_evaluation_002.json
-Alerte JSON générée : alerts/alert_002.json
-Rapport Markdown généré : reports/incident_002.md
-Prompt IA généré : prompts/incident_prompt_002.md
-Événement d'audit ajouté : audit/audit_log.jsonl
+Analyse IA générée : runtime/ai_outputs/incident_ai_analysis_002.md
+Évaluation IA générée : runtime/ai_outputs/incident_ai_evaluation_002.json
+Alerte JSON générée : runtime/alerts/alert_002.json
+Rapport Markdown généré : runtime/reports/incident_002.md
+Prompt IA généré : runtime/prompts/incident_prompt_002.md
+Événement d'audit ajouté : runtime/audit/audit_log.jsonl
 
-Analyse IA générée : ai_outputs/incident_ai_analysis_003.md
-Évaluation IA générée : ai_outputs/incident_ai_evaluation_003.json
-Alerte JSON générée : alerts/alert_003.json
-Rapport Markdown généré : reports/incident_003.md
-Prompt IA généré : prompts/incident_prompt_003.md
-Événement d'audit ajouté : audit/audit_log.jsonl
+Analyse IA générée : runtime/ai_outputs/incident_ai_analysis_003.md
+Évaluation IA générée : runtime/ai_outputs/incident_ai_evaluation_003.json
+Alerte JSON générée : runtime/alerts/alert_003.json
+Rapport Markdown généré : runtime/reports/incident_003.md
+Prompt IA généré : runtime/prompts/incident_prompt_003.md
+Événement d'audit ajouté : runtime/audit/audit_log.jsonl
 ```
 
 ## Dashboard Streamlit
@@ -727,6 +747,36 @@ streamlit run dashboard/app.py
 
 Si aucune sortie locale n’a encore été générée, le dashboard affiche les exemples versionnés présents dans `examples/`.
 
+## Utilisation avec Docker
+
+Le projet peut être lancé dans un conteneur Docker.
+
+Construire l’image :
+
+```bash
+docker build -t cybersoc-ai-lab .
+```
+
+Lancer le dashboard Streamlit avec Docker :
+
+```bash
+docker run -p 8501:8501 cybersoc-ai-lab
+```
+
+Le dashboard est ensuite accessible localement sur le port `8501`.
+
+Exécuter le pipeline depuis Docker :
+
+```bash
+docker run --rm cybersoc-ai-lab python main.py
+```
+
+Exécuter le pipeline avec les logs bénins depuis Docker :
+
+```bash
+docker run --rm cybersoc-ai-lab python main.py --ssh-log-file data/sample_logs/benign_ssh_auth.log --web-log-file data/sample_logs/benign_web_access.log
+```
+
 ## Tests
 
 Lancer les tests unitaires :
@@ -753,7 +803,7 @@ Les tests couvrent actuellement :
 - l’évaluation de réponses IA dangereuses ;
 - la construction d’une validation humaine ;
 - la sauvegarde d’une validation humaine ;
-- la journalisation d’une validation humaine.
+- la journalisation d’une validation humaine ;
 - l’absence d’alerte sur des logs SSH bénins ;
 - l’absence d’alerte sur des logs web bénins ;
 - la non-détection de prompt injection sur du trafic web normal ;
@@ -861,80 +911,50 @@ Ces limites sont acceptées à ce stade, car l’objectif est de construire prog
 
 ## Roadmap
 
-### MVP v0.8 — État actuel
+### v1.0.0 — MVP stable
 
-- Détection brute force SSH ;
-- Détection reconnaissance web ;
-- Détection de tentative de prompt injection dans les logs ;
-- Alertes JSON ;
-- Rapports Markdown ;
-- Prompts IA sécurisés ;
-- Analyse IA locale optionnelle via Ollama ;
-- Évaluation automatique des réponses IA ;
-- Scoring des réponses selon des critères de prudence, structure et contrôle humain ;
-- Journal d’audit système JSONL ;
-- Tests unitaires ;
-- GitHub Actions ;
-- Interface Streamlit ;
-- Visualisation des alertes ;
-- Consultation des rapports ;
-- Consultation des prompts IA ;
-- Consultation des analyses IA ;
-- Affichage des scores d’évaluation IA ;
-- Consultation du journal d’audit ;
-- Workflow de validation humaine ;
-- Décision analyste par alerte ;
-- Note analyste ;
-- Stockage des validations humaines au format JSON ;
-- Journalisation des validations humaines ;
-- Consultation des validations dans le dashboard ;
-- Documentation d’architecture ;
-- Threat model ;
-- Notes de recherche ;
-- Méthodologie d’évaluation.
+La version actuelle fournit un prototype démontrable, reproductible et auditable de SOC augmenté par IA.
 
-### MVP v0.9 — Scénarios avancés
+Elle inclut :
 
-Objectif :
+- parsing de logs SSH et web simulés ;
+- détection de brute force SSH ;
+- détection de reconnaissance web ;
+- détection de tentative de prompt injection dans les logs ;
+- génération d’alertes JSON ;
+- génération de rapports Markdown ;
+- génération de prompts IA sécurisés ;
+- analyse IA locale optionnelle via Ollama ;
+- évaluation automatique des réponses IA ;
+- journalisation d’audit ;
+- validation humaine via dashboard Streamlit ;
+- séparation entre exemples versionnés et sorties runtime locales ;
+- fallback automatique du dashboard vers les exemples versionnés ;
+- support Docker ;
+- tests unitaires ;
+- GitHub Actions.
 
-- ajouter une tentative d’exploitation web ;
-- ajouter un scénario d’accès suspect ;
-- ajouter une corrélation de signaux faibles ;
-- ajouter un scénario de mouvement latéral simulé ;
-- ajouter un scénario de compromission potentielle à partir de plusieurs signaux.
+### Évolutions possibles
 
-### MVP v1.0 — Évaluation avancée
-
-Objectif :
-
-- enrichir la grille d’évaluation IA ;
-- mesurer les faux positifs et faux négatifs ;
-- comparer plusieurs modèles IA ;
-- comparer les réponses IA aux preuves disponibles ;
-- détecter les réponses non justifiées ;
-- journaliser les corrections humaines ;
-- ajouter des métriques de qualité de réponse.
-
-### MVP v1.1 — Validation humaine avancée
-
-Objectif :
-
-- améliorer l’interface de validation humaine ;
-- ajouter un historique des décisions ;
-- ajouter un statut global par incident ;
-- ajouter une exportation des décisions ;
-- préparer une logique multi-analystes ;
-- enrichir le journal d’audit avec les corrections humaines détaillées.
-
-### MVP v1.2 — Industrialisation légère
-
-Objectif :
-
-- dockeriser le projet ;
-- améliorer la structure de configuration ;
-- préparer une API FastAPI ;
-- séparer plus clairement les couches détection, IA, évaluation et interface ;
-- préparer une intégration future avec des sources de logs plus réalistes.
+- Ajouter une tentative d’exploitation web.
+- Ajouter un scénario d’accès suspect.
+- Ajouter une corrélation de signaux faibles.
+- Ajouter un scénario de mouvement latéral simulé.
+- Ajouter un scénario de compromission potentielle à partir de plusieurs signaux.
+- Enrichir la grille d’évaluation IA.
+- Mesurer les faux positifs et faux négatifs.
+- Comparer plusieurs modèles IA.
+- Comparer les réponses IA aux preuves disponibles.
+- Détecter les réponses non justifiées.
+- Journaliser les corrections humaines.
+- Ajouter des métriques de qualité de réponse.
+- Améliorer l’interface de validation humaine.
+- Ajouter un historique des décisions.
+- Ajouter un statut global par incident.
+- Ajouter une exportation des décisions.
+- Préparer une logique multi-analystes.
+- Préparer une API FastAPI.
+- Intégrer des sources de logs plus réalistes.
 
 ## Vision long terme
 
