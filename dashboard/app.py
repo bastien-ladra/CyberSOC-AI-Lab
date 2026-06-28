@@ -118,6 +118,23 @@ col4.metric(
     str(alert.get("human_validation_required", "N/A")),
 )
 
+mitre_attack = alert.get("mitre_attack")
+
+if mitre_attack:
+    st.markdown("## Enrichissement MITRE / Sécurité IA")
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    col1.metric("Framework", mitre_attack.get("framework", "N/A"))
+    col2.metric("Tactique", mitre_attack.get("tactic", "N/A"))
+    col3.metric("Technique", mitre_attack.get("technique", "N/A"))
+    col4.metric("ID", mitre_attack.get("technique_id", "N/A"))
+
+    reference_url = mitre_attack.get("reference_url")
+
+    if reference_url:
+        st.markdown(f"[Référence]({reference_url})")
+
 if ai_evaluation_path.exists():
     evaluation = load_json_file(ai_evaluation_path)
     st.markdown("## Évaluation IA")
