@@ -1,5 +1,33 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.7.0 — Filtres analyste dans le dashboard
+
+### Ajouté
+
+- Ajout de filtres dans la sidebar du dashboard Streamlit.
+- Filtrage des alertes par type d’alerte.
+- Filtrage des alertes par criticité.
+- Filtrage des alertes par priorité.
+- Application des filtres à la vue tableau et à la liste de sélection des alertes.
+- Documentation des filtres analyste dans le README.
+
+### Objectif
+
+Améliorer l’expérience analyste en permettant une investigation plus ciblée lorsque plusieurs alertes sont présentes.
+
+Cette évolution rend le dashboard plus proche d’un outil SOC exploitable :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ filtrage
+→ investigation ciblée
+→ validation humaine
+```
+
+---
+
 ## v1.6.0 — Vue tableau des alertes
 
 ### Ajouté

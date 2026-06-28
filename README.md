@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.6.0 — Vue tableau des alertes
+Version actuelle : v1.7.0 — Filtres analyste dans le dashboard
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -477,6 +477,44 @@ détection
 ```
 
 Le tableau complète la sidebar triée par priorité et rend le dashboard plus proche d’une mini-console SOC.
+
+## Filtres analyste dans le dashboard
+
+Depuis la version v1.7.0, le dashboard Streamlit permet de filtrer les alertes affichées.
+
+Les filtres disponibles sont :
+
+```text
+Type d’alerte
+Criticité
+Priorité
+```
+
+Exemples d’utilisation :
+
+```text
+Afficher uniquement les alertes CRITICAL
+Afficher uniquement les alertes SSH_BRUTE_FORCE
+Afficher uniquement les alertes de criticité HIGH
+```
+
+Les filtres s’appliquent à la fois :
+
+- à la vue tableau des alertes ;
+- à la liste de sélection dans la barre latérale.
+
+Cette évolution améliore l’expérience analyste :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ filtrage
+→ investigation ciblée
+→ validation humaine
+```
+
+Le dashboard devient plus exploitable lorsqu’il contient plusieurs alertes.
 
 ## Garde-fous IA
 
@@ -944,6 +982,7 @@ Le dashboard permet de :
 - lire le journal d’audit des validations humaines.
 - trier les alertes par score de priorité décroissant ;
 - afficher une vue tableau récapitulative des alertes ;
+- filtrer les alertes par type, criticité et priorité ;
 
 ### Source de données du dashboard
 
