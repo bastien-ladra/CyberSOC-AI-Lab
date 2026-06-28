@@ -1,5 +1,31 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.6.0 — Vue tableau des alertes
+
+### Ajouté
+
+- Ajout d’une vue tableau récapitulative des alertes dans le dashboard Streamlit.
+- Affichage du type d’alerte, de la criticité, de la priorité, du score, de l’IP source et du mapping MITRE / sécurité IA.
+- Meilleure comparaison visuelle entre les incidents détectés.
+- Documentation de la vue tableau dans le README.
+
+### Objectif
+
+Améliorer la lisibilité opérationnelle du dashboard en permettant à l’analyste de comparer rapidement les alertes avant investigation détaillée.
+
+Cette évolution rapproche le dashboard d’une mini-console SOC :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ vue tableau
+→ investigation analyste
+→ validation humaine
+```
+
+---
+
 ## v1.5.0 — Tri des alertes par priorité
 
 ### Ajouté

@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.5.0 — Tri des alertes par priorité
+Version actuelle : v1.6.0 — Vue tableau des alertes
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -436,6 +436,47 @@ détection
 ```
 
 Le tri reste basé sur un score simple et explicable afin de conserver une logique transparente pour l’analyste.
+
+## Vue tableau des alertes
+
+Depuis la version v1.6.0, le dashboard Streamlit affiche une vue d’ensemble des alertes sous forme de tableau.
+
+Cette vue permet de comparer rapidement les incidents détectés avant de consulter le détail d’une alerte.
+
+Le tableau affiche notamment :
+
+```text
+Fichier
+Type
+Criticité
+Priorité
+Score
+IP source
+Technique
+ID technique
+Validation humaine
+```
+
+Exemple de colonnes affichées :
+
+```text
+alert_003.json | PROMPT_INJECTION_ATTEMPT | HIGH | CRITICAL | 93 | 185.12.45.10 | Prompt Injection | AI-PROMPT-INJECTION
+alert_001.json | SSH_BRUTE_FORCE | HIGH | CRITICAL | 92 | 185.12.45.10 | Brute Force | T1110
+alert_002.json | WEB_RECONNAISSANCE | MEDIUM | MEDIUM | 66 | 185.12.45.10 | Active Scanning | T1595
+```
+
+Cette évolution améliore la lisibilité du dashboard :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ vue tableau
+→ sélection détaillée
+→ validation humaine
+```
+
+Le tableau complète la sidebar triée par priorité et rend le dashboard plus proche d’une mini-console SOC.
 
 ## Garde-fous IA
 
@@ -902,6 +943,7 @@ Le dashboard permet de :
 - lire le journal d’audit système ;
 - lire le journal d’audit des validations humaines.
 - trier les alertes par score de priorité décroissant ;
+- afficher une vue tableau récapitulative des alertes ;
 
 ### Source de données du dashboard
 
