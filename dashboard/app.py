@@ -81,10 +81,39 @@ def load_text_file(path: Path) -> str:
         return "Fichier non disponible."
     return path.read_text(encoding="utf-8")
 
+def get_alert_priority(path: Path) -> int:
+    try:
+        alert_data = load_json_file(path)
+    except (OSError, json.JSONDecodeError):
+        return 0
+
+    priority_score = alert_data.get("priority_score", 0)
+
+    if isinstance(priority_score, int):
+        return priority_score
+
+    return 0
+
 
 def list_alerts() -> list[Path]:
-    return sorted(ALERT_DIR.glob("alert_*.json"))
+    return sorted(
+        ALERT_DIR.glob("alert_*.json"),
+        key=get_alert_priority,
+        reverse=True,
+    )
 
+def format_alert_option(path: Path) -> str:
+    try:
+        alert_data = load_json_file(path)
+    except (OSError, json.JSONDecodeError):
+        return path.name
+
+    alert_type = alert_data.get("alert_type", "N/A")
+    priority_label = alert_data.get("priority_label", "N/A")
+    priority_score = alert_data.get("priority_score", "N/A")
+    source_ip = alert_data.get("source_ip", "N/A")
+
+    return f"{path.name} — {alert_type} — {priority_label} ({priority_score}/100) — {source_ip}"
 
 st.title("CyberSOC-AI-Lab")
 st.subheader("Prototype de SOC augmenté par IA")
@@ -108,7 +137,7 @@ if not alert_files:
 selected_alert_file = st.sidebar.selectbox(
     "Sélectionner une alerte",
     alert_files,
-    format_func=lambda path: path.name,
+    format_func=format_alert_option,
 )
 
 alert = load_json_file(selected_alert_file)
