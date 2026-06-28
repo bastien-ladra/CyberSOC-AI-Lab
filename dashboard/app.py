@@ -83,6 +83,39 @@ def load_text_file(path: Path) -> str:
         return "Fichier non disponible."
     return path.read_text(encoding="utf-8")
 
+def get_alert_number(path: Path) -> str:
+    return path.stem.split("_")[-1]
+
+
+def get_human_review_path(alert_number: str) -> Path:
+    human_review_write_path = HUMAN_REVIEW_WRITE_DIR / f"review_{alert_number}.json"
+    human_review_read_path = HUMAN_REVIEW_READ_DIR / f"review_{alert_number}.json"
+
+    return (
+        human_review_write_path
+        if human_review_write_path.exists()
+        else human_review_read_path
+    )
+
+
+def get_human_review_decision(alert_number: str) -> str:
+    human_review_path = get_human_review_path(alert_number)
+
+    if not human_review_path.exists():
+        return "Non revue"
+
+    try:
+        human_review = load_json_file(human_review_path)
+    except (OSError, json.JSONDecodeError):
+        return "Erreur lecture"
+
+    decision = human_review.get("decision")
+
+    if decision:
+        return str(decision)
+
+    return "Revue sans décision"
+
 def get_alert_priority(path: Path) -> int:
     try:
         alert_data = load_json_file(path)
@@ -127,7 +160,7 @@ def build_alert_summary(alert_files: list[Path]) -> list[dict[str, Any]]:
             continue
 
         mitre_attack = alert_data.get("mitre_attack", {})
-
+        alert_number = get_alert_number(path)
         summary.append(
             {
                 "Fichier": path.name,
@@ -139,6 +172,7 @@ def build_alert_summary(alert_files: list[Path]) -> list[dict[str, Any]]:
                 "Technique": mitre_attack.get("technique", "N/A"),
                 "ID technique": mitre_attack.get("technique_id", "N/A"),
                 "Validation humaine": alert_data.get("human_validation_required", "N/A"),
+                "Décision analyste": get_human_review_decision(alert_number),
             }
         )
 
@@ -158,10 +192,11 @@ def build_alert_summary_csv(alert_summary: list[dict[str, Any]]) -> bytes:
 
 def get_alert_filter_options(
     alert_files: list[Path],
-) -> tuple[list[str], list[str], list[str]]:
+) -> tuple[list[str], list[str], list[str], list[str]]:
     alert_types = set()
     severities = set()
     priority_labels = set()
+    review_decisions = set()
 
     for path in alert_files:
         try:
@@ -172,6 +207,7 @@ def get_alert_filter_options(
         alert_types.add(str(alert_data.get("alert_type", "N/A")))
         severities.add(str(alert_data.get("severity", "N/A")))
         priority_labels.add(str(alert_data.get("priority_label", "N/A")))
+        review_decisions.add(get_human_review_decision(get_alert_number(path)))
 
     priority_order = {
         "CRITICAL": 0,
@@ -185,6 +221,7 @@ def get_alert_filter_options(
         sorted(alert_types),
         sorted(severities),
         sorted(priority_labels, key=lambda value: priority_order.get(value, 98)),
+        sorted(review_decisions),
     )
 
 
@@ -193,6 +230,7 @@ def filter_alert_files(
     selected_alert_types: list[str],
     selected_severities: list[str],
     selected_priority_labels: list[str],
+    selected_review_decisions: list[str],
 ) -> list[Path]:
     filtered_files = []
 
@@ -205,6 +243,7 @@ def filter_alert_files(
         alert_type = str(alert_data.get("alert_type", "N/A"))
         severity = str(alert_data.get("severity", "N/A"))
         priority_label = str(alert_data.get("priority_label", "N/A"))
+        review_decision = get_human_review_decision(get_alert_number(path))
 
         if alert_type not in selected_alert_types:
             continue
@@ -213,6 +252,9 @@ def filter_alert_files(
             continue
 
         if priority_label not in selected_priority_labels:
+            continue
+
+        if review_decision not in selected_review_decisions:
             continue
 
         filtered_files.append(path)
@@ -227,6 +269,8 @@ def build_alert_metrics(alert_files: list[Path]) -> dict[str, int]:
         "medium": 0,
         "low": 0,
         "human_validation_required": 0,
+        "reviewed": 0,
+        "not_reviewed": 0,
     }
 
     for path in alert_files:
@@ -250,6 +294,12 @@ def build_alert_metrics(alert_files: list[Path]) -> dict[str, int]:
 
         if alert_data.get("human_validation_required") is True:
             metrics["human_validation_required"] += 1
+            review_decision = get_human_review_decision(get_alert_number(path))
+
+            if review_decision == "Non revue":
+                metrics["not_reviewed"] += 1
+            else:
+                metrics["reviewed"] += 1
 
     return metrics
 
@@ -272,7 +322,13 @@ if not alert_files:
     )
     st.stop()
 
-alert_types, severities, priority_labels = get_alert_filter_options(alert_files)
+alert_types, severities, priority_labels, review_decisions = get_alert_filter_options(alert_files)
+
+selected_review_decisions = st.sidebar.multiselect(
+    "Décision analyste",
+    review_decisions,
+    default=review_decisions,
+)
 
 st.sidebar.markdown("## Filtres")
 
@@ -299,6 +355,7 @@ filtered_alert_files = filter_alert_files(
     selected_alert_types,
     selected_severities,
     selected_priority_labels,
+    selected_review_decisions,
 )
 
 if not filtered_alert_files:
@@ -309,13 +366,15 @@ alert_metrics = build_alert_metrics(filtered_alert_files)
 
 st.markdown("## Indicateurs SOC")
 
-col1, col2, col3, col4, col5 = st.columns(5)
+col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
 
 col1.metric("Alertes affichées", alert_metrics["total"])
 col2.metric("CRITICAL", alert_metrics["critical"])
 col3.metric("HIGH", alert_metrics["high"])
 col4.metric("MEDIUM", alert_metrics["medium"])
 col5.metric("Validation humaine", alert_metrics["human_validation_required"])
+col6.metric("Revues", alert_metrics["reviewed"])
+col7.metric("Non revues", alert_metrics["not_reviewed"])
 
 alert_summary = build_alert_summary(filtered_alert_files)
 
@@ -338,21 +397,14 @@ selected_alert_file = st.sidebar.selectbox(
 
 alert = load_json_file(selected_alert_file)
 
-alert_number = selected_alert_file.stem.split("_")[-1]
+alert_number = get_alert_number(selected_alert_file)
 
 report_path = REPORT_DIR / f"incident_{alert_number}.md"
 prompt_path = PROMPT_DIR / f"incident_prompt_{alert_number}.md"
 ai_analysis_path = AI_OUTPUT_DIR / f"incident_ai_analysis_{alert_number}.md"
 ai_evaluation_path = AI_OUTPUT_DIR / \
     f"incident_ai_evaluation_{alert_number}.json"
-human_review_write_path = HUMAN_REVIEW_WRITE_DIR / f"review_{alert_number}.json"
-human_review_read_path = HUMAN_REVIEW_READ_DIR / f"review_{alert_number}.json"
-
-human_review_path = (
-    human_review_write_path
-    if human_review_write_path.exists()
-    else human_review_read_path
-)
+human_review_path = get_human_review_path(alert_number)
 
 st.markdown("## Vue synthétique")
 
