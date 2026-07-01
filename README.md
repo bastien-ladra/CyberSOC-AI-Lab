@@ -1676,7 +1676,7 @@ CyberSOC-AI-Lab se positionne à l’intersection de plusieurs domaines :
 
 ## Limites actuelles
 
-La version actuelle reste un MVP.
+La version actuelle reste un prototype expérimental, non destiné à un usage en production.
 
 Limites identifiées :
 
@@ -1786,3 +1786,28 @@ Il contient :
 - les points forts à mettre en avant ;
 - les questions possibles en entretien ;
 - les limites à assumer clairement.
+
+## Cadrage doctoral
+
+Un cadrage doctoral provisoire est disponible ici :
+
+```text
+docs/RESEARCH_PROPOSAL.md
+```
+
+Il présente :
+
+- le statut provisoire du document ;
+- un titre de recherche provisoire ;
+- le contexte scientifique ;
+- la problématique principale ;
+- les hypothèses de recherche ;
+- les questions de recherche ;
+- la méthodologie envisagée ;
+- les contributions attendues ;
+- les limites actuelles ;
+- la trajectoire de maturation vers un potentiel sujet doctoral.
+
+Ce document ne constitue pas encore un sujet de thèse finalisé.
+
+Il sert à structurer progressivement CyberSOC-AI-Lab comme base exploratoire pour une future discussion avec un encadrant académique, un laboratoire, une école doctorale ou une structure d’accueil.
