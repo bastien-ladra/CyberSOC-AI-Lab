@@ -28,6 +28,7 @@ PROMPT_INJECTION_PATTERNS = [
     "override instructions",
 ]
 
+
 MITRE_ATTACK_MAPPINGS = {
     "SSH_BRUTE_FORCE": {
         "framework": "MITRE ATT&CK Enterprise",
@@ -52,6 +53,69 @@ MITRE_ATTACK_MAPPINGS = {
     },
 }
 
+
+SEVERITY_BASE_SCORES = {
+    "LOW": 25,
+    "MEDIUM": 50,
+    "HIGH": 75,
+    "CRITICAL": 90,
+}
+
+
+def get_event_raw(event: dict[str, Any]) -> str:
+    """
+    Return the original raw log line.
+
+    The normalized event schema uses `raw`.
+    `raw_log` is kept only as a compatibility fallback.
+    """
+    raw_value = event.get("raw")
+
+    if raw_value is None:
+        raw_value = event.get("raw_log")
+
+    if raw_value is None:
+        return str(event)
+
+    return str(raw_value)
+
+
+def get_event_user(event: dict[str, Any]) -> str | None:
+    """
+    Return the normalized user field.
+
+    The normalized event schema uses `user`.
+    `username` is kept only as a compatibility fallback.
+    """
+    user_value = event.get("user")
+
+    if user_value is None:
+        user_value = event.get("username")
+
+    if user_value is None:
+        return None
+
+    return str(user_value)
+
+
+def get_event_status(event: dict[str, Any]) -> int:
+    """
+    Return the normalized HTTP status code.
+
+    The normalized event schema uses `status`.
+    `status_code` is kept only as a compatibility fallback.
+    """
+    status_value = event.get("status")
+
+    if status_value is None:
+        status_value = event.get("status_code", 0)
+
+    try:
+        return int(status_value)
+    except (TypeError, ValueError):
+        return 0
+
+
 def get_mitre_mapping(alert_type: str) -> dict[str, str]:
     """
     Return MITRE ATT&CK or AI-security mapping for a given alert type.
@@ -66,13 +130,6 @@ def get_mitre_mapping(alert_type: str) -> dict[str, str]:
             "reference_url": "",
         },
     )
-
-SEVERITY_BASE_SCORES = {
-    "LOW": 25,
-    "MEDIUM": 50,
-    "HIGH": 75,
-    "CRITICAL": 90,
-}
 
 
 def calculate_priority_score(severity: str, confidence: float) -> int:
@@ -107,7 +164,8 @@ def get_priority_label(priority_score: int) -> str:
         return "MEDIUM"
 
     return "LOW"
-    
+
+
 def detect_ssh_bruteforce(
     events: list[dict[str, Any]],
     threshold: int = 5,
@@ -131,18 +189,20 @@ def detect_ssh_bruteforce(
         if len(failed_events) >= threshold:
             targeted_users = sorted(
                 {
-                    str(event.get("username"))
+                    user
                     for event in failed_events
-                    if event.get("username")
+                    if (user := get_event_user(event)) is not None
                 }
             )
 
             evidence = [
-                str(event.get("raw_log", event))
+                get_event_raw(event)
                 for event in failed_events
             ]
+
             confidence = 0.87
             priority_score = calculate_priority_score("HIGH", confidence)
+
             alerts.append(
                 {
                     "alert_type": "SSH_BRUTE_FORCE",
@@ -181,7 +241,7 @@ def detect_web_reconnaissance(
 
     for event in events:
         path = str(event.get("path", "")).lower()
-        status_code = int(event.get("status_code", 0))
+        status_code = get_event_status(event)
         user_agent = str(event.get("user_agent", "")).lower()
 
         is_suspicious_path = any(
@@ -190,7 +250,11 @@ def detect_web_reconnaissance(
         )
 
         is_suspicious_status = status_code in [401, 403, 404]
-        is_suspicious_user_agent = user_agent in ["-", "", "curl", "scanner"]
+        is_suspicious_user_agent = (
+            user_agent in ["-", ""]
+            or user_agent.startswith("curl")
+            or "scanner" in user_agent
+        )
 
         if is_suspicious_path or is_suspicious_status or is_suspicious_user_agent:
             source_ip = event.get("source_ip", "unknown")
@@ -209,11 +273,13 @@ def detect_web_reconnaissance(
             )
 
             evidence = [
-                str(event.get("raw_log", event))
+                get_event_raw(event)
                 for event in suspicious_events
             ]
+
             confidence = 0.82
             priority_score = calculate_priority_score("MEDIUM", confidence)
+
             alerts.append(
                 {
                     "alert_type": "WEB_RECONNAISSANCE",
@@ -278,7 +344,7 @@ def detect_prompt_injection_attempt(
     for source_ip, suspicious_events in suspicious_events_by_ip.items():
         if len(suspicious_events) >= threshold:
             evidence = [
-                str(event.get("raw_log", event))
+                get_event_raw(event)
                 for event in suspicious_events
             ]
 
@@ -289,8 +355,10 @@ def detect_prompt_injection_attempt(
                     for pattern in event.get("matched_patterns", [])
                 }
             )
+
             confidence = 0.9
             priority_score = calculate_priority_score("HIGH", confidence)
+
             alerts.append(
                 {
                     "alert_type": "PROMPT_INJECTION_ATTEMPT",
