@@ -151,11 +151,11 @@ CyberSOC-AI-Lab/
 │   └── test_rules_engine.py
 │
 ├── utils/
-├── alert_analytics.py
-├── audit_logger.py
-├── csv_export.py
-├── human_review.py
-└── report_export.py
+│   ├── alert_analytics.py
+│   ├── audit_logger.py
+│   ├── csv_export.py
+│   ├── human_review.py
+│   └── report_export.py
 │
 ├── .dockerignore
 ├── .gitignore
@@ -1707,3 +1707,5 @@ Une étude de cas détaillée est disponible ici :
 ```text
 docs/CASE_STUDY.md
 ```
+
+Elle présente le contexte, l’architecture, le workflow SOC, la place de l’IA, les limites du prototype et le positionnement portfolio du projet.
