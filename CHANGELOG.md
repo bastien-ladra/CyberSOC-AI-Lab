@@ -1,5 +1,36 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.13.0 — Recherche globale dans le dashboard
+
+### Ajouté
+
+- Ajout d’un champ de recherche globale dans la sidebar du dashboard Streamlit.
+- Recherche possible par adresse IP source.
+- Recherche possible par type d’alerte, criticité, priorité et score.
+- Recherche possible dans le mapping MITRE / sécurité IA : framework, tactique, technique et ID de technique.
+- Recherche possible dans la décision analyste et la note analyste.
+- Application de la recherche à la vue tableau, aux indicateurs SOC, à la sélection d’alerte et à l’export CSV.
+- Documentation de la recherche globale dans le README.
+
+### Objectif
+
+Améliorer l’investigation analyste en permettant de retrouver rapidement une alerte ou une décision à partir d’un mot-clé.
+
+Cette évolution rend le dashboard plus exploitable lorsque le volume d’alertes augmente :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ filtrage
+→ recherche
+→ investigation
+→ export
+→ audit
+```
+
+---
+
 ## v1.12.0 — Historique des validations humaines
 
 ### Ajouté

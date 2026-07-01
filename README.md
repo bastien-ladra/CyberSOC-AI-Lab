@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.12.0 — Historique des validations humaines
+Version actuelle : v1.13.0 — Recherche globale dans le dashboard
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -757,6 +757,64 @@ détection
 
 L’analyste peut ainsi suivre les décisions prises sur les alertes et conserver une trace exploitable.
 
+## Recherche globale dans le dashboard
+
+Depuis la version v1.13.0, le dashboard Streamlit permet d’effectuer une recherche textuelle globale sur les alertes.
+
+La recherche peut porter sur plusieurs éléments :
+
+```text
+nom du fichier d’alerte
+numéro d’alerte
+type d’alerte
+criticité
+priorité
+score
+adresse IP source
+framework MITRE / sécurité IA
+tactique
+technique
+ID de technique
+décision analyste
+note analyste
+```
+
+Exemples de recherche :
+
+```text
+185.12.45.10
+SSH_BRUTE_FORCE
+Brute Force
+T1110
+Prompt Injection
+Escalade
+Faux positif
+```
+
+La recherche s’applique à l’ensemble du dashboard :
+
+```text
+vue tableau
+indicateurs SOC
+sélection d’alerte
+export CSV
+```
+
+Cette évolution améliore l’investigation analyste :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ filtrage
+→ recherche
+→ investigation ciblée
+→ export
+→ audit
+```
+
+Le dashboard devient plus pratique lorsqu’il contient davantage d’alertes et de validations humaines.
+
 ## Garde-fous IA
 
 Le projet adopte une logique de sécurité stricte pour l’usage de l’IA.
@@ -1232,6 +1290,7 @@ Le dashboard permet de :
 - enregistrer des validations humaines enrichies avec le contexte de l’alerte ;
 - afficher un historique des validations humaines ;
 - exporter l’historique des validations humaines au format CSV ;
+- rechercher globalement dans les alertes, les mappings MITRE / sécurité IA et les décisions analyste ;
 
 ### Source de données du dashboard
 
