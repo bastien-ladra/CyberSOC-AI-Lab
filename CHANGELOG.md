@@ -26,6 +26,8 @@ projet technique
 → crédibilité portfolio
 ```
 
+---
+
 ## v1.17.0 — Étude de cas projet
 
 ### Ajouté

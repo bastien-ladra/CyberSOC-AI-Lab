@@ -1562,7 +1562,7 @@ Objectif :
 
 ## Documentation
 
-Le dossier `docs/` contient les documents de conception et de recherche du projet.
+Le dossier `docs/` contient les documents de conception, de recherche, d’étude de cas et de démonstration du projet.
 
 ### `docs/architecture.md`
 
@@ -1598,6 +1598,32 @@ Décrit la méthodologie d’évaluation du système :
 - métriques envisageables ;
 - validation humaine ;
 - auditabilité des décisions.
+
+### `docs/CASE_STUDY.md`
+
+Présente une étude de cas complète du projet :
+
+- contexte ;
+- problème traité ;
+- scénarios simulés ;
+- architecture générale ;
+- workflow SOC ;
+- place de l’IA ;
+- garde-fous ;
+- auditabilité ;
+- limites ;
+- positionnement portfolio.
+
+### `docs/DEMO_GUIDE.md`
+
+Explique comment présenter le projet lors d’un entretien ou d’une revue de portfolio :
+
+- pitch court ;
+- démonstration en 5 minutes ;
+- commandes à lancer ;
+- points forts à mettre en avant ;
+- questions possibles ;
+- limites à assumer clairement.
 
 ## Lien avec un projet de recherche
 
@@ -1729,9 +1755,9 @@ docs/DEMO_GUIDE.md
 
 Il contient :
 
-un pitch court
-une démonstration en 5 minutes
-les commandes à lancer
-les points forts à mettre en avant
-les questions possibles en entretien
-les limites à assumer clairement
+- un pitch court ;
+- une démonstration en 5 minutes ;
+- les commandes à lancer ;
+- les points forts à mettre en avant ;
+- les questions possibles en entretien ;
+- les limites à assumer clairement.
