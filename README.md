@@ -145,9 +145,12 @@ CyberSOC-AI-Lab/
 │
 ├── tests/
 │   ├── __init__.py
+│   ├── test_alert_analytics.py
 │   ├── test_benign_logs.py
+│   ├── test_csv_export.py
 │   ├── test_human_review.py
 │   ├── test_log_parser.py
+│   ├── test_report_export.py
 │   ├── test_response_evaluator.py
 │   └── test_rules_engine.py
 │
@@ -1514,7 +1517,7 @@ pytest -q
 Résultat attendu :
 
 ```text
-34 passed
+35 passed
 ```
 
 Les tests couvrent actuellement :
@@ -1534,6 +1537,10 @@ Les tests couvrent actuellement :
 - l’absence d’alerte sur des logs web bénins ;
 - la non-détection de prompt injection sur du trafic web normal ;
 - l’exécution du moteur sur des logs bénins via des fichiers séparés.
+- la création récursive des dossiers de validation humaine ;
+- la génération d’exports CSV ;
+- la génération d’un rapport Markdown de synthèse ;
+- le calcul des distributions pour les graphiques SOC.
 
 ## Intégration continue
 

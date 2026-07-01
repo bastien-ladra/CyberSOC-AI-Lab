@@ -66,7 +66,7 @@ def save_human_review(
     audit_event = {
         "timestamp": review["timestamp"],
         "event_type": "human_review_submitted",
-                "details": {
+        "details": {
             "alert_number": alert_number,
             "alert_type": alert.get("alert_type"),
             "severity": alert.get("severity"),
