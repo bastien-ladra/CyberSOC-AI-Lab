@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.10.0 — Statut de revue analyste dans le dashboard
+Version actuelle : v1.11.0 — Validations humaines enrichies
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -662,6 +662,59 @@ détection
 
 Le dashboard permet maintenant de distinguer rapidement les alertes déjà traitées de celles qui restent à analyser.
 
+## Validations humaines enrichies
+
+Depuis la version v1.11.0, les validations humaines conservent davantage de contexte sur l’alerte analysée.
+
+Chaque fichier de validation humaine contient désormais des informations supplémentaires :
+
+```json
+{
+  "priority_score": 92,
+  "priority_label": "CRITICAL",
+  "mitre_framework": "MITRE ATT&CK Enterprise",
+  "mitre_tactic": "Credential Access",
+  "mitre_technique": "Brute Force",
+  "mitre_technique_id": "T1110"
+}
+```
+
+Cela permet de garder une trace plus complète de la décision analyste.
+
+Avant cette version, la validation humaine contenait surtout :
+
+```text
+type d’alerte
+criticité
+IP source
+décision analyste
+note analyste
+```
+
+Depuis cette version, elle contient aussi :
+
+```text
+score de priorité
+label de priorité
+framework MITRE / sécurité IA
+tactique
+technique
+ID de technique
+```
+
+Cette évolution améliore l’auditabilité du projet :
+
+```text
+détection
+→ qualification MITRE / sécurité IA
+→ priorisation
+→ décision analyste
+→ validation humaine enrichie
+→ audit exploitable
+```
+
+Les exemples versionnés dans `examples/human_reviews/` ont également été mis à jour avec ce nouveau format.
+
 ## Garde-fous IA
 
 Le projet adopte une logique de sécurité stricte pour l’usage de l’IA.
@@ -1134,6 +1187,7 @@ Le dashboard permet de :
 - afficher la décision analyste associée à chaque alerte ;
 - filtrer les alertes selon leur statut de revue analyste ;
 - distinguer les alertes revues et non revues dans les indicateurs SOC ;
+- enregistrer des validations humaines enrichies avec le contexte de l’alerte ;
 
 ### Source de données du dashboard
 

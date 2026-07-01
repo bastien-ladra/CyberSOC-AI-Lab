@@ -1,5 +1,34 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.11.0 — Validations humaines enrichies
+
+### Ajouté
+
+- Enrichissement des fichiers de validation humaine avec le score de priorité de l’alerte.
+- Ajout du label de priorité dans les validations humaines.
+- Ajout du contexte MITRE / sécurité IA dans les validations humaines.
+- Ajout de la tactique, de la technique et de l’identifiant de technique dans les fichiers de revue.
+- Enrichissement des événements d’audit liés aux validations humaines.
+- Mise à jour des exemples versionnés dans `examples/human_reviews/`.
+- Mise à jour des tests unitaires associés aux validations humaines.
+
+### Objectif
+
+Améliorer l’auditabilité des décisions analyste en conservant plus de contexte dans chaque validation humaine.
+
+Cette évolution renforce la traçabilité du workflow SOC :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ revue analyste
+→ validation humaine enrichie
+→ audit
+```
+
+---
+
 ## v1.10.0 — Statut de revue analyste dans le dashboard
 
 ### Ajouté
