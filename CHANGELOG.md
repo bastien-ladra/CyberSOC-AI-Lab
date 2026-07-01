@@ -1,5 +1,36 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.14.0 — Utilitaire d’export CSV
+
+### Ajouté
+
+- Ajout d’un module `utils/csv_export.py`.
+- Centralisation de la génération des exports CSV dans une fonction réutilisable.
+- Utilisation de `build_csv_export(...)` pour l’export des alertes filtrées.
+- Utilisation de `build_csv_export(...)` pour l’export de l’historique des validations humaines.
+- Ajout de tests unitaires pour l’export CSV.
+- Vérification de l’encodage compatible avec les accents.
+
+### Modifié
+
+- Nettoyage du dashboard Streamlit en retirant la logique CSV directement intégrée à `dashboard/app.py`.
+
+### Objectif
+
+Améliorer la maintenabilité du projet en séparant la logique d’export CSV de la logique d’affichage du dashboard.
+
+Cette évolution prépare le projet à de futurs exports ou rapports :
+
+```text
+détection
+→ filtrage
+→ vue tableau
+→ export CSV centralisé
+→ exploitation externe
+```
+
+---
+
 ## v1.13.0 — Recherche globale dans le dashboard
 
 ### Ajouté

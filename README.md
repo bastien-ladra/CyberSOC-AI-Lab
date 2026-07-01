@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.13.0 — Recherche globale dans le dashboard
+Version actuelle : v1.14.0 — Utilitaire d’export CSV
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -151,9 +151,9 @@ CyberSOC-AI-Lab/
 │   └── test_rules_engine.py
 │
 ├── utils/
-│   ├── __init__.py
-│   ├── audit_logger.py
-│   └── human_review.py
+├── audit_logger.py
+├── csv_export.py
+└── human_review.py
 │
 ├── .dockerignore
 ├── .gitignore
@@ -815,6 +815,50 @@ détection
 
 Le dashboard devient plus pratique lorsqu’il contient davantage d’alertes et de validations humaines.
 
+## Utilitaire d’export CSV
+
+Depuis la version v1.14.0, la génération des exports CSV est centralisée dans un module dédié :
+
+```text
+utils/csv_export.py
+```
+
+Le dashboard utilise désormais une fonction réutilisable :
+
+```text
+build_csv_export(...)
+```
+
+Cette fonction est utilisée pour exporter :
+
+```text
+les alertes filtrées
+l’historique des validations humaines
+```
+
+Cette évolution améliore la maintenabilité du projet :
+
+```text
+dashboard/app.py
+→ affichage et logique Streamlit
+
+utils/csv_export.py
+→ génération CSV réutilisable et testée
+```
+
+L’export conserve un encodage compatible avec les accents afin de faciliter l’ouverture dans Excel ou dans un tableur.
+
+Des tests unitaires vérifient désormais :
+
+```text
+l’export vide
+la présence des en-têtes CSV
+la présence des valeurs
+la gestion des accents
+```
+
+Cette séparation rend le dashboard plus propre et prépare mieux le projet à de futurs exports.
+
 ## Garde-fous IA
 
 Le projet adopte une logique de sécurité stricte pour l’usage de l’IA.
@@ -1367,7 +1411,7 @@ pytest -q
 Résultat attendu :
 
 ```text
-24 passed
+27 passed
 ```
 
 Les tests couvrent actuellement :
