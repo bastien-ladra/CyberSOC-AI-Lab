@@ -1,5 +1,31 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.18.0 — Guide de démonstration recruteur
+
+### Ajouté
+
+- Ajout de `docs/DEMO_GUIDE.md`.
+- Ajout d’un guide de démonstration en 5 minutes.
+- Ajout d’un pitch court pour présenter le projet.
+- Ajout d’une liste de points forts à mettre en avant en entretien.
+- Ajout de questions possibles en entretien.
+- Ajout d’une section sur les limites à assumer clairement.
+- Ajout d’un lien vers le guide dans le README.
+
+### Objectif
+
+Améliorer l’usage portfolio du projet.
+
+Cette version ne cherche pas à ajouter une nouvelle fonctionnalité technique, mais à rendre le projet plus facile à présenter à un recruteur ou à un interlocuteur technique.
+
+```text
+projet technique
+→ explication claire
+→ démonstration courte
+→ entretien
+→ crédibilité portfolio
+```
+
 ## v1.17.0 — Étude de cas projet
 
 ### Ajouté

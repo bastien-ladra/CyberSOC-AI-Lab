@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.17.0 — Étude de cas projet
+Version actuelle : v1.18.0 — Guide de démonstration recruteur
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -130,6 +130,7 @@ CyberSOC-AI-Lab/
 │
 ├── docs/
 │   ├── CASE_STUDY.md
+│   ├── DEMO_GUIDE.md
 │   ├── architecture.md
 │   ├── evaluation.md
 │   ├── research_notes.md
@@ -1717,3 +1718,20 @@ docs/CASE_STUDY.md
 ```
 
 Elle présente le contexte, l’architecture, le workflow SOC, la place de l’IA, les limites du prototype et le positionnement portfolio du projet.
+
+## Guide de démonstration
+
+Un guide de démonstration est disponible ici :
+
+```text
+docs/DEMO_GUIDE.md
+```
+
+Il contient :
+
+un pitch court
+une démonstration en 5 minutes
+les commandes à lancer
+les points forts à mettre en avant
+les questions possibles en entretien
+les limites à assumer clairement
