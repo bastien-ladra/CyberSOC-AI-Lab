@@ -1,10 +1,16 @@
 {
-    "timestamp": "2026-06-27T13:10:34.079103+00:00",
+    "timestamp": "2026-07-01T21:50:29.918755+00:00",
     "alert_number": "002",
     "alert_type": "WEB_RECONNAISSANCE",
     "severity": "MEDIUM",
+    "priority_score": 66,
+    "priority_label": "MEDIUM",
     "source_ip": "185.12.45.10",
-    "decision": "Validée",
+    "mitre_framework": "MITRE ATT&CK Enterprise",
+    "mitre_tactic": "Reconnaissance",
+    "mitre_technique": "Active Scanning",
+    "mitre_technique_id": "T1595",
+    "decision": "À revoir",
     "analyst_note": "",
     "human_validation_required": true
 }
