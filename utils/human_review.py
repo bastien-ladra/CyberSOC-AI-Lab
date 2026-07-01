@@ -5,7 +5,7 @@ from typing import Any
 
 
 def save_json_file(path: Path, data: dict[str, Any]) -> None:
-    path.parent.mkdir(exist_ok=True)
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
         json.dumps(data, indent=4, ensure_ascii=False),
         encoding="utf-8",
@@ -13,7 +13,7 @@ def save_json_file(path: Path, data: dict[str, Any]) -> None:
 
 
 def append_jsonl(path: Path, data: dict[str, Any]) -> None:
-    path.parent.mkdir(exist_ok=True)
+    path.parent.mkdir(parents=True, exist_ok=True)
 
     with path.open("a", encoding="utf-8") as file:
         file.write(json.dumps(data, ensure_ascii=False) + "\n")

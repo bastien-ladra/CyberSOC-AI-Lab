@@ -82,3 +82,28 @@ def test_save_human_review(tmp_path: Path) -> None:
     assert "WEB_RECONNAISSANCE" in audit_content
     assert "priority_score" in audit_content
     assert "MEDIUM" in audit_content
+
+def test_save_human_review_creates_nested_runtime_directories(tmp_path: Path) -> None:
+    alert = {
+        "alert_type": "SSH_BRUTE_FORCE",
+        "severity": "HIGH",
+        "priority_score": 92,
+        "priority_label": "CRITICAL",
+        "source_ip": "185.12.45.10",
+        "human_validation_required": True,
+    }
+
+    review_dir = tmp_path / "runtime" / "human_reviews"
+    audit_file = tmp_path / "runtime" / "audit" / "human_review_log.jsonl"
+
+    review_path = save_human_review(
+        alert_number="001",
+        alert=alert,
+        decision="Validée",
+        analyst_note="Validation de test.",
+        review_dir=review_dir,
+        audit_file=audit_file,
+    )
+
+    assert review_path.exists()
+    assert audit_file.exists()
