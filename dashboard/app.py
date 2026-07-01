@@ -15,7 +15,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from utils.csv_export import build_csv_export
 from utils.human_review import save_human_review
-
+from utils.report_export import build_markdown_report
 
 def resolve_data_dir() -> Path:
     configured_dir = os.getenv("CYBERSOC_OUTPUT_DIR")
@@ -523,6 +523,17 @@ if human_review_summary:
     )
 else:
     st.info("Aucune validation humaine enregistrée pour le moment.")
+
+st.download_button(
+    label="Exporter un rapport Markdown de synthèse",
+    data=build_markdown_report(
+        metrics=alert_metrics,
+        alert_summary=alert_summary,
+        human_review_summary=human_review_summary,
+    ),
+    file_name="cybersoc_dashboard_report.md",
+    mime="text/markdown",
+)
 
 selected_alert_file = st.sidebar.selectbox(
     "Sélectionner une alerte",
