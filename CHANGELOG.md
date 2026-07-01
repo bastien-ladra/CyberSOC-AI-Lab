@@ -1,5 +1,35 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.16.0 — Graphiques SOC dans le dashboard
+
+### Ajouté
+
+- Ajout de graphiques SOC dans le dashboard Streamlit.
+- Affichage d’une répartition des alertes par priorité.
+- Affichage d’une répartition des alertes par décision analyste.
+- Ajout d’un module `utils/alert_analytics.py`.
+- Centralisation du calcul des distributions dans une fonction réutilisable.
+- Ajout de tests unitaires pour les distributions d’alertes.
+- Documentation des graphiques SOC dans le README.
+
+### Objectif
+
+Améliorer la lisibilité visuelle du dashboard en permettant à l’analyste d’identifier rapidement la répartition des alertes affichées.
+
+Cette évolution renforce l’usage démonstration et investigation du projet :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ filtrage
+→ recherche
+→ graphiques SOC
+→ investigation analyste
+```
+
+---
+
 ## v1.15.0 — Export rapport Markdown de synthèse
 
 ### Ajouté

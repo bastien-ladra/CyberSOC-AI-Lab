@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.15.0 — Export rapport Markdown de synthèse
+Version actuelle : v1.16.0 — Graphiques SOC dans le dashboard
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -151,6 +151,7 @@ CyberSOC-AI-Lab/
 │   └── test_rules_engine.py
 │
 ├── utils/
+├── alert_analytics.py
 ├── audit_logger.py
 ├── csv_export.py
 ├── human_review.py
@@ -916,6 +917,48 @@ détection
 
 L’export Markdown permet de transformer l’état du dashboard en document lisible et partageable.
 
+## Graphiques SOC dans le dashboard
+
+Depuis la version v1.16.0, le dashboard Streamlit affiche des graphiques SOC permettant de visualiser rapidement la répartition des alertes.
+
+Les graphiques disponibles sont :
+
+```text
+Répartition par priorité
+Répartition par décision analyste
+```
+
+Ces graphiques sont calculés à partir des alertes actuellement affichées dans le dashboard.
+
+Ils tiennent donc compte :
+
+```text
+des filtres sélectionnés
+de la recherche globale
+des décisions analyste enregistrées
+```
+
+Cette évolution améliore la lecture visuelle du dashboard :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ filtrage
+→ recherche
+→ graphiques SOC
+→ investigation
+→ export
+```
+
+La logique de calcul des répartitions est centralisée dans :
+
+```text
+utils/alert_analytics.py
+```
+
+Cela permet de garder le dashboard plus propre et de tester la logique d’analyse séparément.
+
 ## Garde-fous IA
 
 Le projet adopte une logique de sécurité stricte pour l’usage de l’IA.
@@ -1393,6 +1436,7 @@ Le dashboard permet de :
 - exporter l’historique des validations humaines au format CSV ;
 - rechercher globalement dans les alertes, les mappings MITRE / sécurité IA et les décisions analyste ;
 - exporter un rapport Markdown de synthèse ;
+- afficher des graphiques SOC de répartition par priorité et par décision analyste ;
 
 ### Source de données du dashboard
 
@@ -1469,7 +1513,7 @@ pytest -q
 Résultat attendu :
 
 ```text
-30 passed
+34 passed
 ```
 
 Les tests couvrent actuellement :
