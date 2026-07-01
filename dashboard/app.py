@@ -12,7 +12,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-
+from utils.alert_analytics import build_distribution
 from utils.csv_export import build_csv_export
 from utils.human_review import save_human_review
 from utils.report_export import build_markdown_report
@@ -508,6 +508,40 @@ if alert_summary:
         mime="text/csv",
     )
 
+priority_distribution = build_distribution(
+    alert_summary,
+    "Priorité",
+    order=["CRITICAL", "HIGH", "MEDIUM", "LOW", "N/A"],
+)
+
+review_distribution = build_distribution(
+    alert_summary,
+    "Décision analyste",
+    order=[
+        "Non revue",
+        "À revoir",
+        "Validée",
+        "Rejetée",
+        "Faux positif",
+        "Escalade nécessaire",
+        "Erreur lecture",
+        "Revue sans décision",
+    ],
+)
+
+if priority_distribution or review_distribution:
+    st.markdown("## Graphiques SOC")
+
+    chart_col1, chart_col2 = st.columns(2)
+
+    with chart_col1:
+        st.markdown("### Répartition par priorité")
+        st.bar_chart(priority_distribution, x="Label", y="Nombre")
+
+    with chart_col2:
+        st.markdown("### Répartition par décision analyste")
+        st.bar_chart(review_distribution, x="Label", y="Nombre")
+        
 human_review_files = list_human_review_files()
 human_review_summary = build_human_review_summary(human_review_files)
 
