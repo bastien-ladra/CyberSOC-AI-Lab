@@ -1648,6 +1648,16 @@ La problématique associée est :
 
 > Comment intégrer des agents d’intelligence artificielle dans un SOC afin d’améliorer la détection, la qualification et la réponse aux incidents cyber, tout en garantissant contrôle humain, explicabilité, traçabilité et maîtrise des risques propres aux systèmes d’IA ?
 
+Un cadrage doctoral provisoire est disponible ici :
+
+```text
+docs/RESEARCH_PROPOSAL.md
+```
+
+Ce document ne constitue pas un sujet de thèse finalisé.
+
+Il sert à structurer progressivement une future discussion avec un encadrant académique, un laboratoire ou une structure d’accueil.
+
 ## Positionnement
 
 CyberSOC-AI-Lab se positionne à l’intersection de plusieurs domaines :
