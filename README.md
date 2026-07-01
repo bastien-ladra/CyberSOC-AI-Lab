@@ -129,6 +129,7 @@ CyberSOC-AI-Lab/
 │   └── rules_engine.py
 │
 ├── docs/
+│   ├── CASE_STUDY.md
 │   ├── architecture.md
 │   ├── evaluation.md
 │   ├── research_notes.md
