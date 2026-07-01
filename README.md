@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.14.0 — Utilitaire d’export CSV
+Version actuelle : v1.15.0 — Export rapport Markdown de synthèse
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -153,7 +153,8 @@ CyberSOC-AI-Lab/
 ├── utils/
 ├── audit_logger.py
 ├── csv_export.py
-└── human_review.py
+├── human_review.py
+└── report_export.py
 │
 ├── .dockerignore
 ├── .gitignore
@@ -859,6 +860,62 @@ la gestion des accents
 
 Cette séparation rend le dashboard plus propre et prépare mieux le projet à de futurs exports.
 
+## Export rapport Markdown de synthèse
+
+Depuis la version v1.15.0, le dashboard Streamlit permet d’exporter un rapport Markdown de synthèse.
+
+Le rapport généré reprend les informations principales du dashboard :
+
+```text
+indicateurs SOC
+alertes filtrées
+historique des validations humaines
+décisions analyste
+contexte MITRE / sécurité IA
+```
+
+Le fichier généré est nommé :
+
+```text
+cybersoc_dashboard_report.md
+```
+
+Ce rapport peut être réutilisé dans :
+
+```text
+un rapport d’analyse
+une documentation projet
+un README
+une démonstration portfolio
+une preuve d’audit
+```
+
+Le rapport contient notamment :
+
+```text
+Alertes affichées
+Nombre d’alertes CRITICAL / HIGH / MEDIUM
+Nombre d’alertes nécessitant validation humaine
+Nombre d’alertes revues / non revues
+Tableau des alertes
+Tableau des validations humaines
+```
+
+Cette évolution améliore la capacité de restitution du projet :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ filtrage
+→ recherche
+→ validation humaine
+→ rapport Markdown
+→ audit / portfolio
+```
+
+L’export Markdown permet de transformer l’état du dashboard en document lisible et partageable.
+
 ## Garde-fous IA
 
 Le projet adopte une logique de sécurité stricte pour l’usage de l’IA.
@@ -1335,6 +1392,7 @@ Le dashboard permet de :
 - afficher un historique des validations humaines ;
 - exporter l’historique des validations humaines au format CSV ;
 - rechercher globalement dans les alertes, les mappings MITRE / sécurité IA et les décisions analyste ;
+- exporter un rapport Markdown de synthèse ;
 
 ### Source de données du dashboard
 
@@ -1411,7 +1469,7 @@ pytest -q
 Résultat attendu :
 
 ```text
-27 passed
+30 passed
 ```
 
 Les tests couvrent actuellement :

@@ -1,5 +1,36 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.15.0 — Export rapport Markdown de synthèse
+
+### Ajouté
+
+- Ajout d’un module `utils/report_export.py`.
+- Ajout d’un export Markdown de synthèse depuis le dashboard Streamlit.
+- Génération d’un fichier `cybersoc_dashboard_report.md`.
+- Le rapport reprend les indicateurs SOC affichés.
+- Le rapport reprend les alertes filtrées.
+- Le rapport reprend l’historique des validations humaines.
+- Ajout de tests unitaires pour la génération du rapport Markdown.
+- Documentation de l’export Markdown dans le README.
+
+### Objectif
+
+Permettre de transformer l’état du dashboard en rapport lisible, exploitable et partageable.
+
+Cette évolution renforce l’usage portfolio et audit du projet :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ validation humaine
+→ historique
+→ export Markdown
+→ restitution
+```
+
+---
+
 ## v1.14.0 — Utilitaire d’export CSV
 
 ### Ajouté
