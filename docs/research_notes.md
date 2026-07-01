@@ -22,7 +22,7 @@ La problématique principale du projet est la suivante :
 
 > Comment intégrer des agents d’intelligence artificielle dans un SOC afin d’améliorer la détection, la qualification et la réponse aux incidents cyber, tout en garantissant le contrôle humain, l’explicabilité, la traçabilité et la maîtrise des risques propres aux systèmes d’IA ?
 
-Cette problématique est complétée par une question spécifique au MVP v0.8 :
+Cette problématique est complétée par une question spécifique au risque de données hostiles dans les pipelines IA :
 
 > Comment protéger un SOC augmenté par IA contre des données hostiles présentes dans les logs, comme des tentatives de prompt injection visant à manipuler l’assistant IA ?
 
@@ -418,7 +418,7 @@ CyberSOC-AI-Lab vise à explorer une question centrale :
 
 > Comment utiliser l’IA pour aider un SOC sans perdre le contrôle humain, l’explicabilité et la traçabilité des décisions cyber ?
 
-La version MVP v0.8 ajoute une dimension importante :
+Le scénario de prompt injection ajoute une dimension importante :
 
 > Comment empêcher des données hostiles présentes dans les logs de manipuler l’assistant IA d’un SOC augmenté ?
 
@@ -465,3 +465,11 @@ prototype technique
 → dossier de recherche
 → sujet doctoral potentiel
 ```
+
+Le cœur du projet doctoral pourrait porter sur la question suivante :
+
+> Comment concevoir, évaluer et auditer un SOC augmenté par IA tout en garantissant la supervision humaine, la traçabilité des décisions, la fiabilité des analyses et la résistance aux données hostiles ?
+
+Cette formulation reste volontairement provisoire.
+
+Elle devra être affinée avec un encadrant académique, un laboratoire ou une structure d’accueil.
