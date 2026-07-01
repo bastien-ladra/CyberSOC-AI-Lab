@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.11.0 — Validations humaines enrichies
+Version actuelle : v1.12.0 — Historique des validations humaines
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -715,6 +715,48 @@ détection
 
 Les exemples versionnés dans `examples/human_reviews/` ont également été mis à jour avec ce nouveau format.
 
+## Historique des validations humaines
+
+Depuis la version v1.12.0, le dashboard Streamlit affiche un historique des validations humaines.
+
+Cette vue permet de consulter les décisions analyste enregistrées sans ouvrir les fichiers JSON manuellement.
+
+L’historique affiche notamment :
+
+```text
+Horodatage
+Alerte
+Type
+Criticité
+Priorité
+Score
+IP source
+Technique
+ID technique
+Décision
+Note analyste
+```
+
+Le dashboard permet aussi d’exporter cet historique au format CSV :
+
+```text
+cybersoc_human_reviews.csv
+```
+
+Cette évolution améliore l’auditabilité du projet :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ validation humaine
+→ historique des décisions
+→ export CSV
+→ audit
+```
+
+L’analyste peut ainsi suivre les décisions prises sur les alertes et conserver une trace exploitable.
+
 ## Garde-fous IA
 
 Le projet adopte une logique de sécurité stricte pour l’usage de l’IA.
@@ -1188,6 +1230,8 @@ Le dashboard permet de :
 - filtrer les alertes selon leur statut de revue analyste ;
 - distinguer les alertes revues et non revues dans les indicateurs SOC ;
 - enregistrer des validations humaines enrichies avec le contexte de l’alerte ;
+- afficher un historique des validations humaines ;
+- exporter l’historique des validations humaines au format CSV ;
 
 ### Source de données du dashboard
 

@@ -1,5 +1,34 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.12.0 — Historique des validations humaines
+
+### Ajouté
+
+- Ajout d’un historique des validations humaines dans le dashboard Streamlit.
+- Affichage des décisions analyste sous forme de tableau.
+- Affichage du contexte enrichi des validations humaines : priorité, score, technique et ID de technique.
+- Export CSV de l’historique des validations humaines.
+- Fusion des validations provenant de `examples/` et `runtime/`, avec priorité aux validations locales.
+- Documentation de l’historique des validations humaines dans le README.
+
+### Objectif
+
+Améliorer l’auditabilité et le suivi des décisions analyste en rendant les validations humaines consultables directement depuis le dashboard.
+
+Cette évolution renforce la traçabilité du workflow SOC :
+
+```text
+détection
+→ qualification
+→ priorisation
+→ validation humaine
+→ historique
+→ export
+→ audit
+```
+
+---
+
 ## v1.11.0 — Validations humaines enrichies
 
 ### Ajouté
