@@ -177,6 +177,51 @@ def build_human_review_summary(review_files: list[Path]) -> list[dict[str, Any]]
 
     return summary
 
+def alert_matches_search(
+    path: Path,
+    alert_data: dict[str, Any],
+    search_query: str,
+) -> bool:
+    normalized_query = search_query.strip().lower()
+
+    if not normalized_query:
+        return True
+
+    alert_number = get_alert_number(path)
+    mitre_attack = alert_data.get("mitre_attack", {})
+
+    searchable_values = [
+        path.name,
+        alert_number,
+        str(alert_data.get("alert_type", "")),
+        str(alert_data.get("severity", "")),
+        str(alert_data.get("priority_label", "")),
+        str(alert_data.get("priority_score", "")),
+        str(alert_data.get("source_ip", "")),
+        str(mitre_attack.get("framework", "")),
+        str(mitre_attack.get("tactic", "")),
+        str(mitre_attack.get("technique", "")),
+        str(mitre_attack.get("technique_id", "")),
+        get_human_review_decision(alert_number),
+    ]
+
+    human_review_path = get_human_review_path(alert_number)
+
+    if human_review_path.exists():
+        try:
+            human_review = load_json_file(human_review_path)
+            searchable_values.extend(
+                [
+                    str(human_review.get("decision", "")),
+                    str(human_review.get("analyst_note", "")),
+                ]
+            )
+        except (OSError, json.JSONDecodeError):
+            pass
+
+    searchable_text = " ".join(searchable_values).lower()
+
+    return normalized_query in searchable_text
 
 def get_alert_priority(path: Path) -> int:
     try:
@@ -304,6 +349,7 @@ def filter_alert_files(
     selected_severities: list[str],
     selected_priority_labels: list[str],
     selected_review_decisions: list[str],
+    search_query: str,
 ) -> list[Path]:
     filtered_files = []
 
@@ -317,6 +363,9 @@ def filter_alert_files(
         severity = str(alert_data.get("severity", "N/A"))
         priority_label = str(alert_data.get("priority_label", "N/A"))
         review_decision = get_human_review_decision(get_alert_number(path))
+        
+        if not alert_matches_search(path, alert_data, search_query):
+            continue
 
         if alert_type not in selected_alert_types:
             continue
@@ -429,12 +478,18 @@ selected_review_decisions = st.sidebar.multiselect(
     default=review_decisions,
 )
 
+search_query = st.sidebar.text_input(
+    "Recherche",
+    placeholder="IP, type, technique, décision, note analyste...",
+)
+
 filtered_alert_files = filter_alert_files(
     alert_files,
     selected_alert_types,
     selected_severities,
     selected_priority_labels,
     selected_review_decisions,
+    search_query,
 )
 
 if not filtered_alert_files:
