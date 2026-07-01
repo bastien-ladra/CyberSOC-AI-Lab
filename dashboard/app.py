@@ -1,8 +1,6 @@
-import csv
 import json
 import os
 import sys
-from io import StringIO
 from pathlib import Path
 from typing import Any
 
@@ -15,6 +13,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 
+from utils.csv_export import build_csv_export
 from utils.human_review import save_human_review
 
 
@@ -294,20 +293,6 @@ def build_alert_summary(alert_files: list[Path]) -> list[dict[str, Any]]:
 
     return summary
 
-
-def build_alert_summary_csv(alert_summary: list[dict[str, Any]]) -> bytes:
-    if not alert_summary:
-        return b""
-
-    output = StringIO()
-    writer = csv.DictWriter(output, fieldnames=list(alert_summary[0].keys()))
-
-    writer.writeheader()
-    writer.writerows(alert_summary)
-
-    return output.getvalue().encode("utf-8-sig")
-
-
 def get_alert_filter_options(
     alert_files: list[Path],
 ) -> tuple[list[str], list[str], list[str], list[str]]:
@@ -518,7 +503,7 @@ if alert_summary:
 
     st.download_button(
         label="Exporter les alertes filtrées en CSV",
-        data=build_alert_summary_csv(alert_summary),
+        data=build_csv_export(alert_summary),
         file_name="cybersoc_alerts_filtered.csv",
         mime="text/csv",
     )
@@ -532,7 +517,7 @@ if human_review_summary:
 
     st.download_button(
         label="Exporter l'historique des validations en CSV",
-        data=build_alert_summary_csv(human_review_summary),
+        data=build_csv_export(human_review_summary),
         file_name="cybersoc_human_reviews.csv",
         mime="text/csv",
     )
