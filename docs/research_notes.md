@@ -1,4 +1,4 @@
-# Research Notes — CyberSOC-AI-Lab
+# CyberSOC-AI-Lab — Notes de recherche
 
 ## Sujet général
 
@@ -63,13 +63,15 @@ Le projet ne cherche pas uniquement à détecter des attaques classiques. Il che
 
 ## État actuel du prototype
 
-La version actuelle correspond au **MVP v0.8**.
+La version actuelle du prototype est `v1.18.0`.
 
-Le prototype couvre trois scénarios :
+CyberSOC-AI-Lab est aujourd’hui un prototype expérimental de SOC augmenté par IA.
 
-1. Détection d’une tentative de brute force SSH ;
-2. Détection d’une activité de reconnaissance web ;
-3. Détection d’une tentative de prompt injection présente dans des logs web.
+Il couvre trois scénarios principaux :
+
+1. détection d’une tentative de brute force SSH ;
+2. détection d’une activité de reconnaissance web ;
+3. détection d’une tentative de prompt injection présente dans des logs web.
 
 Le pipeline actuel permet de :
 
@@ -77,15 +79,27 @@ Le pipeline actuel permet de :
 - parser des événements SSH et HTTP ;
 - détecter des comportements suspects ;
 - générer des alertes JSON ;
+- enrichir les alertes avec un contexte MITRE ATT&CK ou sécurité IA ;
+- calculer un score de priorité ;
 - produire des rapports Markdown ;
 - générer des prompts IA sécurisés ;
 - interroger un modèle IA local via Ollama ;
 - évaluer automatiquement les réponses IA ;
 - afficher les alertes dans un dashboard Streamlit ;
+- filtrer et rechercher les alertes ;
+- visualiser des indicateurs et graphiques SOC ;
+- exporter des données en CSV ;
+- exporter un rapport Markdown de synthèse ;
 - enregistrer une validation humaine ;
+- historiser les validations humaines ;
 - journaliser les traitements système ;
 - journaliser les décisions humaines ;
-- tester automatiquement les composants principaux.
+- tester automatiquement les composants principaux ;
+- documenter le projet sous forme d’étude de cas et de guide de démonstration.
+
+Cette version ne constitue pas un système SOC de production.
+
+Elle constitue une base expérimentale destinée à tester progressivement des hypothèses de recherche autour de l’usage contrôlé de l’IA dans un contexte SOC.
 
 ## Questions de recherche
 
@@ -322,9 +336,9 @@ Le projet se situe à l’intersection de plusieurs domaines :
 - gouvernance des systèmes IA ;
 - supervision humaine des systèmes automatisés.
 
-## Positionnement professionnel
+## Valorisation intermédiaire
 
-Ce projet peut être valorisé pour des postes de type :
+Même si l’objectif final est académique, le projet peut aussi être valorisé à court terme pour des postes de type :
 
 - DevSecOps Engineer ;
 - Security Engineer ;
@@ -337,7 +351,9 @@ Ce projet peut être valorisé pour des postes de type :
 - Ingénieur cybersécurité orienté IA ;
 - Ingénieur détection et réponse à incident.
 
-## Positionnement académique
+## Positionnement académique et doctoral
+
+L’objectif à long terme est de faire évoluer ce prototype vers un support de candidature ou de discussion pour un projet doctoral portant sur l’intégration contrôlée de l’IA dans les opérations de cybersécurité.
 
 CyberSOC-AI-Lab peut servir de base exploratoire pour un futur sujet de recherche sur :
 
@@ -420,3 +436,32 @@ Détection
 ```
 
 L’objectif final est de construire un prototype démontrable d’IA appliquée à la cybersécurité opérationnelle, utile à la fois pour l’employabilité, la montée en compétence et une future orientation recherche.
+
+## Trajectoire doctorale envisagée
+
+CyberSOC-AI-Lab n’est pas encore un sujet de thèse complet.
+
+Il constitue une base exploratoire permettant de construire progressivement :
+
+- une problématique scientifique ;
+- un état de l’art ciblé ;
+- des hypothèses testables ;
+- une méthodologie expérimentale ;
+- un démonstrateur technique ;
+- des scénarios d’évaluation ;
+- des métriques de fiabilité ;
+- une réflexion sur la supervision humaine ;
+- une réflexion sur l’auditabilité des décisions assistées par IA ;
+- une réflexion sur la sécurité des systèmes IA exposés à des données hostiles.
+
+La trajectoire envisagée est la suivante :
+
+```text
+prototype technique
+→ démonstrateur expérimental
+→ cadrage scientifique
+→ état de l’art
+→ protocole d’évaluation
+→ dossier de recherche
+→ sujet doctoral potentiel
+```
