@@ -1,5 +1,32 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.17.0 — Étude de cas projet
+
+### Ajouté
+
+- Ajout d’une étude de cas détaillée dans `docs/CASE_STUDY.md`.
+- Présentation du contexte du projet.
+- Présentation du workflow SOC.
+- Présentation de la place de l’IA et des garde-fous.
+- Présentation du dashboard, de l’auditabilité et des limites actuelles.
+- Ajout d’un positionnement portfolio pour rendre le projet plus lisible côté recruteur.
+
+### Objectif
+
+Améliorer la lisibilité du projet pour une démonstration, un entretien ou une revue de portfolio.
+
+Cette évolution transforme le projet en support explicable :
+
+```text
+prototype technique
+→ workflow SOC
+→ démonstration IA supervisée
+→ documentation portfolio
+→ lecture recruteur
+```
+
+---
+
 ## v1.16.0 — Graphiques SOC dans le dashboard
 
 ### Ajouté

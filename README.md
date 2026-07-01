@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.16.0 — Graphiques SOC dans le dashboard
+Version actuelle : v1.17.0 — Étude de cas projet
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -1699,3 +1699,11 @@ Elle inclut :
 Le principe central reste :
 
 > L’IA peut assister l’analyste, mais ne doit pas remplacer la décision humaine.
+
+## Étude de cas
+
+Une étude de cas détaillée est disponible ici :
+
+```text
+docs/CASE_STUDY.md
+```
