@@ -17,6 +17,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from utils.human_review import save_human_review
 
+
 def resolve_data_dir() -> Path:
     configured_dir = os.getenv("CYBERSOC_OUTPUT_DIR")
 
@@ -38,6 +39,7 @@ def resolve_data_dir() -> Path:
 
     return examples_dir
 
+
 def resolve_write_dir(data_dir: Path) -> Path:
     configured_dir = os.getenv("CYBERSOC_OUTPUT_DIR")
 
@@ -48,6 +50,7 @@ def resolve_write_dir(data_dir: Path) -> Path:
         return PROJECT_ROOT / "runtime"
 
     return data_dir
+
 
 DATA_DIR = resolve_data_dir()
 WRITE_DIR = resolve_write_dir(DATA_DIR)
@@ -73,6 +76,7 @@ st.set_page_config(
 st.caption(f"Dossier de données lu : `{DATA_DIR}`")
 st.caption(f"Dossier d'écriture des validations : `{WRITE_DIR}`")
 
+
 def load_json_file(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as file:
         return json.load(file)
@@ -81,7 +85,9 @@ def load_json_file(path: Path) -> dict[str, Any]:
 def load_text_file(path: Path) -> str:
     if not path.exists():
         return "Fichier non disponible."
+
     return path.read_text(encoding="utf-8")
+
 
 def get_alert_number(path: Path) -> str:
     return path.stem.split("_")[-1]
@@ -116,6 +122,62 @@ def get_human_review_decision(alert_number: str) -> str:
 
     return "Revue sans décision"
 
+
+def get_human_review_timestamp(path: Path) -> str:
+    try:
+        review_data = load_json_file(path)
+    except (OSError, json.JSONDecodeError):
+        return ""
+
+    return str(review_data.get("timestamp", ""))
+
+
+def list_human_review_files() -> list[Path]:
+    review_files_by_name: dict[str, Path] = {}
+
+    if HUMAN_REVIEW_READ_DIR.exists():
+        for path in HUMAN_REVIEW_READ_DIR.glob("review_*.json"):
+            review_files_by_name[path.name] = path
+
+    if HUMAN_REVIEW_WRITE_DIR.exists():
+        for path in HUMAN_REVIEW_WRITE_DIR.glob("review_*.json"):
+            review_files_by_name[path.name] = path
+
+    return sorted(
+        review_files_by_name.values(),
+        key=get_human_review_timestamp,
+        reverse=True,
+    )
+
+
+def build_human_review_summary(review_files: list[Path]) -> list[dict[str, Any]]:
+    summary = []
+
+    for path in review_files:
+        try:
+            review_data = load_json_file(path)
+        except (OSError, json.JSONDecodeError):
+            continue
+
+        summary.append(
+            {
+                "Horodatage": review_data.get("timestamp", "N/A"),
+                "Alerte": review_data.get("alert_number", "N/A"),
+                "Type": review_data.get("alert_type", "N/A"),
+                "Criticité": review_data.get("severity", "N/A"),
+                "Priorité": review_data.get("priority_label", "N/A"),
+                "Score": review_data.get("priority_score", "N/A"),
+                "IP source": review_data.get("source_ip", "N/A"),
+                "Technique": review_data.get("mitre_technique", "N/A"),
+                "ID technique": review_data.get("mitre_technique_id", "N/A"),
+                "Décision": review_data.get("decision", "N/A"),
+                "Note analyste": review_data.get("analyst_note", ""),
+            }
+        )
+
+    return summary
+
+
 def get_alert_priority(path: Path) -> int:
     try:
         alert_data = load_json_file(path)
@@ -137,6 +199,7 @@ def list_alerts() -> list[Path]:
         reverse=True,
     )
 
+
 def format_alert_option(path: Path) -> str:
     try:
         alert_data = load_json_file(path)
@@ -148,7 +211,11 @@ def format_alert_option(path: Path) -> str:
     priority_score = alert_data.get("priority_score", "N/A")
     source_ip = alert_data.get("source_ip", "N/A")
 
-    return f"{path.name} — {alert_type} — {priority_label} ({priority_score}/100) — {source_ip}"
+    return (
+        f"{path.name} — {alert_type} — "
+        f"{priority_label} ({priority_score}/100) — {source_ip}"
+    )
+
 
 def build_alert_summary(alert_files: list[Path]) -> list[dict[str, Any]]:
     summary = []
@@ -161,6 +228,7 @@ def build_alert_summary(alert_files: list[Path]) -> list[dict[str, Any]]:
 
         mitre_attack = alert_data.get("mitre_attack", {})
         alert_number = get_alert_number(path)
+
         summary.append(
             {
                 "Fichier": path.name,
@@ -171,12 +239,16 @@ def build_alert_summary(alert_files: list[Path]) -> list[dict[str, Any]]:
                 "IP source": alert_data.get("source_ip", "N/A"),
                 "Technique": mitre_attack.get("technique", "N/A"),
                 "ID technique": mitre_attack.get("technique_id", "N/A"),
-                "Validation humaine": alert_data.get("human_validation_required", "N/A"),
+                "Validation humaine": alert_data.get(
+                    "human_validation_required",
+                    "N/A",
+                ),
                 "Décision analyste": get_human_review_decision(alert_number),
             }
         )
 
     return summary
+
 
 def build_alert_summary_csv(alert_summary: list[dict[str, Any]]) -> bytes:
     if not alert_summary:
@@ -189,6 +261,7 @@ def build_alert_summary_csv(alert_summary: list[dict[str, Any]]) -> bytes:
     writer.writerows(alert_summary)
 
     return output.getvalue().encode("utf-8-sig")
+
 
 def get_alert_filter_options(
     alert_files: list[Path],
@@ -261,6 +334,7 @@ def filter_alert_files(
 
     return filtered_files
 
+
 def build_alert_metrics(alert_files: list[Path]) -> dict[str, int]:
     metrics = {
         "total": 0,
@@ -294,14 +368,16 @@ def build_alert_metrics(alert_files: list[Path]) -> dict[str, int]:
 
         if alert_data.get("human_validation_required") is True:
             metrics["human_validation_required"] += 1
-            review_decision = get_human_review_decision(get_alert_number(path))
 
-            if review_decision == "Non revue":
-                metrics["not_reviewed"] += 1
-            else:
-                metrics["reviewed"] += 1
+        review_decision = get_human_review_decision(get_alert_number(path))
+
+        if review_decision == "Non revue":
+            metrics["not_reviewed"] += 1
+        else:
+            metrics["reviewed"] += 1
 
     return metrics
+
 
 st.title("CyberSOC-AI-Lab")
 st.subheader("Prototype de SOC augmenté par IA")
@@ -318,16 +394,13 @@ alert_files = list_alerts()
 
 if not alert_files:
     st.warning(
-    f"Aucune alerte trouvée dans `{DATA_DIR}`. Lance `python main.py` ou vérifie le dossier configuré."
+        f"Aucune alerte trouvée dans `{DATA_DIR}`. "
+        "Lance `python main.py` ou vérifie le dossier configuré."
     )
     st.stop()
 
-alert_types, severities, priority_labels, review_decisions = get_alert_filter_options(alert_files)
-
-selected_review_decisions = st.sidebar.multiselect(
-    "Décision analyste",
-    review_decisions,
-    default=review_decisions,
+alert_types, severities, priority_labels, review_decisions = get_alert_filter_options(
+    alert_files
 )
 
 st.sidebar.markdown("## Filtres")
@@ -348,6 +421,12 @@ selected_priority_labels = st.sidebar.multiselect(
     "Priorité",
     priority_labels,
     default=priority_labels,
+)
+
+selected_review_decisions = st.sidebar.multiselect(
+    "Décision analyste",
+    review_decisions,
+    default=review_decisions,
 )
 
 filtered_alert_files = filter_alert_files(
@@ -389,6 +468,22 @@ if alert_summary:
         mime="text/csv",
     )
 
+human_review_files = list_human_review_files()
+human_review_summary = build_human_review_summary(human_review_files)
+
+if human_review_summary:
+    st.markdown("## Historique des validations humaines")
+    st.dataframe(human_review_summary, use_container_width=True)
+
+    st.download_button(
+        label="Exporter l'historique des validations en CSV",
+        data=build_alert_summary_csv(human_review_summary),
+        file_name="cybersoc_human_reviews.csv",
+        mime="text/csv",
+    )
+else:
+    st.info("Aucune validation humaine enregistrée pour le moment.")
+
 selected_alert_file = st.sidebar.selectbox(
     "Sélectionner une alerte",
     filtered_alert_files,
@@ -396,14 +491,12 @@ selected_alert_file = st.sidebar.selectbox(
 )
 
 alert = load_json_file(selected_alert_file)
-
 alert_number = get_alert_number(selected_alert_file)
 
 report_path = REPORT_DIR / f"incident_{alert_number}.md"
 prompt_path = PROMPT_DIR / f"incident_prompt_{alert_number}.md"
 ai_analysis_path = AI_OUTPUT_DIR / f"incident_ai_analysis_{alert_number}.md"
-ai_evaluation_path = AI_OUTPUT_DIR / \
-    f"incident_ai_evaluation_{alert_number}.json"
+ai_evaluation_path = AI_OUTPUT_DIR / f"incident_ai_evaluation_{alert_number}.json"
 human_review_path = get_human_review_path(alert_number)
 
 st.markdown("## Vue synthétique")
@@ -451,7 +544,7 @@ if recommended_actions:
 
     for action in recommended_actions:
         st.markdown(f"- {action}")
-        
+
 if ai_evaluation_path.exists():
     evaluation = load_json_file(ai_evaluation_path)
     st.markdown("## Évaluation IA")
@@ -470,7 +563,8 @@ if ai_evaluation_path.exists():
 
     if evaluation.get("dangerous_matches"):
         st.error(
-            f"Recommandations dangereuses détectées : {evaluation.get('dangerous_matches')}"
+            "Recommandations dangereuses détectées : "
+            f"{evaluation.get('dangerous_matches')}"
         )
     else:
         st.success("Aucune recommandation dangereuse détectée.")
@@ -510,13 +604,13 @@ with st.form("human_review_form"):
 
     if submitted:
         review_path = save_human_review(
-        alert_number=alert_number,
-        alert=alert,
-        decision=decision,
-        analyst_note=analyst_note,
-        review_dir=HUMAN_REVIEW_WRITE_DIR,
-        audit_file=HUMAN_REVIEW_WRITE_AUDIT_FILE,
-    )
+            alert_number=alert_number,
+            alert=alert,
+            decision=decision,
+            analyst_note=analyst_note,
+            review_dir=HUMAN_REVIEW_WRITE_DIR,
+            audit_file=HUMAN_REVIEW_WRITE_AUDIT_FILE,
+        )
 
         st.success(f"Validation humaine enregistrée : {review_path}")
 
@@ -557,9 +651,9 @@ with tab5:
     st.markdown("### Audit des validations humaines")
 
     human_review_audit_file = (
-    HUMAN_REVIEW_WRITE_AUDIT_FILE
-    if HUMAN_REVIEW_WRITE_AUDIT_FILE.exists()
-    else HUMAN_REVIEW_READ_AUDIT_FILE
+        HUMAN_REVIEW_WRITE_AUDIT_FILE
+        if HUMAN_REVIEW_WRITE_AUDIT_FILE.exists()
+        else HUMAN_REVIEW_READ_AUDIT_FILE
     )
 
     if human_review_audit_file.exists():
