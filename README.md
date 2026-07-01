@@ -1536,7 +1536,7 @@ Les tests couvrent actuellement :
 - l’absence d’alerte sur des logs SSH bénins ;
 - l’absence d’alerte sur des logs web bénins ;
 - la non-détection de prompt injection sur du trafic web normal ;
-- l’exécution du moteur sur des logs bénins via des fichiers séparés.
+- l’exécution du moteur sur des logs bénins via des fichiers séparés ;
 - la création récursive des dossiers de validation humaine ;
 - la génération d’exports CSV ;
 - la génération d’un rapport Markdown de synthèse ;
