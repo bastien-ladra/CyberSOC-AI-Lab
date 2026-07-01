@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.18.0 — Guide de démonstration recruteur
+Version actuelle : v1.19.0 — Cadrage doctoral
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -131,6 +131,7 @@ CyberSOC-AI-Lab/
 ├── docs/
 │   ├── CASE_STUDY.md
 │   ├── DEMO_GUIDE.md
+│   ├── RESEARCH_PROPOSAL.md
 │   ├── architecture.md
 │   ├── evaluation.md
 │   ├── research_notes.md
@@ -1624,6 +1625,20 @@ Explique comment présenter le projet lors d’un entretien ou d’une revue de 
 - points forts à mettre en avant ;
 - questions possibles ;
 - limites à assumer clairement.
+
+### `docs/RESEARCH_PROPOSAL.md`
+
+Présente un cadrage doctoral provisoire du projet :
+
+- titre provisoire ;
+- contexte scientifique ;
+- problématique ;
+- hypothèses ;
+- questions de recherche ;
+- méthodologie envisagée ;
+- contributions attendues ;
+- limites actuelles ;
+- trajectoire de maturation vers un potentiel sujet doctoral.
 
 ## Lien avec un projet de recherche
 

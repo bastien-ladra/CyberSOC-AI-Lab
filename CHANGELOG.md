@@ -1,5 +1,37 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.19.0 — Cadrage doctoral
+
+### Ajouté
+
+- Ajout de `docs/RESEARCH_PROPOSAL.md`.
+- Ajout d’un cadrage doctoral provisoire.
+- Ajout d’une problématique de recherche structurée.
+- Ajout d’hypothèses et de questions de recherche.
+- Ajout d’une méthodologie expérimentale envisagée.
+- Ajout des contributions attendues.
+- Ajout des limites actuelles du projet dans une perspective recherche.
+- Ajout d’une trajectoire de maturation vers un potentiel sujet doctoral.
+- Ajout d’un lien vers le cadrage doctoral dans le README.
+
+### Objectif
+
+Faire évoluer CyberSOC-AI-Lab d’un simple prototype portfolio vers une base exploratoire structurée pour un futur projet doctoral.
+
+Cette version ne prétend pas finaliser un sujet de thèse.
+
+Elle sert à poser les fondations d’une discussion future avec un encadrant académique, un laboratoire ou une structure d’accueil.
+
+```text
+prototype technique
+→ démonstrateur expérimental
+→ cadrage scientifique
+→ discussion académique
+→ sujet doctoral potentiel
+```
+
+---
+
 ## v1.18.0 — Guide de démonstration recruteur
 
 ### Ajouté
