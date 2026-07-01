@@ -1698,7 +1698,7 @@ Ces limites sont acceptées à ce stade, car l’objectif est de construire prog
 
 ### v1.0.0 — MVP stable
 
-La version actuelle fournit un prototype démontrable, reproductible et auditable de SOC augmenté par IA.
+Le socle actuel du projet fournit un prototype démontrable, reproductible et auditable de SOC augmenté par IA.
 
 Elle inclut :
 
