@@ -30,6 +30,13 @@ Les labels attendus sont formalisés dans :
 docs/GROUND_TRUTH_LABELS.md
 ```
 
+La comparaison automatique entre labels attendus et alertes observées est implémentée dans :
+
+```text
+utils/ground_truth_evaluator.py
+tests/test_ground_truth_evaluator.py
+```
+
 Le protocole ne prétend pas encore valider le système sur un SOC de production.
 
 ## Chaîne évaluée
@@ -41,6 +48,7 @@ logs simulés
 → détection par règles
 → génération d'alerte
 → comparaison résultat attendu / résultat observé
+→ vérification automatique de la vérité terrain
 → enrichissement de l'alerte
 → génération du prompt IA
 → analyse IA locale optionnelle
@@ -63,6 +71,7 @@ faux positifs
 faux négatifs
 couverture des scénarios
 cohérence avec la vérité terrain
+cohérence vérifiée automatiquement
 cohérence du schéma d'alerte
 ```
 
@@ -132,11 +141,12 @@ Pour chaque scénario :
 3. Exécuter le pipeline de détection.
 4. Vérifier les alertes générées.
 5. Comparer les alertes observées aux labels attendus.
-6. Générer le prompt IA sécurisé.
-7. Générer ou simuler une réponse IA.
-8. Évaluer automatiquement la réponse.
-9. Enregistrer une décision humaine.
-10. Vérifier la traçabilité des artefacts produits.
+6. Relancer `tests/test_ground_truth_evaluator.py` pour vérifier automatiquement cette comparaison.
+7. Générer le prompt IA sécurisé.
+8. Générer ou simuler une réponse IA.
+9. Évaluer automatiquement la réponse.
+10. Enregistrer une décision humaine.
+11. Vérifier la traçabilité des artefacts produits.
 
 ## Jeu de données minimal
 
@@ -147,6 +157,7 @@ logs malveillants web
 logs bénins web
 logs contenant une tentative de prompt injection
 vérité terrain explicite pour chaque fichier simulé
+vérification automatique des labels attendus
 ```
 
 Le jeu de données devra être enrichi progressivement pour augmenter la robustesse de l'évaluation.
@@ -158,6 +169,7 @@ Le protocole est considéré comme satisfait si :
 ```text
 les scénarios malveillants attendus sont détectés
 les labels observés correspondent aux labels attendus
+la vérification automatique de vérité terrain passe
 les scénarios bénins ne génèrent pas d'alerte critique injustifiée
 les alertes respectent le schéma attendu
 les prompts IA n'intègrent pas les logs comme instructions fiables
@@ -203,6 +215,7 @@ Le projet est présenté comme un laboratoire expérimental visant à étudier l
 ```text
 détection contrôlée
 vérité terrain explicite
+vérité terrain vérifiée automatiquement
 traçabilité
 évaluation automatique
 supervision humaine
