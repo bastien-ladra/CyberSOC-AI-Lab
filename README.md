@@ -34,6 +34,7 @@ Le projet intègre aussi :
 - une analyse IA locale optionnelle via Ollama ;
 - une évaluation automatique des réponses IA ;
 - une évaluation automatique de la vérité terrain ;
+- une génération de résultats d'évaluation JSON et Markdown ;
 - un dashboard Streamlit ;
 - un workflow de validation humaine ;
 - une journalisation d'audit ;
@@ -55,6 +56,7 @@ Le prototype permet de :
 - générer des recommandations analyste ;
 - produire des artefacts auditables ;
 - comparer automatiquement les alertes observées aux labels attendus ;
+- exporter les résultats de vérité terrain en JSON et Markdown ;
 - générer un prompt IA encadré ;
 - interroger un modèle local via Ollama si l'option IA est activée ;
 - évaluer automatiquement la réponse IA ;
@@ -132,6 +134,7 @@ runtime/
 ├── prompts/
 ├── ai_outputs/
 ├── audit/
+├── evaluation/
 └── human_reviews/
 ```
 
@@ -145,6 +148,7 @@ logs simulés
 → génération d'alertes
 → comparaison attendu / observé
 → vérification automatique de la vérité terrain
+→ export des résultats d'évaluation
 → génération de rapports
 → génération de prompts IA sécurisés
 → analyse IA locale optionnelle
@@ -242,6 +246,20 @@ utils/ground_truth_evaluator.py
 tests/test_ground_truth_evaluator.py
 ```
 
+L'export des résultats d'évaluation est implémenté dans :
+
+```text
+utils/ground_truth_results_exporter.py
+tests/test_ground_truth_results_exporter.py
+```
+
+Les artefacts générés sont :
+
+```text
+runtime/evaluation/ground_truth_results.json
+runtime/evaluation/ground_truth_results.md
+```
+
 ## Dashboard Streamlit
 
 Lancer le dashboard :
@@ -318,6 +336,7 @@ Le projet contient des tests automatisés sur :
 - le moteur de règles ;
 - les logs bénins ;
 - l'évaluation automatique de la vérité terrain ;
+- l'export des résultats de vérité terrain ;
 - l'évaluation des réponses IA ;
 - les prompts IA ;
 - le client LLM local ;
@@ -345,30 +364,39 @@ docs/PROJECT_INDEX.md
 
 Documents principaux :
 
-| Document                      | Rôle                                                                       |
-| ----------------------------- | -------------------------------------------------------------------------- |
-| `docs/PROJECT_INDEX.md`       | Point d'entrée documentaire du projet.                                     |
-| `docs/architecture.md`        | Architecture et pipeline.                                                  |
-| `docs/threat_model.md`        | Menaces liées à l'usage de l'IA dans un SOC.                               |
-| `docs/SECURITY_MODEL.md`      | Modèle de sécurité, garanties et limites.                                  |
-| `docs/DATASET_CARD.md`        | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
-| `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés.          |
-| `docs/QUALITY_GATES.md`       | Contrôles qualité du projet.                                               |
-| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental.                                                    |
-| `docs/EVALUATION_MATRIX.md`   | Grille d'évaluation.                                                       |
-| `docs/EXPERIMENT_RESULTS.md`  | Modèle de rapport de résultats.                                            |
-| `docs/REPRODUCIBILITY.md`     | Procédure de reproductibilité.                                             |
-| `docs/CASE_STUDY.md`          | Étude de cas.                                                              |
-| `docs/DEMO_GUIDE.md`          | Guide de démonstration.                                                    |
-| `docs/RESEARCH_PROPOSAL.md`   | Cadrage doctoral provisoire.                                               |
-| `docs/research_notes.md`      | Notes de recherche.                                                        |
-| `docs/evaluation.md`          | Méthodologie d'évaluation complémentaire.                                  |
+| Document | Rôle |
+|---|---|
+| `docs/PROJECT_INDEX.md` | Point d'entrée documentaire du projet. |
+| `docs/architecture.md` | Architecture et pipeline. |
+| `docs/threat_model.md` | Menaces liées à l'usage de l'IA dans un SOC. |
+| `docs/SECURITY_MODEL.md` | Modèle de sécurité, garanties et limites. |
+| `docs/DATASET_CARD.md` | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
+| `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés. |
+| `docs/QUALITY_GATES.md` | Contrôles qualité du projet. |
+| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental. |
+| `docs/EVALUATION_MATRIX.md` | Grille d'évaluation. |
+| `docs/EXPERIMENT_RESULTS.md` | Modèle de rapport de résultats. |
+| `docs/REPRODUCIBILITY.md` | Procédure de reproductibilité. |
+| `docs/CASE_STUDY.md` | Étude de cas. |
+| `docs/DEMO_GUIDE.md` | Guide de démonstration. |
+| `docs/RESEARCH_PROPOSAL.md` | Cadrage doctoral provisoire. |
+| `docs/research_notes.md` | Notes de recherche. |
+| `docs/evaluation.md` | Méthodologie d'évaluation complémentaire. |
 
 Artefacts techniques liés à la vérité terrain automatisée :
 
 ```text
 utils/ground_truth_evaluator.py
 tests/test_ground_truth_evaluator.py
+utils/ground_truth_results_exporter.py
+tests/test_ground_truth_results_exporter.py
+```
+
+Artefacts générés liés aux résultats :
+
+```text
+runtime/evaluation/ground_truth_results.json
+runtime/evaluation/ground_truth_results.md
 ```
 
 ## Sécurité IA
@@ -406,6 +434,7 @@ quality gates
 dataset documenté
 vérité terrain explicite
 vérité terrain vérifiée automatiquement
+résultats exportés
 couverture minimale
 protocole expérimental
 matrice d'évaluation
@@ -419,7 +448,9 @@ Voir :
 docs/REPRODUCIBILITY.md
 docs/GROUND_TRUTH_LABELS.md
 utils/ground_truth_evaluator.py
+utils/ground_truth_results_exporter.py
 tests/test_ground_truth_evaluator.py
+tests/test_ground_truth_results_exporter.py
 ```
 
 ## Positionnement recherche
