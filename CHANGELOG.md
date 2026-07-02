@@ -1,5 +1,40 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.24.0 — Automated ground truth evaluation
+
+### Ajouté
+
+- Ajout de `utils/ground_truth_evaluator.py`.
+- Ajout de `tests/test_ground_truth_evaluator.py`.
+- Définition automatisée des cas de vérité terrain pour les logs simulés versionnés.
+- Comparaison automatique entre labels attendus et alertes observées.
+- Détection automatique des labels manquants et des labels inattendus.
+- Ajout de tests couvrant les cas valides et les cas d’échec.
+
+### Qualité
+
+- `black --check .` : OK
+- `ruff check .` : OK
+- `mypy .` : OK
+- `bandit -r ai_assistant dashboard detection utils main.py -q` : OK
+- `pytest --cov=ai_assistant --cov=detection --cov=utils --cov-report=term-missing --cov-fail-under=90 -q` : OK
+- Tests : 54 passed
+- Couverture : 95.20%
+
+### Objectif
+
+Passer d’une vérité terrain documentée à une vérité terrain vérifiée automatiquement.
+
+```text
+logs simulés
+→ labels attendus
+→ alertes observées
+→ comparaison automatique
+→ évaluation plus robuste
+```
+
+---
+
 ## v1.23.1 — Ground truth documentation alignment
 
 ### Modifié

@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.23.1 — Ground truth documentation alignment
+Version actuelle : v1.24.0 — Automated ground truth evaluation
 
 Le prototype couvre actuellement trois scénarios :
 
