@@ -1,5 +1,31 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.21.3 — README documentation alignment
+
+### Modifié
+
+- Réécriture et simplification du `README.md`.
+- Alignement du README avec l’état actuel du projet.
+- Ajout d’une présentation plus claire de la chaîne : détection, preuves, IA encadrée, validation humaine, audit, évaluation et reproductibilité.
+- Mise à jour des sections fonctionnalités, scénarios, architecture, installation, dashboard, Docker, tests et documentation.
+- Ajout explicite des quality gates dans le README.
+- Ajout d’une section documentation alignée avec `docs/PROJECT_INDEX.md`.
+- Clarification des limites actuelles et du positionnement recherche.
+
+### Objectif
+
+Rendre le README plus lisible, plus actuel et plus exploitable pour un recruteur, un évaluateur technique ou un encadrant académique.
+
+```text
+README ancien
+→ README réaligné
+→ documentation cohérente
+→ projet plus lisible
+→ présentation plus solide
+```
+
+---
+
 ## v1.21.2 — Project documentation index
 
 ### Ajouté
