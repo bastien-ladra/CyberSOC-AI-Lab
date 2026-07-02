@@ -1,5 +1,41 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.30.0 — CIC-IDS2017 dataset review
+
+### Ajouté
+
+- Ajout de `docs/CIC_IDS2017_DATASET_REVIEW.md`.
+- Ajout d’une revue documentaire du dataset public CIC-IDS2017.
+- Documentation de la source officielle, de la citation attendue et des formes de données disponibles.
+- Ajout des attaques couvertes : trafic bénin, brute force FTP/SSH, DoS, Heartbleed, web attacks, infiltration, botnet et DDoS.
+- Ajout d’un sous-ensemble recommandé pour une future expérimentation contrôlée.
+- Ajout d’un mapping provisoire vers les alertes internes du projet.
+- Clarification que l’intégration du dataset public n’est pas encore réalisée.
+- Clarification que la revue ne rend pas le projet prêt pour un usage SOC de production.
+- Mise à jour de `docs/PROJECT_INDEX.md`.
+
+### Estimation
+
+- Avancement global : 95 %
+- Note portfolio : 98 / 100
+- Note recherche appliquée : 92 / 100
+- Note production : 22 / 100
+
+### Objectif
+
+Étudier CIC-IDS2017 comme premier dataset public candidat sans télécharger ni intégrer les données.
+
+```text
+candidats publics
+→ CIC-IDS2017 sélectionné en premier
+→ revue documentaire
+→ sous-ensemble recommandé
+→ mapping provisoire
+→ future intégration contrôlée
+```
+
+---
+
 ## v1.29.1 — README public dataset candidates link
 
 ### Modifié
