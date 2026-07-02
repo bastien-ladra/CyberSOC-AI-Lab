@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.21.3 — README documentation alignment
+Version actuelle : v1.22.0 — Dataset card
 
 Le prototype couvre actuellement trois scénarios :
 

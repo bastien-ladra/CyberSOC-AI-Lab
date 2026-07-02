@@ -1,5 +1,32 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.22.0 — Dataset card
+
+### Ajouté
+
+- Ajout de `docs/DATASET_CARD.md`.
+- Documentation de l’origine et du statut des données utilisées.
+- Documentation des fichiers présents dans `data/sample_logs/`.
+- Documentation des scénarios couverts : SSH brute force, reconnaissance web, prompt injection et trafic bénin.
+- Documentation des données incluses et exclues.
+- Documentation des schémas manipulés par le pipeline.
+- Documentation des usages prévus, usages non prévus, limites expérimentales et risques de biais.
+- Clarification du fait que le dataset ne prouve pas une efficacité sur données SOC réelles.
+
+### Objectif
+
+Documenter proprement les données utilisées par le projet afin de renforcer la rigueur expérimentale et d’éviter toute surinterprétation des résultats.
+
+```text
+logs simulés
+→ dataset documenté
+→ limites explicites
+→ résultats mieux interprétés
+→ projet plus rigoureux
+```
+
+---
+
 ## v1.21.3 — README documentation alignment
 
 ### Modifié
