@@ -1,5 +1,31 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.20.3 — Reproducibility checklist
+
+### Ajouté
+
+- Ajout de `docs/REPRODUCIBILITY.md`.
+- Ajout d’une procédure de reproduction du projet.
+- Ajout des étapes d’installation dans un environnement Python isolé.
+- Ajout des commandes exactes de quality gates à relancer.
+- Ajout des critères de reproduction acceptée.
+- Ajout des artefacts à vérifier après exécution.
+- Ajout des limites de reproductibilité actuelles.
+
+### Objectif
+
+Permettre à une autre personne de relancer, contrôler et discuter le projet de manière structurée.
+
+```text
+projet fonctionnel
+→ protocole expérimental
+→ matrice d’évaluation
+→ rapport de résultats
+→ reproductibilité
+```
+
+---
+
 ## v1.20.2 — Experimental results report
 
 ### Ajouté
