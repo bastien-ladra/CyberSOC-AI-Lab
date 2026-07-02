@@ -55,12 +55,12 @@ usage production SOC : non
 
 Estimation indicative actuelle :
 
-| Axe                             | Estimation |
-| ------------------------------- | ---------: |
-| Avancement global               |       91 % |
-| Crédibilité portfolio           |   96 / 100 |
-| Crédibilité recherche appliquée |   88 / 100 |
-| Maturité production             |   22 / 100 |
+| Axe | Estimation |
+|---|---:|
+| Avancement global | 93 % |
+| Crédibilité portfolio | 97 / 100 |
+| Crédibilité recherche appliquée | 90 / 100 |
+| Maturité production | 22 / 100 |
 
 Résultats expérimentaux documentés :
 
@@ -94,6 +94,26 @@ limites du dataset actuel
 → vérité terrain publique future
 → risques à éviter
 → positionnement honnête
+```
+
+## Candidats datasets publics
+
+La liste des datasets publics à étudier est documentée dans :
+
+```text
+docs/PUBLIC_DATASET_CANDIDATES.md
+```
+
+Ce document précise :
+
+```text
+CIC-IDS2017
+→ CSE-CIC-IDS2018
+→ UNSW-NB15
+→ CTU-13
+→ OTRF Security Datasets
+→ critères de sélection
+→ intégration non réalisée à ce stade
 ```
 
 ## Lecture rapide recruteur
@@ -436,26 +456,27 @@ docs/PROJECT_INDEX.md
 
 Documents principaux :
 
-| Document                         | Rôle                                                                       |
-| -------------------------------- | -------------------------------------------------------------------------- |
-| `docs/PROJECT_INDEX.md`          | Point d'entrée documentaire du projet.                                     |
-| `docs/RECRUITER_QUICK_DEMO.md`   | Guide court pour présenter le projet en entretien ou à un recruteur.       |
-| `docs/architecture.md`           | Architecture et pipeline.                                                  |
-| `docs/threat_model.md`           | Menaces liées à l'usage de l'IA dans un SOC.                               |
-| `docs/SECURITY_MODEL.md`         | Modèle de sécurité, garanties et limites.                                  |
-| `docs/DATASET_CARD.md`           | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
-| `docs/PUBLIC_DATASET_ROADMAP.md` | Roadmap vers un dataset public documenté.                                  |
-| `docs/GROUND_TRUTH_LABELS.md`    | Labels attendus et critères de comparaison pour les logs simulés.          |
-| `docs/QUALITY_GATES.md`          | Contrôles qualité du projet.                                               |
-| `docs/EXPERIMENT_PROTOCOL.md`    | Protocole expérimental.                                                    |
-| `docs/EVALUATION_MATRIX.md`      | Grille d'évaluation.                                                       |
-| `docs/EXPERIMENT_RESULTS.md`     | Rapport de résultats expérimentaux.                                        |
-| `docs/REPRODUCIBILITY.md`        | Procédure de reproductibilité.                                             |
-| `docs/CASE_STUDY.md`             | Étude de cas.                                                              |
-| `docs/DEMO_GUIDE.md`             | Guide de démonstration.                                                    |
-| `docs/RESEARCH_PROPOSAL.md`      | Cadrage doctoral provisoire.                                               |
-| `docs/research_notes.md`         | Notes de recherche.                                                        |
-| `docs/evaluation.md`             | Méthodologie d'évaluation complémentaire.                                  |
+| Document | Rôle |
+|---|---|
+| `docs/PROJECT_INDEX.md` | Point d'entrée documentaire du projet. |
+| `docs/RECRUITER_QUICK_DEMO.md` | Guide court pour présenter le projet en entretien ou à un recruteur. |
+| `docs/architecture.md` | Architecture et pipeline. |
+| `docs/threat_model.md` | Menaces liées à l'usage de l'IA dans un SOC. |
+| `docs/SECURITY_MODEL.md` | Modèle de sécurité, garanties et limites. |
+| `docs/DATASET_CARD.md` | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
+| `docs/PUBLIC_DATASET_ROADMAP.md` | Roadmap vers un dataset public documenté. |
+| `docs/PUBLIC_DATASET_CANDIDATES.md` | Liste de datasets publics candidats à étudier avant toute intégration. |
+| `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés. |
+| `docs/QUALITY_GATES.md` | Contrôles qualité du projet. |
+| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental. |
+| `docs/EVALUATION_MATRIX.md` | Grille d'évaluation. |
+| `docs/EXPERIMENT_RESULTS.md` | Rapport de résultats expérimentaux. |
+| `docs/REPRODUCIBILITY.md` | Procédure de reproductibilité. |
+| `docs/CASE_STUDY.md` | Étude de cas. |
+| `docs/DEMO_GUIDE.md` | Guide de démonstration. |
+| `docs/RESEARCH_PROPOSAL.md` | Cadrage doctoral provisoire. |
+| `docs/research_notes.md` | Notes de recherche. |
+| `docs/evaluation.md` | Méthodologie d'évaluation complémentaire. |
 
 Artefacts techniques liés à la vérité terrain automatisée :
 
