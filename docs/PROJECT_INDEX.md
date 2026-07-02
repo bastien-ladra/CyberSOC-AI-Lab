@@ -21,6 +21,7 @@ prototype technique
 → reproductibilité
 → positionnement recherche
 → évolution dataset public
+→ candidats datasets publics
 ```
 
 ## Documents principaux
@@ -35,6 +36,7 @@ prototype technique
 | `docs/SECURITY_MODEL.md` | Modèle de sécurité, garanties recherchées et limites du prototype. |
 | `docs/DATASET_CARD.md` | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
 | `docs/PUBLIC_DATASET_ROADMAP.md` | Roadmap pour évoluer vers un dataset public documenté sans sur-vendre le périmètre actuel. |
+| `docs/PUBLIC_DATASET_CANDIDATES.md` | Liste de datasets publics candidats à étudier avant toute intégration. |
 | `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés. |
 | `docs/QUALITY_GATES.md` | Contrôles qualité à exécuter avant validation d'une version. |
 | `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental utilisé pour évaluer le projet. |
@@ -92,6 +94,7 @@ README.md
 → docs/SECURITY_MODEL.md
 → docs/DATASET_CARD.md
 → docs/PUBLIC_DATASET_ROADMAP.md
+→ docs/PUBLIC_DATASET_CANDIDATES.md
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
 → utils/ground_truth_results_exporter.py
@@ -99,7 +102,7 @@ README.md
 → docs/EVALUATION_MATRIX.md
 ```
 
-Objectif : comprendre les menaces prises en compte, les garde-fous, les données utilisées, les limites du dataset simulé, la trajectoire vers un dataset public, les résultats attendus, la vérification automatique, l'export des résultats et le cadre d'évaluation.
+Objectif : comprendre les menaces prises en compte, les garde-fous, les données utilisées, les limites du dataset simulé, la trajectoire vers un dataset public, les candidats publics, les résultats attendus, la vérification automatique, l'export des résultats et le cadre d'évaluation.
 
 ### Encadrant académique ou doctoral
 
@@ -110,6 +113,7 @@ README.md
 → docs/RESEARCH_PROPOSAL.md
 → docs/DATASET_CARD.md
 → docs/PUBLIC_DATASET_ROADMAP.md
+→ docs/PUBLIC_DATASET_CANDIDATES.md
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
 → utils/ground_truth_results_exporter.py
@@ -121,7 +125,7 @@ README.md
 → docs/REPRODUCIBILITY.md
 ```
 
-Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, les données, la vérité terrain, sa vérification automatique, la trajectoire dataset public, l'export des résultats, la méthode et les limites actuelles.
+Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, les données, la vérité terrain, sa vérification automatique, la trajectoire dataset public, les candidats publics, l'export des résultats, la méthode et les limites actuelles.
 
 ### Contributeur technique
 
@@ -132,6 +136,7 @@ README.md
 → docs/architecture.md
 → docs/DATASET_CARD.md
 → docs/PUBLIC_DATASET_ROADMAP.md
+→ docs/PUBLIC_DATASET_CANDIDATES.md
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
 → utils/ground_truth_results_exporter.py
@@ -142,7 +147,7 @@ README.md
 → CHANGELOG.md
 ```
 
-Objectif : comprendre la structure du projet, les données d'exemple, les limites du dataset actuel, la trajectoire dataset public, les labels attendus, les tests de vérification, l'export des résultats, les contrôles attendus et la manière de vérifier une modification.
+Objectif : comprendre la structure du projet, les données d'exemple, les limites du dataset actuel, la trajectoire dataset public, les candidats publics, les labels attendus, les tests de vérification, l'export des résultats, les contrôles attendus et la manière de vérifier une modification.
 
 ## Chaîne de crédibilité actuelle
 
@@ -164,6 +169,7 @@ code fonctionnel
 → reproductibilité
 → cadrage recherche
 → roadmap dataset public
+→ candidats datasets publics
 ```
 
 ## Ce que cet index ne remplace pas
