@@ -1,5 +1,37 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.19.1 — Cohérence du schéma événement
+
+### Corrigé
+
+- Normalisation de l’utilisation des champs d’événements dans le moteur de règles.
+- Correction de l’incohérence entre `raw` et `raw_log`.
+- Correction de l’incohérence entre `user` et `username`.
+- Correction de l’incohérence entre `status` et `status_code`.
+- Correction de la liste `targeted_users` pour les alertes SSH brute force.
+- Correction des preuves générées afin d’utiliser les lignes brutes de logs plutôt que des dictionnaires Python sérialisés.
+- Robustification de la création du dossier d’audit.
+- Robustification de l’export CSV lorsque les lignes ne possèdent pas toutes exactement les mêmes colonnes.
+- Mise à jour des tests associés.
+- Mise à jour des exemples versionnés après nettoyage du schéma événement.
+
+### Objectif
+
+Rendre le pipeline de détection plus cohérent, plus fiable et plus auditable.
+
+Cette version corrige une dette technique importante liée au schéma interne des événements.
+
+```text
+logs parsés
+→ événements normalisés
+→ règles de détection cohérentes
+→ alertes plus propres
+→ preuves plus lisibles
+→ auditabilité renforcée
+```
+
+---
+
 ## v1.19.0 — Cadrage doctoral
 
 ### Ajouté
