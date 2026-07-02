@@ -24,15 +24,23 @@ PROMPT_INJECTION_ATTEMPT
 
 Les données utilisées sont des logs simulés et versionnés dans le dépôt.
 
+Les labels attendus sont formalisés dans :
+
+```text
+docs/GROUND_TRUTH_LABELS.md
+```
+
 Le protocole ne prétend pas encore valider le système sur un SOC de production.
 
 ## Chaîne évaluée
 
 ```text
 logs simulés
+→ vérité terrain attendue
 → parsing
 → détection par règles
 → génération d'alerte
+→ comparaison résultat attendu / résultat observé
 → enrichissement de l'alerte
 → génération du prompt IA
 → analyse IA locale optionnelle
@@ -54,6 +62,7 @@ vrais positifs
 faux positifs
 faux négatifs
 couverture des scénarios
+cohérence avec la vérité terrain
 cohérence du schéma d'alerte
 ```
 
@@ -119,13 +128,15 @@ présence d'un champ ou d'un rappel de supervision humaine
 Pour chaque scénario :
 
 1. Préparer un fichier de logs simulés.
-2. Exécuter le pipeline de détection.
-3. Vérifier les alertes générées.
-4. Générer le prompt IA sécurisé.
-5. Générer ou simuler une réponse IA.
-6. Évaluer automatiquement la réponse.
-7. Enregistrer une décision humaine.
-8. Vérifier la traçabilité des artefacts produits.
+2. Identifier les labels attendus dans `docs/GROUND_TRUTH_LABELS.md`.
+3. Exécuter le pipeline de détection.
+4. Vérifier les alertes générées.
+5. Comparer les alertes observées aux labels attendus.
+6. Générer le prompt IA sécurisé.
+7. Générer ou simuler une réponse IA.
+8. Évaluer automatiquement la réponse.
+9. Enregistrer une décision humaine.
+10. Vérifier la traçabilité des artefacts produits.
 
 ## Jeu de données minimal
 
@@ -135,6 +146,7 @@ logs bénins SSH
 logs malveillants web
 logs bénins web
 logs contenant une tentative de prompt injection
+vérité terrain explicite pour chaque fichier simulé
 ```
 
 Le jeu de données devra être enrichi progressivement pour augmenter la robustesse de l'évaluation.
@@ -145,6 +157,7 @@ Le protocole est considéré comme satisfait si :
 
 ```text
 les scénarios malveillants attendus sont détectés
+les labels observés correspondent aux labels attendus
 les scénarios bénins ne génèrent pas d'alerte critique injustifiée
 les alertes respectent le schéma attendu
 les prompts IA n'intègrent pas les logs comme instructions fiables
@@ -158,6 +171,7 @@ les quality gates techniques restent verts
 
 ```text
 logs simulés uniquement
+vérité terrain limitée aux exemples versionnés
 pas encore de données SOC réelles
 pas encore de comparaison avec plusieurs modèles IA
 pas encore de mesure temporelle de performance
@@ -175,6 +189,7 @@ ajouter une matrice faux positifs / faux négatifs
 comparer plusieurs modèles locaux
 mesurer la stabilité des réponses IA
 ajouter des tests de prompt injection plus agressifs
+enrichir la vérité terrain avec davantage de cas
 formaliser un protocole d'évaluation reproductible
 ajouter une synthèse expérimentale dans un rapport dédié
 ```
@@ -187,6 +202,7 @@ Le projet est présenté comme un laboratoire expérimental visant à étudier l
 
 ```text
 détection contrôlée
+vérité terrain explicite
 traçabilité
 évaluation automatique
 supervision humaine
