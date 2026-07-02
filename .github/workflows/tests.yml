@@ -31,5 +31,8 @@ jobs:
       - name: Type-check with mypy
         run: mypy .
 
-      - name: Run tests
-        run: pytest -q
+      - name: Security scan with Bandit
+        run: bandit -r ai_assistant dashboard detection utils main.py -q
+
+      - name: Run tests with coverage
+        run: pytest --cov=ai_assistant --cov=detection --cov=utils --cov-report=term-missing --cov-fail-under=80 -q
