@@ -4,3 +4,5 @@ black
 ruff
 mypy
 types-requests
+pytest-cov
+bandit
