@@ -1,5 +1,37 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.29.1 — README public dataset candidates link
+
+### Modifié
+
+- Ajout d’une section `Candidats datasets publics` dans le `README.md`.
+- Ajout d’un lien visible vers `docs/PUBLIC_DATASET_CANDIDATES.md`.
+- Ajout d’un résumé des datasets publics envisagés.
+- Clarification visible dans le README que l’intégration dataset public n’est pas réalisée à ce stade.
+- Mise à jour de la table documentaire du `README.md`.
+- Alignement de l’estimation de maturité du README avec l’état `v1.29.1`.
+
+### Estimation
+
+- Avancement global : 94 %
+- Note portfolio : 97 / 100
+- Note recherche appliquée : 91 / 100
+- Note production : 22 / 100
+
+### Objectif
+
+Rendre la liste des datasets publics candidats immédiatement visible depuis le README.
+
+```text
+roadmap dataset public
+→ candidats publics visibles
+→ sélection plus lisible
+→ intégration non sur-vendue
+→ crédibilité recherche renforcée
+```
+
+---
+
 ## v1.29.0 — Public dataset candidates
 
 ### Ajouté
