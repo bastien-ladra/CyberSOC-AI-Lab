@@ -1,5 +1,35 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.25.1 — Evaluation documentation alignment
+
+### Modifié
+
+- Mise à jour du `README.md`.
+- Mise à jour de `docs/PROJECT_INDEX.md`.
+- Mise à jour de `docs/EXPERIMENT_PROTOCOL.md`.
+- Mise à jour de `docs/EVALUATION_MATRIX.md`.
+- Mise à jour de `docs/REPRODUCIBILITY.md`.
+- Mise à jour de `docs/EXPERIMENT_RESULTS.md`.
+- Ajout de références explicites à `utils/ground_truth_results_exporter.py`.
+- Ajout de références explicites à `tests/test_ground_truth_results_exporter.py`.
+- Ajout de références aux artefacts `runtime/evaluation/ground_truth_results.json` et `runtime/evaluation/ground_truth_results.md`.
+- Alignement de la documentation avec l’export des résultats d’évaluation.
+
+### Objectif
+
+Aligner toute la documentation avec la génération de résultats d’évaluation exportables.
+
+```text
+évaluation automatique
+→ export JSON
+→ rapport Markdown
+→ artefacts runtime
+→ documentation cohérente
+→ résultats auditables
+```
+
+---
+
 ## v1.25.0 — Evaluation result generation
 
 ### Ajouté
