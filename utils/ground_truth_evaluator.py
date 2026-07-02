@@ -50,10 +50,7 @@ GROUND_TRUTH_CASES = (
         log_file="web_access.log",
         log_type="web",
         expected_alert_types=frozenset(
-            {
-                "WEB_RECONNAISSANCE",
-                "PROMPT_INJECTION_ATTEMPT",
-            }
+            {"WEB_RECONNAISSANCE", "PROMPT_INJECTION_ATTEMPT"}
         ),
     ),
     GroundTruthCase(
