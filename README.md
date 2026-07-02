@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.25.1 — Evaluation documentation alignment
+Version actuelle : v1.26.0 — Filled experimental results
 
 Le prototype couvre actuellement trois scénarios :
 

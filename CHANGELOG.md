@@ -1,5 +1,43 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.26.0 — Filled experimental results
+
+### Modifié
+
+- Remplissage de `docs/EXPERIMENT_RESULTS.md`.
+- Ajout d’une synthèse exécutive expérimentale.
+- Ajout des résultats de vérité terrain par fichier.
+- Ajout des scores par scénario : `SSH_BRUTE_FORCE`, `WEB_RECONNAISSANCE`, `PROMPT_INJECTION_ATTEMPT`.
+- Ajout des résultats techniques : quality gates, tests, couverture et export des résultats.
+- Ajout d’une analyse des résultats.
+- Ajout des limites observées.
+- Ajout d’une conclusion expérimentale prudente.
+
+### Qualité documentée
+
+- `black --check .` : OK
+- `ruff check .` : OK
+- `mypy .` : OK
+- `bandit -r ai_assistant dashboard detection utils main.py -q` : OK
+- `pytest --cov=ai_assistant --cov=detection --cov=utils --cov-report=term-missing --cov-fail-under=90 -q` : OK
+- Tests : 60 passed
+- Couverture : 94.94%
+
+### Objectif
+
+Passer d’un modèle de rapport expérimental à un rapport rempli, exploitable et défendable.
+
+```text
+protocole
+→ matrice
+→ vérité terrain
+→ résultats exportables
+→ rapport expérimental rempli
+→ conclusion prudente
+```
+
+---
+
 ## v1.25.1 — Evaluation documentation alignment
 
 ### Modifié
