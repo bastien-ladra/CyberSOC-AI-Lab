@@ -1,5 +1,33 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.24.1 — Ground truth documentation alignment
+
+### Modifié
+
+- Mise à jour du `README.md`.
+- Mise à jour de `docs/PROJECT_INDEX.md`.
+- Mise à jour de `docs/EXPERIMENT_PROTOCOL.md`.
+- Mise à jour de `docs/EVALUATION_MATRIX.md`.
+- Mise à jour de `docs/REPRODUCIBILITY.md`.
+- Ajout de références explicites à `utils/ground_truth_evaluator.py`.
+- Ajout de références explicites à `tests/test_ground_truth_evaluator.py`.
+- Intégration de la vérification automatique de vérité terrain dans la chaîne documentaire, expérimentale et reproductible.
+
+### Objectif
+
+Aligner toute la documentation avec l’évaluation automatique de la vérité terrain.
+
+```text
+vérité terrain documentée
+→ évaluateur automatique
+→ tests dédiés
+→ protocole aligné
+→ matrice alignée
+→ reproductibilité renforcée
+```
+
+---
+
 ## v1.24.0 — Automated ground truth evaluation
 
 ### Ajouté
