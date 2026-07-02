@@ -55,12 +55,12 @@ usage production SOC : non
 
 Estimation indicative actuelle :
 
-| Axe                             | Estimation |
-| ------------------------------- | ---------: |
-| Avancement global               |       95 % |
-| Crédibilité portfolio           |   98 / 100 |
-| Crédibilité recherche appliquée |   92 / 100 |
-| Maturité production             |   22 / 100 |
+| Axe | Estimation |
+|---|---:|
+| Avancement global | 95 % |
+| Crédibilité portfolio | 98 / 100 |
+| Crédibilité recherche appliquée | 92 / 100 |
+| Maturité production | 22 / 100 |
 
 Résultats expérimentaux documentés :
 
@@ -114,6 +114,26 @@ CIC-IDS2017
 → OTRF Security Datasets
 → critères de sélection
 → intégration non réalisée à ce stade
+```
+
+## Revue CIC-IDS2017
+
+La revue du premier dataset public candidat est documentée dans :
+
+```text
+docs/CIC_IDS2017_DATASET_REVIEW.md
+```
+
+Cette revue précise :
+
+```text
+source officielle
+→ citation attendue
+→ attaques couvertes
+→ sous-ensemble recommandé
+→ mapping provisoire
+→ intégration non réalisée à ce stade
+→ limites à ne pas sur-vendre
 ```
 
 ## Lecture rapide recruteur
@@ -456,27 +476,28 @@ docs/PROJECT_INDEX.md
 
 Documents principaux :
 
-| Document                            | Rôle                                                                       |
-| ----------------------------------- | -------------------------------------------------------------------------- |
-| `docs/PROJECT_INDEX.md`             | Point d'entrée documentaire du projet.                                     |
-| `docs/RECRUITER_QUICK_DEMO.md`      | Guide court pour présenter le projet en entretien ou à un recruteur.       |
-| `docs/architecture.md`              | Architecture et pipeline.                                                  |
-| `docs/threat_model.md`              | Menaces liées à l'usage de l'IA dans un SOC.                               |
-| `docs/SECURITY_MODEL.md`            | Modèle de sécurité, garanties et limites.                                  |
-| `docs/DATASET_CARD.md`              | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
-| `docs/PUBLIC_DATASET_ROADMAP.md`    | Roadmap vers un dataset public documenté.                                  |
-| `docs/PUBLIC_DATASET_CANDIDATES.md` | Liste de datasets publics candidats à étudier avant toute intégration.     |
-| `docs/GROUND_TRUTH_LABELS.md`       | Labels attendus et critères de comparaison pour les logs simulés.          |
-| `docs/QUALITY_GATES.md`             | Contrôles qualité du projet.                                               |
-| `docs/EXPERIMENT_PROTOCOL.md`       | Protocole expérimental.                                                    |
-| `docs/EVALUATION_MATRIX.md`         | Grille d'évaluation.                                                       |
-| `docs/EXPERIMENT_RESULTS.md`        | Rapport de résultats expérimentaux.                                        |
-| `docs/REPRODUCIBILITY.md`           | Procédure de reproductibilité.                                             |
-| `docs/CASE_STUDY.md`                | Étude de cas.                                                              |
-| `docs/DEMO_GUIDE.md`                | Guide de démonstration.                                                    |
-| `docs/RESEARCH_PROPOSAL.md`         | Cadrage doctoral provisoire.                                               |
-| `docs/research_notes.md`            | Notes de recherche.                                                        |
-| `docs/evaluation.md`                | Méthodologie d'évaluation complémentaire.                                  |
+| Document | Rôle |
+|---|---|
+| `docs/PROJECT_INDEX.md` | Point d'entrée documentaire du projet. |
+| `docs/RECRUITER_QUICK_DEMO.md` | Guide court pour présenter le projet en entretien ou à un recruteur. |
+| `docs/architecture.md` | Architecture et pipeline. |
+| `docs/threat_model.md` | Menaces liées à l'usage de l'IA dans un SOC. |
+| `docs/SECURITY_MODEL.md` | Modèle de sécurité, garanties et limites. |
+| `docs/DATASET_CARD.md` | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
+| `docs/PUBLIC_DATASET_ROADMAP.md` | Roadmap vers un dataset public documenté. |
+| `docs/PUBLIC_DATASET_CANDIDATES.md` | Liste de datasets publics candidats à étudier avant toute intégration. |
+| `docs/CIC_IDS2017_DATASET_REVIEW.md` | Revue du premier dataset public candidat à étudier, sans intégration immédiate. |
+| `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés. |
+| `docs/QUALITY_GATES.md` | Contrôles qualité du projet. |
+| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental. |
+| `docs/EVALUATION_MATRIX.md` | Grille d'évaluation. |
+| `docs/EXPERIMENT_RESULTS.md` | Rapport de résultats expérimentaux. |
+| `docs/REPRODUCIBILITY.md` | Procédure de reproductibilité. |
+| `docs/CASE_STUDY.md` | Étude de cas. |
+| `docs/DEMO_GUIDE.md` | Guide de démonstration. |
+| `docs/RESEARCH_PROPOSAL.md` | Cadrage doctoral provisoire. |
+| `docs/research_notes.md` | Notes de recherche. |
+| `docs/evaluation.md` | Méthodologie d'évaluation complémentaire. |
 
 Artefacts techniques liés à la vérité terrain automatisée :
 
