@@ -1,5 +1,37 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.28.1 — README dataset roadmap link
+
+### Modifié
+
+- Ajout d’une section `Roadmap dataset public` dans le `README.md`.
+- Ajout d’un lien visible vers `docs/PUBLIC_DATASET_ROADMAP.md`.
+- Ajout d’un résumé des limites du dataset actuel.
+- Ajout d’un résumé de la trajectoire vers un dataset public.
+- Mise à jour de la table documentaire du `README.md` pour référencer la roadmap dataset public.
+- Alignement de l’estimation de maturité du README avec l’état `v1.28.0`.
+
+### Estimation
+
+- Avancement global : 92 %
+- Note portfolio : 96 / 100
+- Note recherche appliquée : 89 / 100
+- Note production : 22 / 100
+
+### Objectif
+
+Rendre la trajectoire dataset public immédiatement visible depuis le README.
+
+```text
+logs simulés
+→ limite visible
+→ roadmap dataset public visible
+→ positionnement plus honnête
+→ crédibilité recherche renforcée
+```
+
+---
+
 ## v1.28.0 — Public dataset roadmap
 
 ### Ajouté
