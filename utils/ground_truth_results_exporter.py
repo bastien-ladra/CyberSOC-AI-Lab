@@ -142,7 +142,11 @@ def write_ground_truth_results(
     """
     Write ground truth evaluation results as JSON and Markdown files.
     """
-    resolved_results = list(results) if results is not None else evaluate_all_ground_truth_cases()
+    if results is None:
+        resolved_results = evaluate_all_ground_truth_cases()
+    else:
+        resolved_results = list(results)
+
     timestamp = get_generated_at(generated_at)
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
