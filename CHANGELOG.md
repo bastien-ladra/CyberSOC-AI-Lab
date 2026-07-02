@@ -1,5 +1,33 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.23.1 — Ground truth documentation alignment
+
+### Modifié
+
+- Mise à jour du `README.md`.
+- Mise à jour de `docs/PROJECT_INDEX.md`.
+- Mise à jour de `docs/DATASET_CARD.md`.
+- Mise à jour de `docs/EXPERIMENT_PROTOCOL.md`.
+- Mise à jour de `docs/EVALUATION_MATRIX.md`.
+- Ajout de références explicites à `docs/GROUND_TRUTH_LABELS.md`.
+- Ajout de la vérité terrain dans la chaîne expérimentale et documentaire.
+- Ajout de la comparaison résultat attendu / résultat observé dans le protocole et la matrice.
+
+### Objectif
+
+Aligner toute la documentation avec la vérité terrain expérimentale.
+
+```text
+logs simulés
+→ dataset card
+→ ground truth labels
+→ protocole expérimental
+→ matrice d'évaluation
+→ documentation cohérente
+```
+
+---
+
 ## v1.23.0 — Ground truth labels
 
 ### Ajouté

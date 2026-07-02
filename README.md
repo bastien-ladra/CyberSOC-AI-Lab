@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.23.0 — Ground truth labels
+Version actuelle : v1.23.1 — Ground truth documentation alignment
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -334,24 +334,24 @@ docs/PROJECT_INDEX.md
 
 Documents principaux :
 
-| Document | Rôle |
-|---|---|
-| `docs/PROJECT_INDEX.md` | Point d'entrée documentaire du projet. |
-| `docs/architecture.md` | Architecture et pipeline. |
-| `docs/threat_model.md` | Menaces liées à l'usage de l'IA dans un SOC. |
-| `docs/SECURITY_MODEL.md` | Modèle de sécurité, garanties et limites. |
-| `docs/DATASET_CARD.md` | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
-| `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés. |
-| `docs/QUALITY_GATES.md` | Contrôles qualité du projet. |
-| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental. |
-| `docs/EVALUATION_MATRIX.md` | Grille d'évaluation. |
-| `docs/EXPERIMENT_RESULTS.md` | Modèle de rapport de résultats. |
-| `docs/REPRODUCIBILITY.md` | Procédure de reproductibilité. |
-| `docs/CASE_STUDY.md` | Étude de cas. |
-| `docs/DEMO_GUIDE.md` | Guide de démonstration. |
-| `docs/RESEARCH_PROPOSAL.md` | Cadrage doctoral provisoire. |
-| `docs/research_notes.md` | Notes de recherche. |
-| `docs/evaluation.md` | Méthodologie d'évaluation complémentaire. |
+| Document                      | Rôle                                                                       |
+| ----------------------------- | -------------------------------------------------------------------------- |
+| `docs/PROJECT_INDEX.md`       | Point d'entrée documentaire du projet.                                     |
+| `docs/architecture.md`        | Architecture et pipeline.                                                  |
+| `docs/threat_model.md`        | Menaces liées à l'usage de l'IA dans un SOC.                               |
+| `docs/SECURITY_MODEL.md`      | Modèle de sécurité, garanties et limites.                                  |
+| `docs/DATASET_CARD.md`        | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
+| `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés.          |
+| `docs/QUALITY_GATES.md`       | Contrôles qualité du projet.                                               |
+| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental.                                                    |
+| `docs/EVALUATION_MATRIX.md`   | Grille d'évaluation.                                                       |
+| `docs/EXPERIMENT_RESULTS.md`  | Modèle de rapport de résultats.                                            |
+| `docs/REPRODUCIBILITY.md`     | Procédure de reproductibilité.                                             |
+| `docs/CASE_STUDY.md`          | Étude de cas.                                                              |
+| `docs/DEMO_GUIDE.md`          | Guide de démonstration.                                                    |
+| `docs/RESEARCH_PROPOSAL.md`   | Cadrage doctoral provisoire.                                               |
+| `docs/research_notes.md`      | Notes de recherche.                                                        |
+| `docs/evaluation.md`          | Méthodologie d'évaluation complémentaire.                                  |
 
 ## Sécurité IA
 
