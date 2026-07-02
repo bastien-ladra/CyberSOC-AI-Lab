@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.26.1 — README maturity summary
+Version actuelle : v1.27.0 — Recruiter quick demo
 
 Le prototype couvre actuellement trois scénarios :
 

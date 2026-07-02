@@ -1,5 +1,41 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.27.0 — Recruiter quick demo
+
+### Ajouté
+
+- Ajout de `docs/RECRUITER_QUICK_DEMO.md`.
+- Ajout d’un pitch projet en 30 secondes.
+- Ajout d’un parcours de démonstration en 5 minutes.
+- Ajout des éléments à montrer en priorité : README, dashboard, scénarios, vérité terrain et résultats expérimentaux.
+- Ajout des commandes utiles pour lancer le projet, le dashboard et les quality gates.
+- Ajout des points forts à annoncer en entretien.
+- Ajout des limites à assumer clairement.
+- Ajout de réponses aux questions probables en entretien.
+- Mise à jour de `docs/PROJECT_INDEX.md` pour référencer le nouveau guide recruteur.
+
+### Estimation
+
+- Avancement global : 89 %
+- Note portfolio : 95 / 100
+- Note recherche appliquée : 86 / 100
+- Note production : 22 / 100
+
+### Objectif
+
+Rendre le projet plus simple à présenter rapidement en entretien ou à un recruteur.
+
+```text
+projet technique
+→ pitch court
+→ démonstration guidée
+→ résultats à montrer
+→ limites à assumer
+→ présentation recruteur plus efficace
+```
+
+---
+
 ## v1.26.1 — README maturity summary
 
 ### Modifié
