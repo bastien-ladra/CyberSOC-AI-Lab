@@ -13,6 +13,7 @@ prototype technique
 → sécurité IA
 → validation humaine
 → qualité logicielle
+→ données documentées
 → évaluation expérimentale
 → reproductibilité
 → positionnement recherche
@@ -24,9 +25,11 @@ prototype technique
 |---|---|
 | `README.md` | Présentation générale du projet, installation, utilisation et positionnement. |
 | `CHANGELOG.md` | Historique versionné des évolutions du projet. |
+| `docs/PROJECT_INDEX.md` | Carte de navigation documentaire du projet. |
 | `docs/architecture.md` | Architecture du prototype et flux de traitement. |
 | `docs/threat_model.md` | Menaces identifiées autour de l'IA appliquée au SOC. |
 | `docs/SECURITY_MODEL.md` | Modèle de sécurité, garanties recherchées et limites du prototype. |
+| `docs/DATASET_CARD.md` | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
 | `docs/QUALITY_GATES.md` | Contrôles qualité à exécuter avant validation d'une version. |
 | `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental utilisé pour évaluer le projet. |
 | `docs/EVALUATION_MATRIX.md` | Grille d'évaluation des scénarios et des réponses IA. |
@@ -62,11 +65,12 @@ Lecture conseillée :
 README.md
 → docs/threat_model.md
 → docs/SECURITY_MODEL.md
+→ docs/DATASET_CARD.md
 → docs/EXPERIMENT_PROTOCOL.md
 → docs/EVALUATION_MATRIX.md
 ```
 
-Objectif : comprendre les menaces prises en compte, les garde-fous, les limites et le cadre d'évaluation.
+Objectif : comprendre les menaces prises en compte, les garde-fous, les données utilisées, les limites et le cadre d'évaluation.
 
 ### Encadrant académique ou doctoral
 
@@ -75,13 +79,14 @@ Lecture conseillée :
 ```text
 README.md
 → docs/RESEARCH_PROPOSAL.md
+→ docs/DATASET_CARD.md
 → docs/EXPERIMENT_PROTOCOL.md
 → docs/EVALUATION_MATRIX.md
 → docs/EXPERIMENT_RESULTS.md
 → docs/REPRODUCIBILITY.md
 ```
 
-Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, la méthode et les limites actuelles.
+Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, les données, la méthode et les limites actuelles.
 
 ### Contributeur technique
 
@@ -90,12 +95,13 @@ Lecture conseillée :
 ```text
 README.md
 → docs/architecture.md
+→ docs/DATASET_CARD.md
 → docs/QUALITY_GATES.md
 → docs/REPRODUCIBILITY.md
 → CHANGELOG.md
 ```
 
-Objectif : comprendre la structure du projet, les contrôles attendus et la manière de vérifier une modification.
+Objectif : comprendre la structure du projet, les données d'exemple, les contrôles attendus et la manière de vérifier une modification.
 
 ## Chaîne de crédibilité actuelle
 
@@ -107,6 +113,7 @@ code fonctionnel
 → quality gates
 → sécurité documentée
 → threat model aligné
+→ dataset documenté
 → protocole expérimental
 → matrice d'évaluation
 → rapport de résultats
