@@ -1,5 +1,39 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.31.1 — README CIC-IDS2017 mapping plan link
+
+### Modifié
+
+- Ajout d’une section `Plan de mapping CIC-IDS2017` dans le `README.md`.
+- Ajout d’un lien visible vers `docs/CIC_IDS2017_MAPPING_PLAN.md`.
+- Ajout d’un résumé du plan : fichiers candidats, colonnes minimales, schéma interne cible, mapping des labels et filtrage initial.
+- Clarification visible qu’aucune donnée brute n’est ajoutée au dépôt.
+- Clarification visible que le loader public n’est pas encore implémenté.
+- Mise à jour de la table documentaire du `README.md`.
+- Alignement de l’estimation de maturité du README avec l’état `v1.31.1`.
+
+### Estimation
+
+- Avancement global : 98 %
+- Note portfolio : 99 / 100
+- Note recherche appliquée : 95 / 100
+- Note production : 22 / 100
+
+### Objectif
+
+Rendre le plan de mapping CIC-IDS2017 immédiatement visible depuis le README.
+
+```text
+CIC-IDS2017 documenté
+→ mapping visible
+→ colonnes visibles
+→ limites visibles
+→ aucun loader sur-vendu
+→ prochaine étape code mieux cadrée
+```
+
+---
+
 ## v1.31.0 — CIC-IDS2017 mapping plan
 
 ### Ajouté
