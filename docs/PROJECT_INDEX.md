@@ -15,6 +15,7 @@ prototype technique
 → qualité logicielle
 → données documentées
 → vérité terrain explicitée
+→ vérité terrain vérifiée automatiquement
 → évaluation expérimentale
 → reproductibilité
 → positionnement recherche
@@ -43,6 +44,13 @@ prototype technique
 | `docs/research_notes.md` | Notes de recherche et pistes d'évolution. |
 | `docs/evaluation.md` | Méthodologie d'évaluation historique et complémentaire. |
 
+## Artefacts techniques de vérification
+
+| Artefact | Rôle |
+|---|---|
+| `utils/ground_truth_evaluator.py` | Compare les alertes observées aux labels attendus des logs simulés versionnés. |
+| `tests/test_ground_truth_evaluator.py` | Vérifie automatiquement les cas de vérité terrain, les labels manquants et les labels inattendus. |
+
 ## Lecture recommandée selon le profil
 
 ### Recruteur technique
@@ -69,11 +77,12 @@ README.md
 → docs/SECURITY_MODEL.md
 → docs/DATASET_CARD.md
 → docs/GROUND_TRUTH_LABELS.md
+→ utils/ground_truth_evaluator.py
 → docs/EXPERIMENT_PROTOCOL.md
 → docs/EVALUATION_MATRIX.md
 ```
 
-Objectif : comprendre les menaces prises en compte, les garde-fous, les données utilisées, les résultats attendus, les limites et le cadre d'évaluation.
+Objectif : comprendre les menaces prises en compte, les garde-fous, les données utilisées, les résultats attendus, la vérification automatique, les limites et le cadre d'évaluation.
 
 ### Encadrant académique ou doctoral
 
@@ -84,13 +93,15 @@ README.md
 → docs/RESEARCH_PROPOSAL.md
 → docs/DATASET_CARD.md
 → docs/GROUND_TRUTH_LABELS.md
+→ utils/ground_truth_evaluator.py
+→ tests/test_ground_truth_evaluator.py
 → docs/EXPERIMENT_PROTOCOL.md
 → docs/EVALUATION_MATRIX.md
 → docs/EXPERIMENT_RESULTS.md
 → docs/REPRODUCIBILITY.md
 ```
 
-Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, les données, la vérité terrain, la méthode et les limites actuelles.
+Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, les données, la vérité terrain, sa vérification automatique, la méthode et les limites actuelles.
 
 ### Contributeur technique
 
@@ -101,12 +112,14 @@ README.md
 → docs/architecture.md
 → docs/DATASET_CARD.md
 → docs/GROUND_TRUTH_LABELS.md
+→ utils/ground_truth_evaluator.py
+→ tests/test_ground_truth_evaluator.py
 → docs/QUALITY_GATES.md
 → docs/REPRODUCIBILITY.md
 → CHANGELOG.md
 ```
 
-Objectif : comprendre la structure du projet, les données d'exemple, les labels attendus, les contrôles attendus et la manière de vérifier une modification.
+Objectif : comprendre la structure du projet, les données d'exemple, les labels attendus, les tests de vérification, les contrôles attendus et la manière de vérifier une modification.
 
 ## Chaîne de crédibilité actuelle
 
@@ -120,6 +133,7 @@ code fonctionnel
 → threat model aligné
 → dataset documenté
 → vérité terrain explicitée
+→ vérité terrain vérifiée automatiquement
 → protocole expérimental
 → matrice d'évaluation
 → rapport de résultats
