@@ -1,5 +1,40 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.29.0 — Public dataset candidates
+
+### Ajouté
+
+- Ajout de `docs/PUBLIC_DATASET_CANDIDATES.md`.
+- Ajout d’une liste de datasets publics candidats à étudier.
+- Ajout des critères de sélection d’un dataset public.
+- Ajout d’une synthèse comparative : CIC-IDS2017, CSE-CIC-IDS2018, UNSW-NB15, CTU-13 et OTRF Security Datasets.
+- Clarification que l’intégration d’un dataset public n’est pas encore réalisée.
+- Clarification que le projet reste fondé sur des logs simulés maîtrisés.
+- Ajout d’une recommandation initiale : étudier CIC-IDS2017 en premier.
+- Mise à jour de `docs/PROJECT_INDEX.md`.
+
+### Estimation
+
+- Avancement global : 93 %
+- Note portfolio : 97 / 100
+- Note recherche appliquée : 90 / 100
+- Note production : 22 / 100
+
+### Objectif
+
+Préparer une sélection raisonnée de datasets publics sans modifier le périmètre expérimental validé.
+
+```text
+logs simulés
+→ roadmap dataset public
+→ candidats publics identifiés
+→ sélection raisonnée
+→ future fiche dataset
+→ crédibilité recherche renforcée
+```
+
+---
+
 ## v1.28.1 — README dataset roadmap link
 
 ### Modifié

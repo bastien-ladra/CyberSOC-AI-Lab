@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.28.1 — README dataset roadmap link
+Version actuelle : v1.29.0 — Public dataset candidates
 
 Le prototype couvre actuellement trois scénarios :
 
