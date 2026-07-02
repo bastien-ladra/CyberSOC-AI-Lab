@@ -1,5 +1,45 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.19.4 — Test coverage hardening
+
+### Ajouté
+
+- Ajout de tests pour le générateur de prompts d’analyse d’incident.
+- Ajout de tests pour le client local Ollama avec mock réseau.
+- Ajout de tests pour le journal d’audit.
+- Renforcement de la couverture des modules cœur.
+
+### Modifié
+
+- Passage du seuil minimal de couverture de tests de 80 % à 90 %.
+- Mise à jour de la CI pour bloquer toute régression sous 90 % de couverture.
+- Mise à jour de la documentation des quality gates.
+
+### Validé
+
+- Formatage Black validé.
+- Lint Ruff validé.
+- Typage statique mypy validé.
+- Scan sécurité Bandit validé.
+- Tests pytest validés.
+- Couverture de tests validée à 95 %.
+- 48 tests passants.
+
+### Objectif
+
+Rendre la couverture de tests plus stricte et renforcer la crédibilité technique du projet.
+
+```text
+tests supplémentaires
+→ couverture renforcée
+→ seuil 90 %
+→ 95 % validés
+→ régression bloquée
+→ qualité plus difficile à contester
+```
+
+---
+
 ## v1.19.3 — Coverage & security gates
 
 ### Ajouté
