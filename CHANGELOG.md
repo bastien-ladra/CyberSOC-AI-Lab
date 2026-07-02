@@ -1,5 +1,29 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.22.1 — Documentation index alignment
+
+### Modifié
+
+- Mise à jour de `docs/PROJECT_INDEX.md`.
+- Ajout de `docs/DATASET_CARD.md` dans l’index documentaire.
+- Ajout de la dataset card dans les parcours de lecture pour les profils cybersécurité, académique et contributeur.
+- Mise à jour du `README.md` pour référencer la dataset card.
+- Alignement de la documentation après l’ajout de `docs/DATASET_CARD.md`.
+
+### Objectif
+
+Maintenir une documentation cohérente après l’ajout de la dataset card.
+
+```text
+dataset card
+→ index documentaire
+→ README
+→ parcours de lecture
+→ documentation alignée
+```
+
+---
+
 ## v1.22.0 — Dataset card
 
 ### Ajouté
