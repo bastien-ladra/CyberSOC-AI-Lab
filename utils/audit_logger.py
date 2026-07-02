@@ -13,7 +13,7 @@ def write_audit_event(
     Écrit un événement d'audit au format JSON Lines.
     Chaque ligne représente une action traçable du système.
     """
-    audit_file.parent.mkdir(exist_ok=True)
+    audit_file.parent.mkdir(parents=True, exist_ok=True)
 
     audit_event = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
