@@ -1,5 +1,30 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.21.2 — Project documentation index
+
+### Ajouté
+
+- Ajout de `docs/PROJECT_INDEX.md`.
+- Ajout d’un point d’entrée documentaire pour le projet.
+- Ajout d’une table des documents principaux.
+- Ajout de parcours de lecture selon le profil : recruteur, évaluateur cybersécurité, encadrant académique et contributeur technique.
+- Ajout d’une chaîne de crédibilité documentaire du projet.
+- Clarification du rôle de l’index : navigation documentaire, sans remplacer README, changelog, tests ou reproductibilité.
+
+### Objectif
+
+Améliorer la lisibilité du projet en rendant la documentation plus facile à parcourir, auditer et présenter.
+
+```text
+README
+→ index documentaire
+→ lecture par profil
+→ documentation plus navigable
+→ projet plus présentable
+```
+
+---
+
 ## v1.21.1 — Threat model alignment
 
 ### Modifié
