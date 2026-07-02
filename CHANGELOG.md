@@ -1,5 +1,33 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.21.0 — Security model
+
+### Ajouté
+
+- Ajout de `docs/SECURITY_MODEL.md`.
+- Formalisation du modèle de sécurité du projet.
+- Clarification du rôle limité de l’IA dans la chaîne SOC.
+- Définition des données considérées comme non fiables.
+- Documentation du risque de prompt injection dans les logs.
+- Définition des actions sensibles interdites automatiquement.
+- Documentation des garde-fous existants.
+- Clarification des garanties actuelles et des limites non garanties.
+
+### Objectif
+
+Renforcer la crédibilité sécurité du projet en clarifiant ce que le prototype protège, ce qu’il ne protège pas encore, et pourquoi la décision finale doit rester humaine.
+
+```text
+threat model
+→ modèle de sécurité
+→ limites explicites
+→ IA encadrée
+→ validation humaine
+→ audit
+```
+
+---
+
 ## v1.20.3 — Reproducibility checklist
 
 ### Ajouté
