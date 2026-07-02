@@ -1,5 +1,42 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.32.0 — CIC-IDS2017 label mapper
+
+### Ajouté
+
+- Ajout de `utils/cic_ids2017_mapping.py`.
+- Ajout d’un mapper pur pour un sous-ensemble contrôlé de labels CIC-IDS2017.
+- Ajout du mapping `BENIGN` vers aucune alerte attendue.
+- Ajout du mapping `SSH-Patator` vers `SSH_BRUTE_FORCE`.
+- Ajout d’alias SSH brute force documentés.
+- Ajout de `tests/test_cic_ids2017_mapping.py`.
+- Ajout de tests unitaires sans téléchargement du dataset public.
+- Clarification que le module ne télécharge pas, ne charge pas et ne parse pas CIC-IDS2017.
+- Mise à jour de `docs/PROJECT_INDEX.md`.
+
+### Estimation
+
+- Avancement global : 99 %
+- Note portfolio : 99 / 100
+- Note recherche appliquée : 96 / 100
+- Note production : 23 / 100
+
+### Objectif
+
+Passer du plan documentaire à un premier composant de code testé, limité au mapping des labels.
+
+```text
+plan de mapping
+→ mapper pur
+→ BENIGN supporté
+→ SSH-Patator supporté
+→ labels hors périmètre exclus
+→ tests unitaires légers
+→ aucun dataset brut ajouté
+```
+
+---
+
 ## v1.31.1 — README CIC-IDS2017 mapping plan link
 
 ### Modifié
