@@ -1,5 +1,40 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.28.0 — Public dataset roadmap
+
+### Ajouté
+
+- Ajout de `docs/PUBLIC_DATASET_ROADMAP.md`.
+- Documentation de la trajectoire entre logs simulés et dataset public.
+- Clarification que le projet repose actuellement sur des logs simulés versionnés.
+- Clarification que le dataset public est un objectif futur, pas une validation déjà réalisée.
+- Ajout des critères de sélection d’un dataset public.
+- Ajout des étapes proposées : sélection, documentation, normalisation, vérité terrain, résultats expérimentaux et comparaison.
+- Ajout des risques à éviter pour ne pas sur-vendre le projet.
+- Mise à jour de `docs/PROJECT_INDEX.md` pour référencer la roadmap dataset public.
+
+### Estimation
+
+- Avancement global : 91 %
+- Note portfolio : 96 / 100
+- Note recherche appliquée : 88 / 100
+- Note production : 22 / 100
+
+### Objectif
+
+Préparer une évolution crédible vers un dataset public tout en gardant un positionnement honnête.
+
+```text
+logs simulés
+→ limites assumées
+→ roadmap dataset public
+→ critères de sélection
+→ future vérité terrain publique
+→ meilleure crédibilité recherche
+```
+
+---
+
 ## v1.27.1 — README recruiter link
 
 ### Modifié
