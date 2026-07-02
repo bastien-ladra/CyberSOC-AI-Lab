@@ -17,7 +17,7 @@ black --check .
 ruff check .
 mypy .
 bandit -r ai_assistant dashboard detection utils main.py -q
-pytest --cov=ai_assistant --cov=detection --cov=utils --cov-report=term-missing --cov-fail-under=80 -q
+pytest --cov=ai_assistant --cov=detection --cov=utils --cov-report=term-missing --cov-fail-under=90 -q
 ```
 
 ## Contrôles CI
@@ -34,7 +34,7 @@ formatage Black
 
 ## Couverture de tests
 
-Le seuil minimal de couverture est fixé à 80 % pour les modules cœur :
+Le seuil minimal de couverture est fixé à 90 % pour les modules cœur :
 
 ```text
 ai_assistant/
