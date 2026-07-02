@@ -35,3 +35,19 @@ no_implicit_optional = true
 exclude = [
     "runtime/",
 ]
+
+[tool.coverage.run]
+branch = true
+source = [
+    "ai_assistant",
+    "detection",
+    "utils",
+]
+omit = [
+    "*/__init__.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 80
