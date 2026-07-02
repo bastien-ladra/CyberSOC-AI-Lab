@@ -1,5 +1,31 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.20.2 — Experimental results report
+
+### Ajouté
+
+- Ajout de `docs/EXPERIMENT_RESULTS.md`.
+- Ajout d’un modèle de rapport de résultats expérimentaux.
+- Ajout d’une synthèse exécutive à renseigner.
+- Ajout de tableaux de résultats par scénario.
+- Ajout d’une section dédiée aux résultats techniques.
+- Ajout d’une section pour l’analyse des écarts, limites observées et conclusion expérimentale.
+
+### Objectif
+
+Préparer la documentation des résultats obtenus lors de l’application du protocole expérimental et de la matrice d’évaluation.
+
+```text
+protocole expérimental
+→ matrice d’évaluation
+→ rapport de résultats
+→ observations
+→ limites
+→ conclusion prudente
+```
+
+---
+
 ## v1.20.1 — Evaluation matrix
 
 ### Ajouté
