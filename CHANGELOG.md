@@ -1,5 +1,30 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.23.0 — Ground truth labels
+
+### Ajouté
+
+- Ajout de `docs/GROUND_TRUTH_LABELS.md`.
+- Formalisation des labels attendus pour les fichiers de `data/sample_logs/`.
+- Définition des alertes attendues pour `ssh_auth.log` et `web_access.log`.
+- Définition des comportements attendus pour les fichiers bénins.
+- Ajout de critères de réussite et d’échec pour comparer les résultats observés aux résultats attendus.
+- Clarification du périmètre : vérité terrain limitée aux logs simulés versionnés.
+
+### Objectif
+
+Renforcer la rigueur expérimentale en rendant les résultats attendus explicites et vérifiables.
+
+```text
+dataset documenté
+→ vérité terrain
+→ résultats observés
+→ comparaison
+→ évaluation plus crédible
+```
+
+---
+
 ## v1.22.1 — Documentation index alignment
 
 ### Modifié

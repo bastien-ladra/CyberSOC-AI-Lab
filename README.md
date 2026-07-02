@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.22.1 — Documentation index alignment
+Version actuelle : v1.23.0 — Ground truth labels
 
 Le prototype couvre actuellement trois scénarios :
 
