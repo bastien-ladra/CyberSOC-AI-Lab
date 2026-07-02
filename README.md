@@ -33,6 +33,7 @@ Le projet intègre aussi :
 - une génération de prompts IA sécurisés ;
 - une analyse IA locale optionnelle via Ollama ;
 - une évaluation automatique des réponses IA ;
+- une évaluation automatique de la vérité terrain ;
 - un dashboard Streamlit ;
 - un workflow de validation humaine ;
 - une journalisation d'audit ;
@@ -53,6 +54,7 @@ Le prototype permet de :
 - calculer un score de priorité incident ;
 - générer des recommandations analyste ;
 - produire des artefacts auditables ;
+- comparer automatiquement les alertes observées aux labels attendus ;
 - générer un prompt IA encadré ;
 - interroger un modèle local via Ollama si l'option IA est activée ;
 - évaluer automatiquement la réponse IA ;
@@ -111,7 +113,7 @@ CyberSOC-AI-Lab/
 ├── docs/                  # documentation projet, sécurité, recherche, évaluation
 ├── examples/              # exemples versionnés d'alertes, rapports et audits
 ├── tests/                 # tests automatisés
-├── utils/                 # exports, rapports, audit, validations humaines
+├── utils/                 # exports, rapports, audit, vérité terrain, validations humaines
 ├── main.py                # pipeline principal
 ├── requirements.txt
 ├── requirements-dev.txt
@@ -142,6 +144,7 @@ logs simulés
 → détection par règles
 → génération d'alertes
 → comparaison attendu / observé
+→ vérification automatique de la vérité terrain
 → génération de rapports
 → génération de prompts IA sécurisés
 → analyse IA locale optionnelle
@@ -232,6 +235,13 @@ Les labels attendus pour ces logs sont documentés dans :
 docs/GROUND_TRUTH_LABELS.md
 ```
 
+La comparaison automatique entre labels attendus et alertes observées est implémentée dans :
+
+```text
+utils/ground_truth_evaluator.py
+tests/test_ground_truth_evaluator.py
+```
+
 ## Dashboard Streamlit
 
 Lancer le dashboard :
@@ -307,6 +317,7 @@ Le projet contient des tests automatisés sur :
 - le parsing des logs ;
 - le moteur de règles ;
 - les logs bénins ;
+- l'évaluation automatique de la vérité terrain ;
 - l'évaluation des réponses IA ;
 - les prompts IA ;
 - le client LLM local ;
@@ -334,24 +345,31 @@ docs/PROJECT_INDEX.md
 
 Documents principaux :
 
-| Document                      | Rôle                                                                       |
-| ----------------------------- | -------------------------------------------------------------------------- |
-| `docs/PROJECT_INDEX.md`       | Point d'entrée documentaire du projet.                                     |
-| `docs/architecture.md`        | Architecture et pipeline.                                                  |
-| `docs/threat_model.md`        | Menaces liées à l'usage de l'IA dans un SOC.                               |
-| `docs/SECURITY_MODEL.md`      | Modèle de sécurité, garanties et limites.                                  |
-| `docs/DATASET_CARD.md`        | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
-| `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés.          |
-| `docs/QUALITY_GATES.md`       | Contrôles qualité du projet.                                               |
-| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental.                                                    |
-| `docs/EVALUATION_MATRIX.md`   | Grille d'évaluation.                                                       |
-| `docs/EXPERIMENT_RESULTS.md`  | Modèle de rapport de résultats.                                            |
-| `docs/REPRODUCIBILITY.md`     | Procédure de reproductibilité.                                             |
-| `docs/CASE_STUDY.md`          | Étude de cas.                                                              |
-| `docs/DEMO_GUIDE.md`          | Guide de démonstration.                                                    |
-| `docs/RESEARCH_PROPOSAL.md`   | Cadrage doctoral provisoire.                                               |
-| `docs/research_notes.md`      | Notes de recherche.                                                        |
-| `docs/evaluation.md`          | Méthodologie d'évaluation complémentaire.                                  |
+| Document | Rôle |
+|---|---|
+| `docs/PROJECT_INDEX.md` | Point d'entrée documentaire du projet. |
+| `docs/architecture.md` | Architecture et pipeline. |
+| `docs/threat_model.md` | Menaces liées à l'usage de l'IA dans un SOC. |
+| `docs/SECURITY_MODEL.md` | Modèle de sécurité, garanties et limites. |
+| `docs/DATASET_CARD.md` | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
+| `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés. |
+| `docs/QUALITY_GATES.md` | Contrôles qualité du projet. |
+| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental. |
+| `docs/EVALUATION_MATRIX.md` | Grille d'évaluation. |
+| `docs/EXPERIMENT_RESULTS.md` | Modèle de rapport de résultats. |
+| `docs/REPRODUCIBILITY.md` | Procédure de reproductibilité. |
+| `docs/CASE_STUDY.md` | Étude de cas. |
+| `docs/DEMO_GUIDE.md` | Guide de démonstration. |
+| `docs/RESEARCH_PROPOSAL.md` | Cadrage doctoral provisoire. |
+| `docs/research_notes.md` | Notes de recherche. |
+| `docs/evaluation.md` | Méthodologie d'évaluation complémentaire. |
+
+Artefacts techniques liés à la vérité terrain automatisée :
+
+```text
+utils/ground_truth_evaluator.py
+tests/test_ground_truth_evaluator.py
+```
 
 ## Sécurité IA
 
@@ -387,6 +405,7 @@ installation contrôlée
 quality gates
 dataset documenté
 vérité terrain explicite
+vérité terrain vérifiée automatiquement
 couverture minimale
 protocole expérimental
 matrice d'évaluation
@@ -399,6 +418,8 @@ Voir :
 ```text
 docs/REPRODUCIBILITY.md
 docs/GROUND_TRUTH_LABELS.md
+utils/ground_truth_evaluator.py
+tests/test_ground_truth_evaluator.py
 ```
 
 ## Positionnement recherche
