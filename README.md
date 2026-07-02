@@ -137,9 +137,11 @@ runtime/
 
 ```text
 logs simulés
+→ vérité terrain attendue
 → parsing
 → détection par règles
 → génération d'alertes
+→ comparaison attendu / observé
 → génération de rapports
 → génération de prompts IA sécurisés
 → analyse IA locale optionnelle
@@ -222,6 +224,12 @@ Les jeux de logs simulés sont documentés dans :
 
 ```text
 docs/DATASET_CARD.md
+```
+
+Les labels attendus pour ces logs sont documentés dans :
+
+```text
+docs/GROUND_TRUTH_LABELS.md
 ```
 
 ## Dashboard Streamlit
@@ -326,23 +334,24 @@ docs/PROJECT_INDEX.md
 
 Documents principaux :
 
-| Document                      | Rôle                                                                       |
-| ----------------------------- | -------------------------------------------------------------------------- |
-| `docs/PROJECT_INDEX.md`       | Point d'entrée documentaire du projet.                                     |
-| `docs/architecture.md`        | Architecture et pipeline.                                                  |
-| `docs/threat_model.md`        | Menaces liées à l'usage de l'IA dans un SOC.                               |
-| `docs/SECURITY_MODEL.md`      | Modèle de sécurité, garanties et limites.                                  |
-| `docs/DATASET_CARD.md`        | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
-| `docs/QUALITY_GATES.md`       | Contrôles qualité du projet.                                               |
-| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental.                                                    |
-| `docs/EVALUATION_MATRIX.md`   | Grille d'évaluation.                                                       |
-| `docs/EXPERIMENT_RESULTS.md`  | Modèle de rapport de résultats.                                            |
-| `docs/REPRODUCIBILITY.md`     | Procédure de reproductibilité.                                             |
-| `docs/CASE_STUDY.md`          | Étude de cas.                                                              |
-| `docs/DEMO_GUIDE.md`          | Guide de démonstration.                                                    |
-| `docs/RESEARCH_PROPOSAL.md`   | Cadrage doctoral provisoire.                                               |
-| `docs/research_notes.md`      | Notes de recherche.                                                        |
-| `docs/evaluation.md`          | Méthodologie d'évaluation complémentaire.                                  |
+| Document | Rôle |
+|---|---|
+| `docs/PROJECT_INDEX.md` | Point d'entrée documentaire du projet. |
+| `docs/architecture.md` | Architecture et pipeline. |
+| `docs/threat_model.md` | Menaces liées à l'usage de l'IA dans un SOC. |
+| `docs/SECURITY_MODEL.md` | Modèle de sécurité, garanties et limites. |
+| `docs/DATASET_CARD.md` | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
+| `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés. |
+| `docs/QUALITY_GATES.md` | Contrôles qualité du projet. |
+| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental. |
+| `docs/EVALUATION_MATRIX.md` | Grille d'évaluation. |
+| `docs/EXPERIMENT_RESULTS.md` | Modèle de rapport de résultats. |
+| `docs/REPRODUCIBILITY.md` | Procédure de reproductibilité. |
+| `docs/CASE_STUDY.md` | Étude de cas. |
+| `docs/DEMO_GUIDE.md` | Guide de démonstration. |
+| `docs/RESEARCH_PROPOSAL.md` | Cadrage doctoral provisoire. |
+| `docs/research_notes.md` | Notes de recherche. |
+| `docs/evaluation.md` | Méthodologie d'évaluation complémentaire. |
 
 ## Sécurité IA
 
@@ -377,6 +386,7 @@ La reproductibilité repose sur :
 installation contrôlée
 quality gates
 dataset documenté
+vérité terrain explicite
 couverture minimale
 protocole expérimental
 matrice d'évaluation
@@ -388,6 +398,7 @@ Voir :
 
 ```text
 docs/REPRODUCIBILITY.md
+docs/GROUND_TRUTH_LABELS.md
 ```
 
 ## Positionnement recherche
@@ -414,6 +425,7 @@ Limites identifiées :
 
 - logs simulés uniquement ;
 - trois scénarios principaux ;
+- vérité terrain limitée aux exemples versionnés ;
 - détection basée sur des règles simples ;
 - absence de logs réels ;
 - absence de connexion à un SIEM réel ;
