@@ -37,6 +37,20 @@ utils/ground_truth_evaluator.py
 tests/test_ground_truth_evaluator.py
 ```
 
+L'export des résultats de vérité terrain est implémenté dans :
+
+```text
+utils/ground_truth_results_exporter.py
+tests/test_ground_truth_results_exporter.py
+```
+
+Les artefacts de résultats attendus sont :
+
+```text
+runtime/evaluation/ground_truth_results.json
+runtime/evaluation/ground_truth_results.md
+```
+
 Le protocole ne prétend pas encore valider le système sur un SOC de production.
 
 ## Chaîne évaluée
@@ -49,6 +63,7 @@ logs simulés
 → génération d'alerte
 → comparaison résultat attendu / résultat observé
 → vérification automatique de la vérité terrain
+→ export des résultats d'évaluation
 → enrichissement de l'alerte
 → génération du prompt IA
 → analyse IA locale optionnelle
@@ -72,6 +87,7 @@ faux négatifs
 couverture des scénarios
 cohérence avec la vérité terrain
 cohérence vérifiée automatiquement
+résultats exportés et auditables
 cohérence du schéma d'alerte
 ```
 
@@ -112,6 +128,8 @@ Objectif : vérifier que les décisions et événements importants restent audit
 ```text
 alertes JSON
 rapports Markdown
+résultats de vérité terrain JSON
+résultats de vérité terrain Markdown
 prompts générés
 réponses IA
 scores d'évaluation
@@ -142,11 +160,14 @@ Pour chaque scénario :
 4. Vérifier les alertes générées.
 5. Comparer les alertes observées aux labels attendus.
 6. Relancer `tests/test_ground_truth_evaluator.py` pour vérifier automatiquement cette comparaison.
-7. Générer le prompt IA sécurisé.
-8. Générer ou simuler une réponse IA.
-9. Évaluer automatiquement la réponse.
-10. Enregistrer une décision humaine.
-11. Vérifier la traçabilité des artefacts produits.
+7. Générer les artefacts de résultats avec `utils/ground_truth_results_exporter.py`.
+8. Vérifier `runtime/evaluation/ground_truth_results.json`.
+9. Vérifier `runtime/evaluation/ground_truth_results.md`.
+10. Générer le prompt IA sécurisé.
+11. Générer ou simuler une réponse IA.
+12. Évaluer automatiquement la réponse.
+13. Enregistrer une décision humaine.
+14. Vérifier la traçabilité des artefacts produits.
 
 ## Jeu de données minimal
 
@@ -158,6 +179,7 @@ logs bénins web
 logs contenant une tentative de prompt injection
 vérité terrain explicite pour chaque fichier simulé
 vérification automatique des labels attendus
+export JSON et Markdown des résultats
 ```
 
 Le jeu de données devra être enrichi progressivement pour augmenter la robustesse de l'évaluation.
@@ -170,6 +192,8 @@ Le protocole est considéré comme satisfait si :
 les scénarios malveillants attendus sont détectés
 les labels observés correspondent aux labels attendus
 la vérification automatique de vérité terrain passe
+les résultats de vérité terrain sont exportés en JSON
+les résultats de vérité terrain sont exportés en Markdown
 les scénarios bénins ne génèrent pas d'alerte critique injustifiée
 les alertes respectent le schéma attendu
 les prompts IA n'intègrent pas les logs comme instructions fiables
@@ -184,6 +208,7 @@ les quality gates techniques restent verts
 ```text
 logs simulés uniquement
 vérité terrain limitée aux exemples versionnés
+résultats exportés limités au périmètre simulé
 pas encore de données SOC réelles
 pas encore de comparaison avec plusieurs modèles IA
 pas encore de mesure temporelle de performance
@@ -216,6 +241,7 @@ Le projet est présenté comme un laboratoire expérimental visant à étudier l
 détection contrôlée
 vérité terrain explicite
 vérité terrain vérifiée automatiquement
+résultats d'évaluation exportés
 traçabilité
 évaluation automatique
 supervision humaine
