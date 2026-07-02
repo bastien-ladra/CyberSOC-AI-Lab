@@ -24,6 +24,7 @@ prototype technique
 → candidats datasets publics
 → revue CIC-IDS2017
 → plan de mapping CIC-IDS2017
+→ mapper CIC-IDS2017 testé
 ```
 
 ## Documents principaux
@@ -62,6 +63,8 @@ prototype technique
 | `tests/test_ground_truth_evaluator.py` | Vérifie automatiquement les cas de vérité terrain, les labels manquants et les labels inattendus. |
 | `utils/ground_truth_results_exporter.py` | Génère les résultats de vérité terrain en JSON et Markdown. |
 | `tests/test_ground_truth_results_exporter.py` | Vérifie la sérialisation JSON, le rapport Markdown et l'écriture des artefacts de résultats. |
+| `utils/cic_ids2017_mapping.py` | Mappe un sous-ensemble documenté de labels CIC-IDS2017 vers les alertes internes. |
+| `tests/test_cic_ids2017_mapping.py` | Vérifie le mapping `BENIGN`, `SSH-Patator`, les alias SSH et les labels hors périmètre. |
 
 ## Artefacts générés
 
@@ -101,6 +104,8 @@ README.md
 → docs/PUBLIC_DATASET_CANDIDATES.md
 → docs/CIC_IDS2017_DATASET_REVIEW.md
 → docs/CIC_IDS2017_MAPPING_PLAN.md
+→ utils/cic_ids2017_mapping.py
+→ tests/test_cic_ids2017_mapping.py
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
 → utils/ground_truth_results_exporter.py
@@ -108,7 +113,7 @@ README.md
 → docs/EVALUATION_MATRIX.md
 ```
 
-Objectif : comprendre les menaces prises en compte, les garde-fous, les données utilisées, les limites du dataset simulé, la trajectoire vers un dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, les résultats attendus, la vérification automatique, l'export des résultats et le cadre d'évaluation.
+Objectif : comprendre les menaces prises en compte, les garde-fous, les données utilisées, les limites du dataset simulé, la trajectoire vers un dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, les résultats attendus, la vérification automatique, l'export des résultats et le cadre d'évaluation.
 
 ### Encadrant académique ou doctoral
 
@@ -122,6 +127,8 @@ README.md
 → docs/PUBLIC_DATASET_CANDIDATES.md
 → docs/CIC_IDS2017_DATASET_REVIEW.md
 → docs/CIC_IDS2017_MAPPING_PLAN.md
+→ utils/cic_ids2017_mapping.py
+→ tests/test_cic_ids2017_mapping.py
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
 → utils/ground_truth_results_exporter.py
@@ -133,7 +140,7 @@ README.md
 → docs/REPRODUCIBILITY.md
 ```
 
-Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, les données, la vérité terrain, sa vérification automatique, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, l'export des résultats, la méthode et les limites actuelles.
+Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, les données, la vérité terrain, sa vérification automatique, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, l'export des résultats, la méthode et les limites actuelles.
 
 ### Contributeur technique
 
@@ -147,6 +154,8 @@ README.md
 → docs/PUBLIC_DATASET_CANDIDATES.md
 → docs/CIC_IDS2017_DATASET_REVIEW.md
 → docs/CIC_IDS2017_MAPPING_PLAN.md
+→ utils/cic_ids2017_mapping.py
+→ tests/test_cic_ids2017_mapping.py
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
 → utils/ground_truth_results_exporter.py
@@ -157,7 +166,7 @@ README.md
 → CHANGELOG.md
 ```
 
-Objectif : comprendre la structure du projet, les données d'exemple, les limites du dataset actuel, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, les labels attendus, les tests de vérification, l'export des résultats, les contrôles attendus et la manière de vérifier une modification.
+Objectif : comprendre la structure du projet, les données d'exemple, les limites du dataset actuel, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, les labels attendus, les tests de vérification, l'export des résultats, les contrôles attendus et la manière de vérifier une modification.
 
 ## Chaîne de crédibilité actuelle
 
@@ -182,6 +191,7 @@ code fonctionnel
 → candidats datasets publics
 → revue CIC-IDS2017
 → plan de mapping CIC-IDS2017
+→ mapper CIC-IDS2017 testé
 ```
 
 ## Ce que cet index ne remplace pas
