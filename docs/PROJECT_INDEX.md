@@ -16,6 +16,7 @@ prototype technique
 → données documentées
 → vérité terrain explicitée
 → vérité terrain vérifiée automatiquement
+→ résultats d'évaluation exportés
 → évaluation expérimentale
 → reproductibilité
 → positionnement recherche
@@ -50,6 +51,15 @@ prototype technique
 |---|---|
 | `utils/ground_truth_evaluator.py` | Compare les alertes observées aux labels attendus des logs simulés versionnés. |
 | `tests/test_ground_truth_evaluator.py` | Vérifie automatiquement les cas de vérité terrain, les labels manquants et les labels inattendus. |
+| `utils/ground_truth_results_exporter.py` | Génère les résultats de vérité terrain en JSON et Markdown. |
+| `tests/test_ground_truth_results_exporter.py` | Vérifie la sérialisation JSON, le rapport Markdown et l'écriture des artefacts de résultats. |
+
+## Artefacts générés
+
+| Artefact | Rôle |
+|---|---|
+| `runtime/evaluation/ground_truth_results.json` | Résultats de vérité terrain exploitables par outil ou audit technique. |
+| `runtime/evaluation/ground_truth_results.md` | Rapport lisible des résultats de vérité terrain. |
 
 ## Lecture recommandée selon le profil
 
@@ -78,11 +88,12 @@ README.md
 → docs/DATASET_CARD.md
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
+→ utils/ground_truth_results_exporter.py
 → docs/EXPERIMENT_PROTOCOL.md
 → docs/EVALUATION_MATRIX.md
 ```
 
-Objectif : comprendre les menaces prises en compte, les garde-fous, les données utilisées, les résultats attendus, la vérification automatique, les limites et le cadre d'évaluation.
+Objectif : comprendre les menaces prises en compte, les garde-fous, les données utilisées, les résultats attendus, la vérification automatique, l'export des résultats, les limites et le cadre d'évaluation.
 
 ### Encadrant académique ou doctoral
 
@@ -94,14 +105,16 @@ README.md
 → docs/DATASET_CARD.md
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
+→ utils/ground_truth_results_exporter.py
 → tests/test_ground_truth_evaluator.py
+→ tests/test_ground_truth_results_exporter.py
 → docs/EXPERIMENT_PROTOCOL.md
 → docs/EVALUATION_MATRIX.md
 → docs/EXPERIMENT_RESULTS.md
 → docs/REPRODUCIBILITY.md
 ```
 
-Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, les données, la vérité terrain, sa vérification automatique, la méthode et les limites actuelles.
+Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, les données, la vérité terrain, sa vérification automatique, l'export des résultats, la méthode et les limites actuelles.
 
 ### Contributeur technique
 
@@ -113,13 +126,15 @@ README.md
 → docs/DATASET_CARD.md
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
+→ utils/ground_truth_results_exporter.py
 → tests/test_ground_truth_evaluator.py
+→ tests/test_ground_truth_results_exporter.py
 → docs/QUALITY_GATES.md
 → docs/REPRODUCIBILITY.md
 → CHANGELOG.md
 ```
 
-Objectif : comprendre la structure du projet, les données d'exemple, les labels attendus, les tests de vérification, les contrôles attendus et la manière de vérifier une modification.
+Objectif : comprendre la structure du projet, les données d'exemple, les labels attendus, les tests de vérification, l'export des résultats, les contrôles attendus et la manière de vérifier une modification.
 
 ## Chaîne de crédibilité actuelle
 
@@ -134,6 +149,7 @@ code fonctionnel
 → dataset documenté
 → vérité terrain explicitée
 → vérité terrain vérifiée automatiquement
+→ résultats d'évaluation exportés
 → protocole expérimental
 → matrice d'évaluation
 → rapport de résultats
