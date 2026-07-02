@@ -116,7 +116,9 @@ def evaluate_ground_truth_case(
     observed_alert_types = get_alert_types(alerts)
 
     missing_alert_types = ground_truth_case.expected_alert_types - observed_alert_types
-    unexpected_alert_types = observed_alert_types - ground_truth_case.expected_alert_types
+    unexpected_alert_types = (
+        observed_alert_types - ground_truth_case.expected_alert_types
+    )
 
     return GroundTruthEvaluationResult(
         log_file=ground_truth_case.log_file,
