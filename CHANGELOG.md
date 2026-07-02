@@ -1,5 +1,38 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.26.1 — README maturity summary
+
+### Modifié
+
+- Ajout d’un résumé de maturité dans le `README.md`.
+- Ajout du statut actuel du projet.
+- Ajout de l’usage recommandé : portfolio, entretien technique, recherche appliquée.
+- Clarification que le projet n’est pas destiné à un usage SOC production.
+- Ajout d’une estimation indicative d’avancement.
+- Ajout d’une note portfolio, recherche appliquée et production.
+- Ajout d’un rappel des résultats expérimentaux documentés.
+
+### Estimation
+
+- Avancement global : 87 %
+- Note portfolio : 94 / 100
+- Note recherche appliquée : 86 / 100
+- Note production : 22 / 100
+
+### Objectif
+
+Rendre le niveau de maturité du projet lisible immédiatement depuis le README.
+
+```text
+résultats expérimentaux
+→ maturité résumée
+→ limites visibles
+→ lecture recruteur plus rapide
+→ positionnement plus clair
+```
+
+---
+
 ## v1.26.0 — Filled experimental results
 
 ### Modifié
