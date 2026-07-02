@@ -14,6 +14,7 @@ Elles permettent de vérifier :
 parsing des logs
 → détection par règles
 → génération d'alertes
+→ comparaison aux labels attendus
 → génération de rapports
 → génération de prompts IA
 → analyse IA optionnelle
@@ -22,6 +23,12 @@ parsing des logs
 ```
 
 Le jeu de données ne cherche pas à représenter un SOC de production complet.
+
+Les labels attendus associés à ces données sont documentés séparément dans :
+
+```text
+docs/GROUND_TRUTH_LABELS.md
+```
 
 ## Statut du dataset
 
@@ -131,6 +138,34 @@ Résultat attendu :
 Aucune alerte détectée.
 ```
 
+## Vérité terrain associée
+
+Les résultats attendus ne sont pas laissés implicites dans les logs.
+
+Ils sont formalisés dans :
+
+```text
+docs/GROUND_TRUTH_LABELS.md
+```
+
+Ce document précise notamment :
+
+```text
+ssh_auth.log → SSH_BRUTE_FORCE
+web_access.log → WEB_RECONNAISSANCE + PROMPT_INJECTION_ATTEMPT
+benign_ssh_auth.log → pas de SSH_BRUTE_FORCE
+benign_web_access.log → pas de WEB_RECONNAISSANCE ni PROMPT_INJECTION_ATTEMPT
+```
+
+Cette séparation permet de distinguer :
+
+```text
+données utilisées
+→ labels attendus
+→ résultats observés
+→ comparaison expérimentale
+```
+
 ## Données incluses
 
 Le dataset contient :
@@ -214,6 +249,7 @@ Ce dataset est prévu pour :
 démonstration locale
 tests automatisés
 vérification des règles de détection
+comparaison aux labels attendus
 exécution du protocole expérimental
 application de la matrice d'évaluation
 reproductibilité des exemples
@@ -297,6 +333,8 @@ La reproduction complète doit s'appuyer sur :
 
 ```text
 docs/REPRODUCIBILITY.md
+docs/DATASET_CARD.md
+docs/GROUND_TRUTH_LABELS.md
 docs/EXPERIMENT_PROTOCOL.md
 docs/EVALUATION_MATRIX.md
 docs/EXPERIMENT_RESULTS.md
@@ -313,7 +351,7 @@ ajouter des scans web plus variés
 ajouter des scénarios multi-sources
 ajouter des volumes de logs plus importants
 ajouter des horodatages plus réalistes
-ajouter une vérité terrain explicite
+enrichir la vérité terrain explicite
 comparer avec un dataset public
 faire relire le dataset par un tiers cybersécurité
 ```
@@ -330,6 +368,7 @@ Son rôle est de soutenir une démarche progressive :
 
 ```text
 données simulées
+→ vérité terrain explicite
 → pipeline vérifiable
 → résultats reproductibles
 → limites explicites
