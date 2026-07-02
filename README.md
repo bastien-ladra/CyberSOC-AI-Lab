@@ -55,12 +55,12 @@ usage production SOC : non
 
 Estimation indicative actuelle :
 
-| Axe                             | Estimation |
-| ------------------------------- | ---------: |
-| Avancement global               |       86 % |
-| Crédibilité portfolio           |   93 / 100 |
-| Crédibilité recherche appliquée |   85 / 100 |
-| Maturité production             |   22 / 100 |
+| Axe | Estimation |
+|---|---:|
+| Avancement global | 91 % |
+| Crédibilité portfolio | 96 / 100 |
+| Crédibilité recherche appliquée | 88 / 100 |
+| Maturité production | 22 / 100 |
 
 Résultats expérimentaux documentés :
 
@@ -74,6 +74,27 @@ rapport expérimental : rempli
 ```
 
 Ces estimations reflètent le niveau actuel du projet sur un périmètre simulé et versionné. Elles ne constituent pas une certification, ni une preuve de performance sur des données SOC réelles.
+
+## Roadmap dataset public
+
+Le projet repose actuellement sur des logs simulés versionnés.
+
+La trajectoire vers un dataset public est documentée dans :
+
+```text
+docs/PUBLIC_DATASET_ROADMAP.md
+```
+
+Cette roadmap précise :
+
+```text
+limites du dataset actuel
+→ critères de sélection d'un dataset public
+→ étapes d'intégration futures
+→ vérité terrain publique future
+→ risques à éviter
+→ positionnement honnête
+```
 
 ## Lecture rapide recruteur
 
@@ -104,7 +125,7 @@ Le prototype permet de :
 - détecter des comportements suspects par règles explicables ;
 - enrichir les alertes avec un contexte MITRE ATT&CK ou sécurité IA ;
 - calculer un score de priorité incident ;
-- générérer des recommandations analyste ;
+- générer des recommandations analyste ;
 - produire des artefacts auditables ;
 - comparer automatiquement les alertes observées aux labels attendus ;
 - exporter les résultats de vérité terrain en JSON et Markdown ;
@@ -415,25 +436,26 @@ docs/PROJECT_INDEX.md
 
 Documents principaux :
 
-| Document                       | Rôle                                                                       |
-| ------------------------------ | -------------------------------------------------------------------------- |
-| `docs/PROJECT_INDEX.md`        | Point d'entrée documentaire du projet.                                     |
-| `docs/RECRUITER_QUICK_DEMO.md` | Guide court pour présenter le projet en entretien ou à un recruteur.       |
-| `docs/architecture.md`         | Architecture et pipeline.                                                  |
-| `docs/threat_model.md`         | Menaces liées à l'usage de l'IA dans un SOC.                               |
-| `docs/SECURITY_MODEL.md`       | Modèle de sécurité, garanties et limites.                                  |
-| `docs/DATASET_CARD.md`         | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
-| `docs/GROUND_TRUTH_LABELS.md`  | Labels attendus et critères de comparaison pour les logs simulés.          |
-| `docs/QUALITY_GATES.md`        | Contrôles qualité du projet.                                               |
-| `docs/EXPERIMENT_PROTOCOL.md`  | Protocole expérimental.                                                    |
-| `docs/EVALUATION_MATRIX.md`    | Grille d'évaluation.                                                       |
-| `docs/EXPERIMENT_RESULTS.md`   | Rapport de résultats expérimentaux.                                        |
-| `docs/REPRODUCIBILITY.md`      | Procédure de reproductibilité.                                             |
-| `docs/CASE_STUDY.md`           | Étude de cas.                                                              |
-| `docs/DEMO_GUIDE.md`           | Guide de démonstration.                                                    |
-| `docs/RESEARCH_PROPOSAL.md`    | Cadrage doctoral provisoire.                                               |
-| `docs/research_notes.md`       | Notes de recherche.                                                        |
-| `docs/evaluation.md`           | Méthodologie d'évaluation complémentaire.                                  |
+| Document | Rôle |
+|---|---|
+| `docs/PROJECT_INDEX.md` | Point d'entrée documentaire du projet. |
+| `docs/RECRUITER_QUICK_DEMO.md` | Guide court pour présenter le projet en entretien ou à un recruteur. |
+| `docs/architecture.md` | Architecture et pipeline. |
+| `docs/threat_model.md` | Menaces liées à l'usage de l'IA dans un SOC. |
+| `docs/SECURITY_MODEL.md` | Modèle de sécurité, garanties et limites. |
+| `docs/DATASET_CARD.md` | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
+| `docs/PUBLIC_DATASET_ROADMAP.md` | Roadmap vers un dataset public documenté. |
+| `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés. |
+| `docs/QUALITY_GATES.md` | Contrôles qualité du projet. |
+| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental. |
+| `docs/EVALUATION_MATRIX.md` | Grille d'évaluation. |
+| `docs/EXPERIMENT_RESULTS.md` | Rapport de résultats expérimentaux. |
+| `docs/REPRODUCIBILITY.md` | Procédure de reproductibilité. |
+| `docs/CASE_STUDY.md` | Étude de cas. |
+| `docs/DEMO_GUIDE.md` | Guide de démonstration. |
+| `docs/RESEARCH_PROPOSAL.md` | Cadrage doctoral provisoire. |
+| `docs/research_notes.md` | Notes de recherche. |
+| `docs/evaluation.md` | Méthodologie d'évaluation complémentaire. |
 
 Artefacts techniques liés à la vérité terrain automatisée :
 
