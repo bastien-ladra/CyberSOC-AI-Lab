@@ -43,6 +43,38 @@ Le projet intègre aussi :
 - des quality gates ;
 - une documentation sécurité, expérimentale et reproductible.
 
+## Résumé de maturité
+
+CyberSOC-AI-Lab est un prototype expérimental avancé, conçu principalement pour un usage portfolio, entretien technique, démonstration contrôlée et recherche appliquée.
+
+```text
+statut : prototype expérimental avancé
+usage recommandé : portfolio, entretien technique, recherche appliquée
+usage production SOC : non
+```
+
+Estimation indicative actuelle :
+
+| Axe | Estimation |
+|---|---:|
+| Avancement global | 86 % |
+| Crédibilité portfolio | 93 / 100 |
+| Crédibilité recherche appliquée | 85 / 100 |
+| Maturité production | 22 / 100 |
+
+Résultats expérimentaux documentés :
+
+```text
+quality gates : OK
+tests : 60 passed
+couverture : 94.94 %
+vérité terrain : OK
+export JSON / Markdown : OK
+rapport expérimental : rempli
+```
+
+Ces estimations reflètent le niveau actuel du projet sur un périmètre simulé et versionné. Elles ne constituent pas une certification, ni une preuve de performance sur des données SOC réelles.
+
 ## Fonctionnalités principales
 
 Le prototype permet de :
@@ -364,24 +396,24 @@ docs/PROJECT_INDEX.md
 
 Documents principaux :
 
-| Document                      | Rôle                                                                       |
-| ----------------------------- | -------------------------------------------------------------------------- |
-| `docs/PROJECT_INDEX.md`       | Point d'entrée documentaire du projet.                                     |
-| `docs/architecture.md`        | Architecture et pipeline.                                                  |
-| `docs/threat_model.md`        | Menaces liées à l'usage de l'IA dans un SOC.                               |
-| `docs/SECURITY_MODEL.md`      | Modèle de sécurité, garanties et limites.                                  |
-| `docs/DATASET_CARD.md`        | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
-| `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés.          |
-| `docs/QUALITY_GATES.md`       | Contrôles qualité du projet.                                               |
-| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental.                                                    |
-| `docs/EVALUATION_MATRIX.md`   | Grille d'évaluation.                                                       |
-| `docs/EXPERIMENT_RESULTS.md`  | Modèle de rapport de résultats.                                            |
-| `docs/REPRODUCIBILITY.md`     | Procédure de reproductibilité.                                             |
-| `docs/CASE_STUDY.md`          | Étude de cas.                                                              |
-| `docs/DEMO_GUIDE.md`          | Guide de démonstration.                                                    |
-| `docs/RESEARCH_PROPOSAL.md`   | Cadrage doctoral provisoire.                                               |
-| `docs/research_notes.md`      | Notes de recherche.                                                        |
-| `docs/evaluation.md`          | Méthodologie d'évaluation complémentaire.                                  |
+| Document | Rôle |
+|---|---|
+| `docs/PROJECT_INDEX.md` | Point d'entrée documentaire du projet. |
+| `docs/architecture.md` | Architecture et pipeline. |
+| `docs/threat_model.md` | Menaces liées à l'usage de l'IA dans un SOC. |
+| `docs/SECURITY_MODEL.md` | Modèle de sécurité, garanties et limites. |
+| `docs/DATASET_CARD.md` | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
+| `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés. |
+| `docs/QUALITY_GATES.md` | Contrôles qualité du projet. |
+| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental. |
+| `docs/EVALUATION_MATRIX.md` | Grille d'évaluation. |
+| `docs/EXPERIMENT_RESULTS.md` | Modèle de rapport de résultats. |
+| `docs/REPRODUCIBILITY.md` | Procédure de reproductibilité. |
+| `docs/CASE_STUDY.md` | Étude de cas. |
+| `docs/DEMO_GUIDE.md` | Guide de démonstration. |
+| `docs/RESEARCH_PROPOSAL.md` | Cadrage doctoral provisoire. |
+| `docs/research_notes.md` | Notes de recherche. |
+| `docs/evaluation.md` | Méthodologie d'évaluation complémentaire. |
 
 Artefacts techniques liés à la vérité terrain automatisée :
 
