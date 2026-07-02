@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any
 
 from utils.ground_truth_evaluator import (
     DEFAULT_DATA_DIR,
@@ -59,7 +60,7 @@ def test_ground_truth_evaluation_detects_unexpected_label() -> None:
 
 
 def test_get_alert_types_ignores_invalid_alert_type_values() -> None:
-    alerts = [
+    alerts: list[dict[str, Any]] = [
         {"alert_type": "SSH_BRUTE_FORCE"},
         {"alert_type": None},
         {"alert_type": 123},
