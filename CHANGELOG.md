@@ -1,5 +1,42 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.25.0 — Evaluation result generation
+
+### Ajouté
+
+- Ajout de `utils/ground_truth_results_exporter.py`.
+- Ajout de `tests/test_ground_truth_results_exporter.py`.
+- Génération d’un artefact JSON de résultats de vérité terrain.
+- Génération d’un rapport Markdown lisible de résultats de vérité terrain.
+- Export des résultats dans `runtime/evaluation/`.
+- Ajout d’un résumé avec statut, nombre de cas passants et nombre de cas en échec.
+- Ajout du détail par fichier : labels attendus, observés, manquants et inattendus.
+
+### Qualité
+
+- `black --check .` : OK
+- `ruff check .` : OK
+- `mypy .` : OK
+- `bandit -r ai_assistant dashboard detection utils main.py -q` : OK
+- `pytest --cov=ai_assistant --cov=detection --cov=utils --cov-report=term-missing --cov-fail-under=90 -q` : OK
+- Tests : 60 passed
+- Couverture : 94.94%
+
+### Objectif
+
+Passer d’une évaluation automatique interne à des résultats exportés, lisibles et auditables.
+
+```text
+labels attendus
+→ alertes observées
+→ comparaison automatique
+→ export JSON
+→ rapport Markdown
+→ résultats auditables
+```
+
+---
+
 ## v1.24.1 — Ground truth documentation alignment
 
 ### Modifié
