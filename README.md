@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.20.0 — Experimental protocol
+Version actuelle : v1.20.1 — Evaluation matrix
 
 Le prototype couvre actuellement trois scénarios :
 

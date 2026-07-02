@@ -1,5 +1,38 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.20.1 — Evaluation matrix
+
+### Ajouté
+
+- Ajout de `docs/EVALUATION_MATRIX.md`.
+- Ajout d’une grille de notation de 0 à 5.
+- Définition de critères communs d’évaluation.
+- Définition d’indicateurs observables pour chaque scénario.
+- Ajout d’une matrice dédiée à `SSH_BRUTE_FORCE`.
+- Ajout d’une matrice dédiée à `WEB_RECONNAISSANCE`.
+- Ajout d’une matrice dédiée à `PROMPT_INJECTION_ATTEMPT`.
+- Ajout d’un niveau de maturité attendu.
+
+### Modifié
+
+- Mise à jour de `docs/evaluation.md` pour l’aligner avec le protocole expérimental actuel.
+- Suppression de la référence obsolète au périmètre `MVP v0.8`.
+
+### Objectif
+
+Rendre l’évaluation du projet plus concrète, mesurable et reproductible.
+
+```text
+protocole expérimental
+→ matrice d’évaluation
+→ critères observables
+→ scoring
+→ indicateurs par scénario
+→ évaluation moins subjective
+```
+
+---
+
 ## v1.20.0 — Experimental protocol
 
 ### Ajouté
