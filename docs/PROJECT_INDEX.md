@@ -41,6 +41,7 @@ prototype technique
 | `docs/REPRODUCIBILITY.md` | Procédure pour reproduire les contrôles techniques et expérimentaux. |
 | `docs/CASE_STUDY.md` | Étude de cas complète du projet. |
 | `docs/DEMO_GUIDE.md` | Guide de démonstration pour entretien, portfolio ou revue technique. |
+| `docs/RECRUITER_QUICK_DEMO.md` | Démonstration courte orientée recruteur et entretien technique. |
 | `docs/RESEARCH_PROPOSAL.md` | Cadrage doctoral provisoire. |
 | `docs/research_notes.md` | Notes de recherche et pistes d'évolution. |
 | `docs/evaluation.md` | Méthodologie d'évaluation historique et complémentaire. |
@@ -69,13 +70,15 @@ Lecture conseillée :
 
 ```text
 README.md
+→ docs/RECRUITER_QUICK_DEMO.md
 → docs/DEMO_GUIDE.md
 → docs/CASE_STUDY.md
+→ docs/EXPERIMENT_RESULTS.md
 → docs/QUALITY_GATES.md
 → CHANGELOG.md
 ```
 
-Objectif : comprendre rapidement ce que fait le projet, comment le lancer, ce qu'il démontre et comment la qualité est contrôlée.
+Objectif : comprendre rapidement ce que fait le projet, comment le lancer, ce qu'il démontre, quels résultats sont documentés et quelles limites sont assumées.
 
 ### Évaluateur cybersécurité
 
@@ -178,7 +181,6 @@ Il sert uniquement de carte de navigation documentaire.
 La documentation est déjà structurée, mais certaines limites restent présentes :
 
 ```text
-les résultats expérimentaux doivent encore être remplis après exécution réelle
 la validation externe par analyste SOC n'est pas encore réalisée
 les métriques scientifiques peuvent encore être enrichies
 la documentation doit rester synchronisée avec le code à chaque nouvelle version
