@@ -23,6 +23,7 @@ prototype technique
 → évolution dataset public
 → candidats datasets publics
 → revue CIC-IDS2017
+→ plan de mapping CIC-IDS2017
 ```
 
 ## Documents principaux
@@ -39,6 +40,7 @@ prototype technique
 | `docs/PUBLIC_DATASET_ROADMAP.md` | Roadmap pour évoluer vers un dataset public documenté sans sur-vendre le périmètre actuel. |
 | `docs/PUBLIC_DATASET_CANDIDATES.md` | Liste de datasets publics candidats à étudier avant toute intégration. |
 | `docs/CIC_IDS2017_DATASET_REVIEW.md` | Revue du premier dataset public candidat à étudier, sans intégration immédiate. |
+| `docs/CIC_IDS2017_MAPPING_PLAN.md` | Plan de mapping entre labels CIC-IDS2017 et alertes internes avant tout loader. |
 | `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés. |
 | `docs/QUALITY_GATES.md` | Contrôles qualité à exécuter avant validation d'une version. |
 | `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental utilisé pour évaluer le projet. |
@@ -98,6 +100,7 @@ README.md
 → docs/PUBLIC_DATASET_ROADMAP.md
 → docs/PUBLIC_DATASET_CANDIDATES.md
 → docs/CIC_IDS2017_DATASET_REVIEW.md
+→ docs/CIC_IDS2017_MAPPING_PLAN.md
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
 → utils/ground_truth_results_exporter.py
@@ -105,7 +108,7 @@ README.md
 → docs/EVALUATION_MATRIX.md
 ```
 
-Objectif : comprendre les menaces prises en compte, les garde-fous, les données utilisées, les limites du dataset simulé, la trajectoire vers un dataset public, les candidats publics, la revue CIC-IDS2017, les résultats attendus, la vérification automatique, l'export des résultats et le cadre d'évaluation.
+Objectif : comprendre les menaces prises en compte, les garde-fous, les données utilisées, les limites du dataset simulé, la trajectoire vers un dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, les résultats attendus, la vérification automatique, l'export des résultats et le cadre d'évaluation.
 
 ### Encadrant académique ou doctoral
 
@@ -118,6 +121,7 @@ README.md
 → docs/PUBLIC_DATASET_ROADMAP.md
 → docs/PUBLIC_DATASET_CANDIDATES.md
 → docs/CIC_IDS2017_DATASET_REVIEW.md
+→ docs/CIC_IDS2017_MAPPING_PLAN.md
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
 → utils/ground_truth_results_exporter.py
@@ -129,7 +133,7 @@ README.md
 → docs/REPRODUCIBILITY.md
 ```
 
-Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, les données, la vérité terrain, sa vérification automatique, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, l'export des résultats, la méthode et les limites actuelles.
+Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, les données, la vérité terrain, sa vérification automatique, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, l'export des résultats, la méthode et les limites actuelles.
 
 ### Contributeur technique
 
@@ -142,6 +146,7 @@ README.md
 → docs/PUBLIC_DATASET_ROADMAP.md
 → docs/PUBLIC_DATASET_CANDIDATES.md
 → docs/CIC_IDS2017_DATASET_REVIEW.md
+→ docs/CIC_IDS2017_MAPPING_PLAN.md
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
 → utils/ground_truth_results_exporter.py
@@ -152,7 +157,7 @@ README.md
 → CHANGELOG.md
 ```
 
-Objectif : comprendre la structure du projet, les données d'exemple, les limites du dataset actuel, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, les labels attendus, les tests de vérification, l'export des résultats, les contrôles attendus et la manière de vérifier une modification.
+Objectif : comprendre la structure du projet, les données d'exemple, les limites du dataset actuel, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, les labels attendus, les tests de vérification, l'export des résultats, les contrôles attendus et la manière de vérifier une modification.
 
 ## Chaîne de crédibilité actuelle
 
@@ -176,6 +181,7 @@ code fonctionnel
 → roadmap dataset public
 → candidats datasets publics
 → revue CIC-IDS2017
+→ plan de mapping CIC-IDS2017
 ```
 
 ## Ce que cet index ne remplace pas
