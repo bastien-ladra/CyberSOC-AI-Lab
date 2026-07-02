@@ -6,7 +6,6 @@ from typing import Any
 
 import streamlit as st
 
-
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 if str(PROJECT_ROOT) not in sys.path:
@@ -16,6 +15,7 @@ from utils.alert_analytics import build_distribution
 from utils.csv_export import build_csv_export
 from utils.human_review import save_human_review
 from utils.report_export import build_markdown_report
+
 
 def resolve_data_dir() -> Path:
     configured_dir = os.getenv("CYBERSOC_OUTPUT_DIR")
@@ -176,6 +176,7 @@ def build_human_review_summary(review_files: list[Path]) -> list[dict[str, Any]]
 
     return summary
 
+
 def alert_matches_search(
     path: Path,
     alert_data: dict[str, Any],
@@ -221,6 +222,7 @@ def alert_matches_search(
     searchable_text = " ".join(searchable_values).lower()
 
     return normalized_query in searchable_text
+
 
 def get_alert_priority(path: Path) -> int:
     try:
@@ -293,6 +295,7 @@ def build_alert_summary(alert_files: list[Path]) -> list[dict[str, Any]]:
 
     return summary
 
+
 def get_alert_filter_options(
     alert_files: list[Path],
 ) -> tuple[list[str], list[str], list[str], list[str]]:
@@ -348,7 +351,7 @@ def filter_alert_files(
         severity = str(alert_data.get("severity", "N/A"))
         priority_label = str(alert_data.get("priority_label", "N/A"))
         review_decision = get_human_review_decision(get_alert_number(path))
-        
+
         if not alert_matches_search(path, alert_data, search_query):
             continue
 
@@ -416,13 +419,11 @@ def build_alert_metrics(alert_files: list[Path]) -> dict[str, int]:
 st.title("CyberSOC-AI-Lab")
 st.subheader("Prototype de SOC augmenté par IA")
 
-st.markdown(
-    """
+st.markdown("""
 Ce tableau de bord permet de visualiser les alertes détectées, les rapports générés,
 les prompts IA, les analyses IA locales, les évaluations automatiques des réponses IA
 et les validations humaines.
-"""
-)
+""")
 
 alert_files = list_alerts()
 
@@ -541,7 +542,7 @@ if priority_distribution or review_distribution:
     with chart_col2:
         st.markdown("### Répartition par décision analyste")
         st.bar_chart(review_distribution, x="Label", y="Nombre")
-        
+
 human_review_files = list_human_review_files()
 human_review_summary = build_human_review_summary(human_review_files)
 

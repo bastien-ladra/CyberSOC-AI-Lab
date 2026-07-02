@@ -1,11 +1,10 @@
 from typing import Optional
+
 import requests
 
 
 def query_ollama(
-    prompt: str,
-    model: str = "llama3.2",
-    base_url: str = "http://localhost:11434"
+    prompt: str, model: str = "llama3.2", base_url: str = "http://localhost:11434"
 ) -> Optional[str]:
     """
     Envoie un prompt à un modèle local Ollama.

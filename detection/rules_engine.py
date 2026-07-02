@@ -1,7 +1,6 @@
 from typing import Any
 from urllib.parse import unquote
 
-
 SUSPICIOUS_WEB_PATHS = [
     "/admin",
     "/wp-admin",
@@ -195,10 +194,7 @@ def detect_ssh_bruteforce(
                 }
             )
 
-            evidence = [
-                get_event_raw(event)
-                for event in failed_events
-            ]
+            evidence = [get_event_raw(event) for event in failed_events]
 
             confidence = 0.87
             priority_score = calculate_priority_score("HIGH", confidence)
@@ -245,8 +241,7 @@ def detect_web_reconnaissance(
         user_agent = str(event.get("user_agent", "")).lower()
 
         is_suspicious_path = any(
-            suspicious_path in path
-            for suspicious_path in SUSPICIOUS_WEB_PATHS
+            suspicious_path in path for suspicious_path in SUSPICIOUS_WEB_PATHS
         )
 
         is_suspicious_status = status_code in [401, 403, 404]
@@ -272,10 +267,7 @@ def detect_web_reconnaissance(
                 }
             )
 
-            evidence = [
-                get_event_raw(event)
-                for event in suspicious_events
-            ]
+            evidence = [get_event_raw(event) for event in suspicious_events]
 
             confidence = 0.82
             priority_score = calculate_priority_score("MEDIUM", confidence)
@@ -326,9 +318,7 @@ def detect_prompt_injection_attempt(
         combined_text = f"{path} {user_agent}"
 
         matched_patterns = [
-            pattern
-            for pattern in PROMPT_INJECTION_PATTERNS
-            if pattern in combined_text
+            pattern for pattern in PROMPT_INJECTION_PATTERNS if pattern in combined_text
         ]
 
         if matched_patterns:
@@ -343,10 +333,7 @@ def detect_prompt_injection_attempt(
 
     for source_ip, suspicious_events in suspicious_events_by_ip.items():
         if len(suspicious_events) >= threshold:
-            evidence = [
-                get_event_raw(event)
-                for event in suspicious_events
-            ]
+            evidence = [get_event_raw(event) for event in suspicious_events]
 
             matched_patterns = sorted(
                 {

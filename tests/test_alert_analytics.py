@@ -1,3 +1,5 @@
+from typing import Any
+
 from utils.alert_analytics import build_distribution
 
 
@@ -39,7 +41,7 @@ def test_build_distribution_respects_custom_order() -> None:
 
 
 def test_build_distribution_uses_na_for_missing_values() -> None:
-    rows = [
+    rows: list[dict[str, Any]] = [
         {"Priorité": ""},
         {},
         {"Priorité": None},

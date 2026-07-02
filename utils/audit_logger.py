@@ -5,9 +5,7 @@ from typing import Any
 
 
 def write_audit_event(
-    audit_file: Path,
-    event_type: str,
-    details: dict[str, Any]
+    audit_file: Path, event_type: str, details: dict[str, Any]
 ) -> None:
     """
     Écrit un événement d'audit au format JSON Lines.

@@ -7,7 +7,6 @@ from detection.rules_engine import (
     detect_web_reconnaissance,
 )
 
-
 DATA_DIR = Path("data/sample_logs")
 
 

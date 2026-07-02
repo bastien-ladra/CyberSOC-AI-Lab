@@ -1,3 +1,5 @@
+from typing import Any
+
 from utils.csv_export import build_csv_export
 
 
@@ -36,7 +38,7 @@ def test_build_csv_export_handles_accents() -> None:
 
 
 def test_build_csv_export_handles_rows_with_additional_columns() -> None:
-    rows = [
+    rows: list[dict[str, Any]] = [
         {
             "Type": "SSH_BRUTE_FORCE",
             "Priorité": "CRITICAL",

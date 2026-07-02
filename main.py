@@ -5,6 +5,7 @@ from typing import Any
 
 from ai_assistant.incident_summarizer import build_incident_analysis_prompt
 from ai_assistant.llm_client import query_ollama
+from ai_assistant.response_evaluator import evaluate_ai_response
 from detection.log_parser import load_ssh_logs, load_web_logs
 from detection.rules_engine import (
     detect_prompt_injection_attempt,
@@ -12,7 +13,6 @@ from detection.rules_engine import (
     detect_web_reconnaissance,
 )
 from utils.audit_logger import write_audit_event
-from ai_assistant.response_evaluator import evaluate_ai_response
 
 SSH_LOG_FILE = Path("data/sample_logs/ssh_auth.log")
 WEB_LOG_FILE = Path("data/sample_logs/web_access.log")
@@ -38,26 +38,27 @@ def build_alert_details(alert: dict[str, Any]) -> str:
 
     if alert.get("failed_attempts") is not None:
         details.append(
-            f"- Nombre d'échecs de connexion : `{alert.get('failed_attempts')}`")
+            f"- Nombre d'échecs de connexion : `{alert.get('failed_attempts')}`"
+        )
 
     if alert.get("targeted_users"):
         details.append(
-            f"- Comptes ciblés : `{', '.join(alert.get('targeted_users', []))}`")
+            f"- Comptes ciblés : `{', '.join(alert.get('targeted_users', []))}`"
+        )
 
     if alert.get("suspicious_requests") is not None:
-        details.append(
-            f"- Requêtes suspectes : `{alert.get('suspicious_requests')}`")
+        details.append(f"- Requêtes suspectes : `{alert.get('suspicious_requests')}`")
 
     if alert.get("targeted_paths"):
         details.append(
-            f"- Chemins ciblés : `{', '.join(alert.get('targeted_paths', []))}`")
+            f"- Chemins ciblés : `{', '.join(alert.get('targeted_paths', []))}`"
+        )
 
     return "\n".join(details)
 
 
 def generate_markdown_report(alert: dict[str, Any], report_path: Path) -> None:
-    evidence_block = "\n".join(
-        [f"- `{line}`" for line in alert.get("evidence", [])])
+    evidence_block = "\n".join([f"- `{line}`" for line in alert.get("evidence", [])])
     recommendations_block = "\n".join(
         [f"- {action}" for action in alert.get("recommended_actions", [])]
     )
@@ -166,8 +167,7 @@ def main() -> None:
         report_path = report_dir / f"incident_{index:03d}.md"
         prompt_path = prompt_dir / f"incident_prompt_{index:03d}.md"
         ai_output_path = ai_output_dir / f"incident_ai_analysis_{index:03d}.md"
-        ai_evaluation_path = ai_output_dir / \
-            f"incident_ai_evaluation_{index:03d}.json"
+        ai_evaluation_path = ai_output_dir / f"incident_ai_evaluation_{index:03d}.json"
 
         save_alert_json(alert, alert_path)
         generate_markdown_report(alert, report_path)
@@ -210,9 +210,13 @@ def main() -> None:
                 "ai_enabled": args.enable_ai,
                 "ai_model": args.model if args.enable_ai else None,
                 "ai_response_generated": ai_response_generated,
-                "ai_output_file": str(ai_output_path) if ai_response_generated else None,
+                "ai_output_file": (
+                    str(ai_output_path) if ai_response_generated else None
+                ),
                 "ai_evaluation_generated": ai_evaluation_generated,
-                "ai_evaluation_file": str(ai_evaluation_path) if ai_evaluation_generated else None,
+                "ai_evaluation_file": (
+                    str(ai_evaluation_path) if ai_evaluation_generated else None
+                ),
             },
         )
 

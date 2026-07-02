@@ -83,6 +83,7 @@ def test_save_human_review(tmp_path: Path) -> None:
     assert "priority_score" in audit_content
     assert "MEDIUM" in audit_content
 
+
 def test_save_human_review_creates_nested_runtime_directories(tmp_path: Path) -> None:
     alert = {
         "alert_type": "SSH_BRUTE_FORCE",

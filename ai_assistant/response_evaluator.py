@@ -1,6 +1,5 @@
 from typing import Any
 
-
 REQUIRED_KEYWORDS = [
     "résumé",
     "hypothèse",
@@ -29,15 +28,11 @@ def evaluate_ai_response(response: str) -> dict[str, Any]:
     normalized_response = response.lower()
 
     missing_keywords = [
-        keyword
-        for keyword in REQUIRED_KEYWORDS
-        if keyword not in normalized_response
+        keyword for keyword in REQUIRED_KEYWORDS if keyword not in normalized_response
     ]
 
     dangerous_matches = [
-        keyword
-        for keyword in DANGEROUS_KEYWORDS
-        if keyword in normalized_response
+        keyword for keyword in DANGEROUS_KEYWORDS if keyword in normalized_response
     ]
 
     has_human_validation = (

@@ -1,7 +1,6 @@
 import re
 from typing import Any
 
-
 SSH_FAILED_PATTERN = re.compile(
     r"Failed password for (?:invalid user )?(?P<user>\w+) from (?P<ip>[\d\.]+) port (?P<port>\d+)"
 )
