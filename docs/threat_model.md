@@ -13,6 +13,8 @@ L’objectif de CyberSOC-AI-Lab n’est pas de remplacer un analyste cybersécur
 - une validation humaine explicite ;
 - une prise en compte des risques de prompt injection.
 
+Ce document complète `docs/SECURITY_MODEL.md`, qui formalise les garanties recherchées, les limites et le rôle exact de l’IA dans la chaîne SOC.
+
 ## Hypothèse centrale
 
 L’intelligence artificielle peut améliorer l’efficacité opérationnelle d’un SOC, notamment pour :
@@ -29,7 +31,7 @@ Dans un SOC augmenté par IA, les logs, les alertes et les preuves doivent être
 
 ## Périmètre du threat model
 
-Le threat model couvre actuellement le MVP v0.8 du projet.
+Le threat model couvre l’état actuel du prototype CyberSOC-AI-Lab.
 
 Le prototype comprend :
 
@@ -47,7 +49,13 @@ Le prototype comprend :
 - un dashboard Streamlit ;
 - une validation humaine ;
 - un journal d’audit système ;
-- un journal d’audit des validations humaines.
+- un journal d’audit des validations humaines ;
+- des tests automatisés ;
+- des quality gates ;
+- un modèle de sécurité documenté ;
+- un protocole expérimental ;
+- une matrice d’évaluation ;
+- une documentation de reproductibilité.
 
 Le projet ne traite pas encore :
 
@@ -56,7 +64,9 @@ Le projet ne traite pas encore :
 - de déploiement en production ;
 - d’authentification multi-utilisateurs ;
 - de gestion de rôles analystes ;
-- de stockage en base de données.
+- de stockage en base de données ;
+- d’intégrité cryptographique des artefacts ;
+- de validation par analystes SOC externes.
 
 ## Actifs à protéger
 
@@ -86,9 +96,11 @@ Dans le projet, les éléments suivants doivent être considérés comme non fia
 - les user-agents ;
 - les chaînes présentes dans les preuves ;
 - les adresses IP ;
-- les noms d’utilisateurs présents dans les logs.
+- les noms d’utilisateurs présents dans les logs ;
+- les réponses générées par l’IA ;
+- les notes ou décisions saisies manuellement.
 
-Même si ces données sont utilisées comme preuves, elles peuvent contenir du contenu hostile, manipulé ou incomplet.
+Même si ces données sont utilisées comme preuves, elles peuvent contenir du contenu hostile, manipulé, incomplet ou erroné.
 
 ## Menaces identifiées
 
@@ -396,7 +408,7 @@ Cependant, les zones sensibles sont :
 - l’intégration locale avec Ollama ;
 - les futures intégrations avec une API IA ou un SIEM.
 
-## Contrôles déjà présents dans le MVP v0.8
+## Contrôles déjà présents
 
 Le projet intègre déjà plusieurs contrôles :
 
@@ -415,7 +427,13 @@ Le projet intègre déjà plusieurs contrôles :
 - journal d’audit système ;
 - journal d’audit des validations humaines ;
 - tests unitaires ;
-- intégration continue via GitHub Actions.
+- quality gates ;
+- couverture de tests minimale ;
+- scan sécurité statique ;
+- protocole expérimental ;
+- matrice d’évaluation ;
+- modèle de sécurité ;
+- documentation de reproductibilité.
 
 ## Principes de sécurité retenus
 
@@ -450,9 +468,11 @@ Limites identifiées :
 - évaluation IA encore basée sur des règles simples ;
 - validation humaine encore locale ;
 - absence d’analyse statistique complète ;
+- absence d’intégrité cryptographique des artefacts ;
+- absence de validation externe par analystes SOC ;
 - absence de déploiement Docker.
 
-Ces limites sont acceptées dans le cadre du MVP, car l’objectif est de construire une base claire, testable, démontrable et extensible.
+Ces limites sont acceptées dans le cadre du prototype, car l’objectif est de construire une base claire, testable, démontrable, reproductible et extensible.
 
 ## Évolutions prévues
 
@@ -468,6 +488,7 @@ Les prochaines étapes de sécurisation sont :
 - améliorer le dashboard de revue d’incident ;
 - préparer une architecture avec API ;
 - ajouter une authentification pour l’interface ;
+- ajouter des mécanismes d’intégrité ;
 - dockeriser le projet ;
 - préparer une future intégration avec des sources de logs plus réalistes.
 
