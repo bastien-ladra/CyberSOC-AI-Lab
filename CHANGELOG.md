@@ -1,5 +1,32 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.20.0 — Experimental protocol
+
+### Ajouté
+
+- Ajout de `docs/EXPERIMENT_PROTOCOL.md`.
+- Formalisation de la question de recherche.
+- Formalisation de l’hypothèse principale.
+- Définition du périmètre expérimental actuel.
+- Définition des axes d’évaluation : détection, qualité de l’analyse IA, résistance à la prompt injection, traçabilité et contrôle humain.
+- Définition d’une méthode expérimentale reproductible.
+- Ajout de critères de réussite explicites.
+- Ajout des limites actuelles du protocole.
+
+### Objectif
+
+Faire évoluer le projet d’un prototype technique propre vers un laboratoire expérimental plus défendable scientifiquement.
+
+```text
+prototype technique
+→ protocole expérimental
+→ critères d’évaluation
+→ limites assumées
+→ base doctorale plus solide
+```
+
+---
+
 ## v1.19.4 — Test coverage hardening
 
 ### Ajouté

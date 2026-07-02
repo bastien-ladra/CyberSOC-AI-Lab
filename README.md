@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.19.4 — Test coverage hardening
+Version actuelle : v1.20.0 — Experimental protocol
 
 Le prototype couvre actuellement trois scénarios :
 
