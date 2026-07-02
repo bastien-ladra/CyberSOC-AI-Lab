@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.21.0 — Security model
+Version actuelle : v1.21.1 — Threat model alignment
 
 Le prototype couvre actuellement trois scénarios :
 

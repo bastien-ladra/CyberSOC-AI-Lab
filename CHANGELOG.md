@@ -1,5 +1,32 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.21.1 — Threat model alignment
+
+### Modifié
+
+- Mise à jour de `docs/threat_model.md`.
+- Suppression de la référence obsolète au périmètre `MVP v0.8`.
+- Alignement du threat model avec l’état actuel du prototype.
+- Ajout des quality gates dans le périmètre documenté.
+- Ajout du modèle de sécurité dans le périmètre documenté.
+- Ajout du protocole expérimental, de la matrice d’évaluation et de la reproductibilité dans le périmètre documenté.
+- Clarification des limites actuelles : absence de logs réels, SIEM réel, production, authentification, base de données, intégrité cryptographique et validation externe.
+
+### Objectif
+
+Maintenir la cohérence de la documentation sécurité avec l’évolution réelle du projet.
+
+```text
+threat model
+→ security model
+→ quality gates
+→ protocole expérimental
+→ reproductibilité
+→ documentation cohérente
+```
+
+---
+
 ## v1.21.0 — Security model
 
 ### Ajouté
