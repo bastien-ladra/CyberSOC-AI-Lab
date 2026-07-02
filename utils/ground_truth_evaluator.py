@@ -50,7 +50,10 @@ GROUND_TRUTH_CASES = (
         log_file="web_access.log",
         log_type="web",
         expected_alert_types=frozenset(
-            {"WEB_RECONNAISSANCE", "PROMPT_INJECTION_ATTEMPT"}
+            {
+                "WEB_RECONNAISSANCE",
+                "PROMPT_INJECTION_ATTEMPT",
+            }
         ),
     ),
     GroundTruthCase(
@@ -70,7 +73,7 @@ def get_alert_types(alerts: list[dict[str, Any]]) -> frozenset[str]:
     """
     Extract alert types from generated alert dictionaries.
     """
-    alert_types = set()
+    alert_types: set[str] = set()
 
     for alert in alerts:
         alert_type = alert.get("alert_type")
@@ -139,9 +142,7 @@ def evaluate_all_ground_truth_cases(
     ]
 
 
-def has_ground_truth_failures(
-    results: list[GroundTruthEvaluationResult],
-) -> bool:
+def has_ground_truth_failures(results: list[GroundTruthEvaluationResult]) -> bool:
     """
     Return True when at least one ground truth comparison failed.
     """
