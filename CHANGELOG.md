@@ -1,5 +1,39 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.30.1 — README CIC-IDS2017 review link
+
+### Modifié
+
+- Ajout d’une section `Revue CIC-IDS2017` dans le `README.md`.
+- Ajout d’un lien visible vers `docs/CIC_IDS2017_DATASET_REVIEW.md`.
+- Ajout d’un résumé de la revue : source officielle, citation attendue, attaques couvertes, sous-ensemble recommandé et mapping provisoire.
+- Clarification visible que l’intégration CIC-IDS2017 n’est pas réalisée à ce stade.
+- Clarification visible que les limites ne doivent pas être sur-vendues.
+- Mise à jour de la table documentaire du `README.md`.
+- Alignement de l’estimation de maturité du README avec l’état `v1.30.1`.
+
+### Estimation
+
+- Avancement global : 96 %
+- Note portfolio : 98 / 100
+- Note recherche appliquée : 93 / 100
+- Note production : 22 / 100
+
+### Objectif
+
+Rendre la revue CIC-IDS2017 immédiatement visible depuis le README.
+
+```text
+dataset public candidat
+→ revue CIC-IDS2017 visible
+→ source officielle visible
+→ mapping provisoire visible
+→ intégration non sur-vendue
+→ crédibilité recherche renforcée
+```
+
+---
+
 ## v1.30.0 — CIC-IDS2017 dataset review
 
 ### Ajouté
