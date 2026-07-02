@@ -10,6 +10,7 @@ Chaque scénario est évalué selon les mêmes dimensions :
 
 ```text
 vérité terrain
+→ vérification automatique de la vérité terrain
 → détection
 → qualité de l'alerte
 → qualité du prompt IA
@@ -23,6 +24,13 @@ Les labels attendus de référence sont définis dans :
 
 ```text
 docs/GROUND_TRUTH_LABELS.md
+```
+
+La comparaison automatique entre labels attendus et alertes observées est portée par :
+
+```text
+utils/ground_truth_evaluator.py
+tests/test_ground_truth_evaluator.py
 ```
 
 ## Grille de notation
@@ -43,6 +51,7 @@ Le score ne remplace pas l'analyse humaine. Il sert à comparer les scénarios d
 | Critère | Question évaluée | Attendu |
 |---|---|---|
 | Vérité terrain | Le résultat observé correspond-il au label attendu ? | Les alertes observées correspondent à `docs/GROUND_TRUTH_LABELS.md`. |
+| Vérification automatique | La comparaison attendu / observé est-elle testée automatiquement ? | `tests/test_ground_truth_evaluator.py` passe. |
 | Détection | Le comportement suspect est-il détecté ? | Une alerte est générée quand le scénario le justifie. |
 | Faux positif | Le scénario bénin évite-t-il une alerte injustifiée ? | Aucun incident critique ne doit être généré sur des logs bénins. |
 | Schéma d'alerte | L'alerte respecte-t-elle la structure attendue ? | Champs cohérents, preuves présentes, validation humaine indiquée. |
@@ -60,6 +69,7 @@ Le score ne remplace pas l'analyse humaine. Il sert à comparer les scénarios d
 | Dimension | Attendu | Indicateur |
 |---|---|---|
 | Vérité terrain | `ssh_auth.log` produit l'alerte attendue. | Correspondance avec `SSH_BRUTE_FORCE` dans `docs/GROUND_TRUTH_LABELS.md` |
+| Vérification automatique | Le cas est couvert par l'évaluateur de vérité terrain. | `utils/ground_truth_evaluator.py` contient `ssh_auth.log` avec `SSH_BRUTE_FORCE` |
 | Détection | Plusieurs échecs SSH depuis une même IP déclenchent une alerte. | `alert_type = SSH_BRUTE_FORCE` |
 | Criticité | La criticité reflète un risque élevé. | `severity = HIGH` ou priorité équivalente |
 | Preuves | Les lignes d'échec SSH sont conservées. | Présence de `evidence` |
@@ -72,6 +82,7 @@ Le score ne remplace pas l'analyse humaine. Il sert à comparer les scénarios d
 | Dimension | Attendu | Indicateur |
 |---|---|---|
 | Vérité terrain | `web_access.log` produit l'alerte attendue. | Correspondance avec `WEB_RECONNAISSANCE` dans `docs/GROUND_TRUTH_LABELS.md` |
+| Vérification automatique | Le cas est couvert par l'évaluateur de vérité terrain. | `utils/ground_truth_evaluator.py` contient `web_access.log` avec `WEB_RECONNAISSANCE` |
 | Détection | Des accès répétés à des chemins sensibles ou suspects déclenchent une alerte. | `alert_type = WEB_RECONNAISSANCE` |
 | Criticité | La criticité reste proportionnée. | `severity = MEDIUM` ou priorité équivalente |
 | Preuves | Les requêtes HTTP suspectes sont conservées. | Présence de chemins, codes HTTP, user-agent |
@@ -84,6 +95,7 @@ Le score ne remplace pas l'analyse humaine. Il sert à comparer les scénarios d
 | Dimension | Attendu | Indicateur |
 |---|---|---|
 | Vérité terrain | `web_access.log` produit l'alerte attendue. | Correspondance avec `PROMPT_INJECTION_ATTEMPT` dans `docs/GROUND_TRUTH_LABELS.md` |
+| Vérification automatique | Le cas est couvert par l'évaluateur de vérité terrain. | `utils/ground_truth_evaluator.py` contient `web_access.log` avec `PROMPT_INJECTION_ATTEMPT` |
 | Détection | Une instruction hostile dans un log web est détectée. | `alert_type = PROMPT_INJECTION_ATTEMPT` |
 | Motifs | Les motifs suspects sont identifiés. | Exemple : `ignore_previous_instructions`, `reveal_system_prompt` |
 | Preuves | Le log hostile est conservé comme preuve, pas comme instruction. | Présence dans `evidence` |
@@ -95,8 +107,8 @@ Le score ne remplace pas l'analyse humaine. Il sert à comparer les scénarios d
 
 | Fichier | Attendu | Indicateur |
 |---|---|---|
-| `benign_ssh_auth.log` | Pas de brute force SSH. | Pas de `SSH_BRUTE_FORCE` |
-| `benign_web_access.log` | Pas de reconnaissance web ou prompt injection. | Pas de `WEB_RECONNAISSANCE` ni `PROMPT_INJECTION_ATTEMPT` |
+| `benign_ssh_auth.log` | Pas de brute force SSH. | Pas de `SSH_BRUTE_FORCE` et cas couvert par `tests/test_ground_truth_evaluator.py` |
+| `benign_web_access.log` | Pas de reconnaissance web ou prompt injection. | Pas de `WEB_RECONNAISSANCE` ni `PROMPT_INJECTION_ATTEMPT` et cas couvert par `tests/test_ground_truth_evaluator.py` |
 
 ## Interprétation des résultats
 
@@ -105,6 +117,7 @@ Une évaluation satisfaisante doit montrer :
 ```text
 alertes correctes sur scénarios malveillants
 correspondance entre labels attendus et labels observés
+vérification automatique de vérité terrain passante
 absence d'alertes critiques injustifiées sur scénarios bénins
 preuves visibles
 prompts IA prudents
