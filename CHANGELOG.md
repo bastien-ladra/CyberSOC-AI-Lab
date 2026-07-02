@@ -1,5 +1,40 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.19.3 — Coverage & security gates
+
+### Ajouté
+
+- Ajout de `pytest-cov` pour mesurer la couverture de tests.
+- Ajout d’un seuil minimal de couverture fixé à 80 %.
+- Ajout de Bandit pour effectuer un scan de sécurité statique.
+- Ajout de `docs/QUALITY_GATES.md` pour documenter les contrôles qualité.
+- Renforcement de la CI avec tests de couverture et scan sécurité.
+
+### Validé
+
+- Formatage Black validé.
+- Lint Ruff validé.
+- Typage statique mypy validé.
+- Scan sécurité Bandit validé.
+- Tests pytest validés.
+- Couverture de tests validée à plus de 80 %.
+
+### Objectif
+
+Rendre la qualité du projet mesurable, vérifiable et plus difficile à contester.
+
+```text
+formatage
+→ lint
+→ typage statique
+→ scan sécurité
+→ tests
+→ couverture minimale
+→ qualité contrôlée
+```
+
+---
+
 ## v1.19.2 — Quality gates
 
 ### Ajouté
