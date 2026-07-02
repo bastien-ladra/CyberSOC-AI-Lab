@@ -40,7 +40,7 @@ Ce projet cherche donc à concevoir un prototype de SOC augmenté par IA qui res
 
 ## Statut du projet
 
-Version actuelle : v1.19.1 — Cohérence du schéma événement
+Version actuelle : v1.19.2 — Quality gates
 
 Le prototype couvre actuellement trois scénarios :
 

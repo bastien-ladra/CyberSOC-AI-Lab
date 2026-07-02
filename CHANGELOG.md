@@ -1,5 +1,37 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.19.2 — Quality gates
+
+### Ajouté
+
+- Ajout de `requirements-dev.txt` pour séparer les dépendances de développement des dépendances runtime.
+- Ajout de `pyproject.toml` pour centraliser la configuration des outils qualité.
+- Ajout de Black pour vérifier le formatage du code.
+- Ajout de Ruff pour vérifier les erreurs de lint et d’imports.
+- Ajout de mypy pour vérifier le typage statique.
+- Renforcement de la CI GitHub avec des quality gates automatiques.
+
+### Corrigé
+
+- Application du formatage Black sur le projet.
+- Correction des annotations de types nécessaires pour rendre mypy strictement vert.
+- Suppression du warning Black lié à la cible Python.
+
+### Objectif
+
+Rendre le projet plus difficile à casser et plus crédible lors d’une revue technique.
+
+```text
+formatage
+→ lint
+→ typage statique
+→ tests
+→ CI bloquante
+→ qualité vérifiable
+```
+
+---
+
 ## v1.19.1 — Cohérence du schéma événement
 
 ### Corrigé
