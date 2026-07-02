@@ -14,6 +14,7 @@ installer les dépendances
 relancer les quality gates
 exécuter les tests
 vérifier automatiquement la vérité terrain
+exporter les résultats d'évaluation
 relire le protocole expérimental
 appliquer la matrice d'évaluation
 renseigner le rapport de résultats
@@ -82,6 +83,7 @@ pytest --cov=ai_assistant --cov=detection --cov=utils --cov-report=term-missing 
 | pytest | Tests passants |
 | coverage | Couverture supérieure ou égale au seuil CI |
 | Ground truth evaluator | Labels attendus et alertes observées cohérents sur les logs simulés versionnés |
+| Ground truth results exporter | Résultats exportables en JSON et Markdown |
 
 ## Vérification automatique de la vérité terrain
 
@@ -110,6 +112,35 @@ labels attendus
 
 La commande `pytest` du bloc de quality gates exécute aussi ces tests.
 
+## Export des résultats d'évaluation
+
+Les résultats de vérité terrain peuvent être exportés par :
+
+```text
+utils/ground_truth_results_exporter.py
+tests/test_ground_truth_results_exporter.py
+```
+
+Artefacts attendus :
+
+```text
+runtime/evaluation/ground_truth_results.json
+runtime/evaluation/ground_truth_results.md
+```
+
+Ces artefacts permettent de vérifier :
+
+```text
+le statut global
+le nombre de cas évalués
+le nombre de cas passants
+le nombre de cas en échec
+les labels attendus
+les labels observés
+les labels manquants
+les labels inattendus
+```
+
 ## Reproduction expérimentale
 
 Les documents suivants doivent être lus dans cet ordre :
@@ -129,11 +160,14 @@ Ordre de reproduction :
 3. Relancer le pipeline sur les logs simulés.
 4. Vérifier les alertes générées.
 5. Relancer les tests de vérité terrain automatique.
-6. Vérifier les preuves conservées.
-7. Vérifier le prompt IA généré.
-8. Vérifier ou simuler la réponse IA.
-9. Appliquer la matrice d'évaluation.
-10. Renseigner le rapport de résultats expérimentaux.
+6. Exporter les résultats de vérité terrain.
+7. Vérifier `runtime/evaluation/ground_truth_results.json`.
+8. Vérifier `runtime/evaluation/ground_truth_results.md`.
+9. Vérifier les preuves conservées.
+10. Vérifier le prompt IA généré.
+11. Vérifier ou simuler la réponse IA.
+12. Appliquer la matrice d'évaluation.
+13. Renseigner le rapport de résultats expérimentaux.
 
 ## Artefacts à vérifier
 
@@ -145,6 +179,7 @@ runtime/reports/
 runtime/prompts/
 runtime/ai_outputs/
 runtime/audit/
+runtime/evaluation/
 runtime/human_reviews/
 ```
 
@@ -168,6 +203,7 @@ les quality gates passent
 les tests passent
 le seuil de couverture est respecté
 l'évaluateur automatique de vérité terrain passe
+les résultats de vérité terrain sont exportables
 les scénarios documentés produisent les alertes attendues
 les scénarios bénins ne produisent pas d'alerte critique injustifiée
 les prompts IA rappellent les limites et la validation humaine
