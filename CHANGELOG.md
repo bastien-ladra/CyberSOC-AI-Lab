@@ -1,5 +1,42 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.31.0 — CIC-IDS2017 mapping plan
+
+### Ajouté
+
+- Ajout de `docs/CIC_IDS2017_MAPPING_PLAN.md`.
+- Définition du périmètre minimal pour une future intégration CIC-IDS2017.
+- Identification des fichiers candidats à étudier.
+- Définition des colonnes minimales à extraire.
+- Définition d’un schéma interne cible.
+- Ajout d’un mapping initial entre labels CIC-IDS2017 et alertes internes.
+- Clarification que le premier mapping doit cibler `BENIGN` et `SSH_BRUTE_FORCE`.
+- Clarification que le loader public n’est pas encore implémenté.
+- Clarification qu’aucune donnée brute n’est ajoutée au dépôt.
+- Mise à jour de `docs/PROJECT_INDEX.md`.
+
+### Estimation
+
+- Avancement global : 97 %
+- Note portfolio : 98 / 100
+- Note recherche appliquée : 94 / 100
+- Note production : 22 / 100
+
+### Objectif
+
+Préparer l’intégration future de CIC-IDS2017 par un mapping documenté avant tout code.
+
+```text
+revue CIC-IDS2017
+→ fichiers candidats
+→ colonnes minimales
+→ labels retenus
+→ mapping explicite
+→ futur loader plus sûr
+```
+
+---
+
 ## v1.30.1 — README CIC-IDS2017 review link
 
 ### Modifié

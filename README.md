@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.30.1 — README CIC-IDS2017 review link
+Version actuelle : v1.31.0 — CIC-IDS2017 mapping plan
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -57,9 +57,9 @@ Estimation indicative actuelle :
 
 | Axe                             | Estimation |
 | ------------------------------- | ---------: |
-| Avancement global               |       96 % |
+| Avancement global               |       97 % |
 | Crédibilité portfolio           |   98 / 100 |
-| Crédibilité recherche appliquée |   93 / 100 |
+| Crédibilité recherche appliquée |   94 / 100 |
 | Maturité production             |   22 / 100 |
 
 Résultats expérimentaux documentés :
