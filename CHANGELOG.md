@@ -1,5 +1,35 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.27.1 — README recruiter link
+
+### Modifié
+
+- Ajout d’une section `Lecture rapide recruteur` dans le `README.md`.
+- Ajout d’un lien visible vers `docs/RECRUITER_QUICK_DEMO.md`.
+- Ajout d’un résumé du contenu du guide recruteur.
+- Mise à jour de la table documentaire du `README.md` pour référencer le guide recruteur.
+
+### Estimation
+
+- Avancement global : 90 %
+- Note portfolio : 96 / 100
+- Note recherche appliquée : 86 / 100
+- Note production : 22 / 100
+
+### Objectif
+
+Rendre le guide recruteur immédiatement visible depuis le README.
+
+```text
+guide recruteur
+→ lien README visible
+→ accès plus rapide
+→ présentation entretien facilitée
+→ valeur portfolio renforcée
+```
+
+---
+
 ## v1.27.0 — Recruiter quick demo
 
 ### Ajouté

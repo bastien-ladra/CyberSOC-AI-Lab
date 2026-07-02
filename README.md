@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.27.0 — Recruiter quick demo
+Version actuelle : v1.27.1 — README recruiter link
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -55,12 +55,12 @@ usage production SOC : non
 
 Estimation indicative actuelle :
 
-| Axe | Estimation |
-|---|---:|
-| Avancement global | 86 % |
-| Crédibilité portfolio | 93 / 100 |
-| Crédibilité recherche appliquée | 85 / 100 |
-| Maturité production | 22 / 100 |
+| Axe                             | Estimation |
+| ------------------------------- | ---------: |
+| Avancement global               |       86 % |
+| Crédibilité portfolio           |   93 / 100 |
+| Crédibilité recherche appliquée |   85 / 100 |
+| Maturité production             |   22 / 100 |
 
 Résultats expérimentaux documentés :
 
@@ -415,25 +415,25 @@ docs/PROJECT_INDEX.md
 
 Documents principaux :
 
-| Document | Rôle |
-|---|---|
-| `docs/PROJECT_INDEX.md` | Point d'entrée documentaire du projet. |
-| `docs/RECRUITER_QUICK_DEMO.md` | Guide court pour présenter le projet en entretien ou à un recruteur. |
-| `docs/architecture.md` | Architecture et pipeline. |
-| `docs/threat_model.md` | Menaces liées à l'usage de l'IA dans un SOC. |
-| `docs/SECURITY_MODEL.md` | Modèle de sécurité, garanties et limites. |
-| `docs/DATASET_CARD.md` | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
-| `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés. |
-| `docs/QUALITY_GATES.md` | Contrôles qualité du projet. |
-| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental. |
-| `docs/EVALUATION_MATRIX.md` | Grille d'évaluation. |
-| `docs/EXPERIMENT_RESULTS.md` | Rapport de résultats expérimentaux. |
-| `docs/REPRODUCIBILITY.md` | Procédure de reproductibilité. |
-| `docs/CASE_STUDY.md` | Étude de cas. |
-| `docs/DEMO_GUIDE.md` | Guide de démonstration. |
-| `docs/RESEARCH_PROPOSAL.md` | Cadrage doctoral provisoire. |
-| `docs/research_notes.md` | Notes de recherche. |
-| `docs/evaluation.md` | Méthodologie d'évaluation complémentaire. |
+| Document                       | Rôle                                                                       |
+| ------------------------------ | -------------------------------------------------------------------------- |
+| `docs/PROJECT_INDEX.md`        | Point d'entrée documentaire du projet.                                     |
+| `docs/RECRUITER_QUICK_DEMO.md` | Guide court pour présenter le projet en entretien ou à un recruteur.       |
+| `docs/architecture.md`         | Architecture et pipeline.                                                  |
+| `docs/threat_model.md`         | Menaces liées à l'usage de l'IA dans un SOC.                               |
+| `docs/SECURITY_MODEL.md`       | Modèle de sécurité, garanties et limites.                                  |
+| `docs/DATASET_CARD.md`         | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
+| `docs/GROUND_TRUTH_LABELS.md`  | Labels attendus et critères de comparaison pour les logs simulés.          |
+| `docs/QUALITY_GATES.md`        | Contrôles qualité du projet.                                               |
+| `docs/EXPERIMENT_PROTOCOL.md`  | Protocole expérimental.                                                    |
+| `docs/EVALUATION_MATRIX.md`    | Grille d'évaluation.                                                       |
+| `docs/EXPERIMENT_RESULTS.md`   | Rapport de résultats expérimentaux.                                        |
+| `docs/REPRODUCIBILITY.md`      | Procédure de reproductibilité.                                             |
+| `docs/CASE_STUDY.md`           | Étude de cas.                                                              |
+| `docs/DEMO_GUIDE.md`           | Guide de démonstration.                                                    |
+| `docs/RESEARCH_PROPOSAL.md`    | Cadrage doctoral provisoire.                                               |
+| `docs/research_notes.md`       | Notes de recherche.                                                        |
+| `docs/evaluation.md`           | Méthodologie d'évaluation complémentaire.                                  |
 
 Artefacts techniques liés à la vérité terrain automatisée :
 
