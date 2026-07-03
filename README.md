@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.38.0 — CIC-IDS2017 mini-loader README visibility
+Version actuelle : v1.39.0 — quality gates refresh
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -65,15 +65,21 @@ Estimation indicative actuelle :
 Résultats expérimentaux documentés :
 
 ```text
-quality gates : OK
-tests : 60 passed
-couverture : 94.94 %
+quality gates locaux : OK (Black, Ruff, mypy, pytest)
+tests : 83 passed
+couverture : 95.99 %
 vérité terrain : OK
 export JSON / Markdown : OK
 rapport expérimental : rempli
 ```
 
 Ces estimations reflètent le niveau actuel du projet sur un périmètre simulé et versionné. Elles ne constituent pas une certification, ni une preuve de performance sur des données SOC réelles.
+
+Le rafraîchissement des contrôles qualité est documenté dans :
+
+```text
+docs/QUALITY_GATES_REFRESH.md
+```
 
 ## Trajectoire dataset public
 
@@ -510,6 +516,7 @@ Ces contrôles sont documentés dans :
 
 ```text
 docs/QUALITY_GATES.md
+docs/QUALITY_GATES_REFRESH.md
 docs/REPRODUCIBILITY.md
 ```
 
@@ -566,6 +573,7 @@ Documents principaux :
 | `docs/CIC_IDS2017_MAPPING_PLAN.md`   | Plan de mapping entre labels CIC-IDS2017 et alertes internes avant tout loader. |
 | `docs/GROUND_TRUTH_LABELS.md`        | Labels attendus et critères de comparaison pour les logs simulés.               |
 | `docs/QUALITY_GATES.md`              | Contrôles qualité du projet.                                                    |
+| `docs/QUALITY_GATES_REFRESH.md`      | Rafraîchissement local des résultats qualité documentés pour v1.39.0.           |
 | `docs/EXPERIMENT_PROTOCOL.md`        | Protocole expérimental.                                                         |
 | `docs/EVALUATION_MATRIX.md`          | Grille d'évaluation.                                                            |
 | `docs/EXPERIMENT_RESULTS.md`         | Rapport de résultats expérimentaux.                                             |
