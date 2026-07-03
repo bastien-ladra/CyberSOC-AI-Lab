@@ -1,5 +1,36 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.33.1 — README maturity alignment
+
+### Modifié
+
+- Alignement du tableau de maturité du `README.md` avec l’état documenté en `v1.33.0`.
+- Mise à jour de la version courante du `README.md`.
+- Aucune modification du code.
+- Aucune modification du parser CIC-IDS2017.
+- Aucune modification des tests.
+
+### Estimation
+
+- Avancement global : 99 %
+- Note portfolio : 100 / 100
+- Note recherche appliquée : 97 / 100
+- Note production : 24 / 100
+
+### Objectif
+
+Corriger l’incohérence entre le README et le CHANGELOG après `v1.33.0`.
+
+```text
+parser validé
+→ README aligné
+→ estimation cohérente
+→ pas de modification code
+→ verrouillage propre
+```
+
+---
+
 ## v1.33.0 — CIC-IDS2017 sample row parser
 
 ### Ajouté
