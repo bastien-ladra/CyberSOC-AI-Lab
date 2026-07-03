@@ -1,5 +1,42 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.35.0 — CIC-IDS2017 sample parser example
+
+### Ajouté
+
+- Ajout de `docs/CIC_IDS2017_SAMPLE_PARSER_EXAMPLE.md`.
+- Ajout d’un exemple contrôlé d’utilisation du sample row parser CIC-IDS2017.
+- Ajout d’un exemple `SSH-Patator` mappé vers `SSH_BRUTE_FORCE`.
+- Ajout d’un exemple `BENIGN` sans alerte attendue.
+- Ajout d’un exemple `FTP-Patator` traité comme label hors périmètre.
+- Ajout des commandes de vérification ciblée avec `pytest`.
+- Mise à jour de `docs/PROJECT_INDEX.md`.
+- Clarification que l’exemple ne télécharge pas CIC-IDS2017, ne lit pas de CSV complet et n’ajoute aucun dataset brut.
+- Clarification que l’exemple ne constitue pas une validation SOC externe.
+
+### Estimation
+
+- Avancement global : 99 %
+- Note portfolio : 100 / 100
+- Note recherche appliquée : 98 / 100
+- Note production : 24 / 100
+
+### Objectif
+
+Documenter un exemple minimal et honnête d’utilisation du parser CIC-IDS2017, sans sur-vendre l’intégration du dataset public.
+
+```text
+parser testé
+→ exemple documenté
+→ SSH-Patator démontré
+→ BENIGN démontré
+→ hors périmètre démontré
+→ limites explicites
+→ aucun dataset brut ajouté
+```
+
+---
+
 ## v1.34.0 — CIC-IDS2017 parser README visibility
 
 ### Modifié

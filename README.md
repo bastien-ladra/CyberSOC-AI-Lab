@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.34.0 — CIC-IDS2017 parser README visibility
+Version actuelle : v1.35.0 — CIC-IDS2017 sample parser example
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -184,6 +184,10 @@ normalisation des labels
 ```
 
 ## Sample row parser CIC-IDS2017
+
+L'exemple documenté d'utilisation est disponible dans :
+
+docs/CIC_IDS2017_SAMPLE_PARSER_EXAMPLE.md
 
 Le parser minimal d'une ligne CIC-IDS2017 déjà fournie localement est implémenté dans :
 
