@@ -1,5 +1,38 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.32.1 — README CIC-IDS2017 mapper link
+
+### Modifié
+
+- Ajout d’une section `Mapper CIC-IDS2017` dans le `README.md`.
+- Ajout d’un lien visible vers `utils/cic_ids2017_mapping.py`.
+- Ajout d’un lien visible vers `tests/test_cic_ids2017_mapping.py`.
+- Clarification visible du périmètre du mapper : `BENIGN`, `SSH-Patator`, alias SSH et labels hors périmètre.
+- Clarification visible qu’aucun dataset public n’est téléchargé ni parsé.
+- Ajout des artefacts techniques du mapper dans la documentation du README.
+
+### Estimation
+
+- Avancement global : 99 %
+- Note portfolio : 100 / 100
+- Note recherche appliquée : 96 / 100
+- Note production : 23 / 100
+
+### Objectif
+
+Rendre le mapper CIC-IDS2017 et ses tests visibles directement depuis le README.
+
+```text
+mapper codé
+→ tests visibles
+→ périmètre visible
+→ limites visibles
+→ dataset non téléchargé
+→ prochaine étape loader mieux cadrée
+```
+
+---
+
 ## v1.32.0 — CIC-IDS2017 label mapper
 
 ### Ajouté
