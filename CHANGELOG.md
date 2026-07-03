@@ -1,5 +1,40 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.34.0 — CIC-IDS2017 parser README visibility
+
+### Modifié
+
+- Ajout d’une section `Sample row parser CIC-IDS2017` dans le `README.md`.
+- Ajout d’un lien visible vers `utils/cic_ids2017_sample_parser.py`.
+- Ajout d’un lien visible vers `tests/test_cic_ids2017_sample_parser.py`.
+- Ajout du sample row parser CIC-IDS2017 dans la liste des tests automatisés.
+- Ajout du sample row parser CIC-IDS2017 dans les artefacts techniques documentés.
+- Clarification visible que le parser traite une ligne dict locale.
+- Clarification visible qu’il ne télécharge pas CIC-IDS2017, ne charge pas de CSV complet et ne lance aucune règle de détection.
+- Aucune modification du code.
+
+### Estimation
+
+- Avancement global : 99 %
+- Note portfolio : 100 / 100
+- Note recherche appliquée : 97 / 100
+- Note production : 24 / 100
+
+### Objectif
+
+Rendre le sample row parser CIC-IDS2017 visible directement depuis le README sans modifier le code.
+
+```text
+parser codé
+→ tests présents
+→ README visible
+→ limites visibles
+→ aucun dataset brut ajouté
+→ verrouillage propre
+```
+
+---
+
 ## v1.33.1 — README maturity alignment
 
 ### Modifié
