@@ -28,6 +28,7 @@ prototype technique
 → sample row parser CIC-IDS2017 testé
 → exemple sample row parser CIC-IDS2017 documenté
 → plan mini-loader borné CIC-IDS2017
+→ mini-loader borné CIC-IDS2017 testé
 ```
 
 ## Documents principaux
@@ -72,6 +73,8 @@ prototype technique
 | `tests/test_cic_ids2017_mapping.py` | Vérifie le mapping `BENIGN`, `SSH-Patator`, les alias SSH et les labels hors périmètre. |
 | `utils/cic_ids2017_sample_parser.py` | Parse une ligne dict CSV CIC-IDS2017 déjà fournie localement vers un événement normalisé minimal. |
 | `tests/test_cic_ids2017_sample_parser.py` | Vérifie le parsing d'une ligne locale, les alias de colonnes, les ports, les labels supportés et les erreurs claires. |
+| `utils/cic_ids2017_mini_loader.py` | Charge un nombre borné de lignes depuis un CSV local CIC-IDS2017-like sans télécharger ni versionner de dataset brut. |
+| `tests/test_cic_ids2017_mini_loader.py` | Vérifie `max_rows`, les CSV temporaires, les labels supportés, les labels hors périmètre et les erreurs explicites. |
 
 ## Artefacts générés
 
@@ -117,6 +120,8 @@ README.md
 → tests/test_cic_ids2017_sample_parser.py
 → docs/CIC_IDS2017_SAMPLE_PARSER_EXAMPLE.md
 → docs/CIC_IDS2017_BOUNDED_MINI_LOADER_PLAN.md
+→ utils/cic_ids2017_mini_loader.py
+→ tests/test_cic_ids2017_mini_loader.py
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
 → utils/ground_truth_results_exporter.py
@@ -124,7 +129,7 @@ README.md
 → docs/EVALUATION_MATRIX.md
 ```
 
-Objectif : comprendre les menaces prises en compte, les garde-fous, les données utilisées, les limites du dataset simulé, la trajectoire vers un dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, le parser d'une ligne locale, son exemple contrôlé, le futur mini-loader borné, les résultats attendus, la vérification automatique, l'export des résultats et le cadre d'évaluation.
+Objectif : comprendre les menaces prises en compte, les garde-fous, les données utilisées, les limites du dataset simulé, la trajectoire vers un dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, le parser d'une ligne locale, son exemple contrôlé, le mini-loader borné, les résultats attendus, la vérification automatique, l'export des résultats et le cadre d'évaluation.
 
 ### Encadrant académique ou doctoral
 
@@ -144,6 +149,8 @@ README.md
 → tests/test_cic_ids2017_sample_parser.py
 → docs/CIC_IDS2017_SAMPLE_PARSER_EXAMPLE.md
 → docs/CIC_IDS2017_BOUNDED_MINI_LOADER_PLAN.md
+→ utils/cic_ids2017_mini_loader.py
+→ tests/test_cic_ids2017_mini_loader.py
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
 → utils/ground_truth_results_exporter.py
@@ -155,7 +162,7 @@ README.md
 → docs/REPRODUCIBILITY.md
 ```
 
-Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, les données, la vérité terrain, sa vérification automatique, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, le parser d'une ligne locale, son exemple contrôlé, le futur mini-loader borné, l'export des résultats, la méthode et les limites actuelles.
+Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, les données, la vérité terrain, sa vérification automatique, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, le parser d'une ligne locale, son exemple contrôlé, le mini-loader borné, l'export des résultats, la méthode et les limites actuelles.
 
 ### Contributeur technique
 
@@ -175,6 +182,8 @@ README.md
 → tests/test_cic_ids2017_sample_parser.py
 → docs/CIC_IDS2017_SAMPLE_PARSER_EXAMPLE.md
 → docs/CIC_IDS2017_BOUNDED_MINI_LOADER_PLAN.md
+→ utils/cic_ids2017_mini_loader.py
+→ tests/test_cic_ids2017_mini_loader.py
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
 → utils/ground_truth_results_exporter.py
@@ -185,7 +194,7 @@ README.md
 → CHANGELOG.md
 ```
 
-Objectif : comprendre la structure du projet, les données d'exemple, les limites du dataset actuel, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, le parser d'une ligne locale, son exemple contrôlé, le futur mini-loader borné, les labels attendus, les tests de vérification, l'export des résultats, les contrôles attendus et la manière de vérifier une modification.
+Objectif : comprendre la structure du projet, les données d'exemple, les limites du dataset actuel, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, le parser d'une ligne locale, son exemple contrôlé, le mini-loader borné, les labels attendus, les tests de vérification, l'export des résultats, les contrôles attendus et la manière de vérifier une modification.
 
 ## Chaîne de crédibilité actuelle
 
@@ -214,6 +223,7 @@ code fonctionnel
 → sample row parser CIC-IDS2017 testé
 → exemple sample row parser CIC-IDS2017 documenté
 → plan mini-loader borné CIC-IDS2017
+→ mini-loader borné CIC-IDS2017 testé
 ```
 
 ## Ce que cet index ne remplace pas
