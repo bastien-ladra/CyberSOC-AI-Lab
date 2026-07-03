@@ -4,6 +4,46 @@ Ce document aligne les dernières versions documentaires après `v1.38.0`.
 
 Il sert de complément récent au `CHANGELOG.md` principal pour éviter une réécriture risquée de tout l'historique long du projet.
 
+## v1.41.0 — repository cleanup and project status
+
+### Ajouté
+
+- Ajout de `docs/PROJECT_STATUS.md` comme point concret central du projet.
+- Regroupement de l'objectif, de l'avancement réel, des limites, de la décision de continuer ou non et de la prochaine étape utile.
+- Clarification du positionnement : portfolio, entretien technique, recherche appliquée, mais pas production SOC.
+- Clarification des résultats qualité actuels : Black, Ruff, mypy, Bandit, pytest, 83 tests passés et couverture 95.99 %.
+- Clarification de la décision recommandée : arrêter les micro-versions cosmétiques et ne continuer que sur une étape qui ajoute une vraie valeur.
+
+### Modifié
+
+- Nettoyage du `README.md` pour en faire une page d'entrée plus synthétique.
+- Regroupement de la navigation documentaire autour de `docs/PROJECT_STATUS.md` et `docs/PROJECT_INDEX.md`.
+- Nettoyage de `docs/PROJECT_INDEX.md` pour réduire la dispersion documentaire.
+- Aucune modification du code.
+- Aucune modification des tests.
+
+### Estimation
+
+- Avancement global : 99 %
+- Note portfolio : 100 / 100
+- Note recherche appliquée : 98 / 100
+- Note production : 25 / 100
+
+### Objectif
+
+Rendre le dépôt plus lisible, plus défendable et plus difficile à critiquer en regroupant le point concret dans un document central.
+
+```text
+documentation dispersée
+→ README nettoyé
+→ point projet centralisé
+→ index regroupé
+→ limites visibles
+→ décision de suite claire
+```
+
+---
+
 ## v1.40.1 — recent changelog alignment
 
 ### Ajouté
