@@ -1,5 +1,44 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.33.0 — CIC-IDS2017 sample row parser
+
+### Ajouté
+
+- Ajout de `utils/cic_ids2017_sample_parser.py`.
+- Ajout d’un parser minimal pour une ligne dict CSV CIC-IDS2017 déjà fournie localement.
+- Ajout d’un événement normalisé `CicIds2017SampleEvent`.
+- Normalisation des colonnes `Timestamp`, `Source IP`, `Destination IP`, `Source Port`, `Destination Port`, `Protocol` et `Label`.
+- Support des alias `Src IP`, `Dst IP`, `Src Port` et `Dst Port`.
+- Conversion des protocoles numériques `1`, `6` et `17` vers `ICMP`, `TCP` et `UDP`.
+- Intégration avec le mapper `map_cic_ids2017_label`.
+- Ajout de `tests/test_cic_ids2017_sample_parser.py`.
+- Ajout de tests sur SSH, BENIGN, label hors périmètre, colonnes manquantes, valeurs vides et ports invalides.
+- Clarification que le module ne télécharge pas CIC-IDS2017, ne charge pas de CSV complet et ne lance aucune règle de détection.
+- Mise à jour de `docs/PROJECT_INDEX.md`.
+
+### Estimation
+
+- Avancement global : 99 %
+- Note portfolio : 100 / 100
+- Note recherche appliquée : 97 / 100
+- Note production : 24 / 100
+
+### Objectif
+
+Passer du mapping de labels à un premier parsing contrôlé d’une ligne CIC-IDS2017 locale, sans intégrer encore le dataset complet.
+
+```text
+mapper CIC-IDS2017
+→ ligne dict locale
+→ colonnes minimales
+→ événement normalisé
+→ label mappé
+→ erreurs claires
+→ aucun dataset brut ajouté
+```
+
+---
+
 ## v1.32.1 — README CIC-IDS2017 mapper link
 
 ### Modifié
