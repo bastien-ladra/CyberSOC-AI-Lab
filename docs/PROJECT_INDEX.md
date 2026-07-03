@@ -1,245 +1,156 @@
 # Index documentaire du projet
 
-Ce document sert de point d'entrée rapide vers les documents importants de CyberSOC-AI-Lab.
+Ce document sert de carte de navigation pour CyberSOC-AI-Lab.
 
-Il évite de dépendre uniquement du README lorsque le projet grandit et permet à un recruteur, un évaluateur technique ou un futur encadrant académique de comprendre rapidement où trouver chaque information.
+Le point d'entrée principal après nettoyage documentaire est :
 
-## Vue d'ensemble
+```text
+docs/PROJECT_STATUS.md
+```
 
-CyberSOC-AI-Lab est organisé autour de plusieurs axes :
+## Lecture rapide
+
+| Besoin | Document |
+|---|---|
+| Comprendre l'état réel du projet | `docs/PROJECT_STATUS.md` |
+| Présenter le projet à un recruteur | `docs/RECRUITER_QUICK_DEMO.md` |
+| Faire une démonstration complète | `docs/DEMO_GUIDE.md` |
+| Lire l'étude de cas | `docs/CASE_STUDY.md` |
+| Comprendre le modèle de sécurité | `docs/SECURITY_MODEL.md` |
+| Comprendre les menaces IA/SOC | `docs/threat_model.md` |
+| Comprendre les données utilisées | `docs/DATASET_CARD.md` |
+| Comprendre la vérité terrain | `docs/GROUND_TRUTH_LABELS.md` |
+| Reproduire les contrôles qualité | `docs/QUALITY_GATES.md` |
+| Lire les résultats qualité récents | `docs/QUALITY_GATES_REFRESH.md` |
+| Lire l'historique récent | `docs/CHANGELOG_RECENT.md` |
+| Lire l'historique long | `CHANGELOG.md` |
+
+## Chaîne de crédibilité actuelle
+
+CyberSOC-AI-Lab est organisé autour de la chaîne suivante :
 
 ```text
 prototype technique
-→ sécurité IA
-→ validation humaine
-→ qualité logicielle
-→ données documentées
+→ tests automatisés
+→ quality gates
+→ sécurité documentée
+→ threat model
+→ dataset simulé documenté
 → vérité terrain explicitée
 → vérité terrain vérifiée automatiquement
-→ résultats d'évaluation exportés
-→ évaluation expérimentale
+→ résultats exportés
+→ protocole expérimental
 → reproductibilité
-→ positionnement recherche
-→ évolution dataset public
-→ candidats datasets publics
-→ revue CIC-IDS2017
-→ plan de mapping CIC-IDS2017
-→ mapper CIC-IDS2017 testé
-→ sample row parser CIC-IDS2017 testé
-→ exemple sample row parser CIC-IDS2017 documenté
-→ plan mini-loader borné CIC-IDS2017
-→ mini-loader borné CIC-IDS2017 testé
-→ exemple mini-loader borné CIC-IDS2017 documenté
-→ historique récent aligné
+→ CIC-IDS2017 traité progressivement
+→ limites assumées
+→ point projet consolidé
 ```
 
 ## Documents principaux
 
 | Document | Rôle |
 |---|---|
-| `README.md` | Présentation générale du projet, installation, utilisation et positionnement. |
-| `CHANGELOG.md` | Historique versionné long du projet. |
+| `README.md` | Présentation synthétique du projet, commandes et liens principaux. |
+| `docs/PROJECT_STATUS.md` | Point concret : objectif, avancement, limites, décision de continuer ou non. |
+| `docs/PROJECT_INDEX.md` | Carte de navigation documentaire. |
 | `docs/CHANGELOG_RECENT.md` | Historique récent aligné des versions postérieures à `v1.38.0`. |
-| `docs/PROJECT_INDEX.md` | Carte de navigation documentaire du projet. |
+| `CHANGELOG.md` | Historique versionné long du projet. |
 | `docs/architecture.md` | Architecture du prototype et flux de traitement. |
-| `docs/threat_model.md` | Menaces identifiées autour de l'IA appliquée au SOC. |
 | `docs/SECURITY_MODEL.md` | Modèle de sécurité, garanties recherchées et limites du prototype. |
+| `docs/threat_model.md` | Menaces identifiées autour de l'IA appliquée au SOC. |
 | `docs/DATASET_CARD.md` | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
-| `docs/PUBLIC_DATASET_ROADMAP.md` | Roadmap pour évoluer vers un dataset public documenté sans sur-vendre le périmètre actuel. |
-| `docs/PUBLIC_DATASET_CANDIDATES.md` | Liste de datasets publics candidats à étudier avant toute intégration. |
-| `docs/CIC_IDS2017_DATASET_REVIEW.md` | Revue du premier dataset public candidat à étudier, sans intégration immédiate. |
-| `docs/CIC_IDS2017_MAPPING_PLAN.md` | Plan de mapping entre labels CIC-IDS2017 et alertes internes avant tout loader. |
-| `docs/CIC_IDS2017_SAMPLE_PARSER_EXAMPLE.md` | Exemple contrôlé d'utilisation du sample row parser CIC-IDS2017 sans dataset brut. |
-| `docs/CIC_IDS2017_BOUNDED_MINI_LOADER_PLAN.md` | Plan de mini-loader borné CIC-IDS2017 avant intégration de code supplémentaire. |
-| `docs/CIC_IDS2017_MINI_LOADER_USAGE_EXAMPLE.md` | Exemple contrôlé d'utilisation du mini-loader borné avec CSV temporaire fictif. |
 | `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés. |
 | `docs/QUALITY_GATES.md` | Contrôles qualité à exécuter avant validation d'une version. |
-| `docs/QUALITY_GATES_REFRESH.md` | Rafraîchissement local des résultats qualité documentés pour la version courante. |
-| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental utilisé pour évaluer le projet. |
+| `docs/QUALITY_GATES_REFRESH.md` | Rafraîchissement local des résultats qualité documentés. |
+| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental. |
 | `docs/EVALUATION_MATRIX.md` | Grille d'évaluation des scénarios et des réponses IA. |
-| `docs/EXPERIMENT_RESULTS.md` | Rapport pour consigner les résultats expérimentaux. |
-| `docs/REPRODUCIBILITY.md` | Procédure pour reproduire les contrôles techniques et expérimentaux. |
-| `docs/CASE_STUDY.md` | Étude de cas complète du projet. |
-| `docs/DEMO_GUIDE.md` | Guide de démonstration pour entretien, portfolio ou revue technique. |
-| `docs/RECRUITER_QUICK_DEMO.md` | Démonstration courte orientée recruteur et entretien technique. |
+| `docs/EXPERIMENT_RESULTS.md` | Rapport de résultats expérimentaux. |
+| `docs/REPRODUCIBILITY.md` | Procédure de reproductibilité. |
+| `docs/CASE_STUDY.md` | Étude de cas complète. |
+| `docs/DEMO_GUIDE.md` | Guide de démonstration. |
+| `docs/RECRUITER_QUICK_DEMO.md` | Démonstration courte orientée recruteur. |
 | `docs/RESEARCH_PROPOSAL.md` | Cadrage doctoral provisoire. |
-| `docs/research_notes.md` | Notes de recherche et pistes d'évolution. |
+| `docs/research_notes.md` | Notes de recherche. |
 | `docs/evaluation.md` | Méthodologie d'évaluation historique et complémentaire. |
 
-## Artefacts techniques de vérification
+## Documentation CIC-IDS2017
+
+| Document | Rôle |
+|---|---|
+| `docs/PUBLIC_DATASET_ROADMAP.md` | Roadmap vers un dataset public documenté. |
+| `docs/PUBLIC_DATASET_CANDIDATES.md` | Liste de datasets publics candidats. |
+| `docs/CIC_IDS2017_DATASET_REVIEW.md` | Revue du dataset CIC-IDS2017, sans intégration complète. |
+| `docs/CIC_IDS2017_MAPPING_PLAN.md` | Plan de mapping entre labels CIC-IDS2017 et alertes internes. |
+| `docs/CIC_IDS2017_SAMPLE_PARSER_EXAMPLE.md` | Exemple contrôlé du sample row parser. |
+| `docs/CIC_IDS2017_BOUNDED_MINI_LOADER_PLAN.md` | Plan du mini-loader borné. |
+| `docs/CIC_IDS2017_MINI_LOADER_USAGE_EXAMPLE.md` | Exemple contrôlé du mini-loader avec CSV temporaire fictif. |
+
+## Artefacts techniques principaux
 
 | Artefact | Rôle |
 |---|---|
-| `utils/ground_truth_evaluator.py` | Compare les alertes observées aux labels attendus des logs simulés versionnés. |
-| `tests/test_ground_truth_evaluator.py` | Vérifie automatiquement les cas de vérité terrain, les labels manquants et les labels inattendus. |
+| `utils/ground_truth_evaluator.py` | Compare les alertes observées aux labels attendus. |
+| `tests/test_ground_truth_evaluator.py` | Vérifie l'évaluation de vérité terrain. |
 | `utils/ground_truth_results_exporter.py` | Génère les résultats de vérité terrain en JSON et Markdown. |
-| `tests/test_ground_truth_results_exporter.py` | Vérifie la sérialisation JSON, le rapport Markdown et l'écriture des artefacts de résultats. |
-| `utils/cic_ids2017_mapping.py` | Mappe un sous-ensemble documenté de labels CIC-IDS2017 vers les alertes internes. |
-| `tests/test_cic_ids2017_mapping.py` | Vérifie le mapping `BENIGN`, `SSH-Patator`, les alias SSH et les labels hors périmètre. |
-| `utils/cic_ids2017_sample_parser.py` | Parse une ligne dict CSV CIC-IDS2017 déjà fournie localement vers un événement normalisé minimal. |
-| `tests/test_cic_ids2017_sample_parser.py` | Vérifie le parsing d'une ligne locale, les alias de colonnes, les ports, les labels supportés et les erreurs claires. |
-| `utils/cic_ids2017_mini_loader.py` | Charge un nombre borné de lignes depuis un CSV local CIC-IDS2017-like sans télécharger ni versionner de dataset brut. |
-| `tests/test_cic_ids2017_mini_loader.py` | Vérifie `max_rows`, les CSV temporaires, les labels supportés, les labels hors périmètre et les erreurs explicites. |
-
-## Artefacts générés
-
-| Artefact | Rôle |
-|---|---|
-| `runtime/evaluation/ground_truth_results.json` | Résultats de vérité terrain exploitables par outil ou audit technique. |
-| `runtime/evaluation/ground_truth_results.md` | Rapport lisible des résultats de vérité terrain. |
+| `tests/test_ground_truth_results_exporter.py` | Vérifie l'export des résultats. |
+| `utils/cic_ids2017_mapping.py` | Mappe un sous-ensemble de labels CIC-IDS2017. |
+| `tests/test_cic_ids2017_mapping.py` | Vérifie le mapper CIC-IDS2017. |
+| `utils/cic_ids2017_sample_parser.py` | Parse une ligne locale CIC-IDS2017-like. |
+| `tests/test_cic_ids2017_sample_parser.py` | Vérifie le sample row parser. |
+| `utils/cic_ids2017_mini_loader.py` | Charge un nombre borné de lignes depuis un CSV local. |
+| `tests/test_cic_ids2017_mini_loader.py` | Vérifie le mini-loader borné. |
 
 ## Lecture recommandée selon le profil
 
 ### Recruteur technique
 
-Lecture conseillée :
-
 ```text
 README.md
+→ docs/PROJECT_STATUS.md
 → docs/RECRUITER_QUICK_DEMO.md
 → docs/DEMO_GUIDE.md
 → docs/CASE_STUDY.md
-→ docs/EXPERIMENT_RESULTS.md
-→ docs/QUALITY_GATES.md
 → docs/QUALITY_GATES_REFRESH.md
-→ docs/CHANGELOG_RECENT.md
-→ CHANGELOG.md
 ```
-
-Objectif : comprendre rapidement ce que fait le projet, comment le lancer, ce qu'il démontre, quels résultats sont documentés et quelles limites sont assumées.
 
 ### Évaluateur cybersécurité
 
-Lecture conseillée :
-
 ```text
 README.md
-→ docs/threat_model.md
+→ docs/PROJECT_STATUS.md
 → docs/SECURITY_MODEL.md
+→ docs/threat_model.md
 → docs/DATASET_CARD.md
-→ docs/PUBLIC_DATASET_ROADMAP.md
-→ docs/PUBLIC_DATASET_CANDIDATES.md
-→ docs/CIC_IDS2017_DATASET_REVIEW.md
-→ docs/CIC_IDS2017_MAPPING_PLAN.md
-→ utils/cic_ids2017_mapping.py
-→ tests/test_cic_ids2017_mapping.py
-→ utils/cic_ids2017_sample_parser.py
-→ tests/test_cic_ids2017_sample_parser.py
-→ docs/CIC_IDS2017_SAMPLE_PARSER_EXAMPLE.md
-→ docs/CIC_IDS2017_BOUNDED_MINI_LOADER_PLAN.md
-→ utils/cic_ids2017_mini_loader.py
-→ tests/test_cic_ids2017_mini_loader.py
-→ docs/CIC_IDS2017_MINI_LOADER_USAGE_EXAMPLE.md
 → docs/GROUND_TRUTH_LABELS.md
-→ utils/ground_truth_evaluator.py
-→ utils/ground_truth_results_exporter.py
-→ docs/EXPERIMENT_PROTOCOL.md
-→ docs/EVALUATION_MATRIX.md
-→ docs/CHANGELOG_RECENT.md
+→ docs/CIC_IDS2017_MINI_LOADER_USAGE_EXAMPLE.md
+→ docs/QUALITY_GATES_REFRESH.md
 ```
-
-Objectif : comprendre les menaces prises en compte, les garde-fous, les données utilisées, les limites du dataset simulé, la trajectoire vers un dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, le parser d'une ligne locale, son exemple contrôlé, le mini-loader borné, son exemple contrôlé, les résultats attendus, la vérification automatique, l'export des résultats et le cadre d'évaluation.
 
 ### Encadrant académique ou doctoral
 
-Lecture conseillée :
-
 ```text
 README.md
+→ docs/PROJECT_STATUS.md
 → docs/RESEARCH_PROPOSAL.md
-→ docs/DATASET_CARD.md
 → docs/PUBLIC_DATASET_ROADMAP.md
 → docs/PUBLIC_DATASET_CANDIDATES.md
 → docs/CIC_IDS2017_DATASET_REVIEW.md
-→ docs/CIC_IDS2017_MAPPING_PLAN.md
-→ utils/cic_ids2017_mapping.py
-→ tests/test_cic_ids2017_mapping.py
-→ utils/cic_ids2017_sample_parser.py
-→ tests/test_cic_ids2017_sample_parser.py
-→ docs/CIC_IDS2017_SAMPLE_PARSER_EXAMPLE.md
-→ docs/CIC_IDS2017_BOUNDED_MINI_LOADER_PLAN.md
-→ utils/cic_ids2017_mini_loader.py
-→ tests/test_cic_ids2017_mini_loader.py
-→ docs/CIC_IDS2017_MINI_LOADER_USAGE_EXAMPLE.md
-→ docs/GROUND_TRUTH_LABELS.md
-→ utils/ground_truth_evaluator.py
-→ utils/ground_truth_results_exporter.py
-→ tests/test_ground_truth_evaluator.py
-→ tests/test_ground_truth_results_exporter.py
 → docs/EXPERIMENT_PROTOCOL.md
 → docs/EVALUATION_MATRIX.md
 → docs/EXPERIMENT_RESULTS.md
-→ docs/REPRODUCIBILITY.md
-→ docs/CHANGELOG_RECENT.md
 ```
-
-Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, les données, la vérité terrain, sa vérification automatique, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, le parser d'une ligne locale, son exemple contrôlé, le mini-loader borné, son exemple contrôlé, l'export des résultats, la méthode et les limites actuelles.
 
 ### Contributeur technique
 
-Lecture conseillée :
-
 ```text
 README.md
+→ docs/PROJECT_STATUS.md
 → docs/architecture.md
-→ docs/DATASET_CARD.md
-→ docs/PUBLIC_DATASET_ROADMAP.md
-→ docs/PUBLIC_DATASET_CANDIDATES.md
-→ docs/CIC_IDS2017_DATASET_REVIEW.md
-→ docs/CIC_IDS2017_MAPPING_PLAN.md
-→ utils/cic_ids2017_mapping.py
-→ tests/test_cic_ids2017_mapping.py
-→ utils/cic_ids2017_sample_parser.py
-→ tests/test_cic_ids2017_sample_parser.py
-→ docs/CIC_IDS2017_SAMPLE_PARSER_EXAMPLE.md
-→ docs/CIC_IDS2017_BOUNDED_MINI_LOADER_PLAN.md
-→ utils/cic_ids2017_mini_loader.py
-→ tests/test_cic_ids2017_mini_loader.py
-→ docs/CIC_IDS2017_MINI_LOADER_USAGE_EXAMPLE.md
-→ docs/GROUND_TRUTH_LABELS.md
-→ utils/ground_truth_evaluator.py
-→ utils/ground_truth_results_exporter.py
-→ tests/test_ground_truth_evaluator.py
-→ tests/test_ground_truth_results_exporter.py
+→ docs/REPRODUCIBILITY.md
 → docs/QUALITY_GATES.md
 → docs/QUALITY_GATES_REFRESH.md
-→ docs/REPRODUCIBILITY.md
-→ docs/CHANGELOG_RECENT.md
-→ CHANGELOG.md
-```
-
-Objectif : comprendre la structure du projet, les données d'exemple, les limites du dataset actuel, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, le parser d'une ligne locale, son exemple contrôlé, le mini-loader borné, son exemple contrôlé, les labels attendus, les tests de vérification, l'export des résultats, les contrôles attendus et la manière de vérifier une modification.
-
-## Chaîne de crédibilité actuelle
-
-Le projet s'appuie progressivement sur la chaîne suivante :
-
-```text
-code fonctionnel
-→ tests automatisés
-→ quality gates
-→ sécurité documentée
-→ threat model aligné
-→ dataset documenté
-→ vérité terrain explicitée
-→ vérité terrain vérifiée automatiquement
-→ résultats d'évaluation exportés
-→ protocole expérimental
-→ matrice d'évaluation
-→ rapport de résultats
-→ reproductibilité
-→ cadrage recherche
-→ roadmap dataset public
-→ candidats datasets publics
-→ revue CIC-IDS2017
-→ plan de mapping CIC-IDS2017
-→ mapper CIC-IDS2017 testé
-→ sample row parser CIC-IDS2017 testé
-→ exemple sample row parser CIC-IDS2017 documenté
-→ plan mini-loader borné CIC-IDS2017
-→ mini-loader borné CIC-IDS2017 testé
-→ exemple mini-loader borné CIC-IDS2017 documenté
-→ historique récent aligné
+→ tests/
+→ utils/
 ```
 
 ## Ce que cet index ne remplace pas
@@ -248,28 +159,11 @@ Cet index ne remplace pas :
 
 ```text
 le README
-le changelog
 les tests
 les quality gates
 la documentation détaillée
-la validation humaine
 la reproduction des résultats
+la validation humaine
 ```
 
-Il sert uniquement de carte de navigation documentaire.
-
-## Limites actuelles de la documentation
-
-La documentation est déjà structurée, mais certaines limites restent présentes :
-
-```text
-la validation externe par analyste SOC n'est pas encore réalisée
-les métriques scientifiques peuvent encore être enrichies
-la documentation doit rester synchronisée avec le code à chaque nouvelle version
-```
-
-## Conclusion
-
-`docs/PROJECT_INDEX.md` sert de point d'entrée documentaire.
-
-Il rend le projet plus lisible, plus navigable et plus facile à auditer sans modifier le fonctionnement technique du prototype.
+Il sert uniquement de carte de navigation.
