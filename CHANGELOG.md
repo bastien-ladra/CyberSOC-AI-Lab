@@ -1,5 +1,37 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.36.1 — README production score alignment
+
+### Modifié
+
+- Alignement du score de maturité production du `README.md` avec l’état documenté en `v1.36.0`.
+- Passage de `24 / 100` à `25 / 100` pour la maturité production.
+- Aucune modification du code.
+- Aucune modification du parser CIC-IDS2017.
+- Aucune modification des tests.
+- Aucune modification du plan de mini-loader CIC-IDS2017.
+
+### Estimation
+
+- Avancement global : 99 %
+- Note portfolio : 100 / 100
+- Note recherche appliquée : 98 / 100
+- Note production : 25 / 100
+
+### Objectif
+
+Corriger l’incohérence entre le README et le CHANGELOG après `v1.36.0`.
+
+```text
+plan mini-loader validé
+→ README aligné
+→ score production cohérent
+→ pas de modification code
+→ verrouillage propre
+```
+
+---
+
 ## v1.36.0 — CIC-IDS2017 bounded mini-loader plan
 
 ### Ajouté

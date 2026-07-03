@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.36.0 — CIC-IDS2017 bounded mini-loader plan
+Version actuelle : v1.36.1 — README production score alignment
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -60,7 +60,7 @@ Estimation indicative actuelle :
 | Avancement global               |       99 % |
 | Crédibilité portfolio           |  100 / 100 |
 | Crédibilité recherche appliquée |   98 / 100 |
-| Maturité production             |   24 / 100 |
+| Maturité production             |   25 / 100 |
 
 Résultats expérimentaux documentés :
 
