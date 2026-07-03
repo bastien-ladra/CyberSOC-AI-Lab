@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.35.0 — CIC-IDS2017 sample parser example
+Version actuelle : v1.35.1 — README research score alignment
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -59,7 +59,7 @@ Estimation indicative actuelle :
 | ------------------------------- | ---------: |
 | Avancement global               |       99 % |
 | Crédibilité portfolio           |  100 / 100 |
-| Crédibilité recherche appliquée |   97 / 100 |
+| Crédibilité recherche appliquée |   98 / 100 |
 | Maturité production             |   24 / 100 |
 
 Résultats expérimentaux documentés :

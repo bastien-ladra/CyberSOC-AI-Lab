@@ -1,5 +1,37 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.35.1 — README research score alignment
+
+### Modifié
+
+- Alignement du score de recherche appliquée du `README.md` avec l’état documenté en `v1.35.0`.
+- Passage de `97 / 100` à `98 / 100` pour la crédibilité recherche appliquée.
+- Aucune modification du code.
+- Aucune modification du parser CIC-IDS2017.
+- Aucune modification des tests.
+- Aucune modification de l’exemple CIC-IDS2017.
+
+### Estimation
+
+- Avancement global : 99 %
+- Note portfolio : 100 / 100
+- Note recherche appliquée : 98 / 100
+- Note production : 24 / 100
+
+### Objectif
+
+Corriger l’incohérence entre le README et le CHANGELOG après `v1.35.0`.
+
+```text
+exemple validé
+→ README aligné
+→ score recherche cohérent
+→ pas de modification code
+→ verrouillage propre
+```
+
+---
+
 ## v1.35.0 — CIC-IDS2017 sample parser example
 
 ### Ajouté
