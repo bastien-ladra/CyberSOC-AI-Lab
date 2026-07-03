@@ -25,6 +25,7 @@ prototype technique
 → revue CIC-IDS2017
 → plan de mapping CIC-IDS2017
 → mapper CIC-IDS2017 testé
+→ sample row parser CIC-IDS2017 testé
 ```
 
 ## Documents principaux
@@ -65,6 +66,8 @@ prototype technique
 | `tests/test_ground_truth_results_exporter.py` | Vérifie la sérialisation JSON, le rapport Markdown et l'écriture des artefacts de résultats. |
 | `utils/cic_ids2017_mapping.py` | Mappe un sous-ensemble documenté de labels CIC-IDS2017 vers les alertes internes. |
 | `tests/test_cic_ids2017_mapping.py` | Vérifie le mapping `BENIGN`, `SSH-Patator`, les alias SSH et les labels hors périmètre. |
+| `utils/cic_ids2017_sample_parser.py` | Parse une ligne dict CSV CIC-IDS2017 déjà fournie localement vers un événement normalisé minimal. |
+| `tests/test_cic_ids2017_sample_parser.py` | Vérifie le parsing d'une ligne locale, les alias de colonnes, les ports, les labels supportés et les erreurs claires. |
 
 ## Artefacts générés
 
@@ -106,6 +109,8 @@ README.md
 → docs/CIC_IDS2017_MAPPING_PLAN.md
 → utils/cic_ids2017_mapping.py
 → tests/test_cic_ids2017_mapping.py
+→ utils/cic_ids2017_sample_parser.py
+→ tests/test_cic_ids2017_sample_parser.py
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
 → utils/ground_truth_results_exporter.py
@@ -113,7 +118,7 @@ README.md
 → docs/EVALUATION_MATRIX.md
 ```
 
-Objectif : comprendre les menaces prises en compte, les garde-fous, les données utilisées, les limites du dataset simulé, la trajectoire vers un dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, les résultats attendus, la vérification automatique, l'export des résultats et le cadre d'évaluation.
+Objectif : comprendre les menaces prises en compte, les garde-fous, les données utilisées, les limites du dataset simulé, la trajectoire vers un dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, le parser d'une ligne locale, les résultats attendus, la vérification automatique, l'export des résultats et le cadre d'évaluation.
 
 ### Encadrant académique ou doctoral
 
@@ -129,6 +134,8 @@ README.md
 → docs/CIC_IDS2017_MAPPING_PLAN.md
 → utils/cic_ids2017_mapping.py
 → tests/test_cic_ids2017_mapping.py
+→ utils/cic_ids2017_sample_parser.py
+→ tests/test_cic_ids2017_sample_parser.py
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
 → utils/ground_truth_results_exporter.py
@@ -140,7 +147,7 @@ README.md
 → docs/REPRODUCIBILITY.md
 ```
 
-Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, les données, la vérité terrain, sa vérification automatique, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, l'export des résultats, la méthode et les limites actuelles.
+Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, les données, la vérité terrain, sa vérification automatique, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, le parser d'une ligne locale, l'export des résultats, la méthode et les limites actuelles.
 
 ### Contributeur technique
 
@@ -156,6 +163,8 @@ README.md
 → docs/CIC_IDS2017_MAPPING_PLAN.md
 → utils/cic_ids2017_mapping.py
 → tests/test_cic_ids2017_mapping.py
+→ utils/cic_ids2017_sample_parser.py
+→ tests/test_cic_ids2017_sample_parser.py
 → docs/GROUND_TRUTH_LABELS.md
 → utils/ground_truth_evaluator.py
 → utils/ground_truth_results_exporter.py
@@ -166,7 +175,7 @@ README.md
 → CHANGELOG.md
 ```
 
-Objectif : comprendre la structure du projet, les données d'exemple, les limites du dataset actuel, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, les labels attendus, les tests de vérification, l'export des résultats, les contrôles attendus et la manière de vérifier une modification.
+Objectif : comprendre la structure du projet, les données d'exemple, les limites du dataset actuel, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, le parser d'une ligne locale, les labels attendus, les tests de vérification, l'export des résultats, les contrôles attendus et la manière de vérifier une modification.
 
 ## Chaîne de crédibilité actuelle
 
@@ -192,6 +201,7 @@ code fonctionnel
 → revue CIC-IDS2017
 → plan de mapping CIC-IDS2017
 → mapper CIC-IDS2017 testé
+→ sample row parser CIC-IDS2017 testé
 ```
 
 ## Ce que cet index ne remplace pas
