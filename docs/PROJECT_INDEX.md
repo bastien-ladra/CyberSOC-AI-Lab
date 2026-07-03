@@ -8,11 +8,18 @@ Le point d'entrée principal après nettoyage documentaire est :
 docs/PROJECT_STATUS.md
 ```
 
+Le statut des documents et le tri de lecture sont ici :
+
+```text
+docs/DOCUMENTATION_STATUS.md
+```
+
 ## Lecture rapide
 
 | Besoin | Document |
 |---|---|
 | Comprendre l'état réel du projet | `docs/PROJECT_STATUS.md` |
+| Savoir quels documents sont actifs ou secondaires | `docs/DOCUMENTATION_STATUS.md` |
 | Présenter le projet à un recruteur | `docs/RECRUITER_QUICK_DEMO.md` |
 | Faire une démonstration complète | `docs/DEMO_GUIDE.md` |
 | Lire l'étude de cas | `docs/CASE_STUDY.md` |
@@ -44,46 +51,48 @@ prototype technique
 → CIC-IDS2017 traité progressivement
 → limites assumées
 → point projet consolidé
+→ statut documentaire clarifié
 ```
 
 ## Documents principaux
 
-| Document | Rôle |
-|---|---|
-| `README.md` | Présentation synthétique du projet, commandes et liens principaux. |
-| `docs/PROJECT_STATUS.md` | Point concret : objectif, avancement, limites, décision de continuer ou non. |
-| `docs/PROJECT_INDEX.md` | Carte de navigation documentaire. |
-| `docs/CHANGELOG_RECENT.md` | Historique récent aligné des versions postérieures à `v1.38.0`. |
-| `CHANGELOG.md` | Historique versionné long du projet. |
-| `docs/architecture.md` | Architecture du prototype et flux de traitement. |
-| `docs/SECURITY_MODEL.md` | Modèle de sécurité, garanties recherchées et limites du prototype. |
-| `docs/threat_model.md` | Menaces identifiées autour de l'IA appliquée au SOC. |
-| `docs/DATASET_CARD.md` | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
-| `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés. |
-| `docs/QUALITY_GATES.md` | Contrôles qualité à exécuter avant validation d'une version. |
-| `docs/QUALITY_GATES_REFRESH.md` | Rafraîchissement local des résultats qualité documentés. |
-| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental. |
-| `docs/EVALUATION_MATRIX.md` | Grille d'évaluation des scénarios et des réponses IA. |
-| `docs/EXPERIMENT_RESULTS.md` | Rapport de résultats expérimentaux. |
-| `docs/REPRODUCIBILITY.md` | Procédure de reproductibilité. |
-| `docs/CASE_STUDY.md` | Étude de cas complète. |
-| `docs/DEMO_GUIDE.md` | Guide de démonstration. |
-| `docs/RECRUITER_QUICK_DEMO.md` | Démonstration courte orientée recruteur. |
-| `docs/RESEARCH_PROPOSAL.md` | Cadrage doctoral provisoire. |
-| `docs/research_notes.md` | Notes de recherche. |
-| `docs/evaluation.md` | Méthodologie d'évaluation historique et complémentaire. |
+| Document | Statut | Rôle |
+|---|---|---|
+| `README.md` | actif | Présentation synthétique du projet, commandes et liens principaux. |
+| `docs/PROJECT_STATUS.md` | actif | Point concret : objectif, avancement, limites, décision de continuer ou non. |
+| `docs/DOCUMENTATION_STATUS.md` | actif | Tri documentaire : actifs, secondaires, historiques et non prioritaires. |
+| `docs/PROJECT_INDEX.md` | actif | Carte de navigation documentaire. |
+| `docs/CHANGELOG_RECENT.md` | actif | Historique récent aligné des versions postérieures à `v1.38.0`. |
+| `CHANGELOG.md` | historique long | Historique versionné long du projet. |
+| `docs/architecture.md` | actif | Architecture du prototype et flux de traitement. |
+| `docs/SECURITY_MODEL.md` | actif | Modèle de sécurité, garanties recherchées et limites du prototype. |
+| `docs/threat_model.md` | actif | Menaces identifiées autour de l'IA appliquée au SOC. |
+| `docs/DATASET_CARD.md` | actif | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
+| `docs/GROUND_TRUTH_LABELS.md` | actif | Labels attendus et critères de comparaison pour les logs simulés. |
+| `docs/QUALITY_GATES.md` | actif | Contrôles qualité à exécuter avant validation d'une version. |
+| `docs/QUALITY_GATES_REFRESH.md` | actif | Rafraîchissement local des résultats qualité documentés. |
+| `docs/EXPERIMENT_PROTOCOL.md` | actif | Protocole expérimental. |
+| `docs/EVALUATION_MATRIX.md` | actif | Grille d'évaluation des scénarios et des réponses IA. |
+| `docs/EXPERIMENT_RESULTS.md` | actif | Rapport de résultats expérimentaux. |
+| `docs/REPRODUCIBILITY.md` | actif | Procédure de reproductibilité. |
+| `docs/CASE_STUDY.md` | actif | Étude de cas complète. |
+| `docs/DEMO_GUIDE.md` | actif | Guide de démonstration. |
+| `docs/RECRUITER_QUICK_DEMO.md` | actif | Démonstration courte orientée recruteur. |
+| `docs/RESEARCH_PROPOSAL.md` | actif | Cadrage doctoral provisoire. |
+| `docs/research_notes.md` | notes historiques nettoyées | Notes de recherche, non source de vérité sur l'état actuel. |
+| `docs/evaluation.md` | complément historique | Ancienne méthodologie générale, conservée mais non prioritaire. |
 
 ## Documentation CIC-IDS2017
 
-| Document | Rôle |
-|---|---|
-| `docs/PUBLIC_DATASET_ROADMAP.md` | Roadmap vers un dataset public documenté. |
-| `docs/PUBLIC_DATASET_CANDIDATES.md` | Liste de datasets publics candidats. |
-| `docs/CIC_IDS2017_DATASET_REVIEW.md` | Revue du dataset CIC-IDS2017, sans intégration complète. |
-| `docs/CIC_IDS2017_MAPPING_PLAN.md` | Plan de mapping entre labels CIC-IDS2017 et alertes internes. |
-| `docs/CIC_IDS2017_SAMPLE_PARSER_EXAMPLE.md` | Exemple contrôlé du sample row parser. |
-| `docs/CIC_IDS2017_BOUNDED_MINI_LOADER_PLAN.md` | Plan du mini-loader borné. |
-| `docs/CIC_IDS2017_MINI_LOADER_USAGE_EXAMPLE.md` | Exemple contrôlé du mini-loader avec CSV temporaire fictif. |
+| Document | Statut | Rôle |
+|---|---|---|
+| `docs/PUBLIC_DATASET_ROADMAP.md` | actif | Roadmap vers un dataset public documenté. |
+| `docs/PUBLIC_DATASET_CANDIDATES.md` | actif | Liste de datasets publics candidats. |
+| `docs/CIC_IDS2017_DATASET_REVIEW.md` | actif | Revue du dataset CIC-IDS2017, sans intégration complète. |
+| `docs/CIC_IDS2017_MAPPING_PLAN.md` | actif | Plan de mapping entre labels CIC-IDS2017 et alertes internes. |
+| `docs/CIC_IDS2017_SAMPLE_PARSER_EXAMPLE.md` | actif | Exemple contrôlé du sample row parser. |
+| `docs/CIC_IDS2017_BOUNDED_MINI_LOADER_PLAN.md` | actif | Plan du mini-loader borné. |
+| `docs/CIC_IDS2017_MINI_LOADER_USAGE_EXAMPLE.md` | actif | Exemple contrôlé du mini-loader avec CSV temporaire fictif. |
 
 ## Artefacts techniques principaux
 
@@ -107,6 +116,7 @@ prototype technique
 ```text
 README.md
 → docs/PROJECT_STATUS.md
+→ docs/DOCUMENTATION_STATUS.md
 → docs/RECRUITER_QUICK_DEMO.md
 → docs/DEMO_GUIDE.md
 → docs/CASE_STUDY.md
@@ -118,6 +128,7 @@ README.md
 ```text
 README.md
 → docs/PROJECT_STATUS.md
+→ docs/DOCUMENTATION_STATUS.md
 → docs/SECURITY_MODEL.md
 → docs/threat_model.md
 → docs/DATASET_CARD.md
@@ -131,6 +142,7 @@ README.md
 ```text
 README.md
 → docs/PROJECT_STATUS.md
+→ docs/DOCUMENTATION_STATUS.md
 → docs/RESEARCH_PROPOSAL.md
 → docs/PUBLIC_DATASET_ROADMAP.md
 → docs/PUBLIC_DATASET_CANDIDATES.md
@@ -145,12 +157,33 @@ README.md
 ```text
 README.md
 → docs/PROJECT_STATUS.md
+→ docs/DOCUMENTATION_STATUS.md
 → docs/architecture.md
 → docs/REPRODUCIBILITY.md
 → docs/QUALITY_GATES.md
 → docs/QUALITY_GATES_REFRESH.md
 → tests/
 → utils/
+```
+
+## Ce qui n'est plus prioritaire
+
+Ces documents sont conservés mais ne doivent pas être utilisés comme première source pour l'état actuel :
+
+```text
+docs/evaluation.md
+docs/research_notes.md
+CHANGELOG.md
+```
+
+Sources prioritaires à utiliser à la place :
+
+```text
+docs/PROJECT_STATUS.md
+docs/DOCUMENTATION_STATUS.md
+docs/EXPERIMENT_PROTOCOL.md
+docs/EVALUATION_MATRIX.md
+docs/CHANGELOG_RECENT.md
 ```
 
 ## Ce que cet index ne remplace pas
