@@ -1,5 +1,42 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.36.0 — CIC-IDS2017 bounded mini-loader plan
+
+### Ajouté
+
+- Ajout de `docs/CIC_IDS2017_BOUNDED_MINI_LOADER_PLAN.md`.
+- Ajout d’un plan de mini-loader borné pour CIC-IDS2017.
+- Définition d’un futur chargement limité à un CSV local fourni explicitement.
+- Définition d’une limite obligatoire `max_rows`.
+- Clarification que le futur loader devra réutiliser `utils/cic_ids2017_sample_parser.py`.
+- Clarification que les tests devront générer leurs propres CSV temporaires.
+- Clarification qu’aucune donnée brute CIC-IDS2017 ne doit être ajoutée au dépôt.
+- Mise à jour de `docs/PROJECT_INDEX.md`.
+- Aucune modification du code.
+
+### Estimation
+
+- Avancement global : 99 %
+- Note portfolio : 100 / 100
+- Note recherche appliquée : 98 / 100
+- Note production : 25 / 100
+
+### Objectif
+
+Préparer proprement l’implémentation future d’un mini-loader CIC-IDS2017 borné, sans sur-vendre l’intégration du dataset public.
+
+```text
+parser existant
+→ plan mini-loader
+→ CSV local uniquement
+→ max_rows obligatoire
+→ tests temporaires
+→ aucun dataset brut
+→ limites explicites
+```
+
+---
+
 ## v1.35.1 — README research score alignment
 
 ### Modifié

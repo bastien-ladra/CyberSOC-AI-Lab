@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.35.1 — README research score alignment
+Version actuelle : v1.36.0 — CIC-IDS2017 bounded mini-loader plan
 
 Le prototype couvre actuellement trois scénarios :
 
