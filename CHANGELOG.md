@@ -1,5 +1,43 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.38.0 — CIC-IDS2017 mini-loader README visibility
+
+### Modifié
+
+- Ajout d’une section `Mini-loader borné CIC-IDS2017` dans le `README.md`.
+- Ajout d’un lien visible vers `utils/cic_ids2017_mini_loader.py`.
+- Ajout d’un lien visible vers `tests/test_cic_ids2017_mini_loader.py`.
+- Ajout du mini-loader CIC-IDS2017 dans la liste des tests automatisés.
+- Ajout du mini-loader CIC-IDS2017 dans les artefacts techniques documentés.
+- Clarification visible que le loader utilise un CSV local fourni explicitement.
+- Clarification visible que `max_rows` est obligatoire.
+- Clarification visible qu’aucun dataset brut CIC-IDS2017 n’est versionné.
+- Clarification visible qu’aucun téléchargement ni règle de détection n’est lancé.
+- Aucune modification du code.
+- Aucune modification des tests.
+
+### Estimation
+
+- Avancement global : 99 %
+- Note portfolio : 100 / 100
+- Note recherche appliquée : 98 / 100
+- Note production : 25 / 100
+
+### Objectif
+
+Rendre visible le mini-loader CIC-IDS2017 dans le README sans modifier le fonctionnement technique du projet.
+
+```text
+mini-loader existant
+→ README aligné
+→ limites visibles
+→ artefacts visibles
+→ pas de modification code
+→ verrouillage propre
+```
+
+---
+
 ## v1.37.0 — CIC-IDS2017 bounded mini-loader
 
 ### Ajouté

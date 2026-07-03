@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.37.0 — CIC-IDS2017 bounded mini-loader
+Version actuelle : v1.38.0 — CIC-IDS2017 mini-loader README visibility
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -213,6 +213,14 @@ une ligne dict locale
 → aucun téléchargement du dataset
 → aucun chargement de CSV complet
 → aucune règle de détection lancée
+```
+
+## Mini-loader borné CIC-IDS2017
+
+Le mini-loader borné CIC-IDS2017 est implémenté dans :
+
+```text
+utils/cic_ids2017_mini_loader.py
 ```
 
 ## Lecture rapide recruteur
@@ -537,7 +545,8 @@ Le projet contient des tests automatisés sur :
 - les validations humaines ;
 - les journaux d'audit ;
 - le mapper CIC-IDS2017 ;
-- le sample row parser CIC-IDS2017.
+- le sample row parser CIC-IDS2017 ;
+- le mini-loader borné CIC-IDS2017.
 
 Le workflow GitHub Actions exécute les quality gates à chaque push ou pull request.
 
