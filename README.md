@@ -183,6 +183,34 @@ normalisation des labels
 → aucun parsing du dataset public
 ```
 
+## Sample row parser CIC-IDS2017
+
+Le parser minimal d'une ligne CIC-IDS2017 déjà fournie localement est implémenté dans :
+
+```text
+utils/cic_ids2017_sample_parser.py
+```
+
+Les tests unitaires associés sont disponibles dans :
+
+```text
+tests/test_cic_ids2017_sample_parser.py
+```
+
+Ce parser précise :
+
+```text
+une ligne dict locale
+→ colonnes minimales normalisées
+→ alias Src/Dst supportés
+→ ports validés
+→ protocole normalisé
+→ label envoyé au mapper CIC-IDS2017
+→ aucun téléchargement du dataset
+→ aucun chargement de CSV complet
+→ aucune règle de détection lancée
+```
+
 ## Lecture rapide recruteur
 
 Pour une présentation courte en entretien ou revue portfolio, utiliser :
@@ -503,7 +531,9 @@ Le projet contient des tests automatisés sur :
 - les rapports Markdown ;
 - les graphiques SOC ;
 - les validations humaines ;
-- les journaux d'audit.
+- les journaux d'audit ;
+- le mapper CIC-IDS2017 ;
+- le sample row parser CIC-IDS2017.
 
 Le workflow GitHub Actions exécute les quality gates à chaque push ou pull request.
 
@@ -561,6 +591,13 @@ Artefacts techniques liés au mapper CIC-IDS2017 :
 ```text
 utils/cic_ids2017_mapping.py
 tests/test_cic_ids2017_mapping.py
+```
+
+Artefacts techniques liés au sample row parser CIC-IDS2017 :
+
+```text
+utils/cic_ids2017_sample_parser.py
+tests/test_cic_ids2017_sample_parser.py
 ```
 
 Artefacts générés liés aux résultats :
