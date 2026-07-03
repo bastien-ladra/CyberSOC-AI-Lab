@@ -19,7 +19,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 ## Statut actuel
 
 ```text
-Version actuelle : v1.41.0 — repository cleanup and project status
+Version actuelle : v1.41.1 — documentation triage and cleanup
 ```
 
 Point concret à lire en premier :
@@ -28,7 +28,11 @@ Point concret à lire en premier :
 docs/PROJECT_STATUS.md
 ```
 
-Ce document regroupe l'objectif, l'avancement réel, les limites, la décision de continuer ou non, et la prochaine étape utile.
+Statut des documents et tri de lecture :
+
+```text
+docs/DOCUMENTATION_STATUS.md
+```
 
 ## Positionnement
 
@@ -262,6 +266,7 @@ Lecture recommandée :
 | Besoin | Document |
 |---|---|
 | Point concret actuel | `docs/PROJECT_STATUS.md` |
+| Statut et tri des documents | `docs/DOCUMENTATION_STATUS.md` |
 | Navigation complète | `docs/PROJECT_INDEX.md` |
 | Démo recruteur | `docs/RECRUITER_QUICK_DEMO.md` |
 | Guide de démonstration | `docs/DEMO_GUIDE.md` |
