@@ -36,7 +36,7 @@ production SOC : non
 Version courante de travail :
 
 ```text
-v1.41.0 — repository cleanup and project status
+v1.41.1 — documentation triage and cleanup
 ```
 
 État fonctionnel actuel :
@@ -56,6 +56,48 @@ mapper CIC-IDS2017 présent
 sample row parser CIC-IDS2017 présent
 mini-loader CIC-IDS2017 borné présent
 exemple d'utilisation mini-loader présent
+```
+
+## Nettoyage documentaire effectué
+
+Le dépôt possède maintenant une séparation claire :
+
+```text
+README.md
+→ entrée synthétique
+
+docs/PROJECT_STATUS.md
+→ état concret du projet
+
+docs/PROJECT_INDEX.md
+→ carte de navigation
+
+docs/DOCUMENTATION_STATUS.md
+→ tri des documents actifs, secondaires et historiques
+```
+
+Les documents anciens ou moins prioritaires ne sont pas supprimés, mais leur statut est clarifié.
+
+Documents non prioritaires pour juger l'état actuel :
+
+```text
+docs/evaluation.md
+→ complément historique
+
+docs/research_notes.md
+→ notes de recherche nettoyées
+
+CHANGELOG.md
+→ historique long
+```
+
+Raison du choix non destructif :
+
+```text
+préserver l'historique
+ne pas casser les liens
+éviter une suppression difficile à justifier
+conserver le contexte utile pour une revue technique
 ```
 
 ## Résultats qualité documentés
@@ -113,6 +155,7 @@ validation humaine documentée
 risque de prompt injection pris en compte
 CIC-IDS2017 abordé progressivement sans survente
 limitations répétées et visibles
+tri documentaire clarifié
 ```
 
 Le projet évite une erreur classique : prétendre être production-ready alors que le périmètre reste expérimental.
