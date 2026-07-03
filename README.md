@@ -55,12 +55,12 @@ usage production SOC : non
 
 Estimation indicative actuelle :
 
-| Axe                             | Estimation |
-| ------------------------------- | ---------: |
-| Avancement global               |       99 % |
-| Crédibilité portfolio           |   99 / 100 |
-| Crédibilité recherche appliquée |   96 / 100 |
-| Maturité production             |   23 / 100 |
+| Axe | Estimation |
+|---|---:|
+| Avancement global | 99 % |
+| Crédibilité portfolio | 99 / 100 |
+| Crédibilité recherche appliquée | 96 / 100 |
+| Maturité production | 23 / 100 |
 
 Résultats expérimentaux documentés :
 
@@ -155,6 +155,32 @@ fichiers candidats
 → tests légers futurs
 → aucune donnée brute ajoutée
 → loader non implémenté à ce stade
+```
+
+## Mapper CIC-IDS2017
+
+Le mapper de labels CIC-IDS2017 est implémenté dans :
+
+```text
+utils/cic_ids2017_mapping.py
+```
+
+Les tests unitaires associés sont disponibles dans :
+
+```text
+tests/test_cic_ids2017_mapping.py
+```
+
+Ce mapper précise :
+
+```text
+normalisation des labels
+→ BENIGN supporté sans alerte attendue
+→ SSH-Patator mappé vers SSH_BRUTE_FORCE
+→ alias SSH brute force supportés
+→ labels hors périmètre exclus
+→ aucun téléchargement du dataset
+→ aucun parsing du dataset public
 ```
 
 ## Lecture rapide recruteur
@@ -497,29 +523,29 @@ docs/PROJECT_INDEX.md
 
 Documents principaux :
 
-| Document                             | Rôle                                                                            |
-| ------------------------------------ | ------------------------------------------------------------------------------- |
-| `docs/PROJECT_INDEX.md`              | Point d'entrée documentaire du projet.                                          |
-| `docs/RECRUITER_QUICK_DEMO.md`       | Guide court pour présenter le projet en entretien ou à un recruteur.            |
-| `docs/architecture.md`               | Architecture et pipeline.                                                       |
-| `docs/threat_model.md`               | Menaces liées à l'usage de l'IA dans un SOC.                                    |
-| `docs/SECURITY_MODEL.md`             | Modèle de sécurité, garanties et limites.                                       |
-| `docs/DATASET_CARD.md`               | Description des jeux de logs simulés, de leurs usages et de leurs limites.      |
-| `docs/PUBLIC_DATASET_ROADMAP.md`     | Roadmap vers un dataset public documenté.                                       |
-| `docs/PUBLIC_DATASET_CANDIDATES.md`  | Liste de datasets publics candidats à étudier avant toute intégration.          |
+| Document | Rôle |
+|---|---|
+| `docs/PROJECT_INDEX.md` | Point d'entrée documentaire du projet. |
+| `docs/RECRUITER_QUICK_DEMO.md` | Guide court pour présenter le projet en entretien ou à un recruteur. |
+| `docs/architecture.md` | Architecture et pipeline. |
+| `docs/threat_model.md` | Menaces liées à l'usage de l'IA dans un SOC. |
+| `docs/SECURITY_MODEL.md` | Modèle de sécurité, garanties et limites. |
+| `docs/DATASET_CARD.md` | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
+| `docs/PUBLIC_DATASET_ROADMAP.md` | Roadmap vers un dataset public documenté. |
+| `docs/PUBLIC_DATASET_CANDIDATES.md` | Liste de datasets publics candidats à étudier avant toute intégration. |
 | `docs/CIC_IDS2017_DATASET_REVIEW.md` | Revue du premier dataset public candidat à étudier, sans intégration immédiate. |
-| `docs/CIC_IDS2017_MAPPING_PLAN.md`   | Plan de mapping entre labels CIC-IDS2017 et alertes internes avant tout loader. |
-| `docs/GROUND_TRUTH_LABELS.md`        | Labels attendus et critères de comparaison pour les logs simulés.               |
-| `docs/QUALITY_GATES.md`              | Contrôles qualité du projet.                                                    |
-| `docs/EXPERIMENT_PROTOCOL.md`        | Protocole expérimental.                                                         |
-| `docs/EVALUATION_MATRIX.md`          | Grille d'évaluation.                                                            |
-| `docs/EXPERIMENT_RESULTS.md`         | Rapport de résultats expérimentaux.                                             |
-| `docs/REPRODUCIBILITY.md`            | Procédure de reproductibilité.                                                  |
-| `docs/CASE_STUDY.md`                 | Étude de cas.                                                                   |
-| `docs/DEMO_GUIDE.md`                 | Guide de démonstration.                                                         |
-| `docs/RESEARCH_PROPOSAL.md`          | Cadrage doctoral provisoire.                                                    |
-| `docs/research_notes.md`             | Notes de recherche.                                                             |
-| `docs/evaluation.md`                 | Méthodologie d'évaluation complémentaire.                                       |
+| `docs/CIC_IDS2017_MAPPING_PLAN.md` | Plan de mapping entre labels CIC-IDS2017 et alertes internes avant tout loader. |
+| `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés. |
+| `docs/QUALITY_GATES.md` | Contrôles qualité du projet. |
+| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental. |
+| `docs/EVALUATION_MATRIX.md` | Grille d'évaluation. |
+| `docs/EXPERIMENT_RESULTS.md` | Rapport de résultats expérimentaux. |
+| `docs/REPRODUCIBILITY.md` | Procédure de reproductibilité. |
+| `docs/CASE_STUDY.md` | Étude de cas. |
+| `docs/DEMO_GUIDE.md` | Guide de démonstration. |
+| `docs/RESEARCH_PROPOSAL.md` | Cadrage doctoral provisoire. |
+| `docs/research_notes.md` | Notes de recherche. |
+| `docs/evaluation.md` | Méthodologie d'évaluation complémentaire. |
 
 Artefacts techniques liés à la vérité terrain automatisée :
 
@@ -528,6 +554,13 @@ utils/ground_truth_evaluator.py
 tests/test_ground_truth_evaluator.py
 utils/ground_truth_results_exporter.py
 tests/test_ground_truth_results_exporter.py
+```
+
+Artefacts techniques liés au mapper CIC-IDS2017 :
+
+```text
+utils/cic_ids2017_mapping.py
+tests/test_cic_ids2017_mapping.py
 ```
 
 Artefacts générés liés aux résultats :
