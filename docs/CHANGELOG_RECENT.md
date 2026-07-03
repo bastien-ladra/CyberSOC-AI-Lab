@@ -4,6 +4,47 @@ Ce document aligne les dernières versions documentaires après `v1.38.0`.
 
 Il sert de complément récent au `CHANGELOG.md` principal pour éviter une réécriture risquée de tout l'historique long du projet.
 
+## v1.41.1 — documentation triage and cleanup
+
+### Ajouté
+
+- Ajout de `docs/DOCUMENTATION_STATUS.md`.
+- Ajout d'un tri explicite des documents actifs, secondaires, historiques et non prioritaires.
+- Clarification des documents à lire en priorité : `README.md`, `docs/PROJECT_STATUS.md`, `docs/PROJECT_INDEX.md`, `docs/DOCUMENTATION_STATUS.md`.
+- Clarification que `docs/evaluation.md`, `docs/research_notes.md` et `CHANGELOG.md` ne doivent plus être utilisés comme première source de vérité sur l'état actuel.
+
+### Modifié
+
+- Mise à jour de `README.md` pour pointer vers le statut documentaire.
+- Mise à jour de `docs/PROJECT_INDEX.md` avec le statut des documents.
+- Mise à jour de `docs/PROJECT_STATUS.md` avec le nettoyage documentaire effectué.
+- Nettoyage de `docs/research_notes.md` pour retirer les informations obsolètes et le repositionner comme notes de recherche.
+- Mise à jour de `docs/evaluation.md` pour le marquer comme complément historique, non prioritaire.
+- Aucune modification du code.
+- Aucune modification des tests.
+
+### Estimation
+
+- Avancement global : 99 %
+- Note portfolio : 100 / 100
+- Note recherche appliquée : 98 / 100
+- Note production : 25 / 100
+
+### Objectif
+
+Rendre le dépôt plus irréprochable en indiquant clairement quels documents sont actifs, lesquels sont historiques, et lesquels ne doivent plus être utilisés comme source principale.
+
+```text
+docs dispersés
+→ tri documentaire
+→ sources de vérité claires
+→ documents obsolètes signalés
+→ aucune suppression risquée
+→ repo plus défendable
+```
+
+---
+
 ## v1.41.0 — repository cleanup and project status
 
 ### Ajouté
