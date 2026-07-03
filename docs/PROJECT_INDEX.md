@@ -30,6 +30,7 @@ prototype technique
 → plan mini-loader borné CIC-IDS2017
 → mini-loader borné CIC-IDS2017 testé
 → exemple mini-loader borné CIC-IDS2017 documenté
+→ historique récent aligné
 ```
 
 ## Documents principaux
@@ -37,7 +38,8 @@ prototype technique
 | Document | Rôle |
 |---|---|
 | `README.md` | Présentation générale du projet, installation, utilisation et positionnement. |
-| `CHANGELOG.md` | Historique versionné des évolutions du projet. |
+| `CHANGELOG.md` | Historique versionné long du projet. |
+| `docs/CHANGELOG_RECENT.md` | Historique récent aligné des versions postérieures à `v1.38.0`. |
 | `docs/PROJECT_INDEX.md` | Carte de navigation documentaire du projet. |
 | `docs/architecture.md` | Architecture du prototype et flux de traitement. |
 | `docs/threat_model.md` | Menaces identifiées autour de l'IA appliquée au SOC. |
@@ -100,6 +102,7 @@ README.md
 → docs/EXPERIMENT_RESULTS.md
 → docs/QUALITY_GATES.md
 → docs/QUALITY_GATES_REFRESH.md
+→ docs/CHANGELOG_RECENT.md
 → CHANGELOG.md
 ```
 
@@ -132,6 +135,7 @@ README.md
 → utils/ground_truth_results_exporter.py
 → docs/EXPERIMENT_PROTOCOL.md
 → docs/EVALUATION_MATRIX.md
+→ docs/CHANGELOG_RECENT.md
 ```
 
 Objectif : comprendre les menaces prises en compte, les garde-fous, les données utilisées, les limites du dataset simulé, la trajectoire vers un dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, le parser d'une ligne locale, son exemple contrôlé, le mini-loader borné, son exemple contrôlé, les résultats attendus, la vérification automatique, l'export des résultats et le cadre d'évaluation.
@@ -166,6 +170,7 @@ README.md
 → docs/EVALUATION_MATRIX.md
 → docs/EXPERIMENT_RESULTS.md
 → docs/REPRODUCIBILITY.md
+→ docs/CHANGELOG_RECENT.md
 ```
 
 Objectif : évaluer le potentiel scientifique, la problématique, les hypothèses, les données, la vérité terrain, sa vérification automatique, la trajectoire dataset public, les candidats publics, la revue CIC-IDS2017, le plan de mapping, le mapper testé, le parser d'une ligne locale, son exemple contrôlé, le mini-loader borné, son exemple contrôlé, l'export des résultats, la méthode et les limites actuelles.
@@ -199,6 +204,7 @@ README.md
 → docs/QUALITY_GATES.md
 → docs/QUALITY_GATES_REFRESH.md
 → docs/REPRODUCIBILITY.md
+→ docs/CHANGELOG_RECENT.md
 → CHANGELOG.md
 ```
 
@@ -233,6 +239,7 @@ code fonctionnel
 → plan mini-loader borné CIC-IDS2017
 → mini-loader borné CIC-IDS2017 testé
 → exemple mini-loader borné CIC-IDS2017 documenté
+→ historique récent aligné
 ```
 
 ## Ce que cet index ne remplace pas
