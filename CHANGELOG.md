@@ -1,5 +1,48 @@
 # Changelog — CyberSOC-AI-Lab
 
+## v1.37.0 — CIC-IDS2017 bounded mini-loader
+
+### Ajouté
+
+- Ajout de `utils/cic_ids2017_mini_loader.py`.
+- Ajout de `tests/test_cic_ids2017_mini_loader.py`.
+- Ajout d’un mini-loader borné pour fichiers CSV CIC-IDS2017-like locaux.
+- Ajout d’une limite de sécurité `MAX_CIC_IDS2017_LOADER_ROWS = 1000`.
+- Ajout d’un paramètre obligatoire `max_rows`.
+- Réutilisation du parser existant `parse_cic_ids2017_sample_row`.
+- Ajout d’un résultat descriptif `CicIds2017MiniLoaderResult`.
+- Ajout du comptage des labels supportés et hors périmètre.
+- Ajout d’erreurs explicites pour fichier manquant, `max_rows` invalide et lignes invalides.
+- Ajout de tests avec CSV temporaires générés pendant les tests.
+- Mise à jour de `docs/PROJECT_INDEX.md`.
+- Aucun dataset brut CIC-IDS2017 ajouté au dépôt.
+- Aucun téléchargement du dataset.
+- Aucune règle de détection lancée par le mini-loader.
+
+### Estimation
+
+- Avancement global : 99 %
+- Note portfolio : 100 / 100
+- Note recherche appliquée : 98 / 100
+- Note production : 25 / 100
+
+### Objectif
+
+Ajouter un mini-loader CIC-IDS2017 borné, testable et honnête, sans intégrer le dataset public complet ni sur-vendre le niveau production.
+
+```text
+CSV local explicite
+→ max_rows obligatoire
+→ limite de sécurité
+→ parser existant réutilisé
+→ événements normalisés
+→ labels supportés / hors périmètre comptés
+→ tests temporaires
+→ aucun dataset brut
+```
+
+---
+
 ## v1.36.1 — README production score alignment
 
 ### Modifié
