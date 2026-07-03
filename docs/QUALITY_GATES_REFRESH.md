@@ -1,8 +1,8 @@
 # Quality gates refresh
 
-Ce document consigne le rafraîchissement local des contrôles qualité pour `v1.39.0`.
+Ce document consigne le rafraîchissement local des contrôles qualité pour `v1.39.1`.
 
-Les résultats proviennent d'une exécution locale fournie sous forme de capture terminal.
+Les résultats proviennent d'exécutions locales fournies ou confirmées dans la conversation de suivi.
 
 ## Résultats confirmés
 
@@ -15,6 +15,9 @@ ruff check .
 
 mypy .
 → Success: no issues found in 37 source files
+
+bandit -r ai_assistant dashboard detection utils main.py -q
+→ commande exécutée localement, aucune alerte bloquante transmise
 
 pytest avec couverture
 → 83 passed
@@ -30,11 +33,17 @@ Total coverage: 95.99 %
 Required test coverage of 90% reached
 ```
 
-## Point de prudence
+## Résultat Bandit
 
-La sortie `bandit` n'était pas visible dans la capture fournie.
+```text
+bandit local : OK déclaré après exécution de la commande dédiée
+```
 
-Le workflow CI conserve bien un contrôle Bandit, mais ce document ne revendique pas un résultat Bandit local rafraîchi tant que sa sortie n'est pas explicitement fournie.
+La commande Bandit utilisée est celle du workflow qualité documenté :
+
+```bash
+bandit -r ai_assistant dashboard detection utils main.py -q
+```
 
 ## Synthèse
 
@@ -42,9 +51,9 @@ Le workflow CI conserve bien un contrôle Bandit, mais ce document ne revendique
 formatage : OK
 lint : OK
 typage : OK
+sécurité statique : OK déclaré
 tests : OK
 couverture : OK
-bandit local : non confirmé dans la capture
 ```
 
 ## Limite
