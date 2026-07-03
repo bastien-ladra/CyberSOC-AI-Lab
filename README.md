@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.39.1 — Bandit local confirmation
+Version actuelle : v1.40.0 — CIC-IDS2017 mini-loader usage example
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -197,6 +197,12 @@ Les tests unitaires associés sont disponibles dans :
 
 ```text
 tests/test_cic_ids2017_mini_loader.py
+```
+
+L'exemple documenté d'utilisation est disponible dans :
+
+```text
+docs/CIC_IDS2017_MINI_LOADER_USAGE_EXAMPLE.md
 ```
 
 Ce mini-loader précise :
@@ -559,30 +565,33 @@ docs/PROJECT_INDEX.md
 
 Documents principaux :
 
-| Document                             | Rôle                                                                            |
-| ------------------------------------ | ------------------------------------------------------------------------------- |
-| `docs/PROJECT_INDEX.md`              | Point d'entrée documentaire du projet.                                          |
-| `docs/RECRUITER_QUICK_DEMO.md`       | Guide court pour présenter le projet en entretien ou à un recruteur.            |
-| `docs/architecture.md`               | Architecture et pipeline.                                                       |
-| `docs/threat_model.md`               | Menaces liées à l'usage de l'IA dans un SOC.                                    |
-| `docs/SECURITY_MODEL.md`             | Modèle de sécurité, garanties et limites.                                       |
-| `docs/DATASET_CARD.md`               | Description des jeux de logs simulés, de leurs usages et de leurs limites.      |
-| `docs/PUBLIC_DATASET_ROADMAP.md`     | Roadmap vers un dataset public documenté.                                       |
-| `docs/PUBLIC_DATASET_CANDIDATES.md`  | Liste de datasets publics candidats à étudier avant toute intégration.          |
+| Document | Rôle |
+|---|---|
+| `docs/PROJECT_INDEX.md` | Point d'entrée documentaire du projet. |
+| `docs/RECRUITER_QUICK_DEMO.md` | Guide court pour présenter le projet en entretien ou à un recruteur. |
+| `docs/architecture.md` | Architecture et pipeline. |
+| `docs/threat_model.md` | Menaces liées à l'usage de l'IA dans un SOC. |
+| `docs/SECURITY_MODEL.md` | Modèle de sécurité, garanties et limites. |
+| `docs/DATASET_CARD.md` | Description des jeux de logs simulés, de leurs usages et de leurs limites. |
+| `docs/PUBLIC_DATASET_ROADMAP.md` | Roadmap vers un dataset public documenté. |
+| `docs/PUBLIC_DATASET_CANDIDATES.md` | Liste de datasets publics candidats à étudier avant toute intégration. |
 | `docs/CIC_IDS2017_DATASET_REVIEW.md` | Revue du premier dataset public candidat à étudier, sans intégration immédiate. |
-| `docs/CIC_IDS2017_MAPPING_PLAN.md`   | Plan de mapping entre labels CIC-IDS2017 et alertes internes avant tout loader. |
-| `docs/GROUND_TRUTH_LABELS.md`        | Labels attendus et critères de comparaison pour les logs simulés.               |
-| `docs/QUALITY_GATES.md`              | Contrôles qualité du projet.                                                    |
-| `docs/QUALITY_GATES_REFRESH.md`      | Rafraîchissement local des résultats qualité documentés pour v1.39.1.           |
-| `docs/EXPERIMENT_PROTOCOL.md`        | Protocole expérimental.                                                         |
-| `docs/EVALUATION_MATRIX.md`          | Grille d'évaluation.                                                            |
-| `docs/EXPERIMENT_RESULTS.md`         | Rapport de résultats expérimentaux.                                             |
-| `docs/REPRODUCIBILITY.md`            | Procédure de reproductibilité.                                                  |
-| `docs/CASE_STUDY.md`                 | Étude de cas.                                                                   |
-| `docs/DEMO_GUIDE.md`                 | Guide de démonstration.                                                         |
-| `docs/RESEARCH_PROPOSAL.md`          | Cadrage doctoral provisoire.                                                    |
-| `docs/research_notes.md`             | Notes de recherche.                                                             |
-| `docs/evaluation.md`                 | Méthodologie d'évaluation complémentaire.                                       |
+| `docs/CIC_IDS2017_MAPPING_PLAN.md` | Plan de mapping entre labels CIC-IDS2017 et alertes internes avant tout loader. |
+| `docs/CIC_IDS2017_SAMPLE_PARSER_EXAMPLE.md` | Exemple contrôlé d'utilisation du sample row parser CIC-IDS2017 sans dataset brut. |
+| `docs/CIC_IDS2017_BOUNDED_MINI_LOADER_PLAN.md` | Plan de mini-loader borné CIC-IDS2017 avant intégration de code supplémentaire. |
+| `docs/CIC_IDS2017_MINI_LOADER_USAGE_EXAMPLE.md` | Exemple contrôlé d'utilisation du mini-loader borné avec CSV temporaire fictif. |
+| `docs/GROUND_TRUTH_LABELS.md` | Labels attendus et critères de comparaison pour les logs simulés. |
+| `docs/QUALITY_GATES.md` | Contrôles qualité du projet. |
+| `docs/QUALITY_GATES_REFRESH.md` | Rafraîchissement local des résultats qualité documentés pour v1.39.1. |
+| `docs/EXPERIMENT_PROTOCOL.md` | Protocole expérimental. |
+| `docs/EVALUATION_MATRIX.md` | Grille d'évaluation. |
+| `docs/EXPERIMENT_RESULTS.md` | Rapport de résultats expérimentaux. |
+| `docs/REPRODUCIBILITY.md` | Procédure de reproductibilité. |
+| `docs/CASE_STUDY.md` | Étude de cas. |
+| `docs/DEMO_GUIDE.md` | Guide de démonstration. |
+| `docs/RESEARCH_PROPOSAL.md` | Cadrage doctoral provisoire. |
+| `docs/research_notes.md` | Notes de recherche. |
+| `docs/evaluation.md` | Méthodologie d'évaluation complémentaire. |
 
 Artefacts techniques liés à la vérité terrain automatisée :
 
