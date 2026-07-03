@@ -75,7 +75,7 @@ rapport expérimental : rempli
 
 Ces estimations reflètent le niveau actuel du projet sur un périmètre simulé et versionné. Elles ne constituent pas une certification, ni une preuve de performance sur des données SOC réelles.
 
-## Roadmap dataset public
+## Trajectoire dataset public
 
 Le projet repose actuellement sur des logs simulés versionnés.
 
@@ -83,57 +83,21 @@ La trajectoire vers un dataset public est documentée dans :
 
 ```text
 docs/PUBLIC_DATASET_ROADMAP.md
+docs/PUBLIC_DATASET_CANDIDATES.md
+docs/CIC_IDS2017_DATASET_REVIEW.md
 ```
 
-Cette roadmap précise :
+Ces documents précisent :
 
 ```text
 limites du dataset actuel
 → critères de sélection d'un dataset public
+→ candidats datasets publics
+→ revue CIC-IDS2017
 → étapes d'intégration futures
 → vérité terrain publique future
 → risques à éviter
 → positionnement honnête
-```
-
-## Candidats datasets publics
-
-La liste des datasets publics à étudier est documentée dans :
-
-```text
-docs/PUBLIC_DATASET_CANDIDATES.md
-```
-
-Ce document précise :
-
-```text
-CIC-IDS2017
-→ CSE-CIC-IDS2018
-→ UNSW-NB15
-→ CTU-13
-→ OTRF Security Datasets
-→ critères de sélection
-→ intégration non réalisée à ce stade
-```
-
-## Revue CIC-IDS2017
-
-La revue du premier dataset public candidat est documentée dans :
-
-```text
-docs/CIC_IDS2017_DATASET_REVIEW.md
-```
-
-Cette revue précise :
-
-```text
-source officielle
-→ citation attendue
-→ attaques couvertes
-→ sous-ensemble recommandé
-→ mapping provisoire
-→ intégration non réalisée à ce stade
-→ limites à ne pas sur-vendre
 ```
 
 ## Plan de mapping CIC-IDS2017
@@ -152,9 +116,7 @@ fichiers candidats
 → schéma interne cible
 → mapping des labels
 → filtrage initial
-→ tests légers futurs
 → aucune donnée brute ajoutée
-→ loader non implémenté à ce stade
 ```
 
 ## Mapper CIC-IDS2017
@@ -187,7 +149,9 @@ normalisation des labels
 
 L'exemple documenté d'utilisation est disponible dans :
 
+```text
 docs/CIC_IDS2017_SAMPLE_PARSER_EXAMPLE.md
+```
 
 Le parser minimal d'une ligne CIC-IDS2017 déjà fournie localement est implémenté dans :
 
@@ -222,6 +186,30 @@ Le mini-loader borné CIC-IDS2017 est implémenté dans :
 ```text
 utils/cic_ids2017_mini_loader.py
 ```
+
+Les tests unitaires associés sont disponibles dans :
+
+```text
+tests/test_cic_ids2017_mini_loader.py
+```
+
+Ce mini-loader précise :
+
+```text
+CSV local fourni explicitement
+→ max_rows obligatoire
+→ limite de sécurité à 1000 lignes
+→ parsing ligne par ligne
+→ réutilisation du sample row parser
+→ comptage des labels supportés
+→ comptage des labels hors périmètre
+→ erreurs explicites
+→ aucun téléchargement du dataset
+→ aucun dataset brut versionné
+→ aucune règle de détection lancée
+```
+
+Cette étape améliore la visibilité du loader dans le README, mais ne transforme pas le projet en intégration complète de CIC-IDS2017.
 
 ## Lecture rapide recruteur
 
@@ -397,8 +385,6 @@ Le projet génère alors des alertes, rapports, prompts et journaux d'audit dans
 ## Utilisation avec IA locale
 
 L'analyse IA est optionnelle et repose sur Ollama en local.
-
-Exemple :
 
 ```bash
 python main.py --enable-ai
@@ -613,6 +599,13 @@ utils/cic_ids2017_sample_parser.py
 tests/test_cic_ids2017_sample_parser.py
 ```
 
+Artefacts techniques liés au mini-loader borné CIC-IDS2017 :
+
+```text
+utils/cic_ids2017_mini_loader.py
+tests/test_cic_ids2017_mini_loader.py
+```
+
 Artefacts générés liés aux résultats :
 
 ```text
@@ -699,7 +692,8 @@ Limites identifiées :
 - logs simulés uniquement ;
 - trois scénarios principaux ;
 - vérité terrain limitée aux exemples versionnés ;
-- détection basée sur des règles simples ;
+- mini-loader CIC-IDS2017 limité à un CSV local borné ;
+- absence d'intégration complète de CIC-IDS2017 ;
 - absence de logs réels ;
 - absence de connexion à un SIEM réel ;
 - absence de corrélation multi-sources avancée ;
