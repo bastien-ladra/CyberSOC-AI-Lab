@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.40.0 — CIC-IDS2017 mini-loader usage example
+Version actuelle : v1.40.1 — recent changelog alignment
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -79,6 +79,12 @@ Le rafraîchissement des contrôles qualité est documenté dans :
 
 ```text
 docs/QUALITY_GATES_REFRESH.md
+```
+
+L'historique récent aligné est documenté dans :
+
+```text
+docs/CHANGELOG_RECENT.md
 ```
 
 ## Trajectoire dataset public
@@ -568,6 +574,7 @@ Documents principaux :
 | Document | Rôle |
 |---|---|
 | `docs/PROJECT_INDEX.md` | Point d'entrée documentaire du projet. |
+| `docs/CHANGELOG_RECENT.md` | Historique récent aligné des versions postérieures à `v1.38.0`. |
 | `docs/RECRUITER_QUICK_DEMO.md` | Guide court pour présenter le projet en entretien ou à un recruteur. |
 | `docs/architecture.md` | Architecture et pipeline. |
 | `docs/threat_model.md` | Menaces liées à l'usage de l'IA dans un SOC. |
