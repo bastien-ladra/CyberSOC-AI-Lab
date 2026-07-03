@@ -18,7 +18,7 @@ L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une I
 
 ## Statut du projet
 
-Version actuelle : v1.39.0 — quality gates refresh
+Version actuelle : v1.39.1 — Bandit local confirmation
 
 Le prototype couvre actuellement trois scénarios :
 
@@ -65,7 +65,7 @@ Estimation indicative actuelle :
 Résultats expérimentaux documentés :
 
 ```text
-quality gates locaux : OK (Black, Ruff, mypy, pytest)
+quality gates locaux : OK (Black, Ruff, mypy, Bandit, pytest)
 tests : 83 passed
 couverture : 95.99 %
 vérité terrain : OK
@@ -573,7 +573,7 @@ Documents principaux :
 | `docs/CIC_IDS2017_MAPPING_PLAN.md`   | Plan de mapping entre labels CIC-IDS2017 et alertes internes avant tout loader. |
 | `docs/GROUND_TRUTH_LABELS.md`        | Labels attendus et critères de comparaison pour les logs simulés.               |
 | `docs/QUALITY_GATES.md`              | Contrôles qualité du projet.                                                    |
-| `docs/QUALITY_GATES_REFRESH.md`      | Rafraîchissement local des résultats qualité documentés pour v1.39.0.           |
+| `docs/QUALITY_GATES_REFRESH.md`      | Rafraîchissement local des résultats qualité documentés pour v1.39.1.           |
 | `docs/EXPERIMENT_PROTOCOL.md`        | Protocole expérimental.                                                         |
 | `docs/EVALUATION_MATRIX.md`          | Grille d'évaluation.                                                            |
 | `docs/EXPERIMENT_RESULTS.md`         | Rapport de résultats expérimentaux.                                             |
