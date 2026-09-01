@@ -2,17 +2,40 @@
 
 CyberSOC-AI-Lab is an experimental cybersecurity and AI project. Contributions should improve observable engineering value rather than inflate maturity claims.
 
-## Before opening a pull request
+## Environment
 
-Run the same checks as CI:
+Install the development environment from the hash-locked dependency set:
 
 ```bash
+python -m pip install --require-hashes -r requirements-dev.lock
+```
+
+Direct dependencies live in `requirements.in` and `requirements-dev.in`. If one of those inputs changes, regenerate both lockfiles with the same toolchain as CI:
+
+```bash
+python -m pip install "pip==26.1.2" "pip-tools==7.6.0"
+python -m piptools compile --generate-hashes --resolver=backtracking --no-header --no-emit-index-url --no-emit-trusted-host --output-file=requirements.lock requirements.in
+python -m piptools compile --generate-hashes --resolver=backtracking --no-header --no-emit-index-url --no-emit-trusted-host --output-file=requirements-dev.lock requirements-dev.in
+```
+
+Do not hand-edit resolved package versions or hashes in the `.lock` files.
+
+## Before opening a pull request
+
+Run the same core checks as CI:
+
+```bash
+python -m pip check
+pip-audit -r requirements.lock --strict
 black --check .
 ruff check .
 mypy .
 bandit -r ai_assistant dashboard detection utils main.py -q
 pytest --cov=ai_assistant --cov=detection --cov=utils --cov-report=term-missing --cov-fail-under=90 -q
+docker build -t cybersoc-ai-lab .
 ```
+
+GitHub Actions additionally verifies lockfile drift, full-history secret scanning, the non-root container runtime, the Streamlit health endpoint, Trivy HIGH/CRITICAL findings and CycloneDX SBOM generation.
 
 ## Data rules
 
