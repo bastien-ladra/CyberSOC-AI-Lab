@@ -1,8 +1,3 @@
--r requirements.txt
-
-black
-ruff
-mypy
-types-requests
-pytest-cov
-bandit
+# Compatibility entry point for local development installs.
+# Development dependencies are resolved and hash-locked in requirements-dev.lock.
+-r requirements-dev.lock
