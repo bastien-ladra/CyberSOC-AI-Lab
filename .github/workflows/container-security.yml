@@ -1,0 +1,80 @@
+name: Container Security
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: container-security-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  container-scan:
+    name: Container scan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Build container image
+        run: docker build --tag cybersoc-ai:${{ github.sha }} .
+
+      - name: Verify non-root runtime user
+        run: |
+          test "$(docker image inspect --format '{{.Config.User}}' cybersoc-ai:${{ github.sha }})" = "65532:65532" \
+            || test "$(docker image inspect --format '{{.Config.User}}' cybersoc-ai:${{ github.sha }})" = "65532"
+
+      - name: Start dashboard container
+        run: docker run --detach --name cybersoc-ai-test --publish 8501:8501 cybersoc-ai:${{ github.sha }}
+
+      - name: Wait for Streamlit health endpoint
+        run: |
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8501/_stcore/health >/dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+
+          docker logs cybersoc-ai-test
+          exit 1
+
+      - name: Scan container image
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: cybersoc-ai:${{ github.sha }}
+          format: table
+          vuln-type: os,library
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+          exit-code: "1"
+
+      - name: Generate CycloneDX SBOM
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: cybersoc-ai:${{ github.sha }}
+          format: cyclonedx
+          output: sbom.cdx.json
+
+      - name: Upload SBOM
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: sbom-${{ github.sha }}
+          path: sbom.cdx.json
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Stop dashboard container
+        if: always()
+        run: docker rm --force cybersoc-ai-test >/dev/null 2>&1 || true
