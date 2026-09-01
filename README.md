@@ -6,6 +6,8 @@ CyberSOC-AI-Lab combine détection basée sur règles, preuves structurées, ass
 
 > Question étudiée : **comment une IA peut-elle aider un analyste SOC sans remplacer sa décision ?**
 
+[Étude de cas FR](https://bastien-ladra.github.io/portfolio-bastien-ladra/case-study-cybersoc-fr.html) · [Case study EN](https://bastien-ladra.github.io/portfolio-bastien-ladra/case-study-cybersoc.html) · [Portfolio](https://bastien-ladra.github.io/portfolio-bastien-ladra/)
+
 ## Ce que le projet démontre
 
 - **3 scénarios contrôlés** : `SSH_BRUTE_FORCE`, `WEB_RECONNAISSANCE`, `PROMPT_INJECTION_ATTEMPT`.
@@ -157,4 +159,6 @@ It intentionally uses a constrained scope and synthetic data. It is **not presen
 
 Engineering evidence includes hash-locked dependencies, vulnerability auditing, a digest-pinned non-root container, Trivy scanning, CycloneDX SBOM generation, secret scanning and Python quality gates.
 
-Start with the [case study](docs/CASE_STUDY.md), [security model](docs/SECURITY_MODEL.md) and [threat model](docs/threat_model.md).
+[French case study](https://bastien-ladra.github.io/portfolio-bastien-ladra/case-study-cybersoc-fr.html) · [English case study](https://bastien-ladra.github.io/portfolio-bastien-ladra/case-study-cybersoc.html) · [Portfolio](https://bastien-ladra.github.io/portfolio-bastien-ladra/?lang=en)
+
+Start with the [repository case study](docs/CASE_STUDY.md), [security model](docs/SECURITY_MODEL.md) and [threat model](docs/threat_model.md).
