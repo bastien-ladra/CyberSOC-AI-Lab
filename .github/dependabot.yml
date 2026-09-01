@@ -15,6 +15,13 @@ updates:
     open-pull-requests-limit: 3
     labels:
       - dependencies
+    ignore:
+      # Keep the public lab on the tested Python 3.11 runtime line.
+      # Minor/major interpreter upgrades require an explicit compatibility pass.
+      - dependency-name: python
+        update-types:
+          - version-update:semver-major
+          - version-update:semver-minor
 
   - package-ecosystem: github-actions
     directory: "/"
