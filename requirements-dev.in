@@ -1,0 +1,11 @@
+-r requirements.in
+
+black
+ruff
+mypy
+types-requests
+pytest
+pytest-cov
+bandit
+pip-audit
+pip-tools
