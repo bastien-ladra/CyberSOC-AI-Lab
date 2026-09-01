@@ -1,250 +1,95 @@
-# Point concret du projet — CyberSOC-AI-Lab
+# État du projet — CyberSOC-AI-Lab
 
-Ce document regroupe l'état réel du projet, son objectif, son avancement, ses limites et la décision recommandée pour la suite.
+Ce document décrit l'état **observable** du projet, ses limites et les prochaines étapes utiles. Il évite volontairement les notes de maturité auto-attribuées : la crédibilité du projet doit venir du code, des tests, de la CI, des documents de sécurité et des limites explicites.
 
-Il sert de point d'entrée après nettoyage documentaire.
+## Objectif
 
-## Objectif du projet
-
-CyberSOC-AI-Lab vise à démontrer un prototype de SOC augmenté par IA capable de :
+CyberSOC-AI-Lab explore un workflow de SOC assisté par IA dans lequel :
 
 ```text
-détecter
-→ qualifier
-→ expliquer
-→ générer des preuves
-→ assister l'analyste
-→ garder la décision humaine
-→ journaliser
-→ évaluer
-→ documenter les limites
+détection explicable
+→ preuves structurées
+→ assistance IA encadrée
+→ validation humaine
+→ audit
+→ évaluation
 ```
 
-Le projet ne cherche pas à se présenter comme un SIEM, un EDR, un SOC managé ou une solution de production.
+Le projet n'est pas présenté comme un SIEM, un EDR, un SOC managé ou une solution de production.
 
-Positionnement honnête :
+## Capacités actuellement présentes
+
+Le dépôt contient aujourd'hui :
+
+- trois scénarios simulés : `SSH_BRUTE_FORCE`, `WEB_RECONNAISSANCE`, `PROMPT_INJECTION_ATTEMPT` ;
+- un pipeline Python de parsing et détection ;
+- des alertes et rapports structurés ;
+- un dashboard Streamlit ;
+- une validation humaine et un journal d'audit ;
+- une assistance IA locale optionnelle via Ollama ;
+- une évaluation des réponses IA ;
+- un modèle de sécurité et un threat model ;
+- une vérité terrain documentée ;
+- des exports JSON / Markdown / CSV ;
+- un mapper, un parser d'échantillon et un mini-loader borné pour CIC-IDS2017 ;
+- une CI de formatage, lint, typage, analyse statique de sécurité et tests avec seuil de couverture.
+
+## Preuves principales
+
+- [`README.md`](../README.md) — point d'entrée synthétique.
+- [`CASE_STUDY.md`](CASE_STUDY.md) — contexte, architecture et workflow.
+- [`SECURITY_MODEL.md`](SECURITY_MODEL.md) — hypothèses, garde-fous et non-garanties.
+- [`threat_model.md`](threat_model.md) — menaces et surfaces de confiance.
+- [`DATASET_CARD.md`](DATASET_CARD.md) — provenance et limites des données.
+- [`EXPERIMENT_PROTOCOL.md`](EXPERIMENT_PROTOCOL.md) — protocole expérimental.
+- [`.github/workflows/tests.yml`](../.github/workflows/tests.yml) — contrôles automatisés actuels.
+
+## Qualité logicielle
+
+Le workflow CI impose actuellement :
 
 ```text
-portfolio technique : oui
-entretien technique : oui
-recherche appliquée : oui
-production SOC : non
+Black
+Ruff
+mypy
+Bandit
+pytest
+branch coverage >= 90 %
 ```
 
-## État actuel verrouillé
+Les anciens résultats chiffrés locaux restent des snapshots historiques. **Le résultat CI associé au commit ou à la pull request courante est la source de vérité.**
 
-Version courante de travail :
+## Limites qui restent structurantes
 
-```text
-v1.41.1 — documentation triage and cleanup
-```
+Le projet ne dispose pas encore de :
 
-État fonctionnel actuel :
+- logs SOC réels ;
+- connexion SIEM/EDR réelle ;
+- évaluation représentative à grande échelle sur dataset public ;
+- validation externe par des analystes SOC ;
+- authentification multi-utilisateurs du dashboard ;
+- base de données de production ;
+- intégrité/signature cryptographique complète des artefacts ;
+- remédiation active ;
+- durcissement ou validation production.
 
-```text
-3 scénarios simulés couverts
-pipeline principal fonctionnel
-dashboard Streamlit présent
-validation humaine présente
-audit présent
-vérité terrain documentée et évaluée
-exports JSON / Markdown présents
-prompts IA sécurisés présents
-analyse IA locale optionnelle via Ollama
-évaluation des réponses IA présente
-mapper CIC-IDS2017 présent
-sample row parser CIC-IDS2017 présent
-mini-loader CIC-IDS2017 borné présent
-exemple d'utilisation mini-loader présent
-```
+Ces limites sont acceptables pour un laboratoire et deviennent bloquantes uniquement si le projet est présenté comme une solution opérationnelle.
 
-## Nettoyage documentaire effectué
+## Données
 
-Le dépôt possède maintenant une séparation claire :
+Les scénarios versionnés doivent rester synthétiques et démonstratifs. Les données réelles, privées et datasets externes bruts restent exclus du dépôt. Toute future publication doit conserver cette frontière.
 
-```text
-README.md
-→ entrée synthétique
+## Prochaine valeur technique
 
-docs/PROJECT_STATUS.md
-→ état concret du projet
+Les prochaines améliorations utiles sont celles qui augmentent une preuve réelle, par exemple :
 
-docs/PROJECT_INDEX.md
-→ carte de navigation
+1. rendre la supply chain du projet plus reproductible (dépendances verrouillées) ;
+2. durcir l'image Docker et documenter son modèle d'exécution ;
+3. exécuter une micro-évaluation contrôlée sur un sous-ensemble public clairement défini ;
+4. publier les métriques et limites de cette expérience sans extrapoler à un SOC réel.
 
-docs/DOCUMENTATION_STATUS.md
-→ tri des documents actifs, secondaires et historiques
-```
+Les micro-versions cosmétiques ou les nouvelles pages de documentation sans preuve supplémentaire ne sont pas prioritaires.
 
-Les documents anciens ou moins prioritaires ne sont pas supprimés, mais leur statut est clarifié.
+## Discours court
 
-Documents non prioritaires pour juger l'état actuel :
-
-```text
-docs/evaluation.md
-→ complément historique
-
-docs/research_notes.md
-→ notes de recherche nettoyées
-
-CHANGELOG.md
-→ historique long
-```
-
-Raison du choix non destructif :
-
-```text
-préserver l'historique
-ne pas casser les liens
-éviter une suppression difficile à justifier
-conserver le contexte utile pour une revue technique
-```
-
-## Résultats qualité documentés
-
-Résultats locaux actuellement documentés :
-
-```text
-Black : OK
-Ruff : OK
-mypy : OK
-Bandit : OK déclaré après exécution locale dédiée
-pytest : 83 passed
-coverage : 95.99 %
-seuil coverage : 90 %
-```
-
-Ces résultats rendent le projet très solide pour une revue technique portfolio.
-
-Ils ne prouvent pas une performance SOC sur données réelles.
-
-## Avancement concret
-
-Estimation actuelle :
-
-| Axe | Niveau |
-|---|---:|
-| Avancement global | 99 % |
-| Crédibilité portfolio | 100 / 100 |
-| Crédibilité recherche appliquée | 98 / 100 |
-| Maturité production | 25 / 100 |
-
-Interprétation :
-
-```text
-Le projet est quasiment terminé pour un usage portfolio.
-Il est très fort pour défendre une démarche cyber + IA + qualité logicielle.
-Il reste volontairement faible en maturité production car il ne traite pas de logs réels et n'est pas intégré à un SOC réel.
-```
-
-## Ce qui est irréprochable aujourd'hui
-
-Points forts actuels :
-
-```text
-objectif clair
-périmètre assumé
-données simulées documentées
-vérité terrain explicitée
-tests automatisés
-quality gates visibles
-coverage au-dessus du seuil
-Bandit confirmé localement
-dashboard démontrable
-validation humaine documentée
-risque de prompt injection pris en compte
-CIC-IDS2017 abordé progressivement sans survente
-limitations répétées et visibles
-tri documentaire clarifié
-```
-
-Le projet évite une erreur classique : prétendre être production-ready alors que le périmètre reste expérimental.
-
-## Ce qui n'est pas encore irréprochable
-
-Limites encore présentes :
-
-```text
-pas de logs SOC réels
-pas d'évaluation complète sur dataset public
-pas de mesure robuste faux positifs / faux négatifs sur grand volume
-pas de validation externe par analyste SOC
-pas de connexion SIEM réelle
-pas d'authentification multi-utilisateur
-pas de base de données
-pas de signature cryptographique des artefacts
-pas de durcissement production
-```
-
-Ces limites ne posent pas problème pour un portfolio si elles sont assumées clairement.
-
-Elles deviennent bloquantes uniquement si le projet est présenté comme un outil opérationnel de production.
-
-## Doit-on continuer ?
-
-Réponse courte :
-
-```text
-Pour le portfolio : non, le projet est suffisant.
-Pour chercher un poste : préparer la démonstration et candidater.
-Pour la recherche appliquée : oui, continuer vers une micro-évaluation dataset public.
-Pour la production : oui, mais ce serait un autre projet beaucoup plus lourd.
-```
-
-Recommandation concrète :
-
-```text
-ne plus empiler de documentation inutile
-ne plus faire de micro-versions cosmétiques
-passer à une étape qui change réellement la valeur du projet
-```
-
-## Suite recommandée
-
-La prochaine vraie étape utile serait :
-
-```text
-v1.42.0 — public dataset micro-evaluation plan
-```
-
-Objectif : préparer une évaluation très limitée, contrôlée et honnête sur un mini-échantillon local issu d'un dataset public.
-
-Ce que cette étape devrait faire :
-
-```text
-définir un protocole micro-évaluation
-choisir un sous-ensemble CIC-IDS2017 limité
-définir les métriques minimales
-préciser les colonnes nécessaires
-préciser les erreurs à éviter
-ne pas versionner le dataset brut
-ne pas prétendre à une validation complète
-```
-
-Ce que cette étape ne doit pas faire :
-
-```text
-télécharger automatiquement un dataset massif
-ajouter des données brutes au dépôt
-annoncer une performance SOC réelle
-augmenter artificiellement la maturité production
-```
-
-## Décision finale actuelle
-
-Décision recommandée :
-
-```text
-Le projet est prêt pour portfolio et entretien technique.
-Il peut être montré sans honte si le discours reste honnête.
-Il ne faut pas le vendre comme production-ready.
-La suite doit viser soit la recherche appliquée, soit la préparation candidature.
-```
-
-## Discours court à tenir en entretien
-
-```text
-J'ai construit un prototype de SOC augmenté par IA avec détection explicable, preuves, validation humaine, audit, dashboard, vérité terrain, tests automatisés et quality gates.
-
-Le projet est volontairement honnête : il repose encore sur des logs simulés et une intégration CIC-IDS2017 bornée. Je ne le présente pas comme un SIEM de production, mais comme un laboratoire technique solide pour démontrer ma démarche cyber, IA, qualité logicielle et sécurité.
-```
+> J'ai construit un laboratoire de SOC assisté par IA dans lequel la détection reste explicable, les logs sont considérés comme non fiables, l'IA est optionnelle et la décision finale reste humaine. Le projet fournit des preuves, des tests, un modèle de sécurité et une traçabilité, mais je ne le présente pas comme un SIEM ou un SOC de production : les données sont principalement synthétiques et l'évaluation sur dataset public reste volontairement bornée.
