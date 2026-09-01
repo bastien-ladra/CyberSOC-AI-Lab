@@ -16,7 +16,8 @@ COPY requirements.lock ./requirements.lock
 RUN python -m pip install \
     --no-cache-dir \
     --require-hashes \
-    -r requirements.lock
+    -r requirements.lock \
+    && python -m pip uninstall --yes setuptools wheel
 
 COPY --chown=65532:65532 ai_assistant ./ai_assistant
 COPY --chown=65532:65532 dashboard ./dashboard
