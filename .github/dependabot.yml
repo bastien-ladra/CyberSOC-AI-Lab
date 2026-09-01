@@ -5,16 +5,12 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
-    labels:
-      - dependencies
 
   - package-ecosystem: docker
     directory: "/"
     schedule:
       interval: weekly
     open-pull-requests-limit: 3
-    labels:
-      - dependencies
     ignore:
       # Keep the public lab on the tested Python 3.11 runtime line.
       # Minor/major interpreter upgrades require an explicit compatibility pass.
@@ -28,5 +24,3 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
-    labels:
-      - dependencies
