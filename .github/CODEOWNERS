@@ -1,0 +1,10 @@
+* @bastien-ladra
+
+# Security-sensitive paths
+/.github/ @bastien-ladra
+/ai_assistant/ @bastien-ladra
+/detection/ @bastien-ladra
+/utils/ @bastien-ladra
+/docs/SECURITY_MODEL.md @bastien-ladra
+/docs/threat_model.md @bastien-ladra
+/SECURITY.md @bastien-ladra

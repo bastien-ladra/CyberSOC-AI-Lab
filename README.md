@@ -1,312 +1,138 @@
 # CyberSOC-AI-Lab
 
-Prototype de SOC augmenté par intelligence artificielle pour la détection, la qualification et la réponse aux incidents cyber.
+**Prototype de SOC assisté par IA, conçu pour explorer une assistance analyste explicable, supervisée et auditable.**
 
-Le projet met volontairement l'accent sur :
+CyberSOC-AI-Lab combine détection basée sur règles, preuves structurées, assistance IA locale optionnelle, validation humaine et journalisation. Le projet est volontairement présenté comme un **laboratoire expérimental** : ce n'est ni un SIEM, ni un EDR, ni une solution SOC de production.
 
-```text
-détection explicable
-→ preuves visibles
-→ assistance IA encadrée
-→ validation humaine
-→ audit
-→ évaluation
-→ reproductibilité
-```
+> Question étudiée : **comment une IA peut-elle aider un analyste SOC sans remplacer sa décision ?**
 
-L'objectif n'est pas de remplacer un analyste SOC, mais d'explorer comment une IA locale peut l'assister tout en conservant le contrôle humain, la traçabilité et des limites explicites.
+## Ce que le projet démontre
 
-## Statut actuel
-
-```text
-Version actuelle : v1.41.1 — documentation triage and cleanup
-```
-
-Point concret à lire en premier :
-
-```text
-docs/PROJECT_STATUS.md
-```
-
-Statut des documents et tri de lecture :
-
-```text
-docs/DOCUMENTATION_STATUS.md
-```
-
-## Positionnement
-
-CyberSOC-AI-Lab est un prototype expérimental avancé, conçu pour un usage portfolio, entretien technique, démonstration contrôlée et recherche appliquée.
-
-```text
-portfolio technique : oui
-entretien technique : oui
-recherche appliquée : oui
-production SOC : non
-```
-
-## Avancement estimé
-
-| Axe | Niveau |
-|---|---:|
-| Avancement global | 99 % |
-| Crédibilité portfolio | 100 / 100 |
-| Crédibilité recherche appliquée | 98 / 100 |
-| Maturité production | 25 / 100 |
-
-Ces estimations reflètent le niveau actuel sur un périmètre simulé et versionné. Elles ne constituent pas une certification, ni une preuve de performance sur des données SOC réelles.
-
-## Résultats qualité documentés
-
-```text
-Black : OK
-Ruff : OK
-mypy : OK
-Bandit : OK
-pytest : 83 passed
-coverage : 95.99 %
-seuil coverage : 90 %
-```
-
-Détail :
-
-```text
-docs/QUALITY_GATES_REFRESH.md
-```
-
-## Ce que fait le prototype
-
-Le prototype couvre actuellement trois scénarios :
-
-```text
-SSH_BRUTE_FORCE
-WEB_RECONNAISSANCE
-PROMPT_INJECTION_ATTEMPT
-```
-
-Il intègre aussi :
-
-```text
-alertes JSON
-rapports Markdown
-prompts IA sécurisés
-analyse IA locale optionnelle via Ollama
-évaluation automatique des réponses IA
-vérité terrain documentée et évaluée
-exports JSON / Markdown
-dashboard Streamlit
-validation humaine
-journalisation d'audit
-quality gates
-documentation sécurité et recherche
-```
+- **3 scénarios contrôlés** : `SSH_BRUTE_FORCE`, `WEB_RECONNAISSANCE`, `PROMPT_INJECTION_ATTEMPT`.
+- **Détection explicable** : parsing de logs et règles déterministes avant toute assistance IA.
+- **Human-in-the-loop** : l'IA propose et synthétise ; la décision finale reste humaine.
+- **Sécurité IA** : les logs sont traités comme des données non fiables et peuvent déclencher une détection de prompt injection.
+- **Traçabilité** : alertes structurées, rapports, évaluations IA, décisions humaines et journal d'audit.
+- **Qualité logicielle** : Black, Ruff, mypy, Bandit, pytest et seuil de couverture CI de 90 %.
+- **Ouverture recherche** : mapper, parser et mini-loader borné pour expérimenter progressivement avec CIC-IDS2017 sans versionner le dataset brut.
 
 ## Chaîne de traitement
 
 ```text
 logs simulés
-→ vérité terrain attendue
 → parsing
-→ détection par règles
-→ alertes structurées
-→ comparaison attendu / observé
-→ export des résultats
-→ rapports
-→ prompts IA sécurisés
-→ analyse IA locale optionnelle
-→ évaluation IA
-→ audit
-→ dashboard
+→ règles de détection explicables
+→ alertes structurées + preuves
+→ priorisation / rapport
+→ prompt IA encadré
+→ analyse locale optionnelle (Ollama)
+→ évaluation de la réponse
 → validation humaine
+→ audit / dashboard / exports
 ```
 
-## CIC-IDS2017
+L'assistant IA n'exécute aucune remédiation réelle. Il ne bloque pas d'IP, ne modifie pas de compte et n'exécute pas de commande système.
 
-Le projet aborde CIC-IDS2017 progressivement, sans survente :
+## Preuves à inspecter
 
-```text
-revue dataset
-→ plan de mapping
-→ mapper de labels
-→ sample row parser
-→ mini-loader borné
-→ exemple d'utilisation contrôlé
-```
+| Sujet | Point d'entrée |
+|---|---|
+| Étude de cas | [`docs/CASE_STUDY.md`](docs/CASE_STUDY.md) |
+| Modèle de sécurité | [`docs/SECURITY_MODEL.md`](docs/SECURITY_MODEL.md) |
+| Threat model | [`docs/threat_model.md`](docs/threat_model.md) |
+| Architecture | [`docs/architecture.md`](docs/architecture.md) |
+| Données et limites | [`docs/DATASET_CARD.md`](docs/DATASET_CARD.md) |
+| Protocole expérimental | [`docs/EXPERIMENT_PROTOCOL.md`](docs/EXPERIMENT_PROTOCOL.md) |
+| Démo courte | [`docs/RECRUITER_QUICK_DEMO.md`](docs/RECRUITER_QUICK_DEMO.md) |
+| État courant | [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) |
 
-Artefacts principaux :
+## Limites explicites
 
-```text
-docs/CIC_IDS2017_DATASET_REVIEW.md
-docs/CIC_IDS2017_MAPPING_PLAN.md
-docs/CIC_IDS2017_SAMPLE_PARSER_EXAMPLE.md
-docs/CIC_IDS2017_BOUNDED_MINI_LOADER_PLAN.md
-docs/CIC_IDS2017_MINI_LOADER_USAGE_EXAMPLE.md
-utils/cic_ids2017_mapping.py
-utils/cic_ids2017_sample_parser.py
-utils/cic_ids2017_mini_loader.py
-tests/test_cic_ids2017_mapping.py
-tests/test_cic_ids2017_sample_parser.py
-tests/test_cic_ids2017_mini_loader.py
-```
+Le projet repose principalement sur des **logs synthétiques** et une intégration CIC-IDS2017 limitée. Il ne fournit pas aujourd'hui :
 
-Limites assumées :
+- de validation sur un flux SOC réel ;
+- de connexion SIEM/EDR réelle ;
+- de mesure de performance représentative à grande échelle ;
+- d'authentification ou de gestion multi-utilisateurs du dashboard ;
+- de remédiation automatisée ;
+- de garantie de résistance à toutes les formes de prompt injection ;
+- de certification ou de niveau de sécurité production.
 
-```text
-aucun téléchargement automatique de CIC-IDS2017
-aucun dataset brut versionné
-aucune intégration complète du dataset public
-aucune preuve de performance SOC réelle
-```
+Ces limites font partie du périmètre du laboratoire et ne sont pas masquées par des scores de maturité auto-attribués.
 
-## Installation
-
-Créer un environnement Python isolé :
+## Exécution locale
 
 ```bash
 python -m venv .venv
 ```
 
-Activer l'environnement sous Windows PowerShell :
+Sous PowerShell :
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
 ```
 
-Installer les dépendances :
+Installation :
 
 ```bash
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-Pour les contrôles qualité :
-
-```bash
-pip install -r requirements-dev.txt
-```
-
-## Utilisation
-
-Lancer le pipeline sans IA :
+Pipeline sans IA :
 
 ```bash
 python main.py
 ```
 
-Lancer avec IA locale via Ollama :
+Pipeline avec Ollama local :
 
 ```bash
 python main.py --enable-ai
 ```
 
-Lancer avec un autre modèle :
-
-```bash
-python main.py --enable-ai --model mistral
-```
-
-Lancer le dashboard :
+Dashboard :
 
 ```bash
 streamlit run dashboard/app.py
 ```
 
-Tester des logs bénins :
-
-```bash
-python main.py --ssh-log-file data/sample_logs/benign_ssh_auth.log --web-log-file data/sample_logs/benign_web_access.log
-```
-
-Résultat attendu :
-
-```text
-Aucune alerte détectée.
-```
-
 ## Docker
-
-Construire l'image :
 
 ```bash
 docker build -t cybersoc-ai-lab .
-```
-
-Lancer le dashboard :
-
-```bash
 docker run -p 8501:8501 cybersoc-ai-lab
-```
-
-Exécuter le pipeline :
-
-```bash
-docker run --rm cybersoc-ai-lab python main.py
 ```
 
 ## Quality gates
 
-```bash
-black --check .
-ruff check .
-mypy .
-bandit -r ai_assistant dashboard detection utils main.py -q
-pytest --cov=ai_assistant --cov=detection --cov=utils --cov-report=term-missing --cov-fail-under=90 -q
-```
-
-Le workflow GitHub Actions exécute les quality gates à chaque push ou pull request :
+La CI exécute :
 
 ```text
-.github/workflows/tests.yml
+Black
+Ruff
+mypy
+Bandit
+pytest + branch coverage >= 90 %
+secret scanning
 ```
 
-## Documentation regroupée
+Les résultats CI courants sont la source de vérité ; les anciens snapshots locaux conservés dans la documentation sont historiques.
 
-Lecture recommandée :
+## Données d'exemple
 
-| Besoin | Document |
-|---|---|
-| Point concret actuel | `docs/PROJECT_STATUS.md` |
-| Statut et tri des documents | `docs/DOCUMENTATION_STATUS.md` |
-| Navigation complète | `docs/PROJECT_INDEX.md` |
-| Démo recruteur | `docs/RECRUITER_QUICK_DEMO.md` |
-| Guide de démonstration | `docs/DEMO_GUIDE.md` |
-| Étude de cas | `docs/CASE_STUDY.md` |
-| Modèle de sécurité | `docs/SECURITY_MODEL.md` |
-| Threat model | `docs/threat_model.md` |
-| Données simulées | `docs/DATASET_CARD.md` |
-| Vérité terrain | `docs/GROUND_TRUTH_LABELS.md` |
-| Quality gates | `docs/QUALITY_GATES.md` |
-| Résultats qualité récents | `docs/QUALITY_GATES_REFRESH.md` |
-| Historique récent | `docs/CHANGELOG_RECENT.md` |
-| Changelog long | `CHANGELOG.md` |
+Les fichiers de `data/sample_logs/` sont des scénarios synthétiques destinés à la démonstration et aux tests. Les adresses utilisées pour les scénarios publics sont réservées à la documentation conformément à RFC 5737. Les données réelles, privées ou externes sont exclues du dépôt par défaut.
 
-## Limites actuelles
+## Positionnement
 
-La version actuelle reste un prototype expérimental, non destiné à un usage en production.
+Ce projet sert de preuve technique à l'intersection **cybersécurité + IA responsable + engineering**. Il complète mon projet DevSecOps/supply-chain public en montrant une autre problématique : encadrer l'utilisation d'un modèle IA lorsqu'il consomme lui-même des données de sécurité potentiellement hostiles.
 
-Limites identifiées :
+---
 
-```text
-logs simulés uniquement
-pas de logs SOC réels
-pas de connexion SIEM réelle
-pas d'évaluation complète sur dataset public
-pas de validation externe par analystes SOC
-pas d'authentification multi-utilisateurs
-pas de stockage en base de données
-pas d'intégrité cryptographique des artefacts
-pas de certification sécurité
-```
+## English snapshot
 
-## Décision actuelle
+**CyberSOC-AI-Lab** is an experimental AI-assisted SOC prototype focused on explainable detection, visible evidence, local optional AI assistance, human validation and auditability.
 
-```text
-Le projet est prêt pour portfolio et entretien technique.
-Il peut être montré si le discours reste honnête.
-Il ne doit pas être vendu comme production-ready.
-La suite utile est soit la préparation candidature, soit une micro-évaluation dataset public contrôlée.
-```
+It intentionally uses a constrained scope and synthetic data. It is **not presented as a production SOC, SIEM or EDR**. The core research/engineering question is how an AI assistant can help a security analyst while keeping untrusted log content separated from instructions and preserving human decision authority.
 
-Le principe central reste :
-
-> L'IA peut assister l'analyste, mais ne doit pas remplacer la décision humaine.
+Start with the [case study](docs/CASE_STUDY.md), [security model](docs/SECURITY_MODEL.md) and [threat model](docs/threat_model.md).
