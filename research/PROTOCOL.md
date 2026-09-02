@@ -27,17 +27,25 @@ This baseline is not presented as a production detector. It establishes a reprod
 
 One local Ollama-assisted triage method will produce a binary recommendation plus a short rationale from **non-label input fields only**. The final operational decision remains conceptually human-approved; the benchmark measures recommendation quality, not autonomous response.
 
-The following must be committed before the first scored AI run:
+Implementation scaffold: `research/cicids2017_ai.py`.
 
-- Ollama model name and immutable model/version identifier where available;
-- prompt template;
-- decoding/generation settings;
-- exact input-field allowlist;
-- parser for the binary recommendation;
-- timeout/failure policy;
-- fixed evaluation rows shared with the baseline.
+The v1 runner already fixes these integrity constraints:
 
-These values remain **TBD** until the exact dataset file is frozen. No AI metric may be interpreted before that commit.
+- explicit input-field allowlist;
+- dataset label excluded from model input;
+- strict JSON response schema;
+- explicit `human_validation_required: true` requirement;
+- bounded maximum of 500 scored records per invocation;
+- timeout, missing response or invalid JSON is recorded as a model failure and counted operationally as `DO_NOT_ESCALATE`.
+
+The following must still be committed before the first scored AI comparison:
+
+- exact Ollama model identifier/digest where available;
+- final evaluation row count and deterministic selection rule;
+- final model invocation/generation configuration supported by the local runtime;
+- dataset file SHA-256 shared by both methods.
+
+No AI metric may be interpreted before those values are frozen.
 
 ## 3. Dataset and evaluation set
 
