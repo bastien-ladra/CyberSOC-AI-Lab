@@ -20,6 +20,12 @@ CyberSOC-AI-Lab combine détection basée sur règles, preuves structurées, ass
 - **Conteneur durci** : image Python épinglée par digest, installation `--require-hashes`, exécution non-root, healthcheck, scan Trivy et SBOM CycloneDX.
 - **Ouverture recherche** : mapper, parser et mini-loader borné pour expérimenter progressivement avec CIC-IDS2017 sans versionner le dataset brut.
 
+## Benchmark de recherche reproductible
+
+Le dossier [`research/`](research/README.md) structure désormais une comparaison expérimentale entre une baseline déterministe et une assistance IA locale. La v1 sélectionne CIC-IDS2017 comme source publique, limite explicitement le scoring aux labels `BENIGN` et `SSH-Patator`, exclut le label de l'entrée du modèle et calcule les métriques automatiquement. Aucun résultat n'est revendiqué tant que le fichier source exact, son SHA-256, la sélection des lignes et la configuration du modèle ne sont pas figés.
+
+Voir [`research/PROTOCOL.md`](research/PROTOCOL.md), [`research/DATASET.md`](research/DATASET.md) et [`research/REPORT.md`](research/REPORT.md).
+
 ## Chaîne de traitement
 
 ```text
