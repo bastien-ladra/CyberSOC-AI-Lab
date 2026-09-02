@@ -8,7 +8,7 @@ Status: **source selected; exact local file not frozen yet**.
 - **Publisher:** Canadian Institute for Cybersecurity, University of New Brunswick.
 - **Official source:** https://www.unb.ca/cic/datasets/ids-2017.html
 - **Primary reference:** I. Sharafaldin, A. H. Lashkari and A. A. Ghorbani, "Toward Generating a New Intrusion Detection Dataset and Intrusion Traffic Characterization", ICISSP 2018.
-- **Availability:** the official dataset page states that labelled flows and machine-learning CSV files are publicly available for researchers and requests citation of the reference paper.
+- **Availability:** the official dataset page states that labelled flows and machine-learning CSV files are publicly available for researchers and requests citation of the reference paper. The CIC dataset FAQ also states that its datasets may be redistributed, republished and mirrored.
 - **Data origin:** controlled/lab network traffic containing benign activity and documented attacks collected over five days in July 2017.
 
 ## Benchmark v1 scope
