@@ -1,6 +1,7 @@
 import argparse
 import csv
 import json
+from collections.abc import Mapping
 from pathlib import Path
 from time import perf_counter
 from typing import Any, Callable
@@ -43,7 +44,7 @@ ALLOWED_INPUT_FIELDS = {
 AIQuery = Callable[[str], str | None]
 
 
-def build_ai_features(row: dict[str, object]) -> dict[str, str]:
+def build_ai_features(row: Mapping[str, object]) -> dict[str, str]:
     """Return an allowlisted, label-free feature dictionary for the model."""
     features: dict[str, str] = {}
 
