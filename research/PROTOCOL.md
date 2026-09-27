@@ -1,6 +1,6 @@
 # Benchmark protocol
 
-Status: **dataset source, deterministic baseline and evaluation-row selection rule are frozen; exact dataset file and local AI model configuration remain TBD**.
+Status: **dataset source, deterministic baseline, evaluation-row selection rule and AI generation defaults are frozen; exact dataset bytes and local Ollama model digest remain runtime-bound**.
 
 ## 1. Research target
 
@@ -38,13 +38,23 @@ The v1 runner fixes these integrity constraints:
 - bounded maximum of 500 scored records per invocation;
 - timeout, missing response or invalid JSON is recorded as a model failure and counted operationally as `DO_NOT_ESCALATE`.
 
-The following must still be committed before the first scored AI comparison:
+The scored AI runner now preregisters these generation options:
 
-- exact Ollama model identifier/digest where available;
-- final model invocation/generation configuration supported by the local runtime;
-- exact CIC-IDS2017 file name and SHA-256.
+- temperature: `0.0`;
+- seed: `20260927`;
+- maximum generated tokens (`num_predict`): `128`.
 
-No AI metric may be interpreted before those values are frozen.
+Before scoring, the runner queries the local Ollama runtime and records:
+
+- requested and resolved model name;
+- exact local model digest;
+- Ollama runtime version;
+- model metadata returned by the local `/api/tags` endpoint;
+- the generation options used for the run.
+
+If the exact local model digest cannot be resolved, the CLI refuses to execute a scored benchmark. The exact CIC-IDS2017 file SHA-256 must also be frozen before interpretation.
+
+No AI metric may be interpreted without both dataset and model identity recorded.
 
 ## 3. Dataset and frozen evaluation selection
 
@@ -101,7 +111,8 @@ No manual metric transcription is considered source evidence.
 - Fixed dataset file SHA-256 or immutable retrieval manifest.
 - Fixed deterministic balanced row-selection rule.
 - Frozen row manifest shared by both compared methods.
-- Fixed model/version and configuration for AI runs.
+- Exact local Ollama model digest and runtime version captured before scoring.
+- Fixed AI generation defaults: temperature 0.0, seed 20260927, num_predict 128.
 - Machine-readable run metadata.
 - No raw public dataset committed into the repository.
 - Clean-environment reproduction commands documented before release.
@@ -126,4 +137,4 @@ Do not remove difficult records from the frozen evaluation set after results are
 
 ## 8. Reporting
 
-Each scored run must export machine-readable metrics and metadata under `research/results/`, including repository commit SHA, dataset SHA-256, selection rule/manifest, method configuration, run timestamp and latency measurement. `REPORT.md` will contain interpretation, limitations and non-claims.
+Each scored run must export machine-readable metrics and metadata under `research/results/`, including repository commit SHA, dataset SHA-256, selection rule/manifest, Ollama model digest/runtime version, generation options, method configuration, run timestamp and latency measurement. `REPORT.md` will contain interpretation, limitations and non-claims.
