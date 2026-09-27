@@ -4,7 +4,7 @@ Status: **template — no benchmark results are claimed yet**.
 
 ## Executive summary
 
-To be completed only after the CIC-IDS2017 source file, SHA-256, evaluation-row selection rule, deterministic baseline and local-Ollama configuration have been frozen and executed.
+To be completed only after the CIC-IDS2017 source file SHA-256, frozen 200-row evaluation manifest and exact local Ollama model identity have been recorded and both methods have been executed.
 
 ## Research question
 
@@ -14,16 +14,18 @@ See `QUESTION.md`.
 
 - Source: CIC-IDS2017, Canadian Institute for Cybersecurity, University of New Brunswick.
 - v1 labels: `BENIGN` and `SSH-Patator` only.
-- Exact file name: **TBD**.
-- SHA-256: **TBD**.
-- Scored row-selection rule: **TBD before result interpretation**.
+- Target file: `Tuesday-WorkingHours.pcap_ISCX.csv` from Generated Labelled Flows; exact local filename must be confirmed after download.
+- SHA-256: **TBD from the exact local bytes**.
+- Scored row-selection rule: **frozen — 100 BENIGN + 100 SSH-Patator rows selected by lowest canonical row SHA-256 per class, then evaluated in source order**.
 
 See `DATASET.md` and the generated dataset manifest in `research/results/`.
 
 ## Compared methods
 
 - Deterministic baseline: TCP destination port 22 -> `ESCALATE`.
-- AI-assisted method: bounded local Ollama triage over an allowlisted, label-free feature set; exact model/version and final row count **TBD before scored run**.
+- AI-assisted method: bounded local Ollama triage over an allowlisted, label-free feature set and the same frozen 200 rows.
+- AI generation defaults: temperature `0.0`, seed `20260927`, `num_predict=128`.
+- Exact local model digest and Ollama runtime version: **captured automatically at scored runtime; TBD until the local model is available**.
 
 ## Results
 
@@ -71,4 +73,4 @@ This benchmark is evidence about the documented evaluation setup only. It does n
 
 ## Reproduction
 
-See `research/README.md` for the validation, baseline and AI-run commands. Final release evidence must include the dataset manifest, machine-generated result JSON files, commit SHA and exact local model identifier.
+See `research/README.md` for the validation, baseline and AI-run commands. Final release evidence must include the dataset manifest, frozen selection manifest, machine-generated result JSON files, commit SHA, exact local Ollama model digest/runtime version and generation options.
