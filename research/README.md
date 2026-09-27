@@ -10,7 +10,9 @@ This directory contains the research-evidence workflow used to compare a transpa
 - Binary metrics implemented without external ML dependencies.
 - Deterministic balanced evaluation-row selection implemented.
 - Local-Ollama runner implemented with a label-free input allowlist and strict JSON response validation.
-- No benchmark result is claimed until the exact local dataset file and model configuration are frozen.
+- The runner captures the exact local Ollama model digest/runtime version before scoring and refuses to run if it cannot resolve them.
+- AI generation defaults are preregistered: temperature 0.0, seed 20260927, num_predict 128.
+- No benchmark result is claimed until the exact local dataset file SHA-256 is frozen.
 
 ## 1. Obtain the dataset
 
@@ -55,11 +57,14 @@ Start Ollama locally with the preregistered model, then run the **same 200 froze
 python -m research.cicids2017_ai /path/to/labelled_flows.csv \
   --selection-manifest research/results/evaluation_selection.json \
   --max-scored-rows 200 \
-  --model <frozen-model-identifier> \
+  --model <local-ollama-model-name> \
+  --temperature 0.0 \
+  --seed 20260927 \
+  --num-predict 128 \
   --output research/results/ai.json
 ```
 
-The exact model/version and supported generation configuration must be frozen before a scored comparison is treated as evidence.
+Before scoring, the runner resolves the exact local model digest from Ollama and records it with the Ollama version and generation options in the result JSON. If no digest can be resolved, the scored run stops instead of producing ambiguous evidence.
 
 ## 6. Interpret results
 
