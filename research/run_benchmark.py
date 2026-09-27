@@ -79,9 +79,10 @@ def run_benchmark(
         "num_predict": num_predict,
     }
 
-    if query is None:
+    query_fn = query
+    if query_fn is None:
 
-        def query(prompt: str) -> str | None:
+        def default_query(prompt: str) -> str | None:
             return query_ollama(
                 prompt,
                 model=model,
@@ -89,10 +90,12 @@ def run_benchmark(
                 options=generation_options,
             )
 
+        query_fn = default_query
+
     ai_result = evaluate_ai_method(
         csv_path=csv_path,
         max_scored_rows=int(selection_manifest["selected_row_count"]),
-        query=query,
+        query=query_fn,
         selection_manifest=selection_manifest_path,
     )
     ai_result["model_runtime"] = resolved_model_metadata
