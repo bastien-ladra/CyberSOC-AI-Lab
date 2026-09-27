@@ -7,10 +7,10 @@ from typing import Any
 
 from ai_assistant.llm_client import get_ollama_model_metadata, query_ollama
 from research.cicids2017_ai import (
-    AIQuery,
     DEFAULT_AI_NUM_PREDICT,
     DEFAULT_AI_SEED,
     DEFAULT_AI_TEMPERATURE,
+    AIQuery,
     evaluate_ai_method,
 )
 from research.cicids2017_baseline import evaluate_baseline
