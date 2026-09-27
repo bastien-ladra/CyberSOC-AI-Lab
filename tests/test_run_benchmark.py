@@ -4,7 +4,6 @@ from pathlib import Path
 
 from research.run_benchmark import run_benchmark
 
-
 FIELDNAMES = [
     "Timestamp",
     "Source IP",
