@@ -78,8 +78,26 @@ def test_parse_ai_response_rejects_missing_human_validation() -> None:
 def test_evaluate_ai_method_uses_failure_as_no_escalation(tmp_path: Path) -> None:
     csv_path = tmp_path / "cicids.csv"
     rows = [
-        ["2017-07-04 14:00:00", "192.0.2.1", "192.0.2.20", "50000", "22", "6", "100", "SSH-Patator"],
-        ["2017-07-04 14:00:01", "192.0.2.2", "192.0.2.20", "50001", "443", "6", "200", "BENIGN"],
+        [
+            "2017-07-04 14:00:00",
+            "192.0.2.1",
+            "192.0.2.20",
+            "50000",
+            "22",
+            "6",
+            "100",
+            "SSH-Patator",
+        ],
+        [
+            "2017-07-04 14:00:01",
+            "192.0.2.2",
+            "192.0.2.20",
+            "50001",
+            "443",
+            "6",
+            "200",
+            "BENIGN",
+        ],
     ]
 
     with csv_path.open("w", newline="", encoding="utf-8") as handle:
