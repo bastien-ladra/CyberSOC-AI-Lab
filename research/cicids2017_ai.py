@@ -7,6 +7,7 @@ from time import perf_counter
 from typing import Any, Callable
 
 from ai_assistant.llm_client import query_ollama
+from research.cicids2017_selection import load_selection_manifest
 from research.metrics import compute_binary_metrics
 from utils.cic_ids2017_sample_parser import (
     normalize_cic_ids2017_column_name,
@@ -117,6 +118,7 @@ def evaluate_ai_method(
     csv_path: Path,
     max_scored_rows: int,
     query: AIQuery,
+    selection_manifest: Path | None = None,
 ) -> dict[str, Any]:
     if not csv_path.is_file():
         raise ValueError(f"dataset file does not exist: {csv_path}")
@@ -124,6 +126,18 @@ def evaluate_ai_method(
         raise ValueError(
             f"max_scored_rows must be between 1 and {MAX_AI_SCORED_ROWS}"
         )
+
+    selection_metadata: dict[str, Any] | None = None
+    selected_row_numbers: set[int] | None = None
+    if selection_manifest is not None:
+        selection_metadata, selected_row_numbers = load_selection_manifest(
+            selection_manifest,
+            csv_path,
+        )
+        if len(selected_row_numbers) != max_scored_rows:
+            raise ValueError(
+                "max_scored_rows must equal the frozen manifest row count"
+            )
 
     expected: list[bool] = []
     predicted: list[bool] = []
@@ -136,10 +150,14 @@ def evaluate_ai_method(
     with csv_path.open(newline="", encoding="utf-8-sig") as csv_file:
         reader = csv.DictReader(csv_file)
 
-        for row in reader:
-            if scored_rows >= max_scored_rows:
+        for row_number, row in enumerate(reader, start=1):
+            if selected_row_numbers is None and scored_rows >= max_scored_rows:
                 break
+
             rows_seen += 1
+
+            if selected_row_numbers is not None and row_number not in selected_row_numbers:
+                continue
 
             event = parse_cic_ids2017_sample_row(row)
             if not event.is_supported_label:
@@ -167,12 +185,22 @@ def evaluate_ai_method(
             predicted.append(prediction)
             scored_rows += 1
 
+            if (
+                selected_row_numbers is not None
+                and scored_rows == len(selected_row_numbers)
+            ):
+                break
+
     if scored_rows == 0:
         raise ValueError("no supported CIC-IDS2017 v1 rows were available for scoring")
+    if selected_row_numbers is not None and scored_rows != len(selected_row_numbers):
+        raise ValueError(
+            "selection manifest rows could not all be scored from the dataset"
+        )
 
     metrics = compute_binary_metrics(expected, predicted)
 
-    return {
+    result: dict[str, Any] = {
         "method": "local_ollama_triage_v1",
         "rows_seen": rows_seen,
         "scored_rows": scored_rows,
@@ -183,6 +211,16 @@ def evaluate_ai_method(
         "metrics": metrics.to_dict(),
     }
 
+    if selection_metadata is not None:
+        result["selection"] = {
+            "dataset_sha256": selection_metadata["dataset_sha256"],
+            "selection_rule": selection_metadata["selection_rule"],
+            "selected_row_count": selection_metadata["selected_row_count"],
+            "rows_per_class": selection_metadata["rows_per_class"],
+        }
+
+    return result
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(
@@ -190,6 +228,7 @@ def main() -> int:
     )
     parser.add_argument("csv_path", type=Path)
     parser.add_argument("--max-scored-rows", type=int, required=True)
+    parser.add_argument("--selection-manifest", type=Path, default=None)
     parser.add_argument("--model", default="llama3.2")
     parser.add_argument("--base-url", default="http://localhost:11434")
     parser.add_argument("--output", type=Path, default=None)
@@ -199,6 +238,7 @@ def main() -> int:
         csv_path=args.csv_path,
         max_scored_rows=args.max_scored_rows,
         query=_default_query(args.model, args.base_url),
+        selection_manifest=args.selection_manifest,
     )
     result["model"] = args.model
     result["base_url"] = args.base_url
