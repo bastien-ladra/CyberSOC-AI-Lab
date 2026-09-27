@@ -34,19 +34,23 @@ def compute_binary_metrics(
         raise ValueError("at least one scored record is required")
 
     true_positive = sum(
-        1 for truth, prediction in zip(expected, predicted, strict=True)
+        1
+        for truth, prediction in zip(expected, predicted, strict=True)
         if truth and prediction
     )
     true_negative = sum(
-        1 for truth, prediction in zip(expected, predicted, strict=True)
+        1
+        for truth, prediction in zip(expected, predicted, strict=True)
         if not truth and not prediction
     )
     false_positive = sum(
-        1 for truth, prediction in zip(expected, predicted, strict=True)
+        1
+        for truth, prediction in zip(expected, predicted, strict=True)
         if not truth and prediction
     )
     false_negative = sum(
-        1 for truth, prediction in zip(expected, predicted, strict=True)
+        1
+        for truth, prediction in zip(expected, predicted, strict=True)
         if truth and not prediction
     )
 
