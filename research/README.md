@@ -18,7 +18,29 @@ This directory contains the research-evidence workflow used to compare a transpa
 
 Use the official CIC-IDS2017 source documented in `DATASET.md`. Keep raw data outside the repository.
 
-## 2. Validate and freeze provenance
+## 2. Recommended one-command run
+
+Once the exact Tuesday CSV and a local Ollama model are available, run the full evidence pipeline with one command:
+
+```bash
+python -m research.run_benchmark /path/to/Tuesday-WorkingHours.pcap_ISCX.csv \
+  --model <local-ollama-model-name> \
+  --output-dir research/results
+```
+
+This writes:
+
+- `dataset_manifest.json`;
+- `evaluation_selection.json`;
+- `baseline.json`;
+- `ai.json`;
+- `benchmark_summary.json`.
+
+The command refuses to produce scored AI evidence if it cannot resolve the exact local Ollama model digest. It also binds the frozen row selection to the exact dataset SHA-256.
+
+The remaining sections document the same pipeline step by step for inspection and debugging.
+
+## 3. Validate and freeze provenance
 
 ```bash
 python -m research.cicids2017_validate /path/to/labelled_flows.csv \
@@ -27,7 +49,7 @@ python -m research.cicids2017_validate /path/to/labelled_flows.csv \
 
 Review the manifest and keep the exact file SHA-256.
 
-## 3. Freeze the exact evaluation rows
+## 4. Freeze the exact evaluation rows
 
 Benchmark v1 is preregistered as **100 BENIGN + 100 SSH-Patator** rows. Within each class, the selector chooses the 100 canonical rows with the smallest SHA-256 values, then evaluates the combined set in original source order.
 
@@ -39,7 +61,7 @@ python -m research.cicids2017_selection /path/to/labelled_flows.csv \
 
 The selection manifest is bound to the exact dataset SHA-256. If the CSV changes, the benchmark refuses to use the old manifest.
 
-## 4. Run the deterministic baseline
+## 5. Run the deterministic baseline
 
 ```bash
 python -m research.cicids2017_baseline /path/to/labelled_flows.csv \
@@ -49,7 +71,7 @@ python -m research.cicids2017_baseline /path/to/labelled_flows.csv \
 
 The baseline is deliberately fixed as TCP destination port 22 -> escalate. Do not tune it after viewing results.
 
-## 5. Run the local AI method
+## 6. Run the local AI method
 
 Start Ollama locally with the preregistered model, then run the **same 200 frozen rows**:
 
@@ -66,7 +88,7 @@ python -m research.cicids2017_ai /path/to/labelled_flows.csv \
 
 Before scoring, the runner resolves the exact local model digest from Ollama and records it with the Ollama version and generation options in the result JSON. If no digest can be resolved, the scored run stops instead of producing ambiguous evidence.
 
-## 6. Interpret results
+## 7. Interpret results
 
 Use `REPORT.md`. Report precision, recall, F1, false-positive rate, false-negative rate, latency, model failures and representative failure cases. A negative result is valid evidence; do not post-hoc tune the experiment solely to force the AI method to win.
 
