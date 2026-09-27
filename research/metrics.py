@@ -17,7 +17,7 @@ class BinaryClassificationMetrics:
         return asdict(self)
 
 
-def _safe_divide(numerator: int, denominator: int) -> float:
+def _safe_divide(numerator: int | float, denominator: int | float) -> float:
     if denominator == 0:
         return 0.0
     return numerator / denominator
