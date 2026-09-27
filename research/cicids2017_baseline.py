@@ -78,9 +78,8 @@ def evaluate_baseline(
             predicted.append(prediction)
             scored_rows += 1
 
-            if (
-                selected_row_numbers is not None
-                and scored_rows == len(selected_row_numbers)
+            if selected_row_numbers is not None and scored_rows == len(
+                selected_row_numbers
             ):
                 break
 

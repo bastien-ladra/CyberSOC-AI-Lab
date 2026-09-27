@@ -135,9 +135,7 @@ def evaluate_ai_method(
     if not csv_path.is_file():
         raise ValueError(f"dataset file does not exist: {csv_path}")
     if max_scored_rows <= 0 or max_scored_rows > MAX_AI_SCORED_ROWS:
-        raise ValueError(
-            f"max_scored_rows must be between 1 and {MAX_AI_SCORED_ROWS}"
-        )
+        raise ValueError(f"max_scored_rows must be between 1 and {MAX_AI_SCORED_ROWS}")
 
     selection_metadata: dict[str, Any] | None = None
     selected_row_numbers: set[int] | None = None
@@ -147,9 +145,7 @@ def evaluate_ai_method(
             csv_path,
         )
         if len(selected_row_numbers) != max_scored_rows:
-            raise ValueError(
-                "max_scored_rows must equal the frozen manifest row count"
-            )
+            raise ValueError("max_scored_rows must equal the frozen manifest row count")
 
     expected: list[bool] = []
     predicted: list[bool] = []
@@ -200,9 +196,8 @@ def evaluate_ai_method(
             predicted.append(prediction)
             scored_rows += 1
 
-            if (
-                selected_row_numbers is not None
-                and scored_rows == len(selected_row_numbers)
+            if selected_row_numbers is not None and scored_rows == len(
+                selected_row_numbers
             ):
                 break
 

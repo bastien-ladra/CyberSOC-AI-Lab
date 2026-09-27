@@ -5,7 +5,6 @@ import pytest
 
 from research.cicids2017_validate import inspect_dataset, validate_header
 
-
 FIELDNAMES = [
     "Timestamp",
     "Source IP",

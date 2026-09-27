@@ -8,7 +8,6 @@ from research.cicids2017_baseline import (
 )
 from research.cicids2017_selection import build_selection_manifest
 
-
 FIELDNAMES = [
     "Timestamp",
     "Source IP",

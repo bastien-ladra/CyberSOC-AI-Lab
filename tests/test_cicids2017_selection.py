@@ -9,7 +9,6 @@ from research.cicids2017_selection import (
     load_selection_manifest,
 )
 
-
 FIELDNAMES = [
     "Timestamp",
     "Source IP",
