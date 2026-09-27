@@ -54,9 +54,7 @@ def build_selection_manifest(
         )
 
     labels = sorted(V1_SUPPORTED_LABELS)
-    candidates: dict[str, list[tuple[str, int]]] = {
-        label: [] for label in labels
-    }
+    candidates: dict[str, list[tuple[str, int]]] = {label: [] for label in labels}
 
     with csv_path.open(newline="", encoding="utf-8-sig") as csv_file:
         reader = csv.DictReader(csv_file)
@@ -111,12 +109,8 @@ def build_selection_manifest(
         ),
         "rows_per_class": rows_per_class,
         "supported_labels": labels,
-        "available_counts": {
-            label: len(candidates[label]) for label in labels
-        },
-        "selected_counts": {
-            label: rows_per_class for label in labels
-        },
+        "available_counts": {label: len(candidates[label]) for label in labels},
+        "selected_counts": {label: rows_per_class for label in labels},
         "selected_row_count": len(selected_rows),
         "selected_rows": selected_rows,
     }
