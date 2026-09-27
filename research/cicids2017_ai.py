@@ -156,7 +156,10 @@ def evaluate_ai_method(
 
             rows_seen += 1
 
-            if selected_row_numbers is not None and row_number not in selected_row_numbers:
+            if (
+                selected_row_numbers is not None
+                and row_number not in selected_row_numbers
+            ):
                 continue
 
             event = parse_cic_ids2017_sample_row(row)
