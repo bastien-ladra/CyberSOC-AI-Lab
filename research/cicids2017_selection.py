@@ -148,7 +148,11 @@ def load_selection_manifest(
         if not isinstance(item, dict):
             raise ValueError("selection manifest row entry must be an object")
         row_number = item.get("row_number")
-        if not isinstance(row_number, int) or isinstance(row_number, bool) or row_number <= 0:
+        if (
+            not isinstance(row_number, int)
+            or isinstance(row_number, bool)
+            or row_number <= 0
+        ):
             raise ValueError("selection manifest contains an invalid row number")
         if row_number in row_numbers:
             raise ValueError("selection manifest contains duplicate row numbers")
