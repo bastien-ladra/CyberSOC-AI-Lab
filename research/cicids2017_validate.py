@@ -3,6 +3,7 @@ import csv
 import hashlib
 import json
 from collections import Counter
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
@@ -30,7 +31,7 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def validate_header(fieldnames: list[str] | None) -> None:
+def validate_header(fieldnames: Sequence[str] | None) -> None:
     if not fieldnames:
         raise ValueError("CSV has no header")
 
