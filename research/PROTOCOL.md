@@ -1,6 +1,6 @@
 # Benchmark protocol
 
-Status: **dataset source and deterministic baseline selected; AI configuration and final frozen evaluation manifest remain TBD**.
+Status: **dataset source, deterministic baseline and evaluation-row selection rule are frozen; exact dataset file and local AI model configuration remain TBD**.
 
 ## 1. Research target
 
@@ -29,7 +29,7 @@ One local Ollama-assisted triage method will produce a binary recommendation plu
 
 Implementation scaffold: `research/cicids2017_ai.py`.
 
-The v1 runner already fixes these integrity constraints:
+The v1 runner fixes these integrity constraints:
 
 - explicit input-field allowlist;
 - dataset label excluded from model input;
@@ -41,17 +41,16 @@ The v1 runner already fixes these integrity constraints:
 The following must still be committed before the first scored AI comparison:
 
 - exact Ollama model identifier/digest where available;
-- final evaluation row count and deterministic selection rule;
 - final model invocation/generation configuration supported by the local runtime;
-- dataset file SHA-256 shared by both methods.
+- exact CIC-IDS2017 file name and SHA-256.
 
 No AI metric may be interpreted before those values are frozen.
 
-## 3. Dataset and evaluation set
+## 3. Dataset and frozen evaluation selection
 
 Dataset source: **CIC-IDS2017**, Canadian Institute for Cybersecurity, University of New Brunswick. See `DATASET.md`.
 
-Before scoring, `research/cicids2017_validate.py` must record:
+Before scoring, `research/cicids2017_validate.py` records:
 
 - exact local file name;
 - SHA-256;
@@ -59,7 +58,28 @@ Before scoring, `research/cicids2017_validate.py` must record:
 - label distribution;
 - presence of both v1 classes.
 
-The exact evaluation sampling/splitting rule must be committed after inspecting metadata but **before** looking at method results. The baseline and AI-assisted method must score the same frozen evaluation rows.
+The benchmark v1 row-selection rule is now preregistered and implemented in `research/cicids2017_selection.py`:
+
+1. use only supported labels `BENIGN` and `SSH-Patator`;
+2. require at least 100 rows from each class;
+3. canonicalize every candidate CSV row;
+4. compute SHA-256 for each canonical row;
+5. within each class, select the 100 rows with the lexicographically smallest row hashes;
+6. combine the two classes into a 200-row evaluation set;
+7. evaluate those exact selected row numbers in original source order;
+8. bind the manifest to the exact dataset SHA-256.
+
+This rule is deterministic, balanced and independent of source-file ordering. It is fixed before any benchmark result is interpreted. If either class has fewer than 100 rows, benchmark v1 fails rather than silently changing sample size.
+
+Generate the frozen manifest with:
+
+```bash
+python -m research.cicids2017_selection /path/to/labelled_flows.csv \
+  --rows-per-class 100 \
+  --output research/results/evaluation_selection.json
+```
+
+Both the baseline and AI-assisted method must consume the same manifest.
 
 ## 4. Primary metrics
 
@@ -79,10 +99,10 @@ No manual metric transcription is considered source evidence.
 
 - Fixed dependency versions from the repository lockfiles.
 - Fixed dataset file SHA-256 or immutable retrieval manifest.
-- Fixed selection/split rule.
+- Fixed deterministic balanced row-selection rule.
+- Frozen row manifest shared by both compared methods.
 - Fixed model/version and configuration for AI runs.
 - Machine-readable run metadata.
-- Same evaluation rows for compared methods.
 - No raw public dataset committed into the repository.
 - Clean-environment reproduction commands documented before release.
 
@@ -106,4 +126,4 @@ Do not remove difficult records from the frozen evaluation set after results are
 
 ## 8. Reporting
 
-Each scored run must export machine-readable metrics and metadata under `research/results/`, including repository commit SHA, dataset SHA-256, method configuration, run timestamp and latency measurement. `REPORT.md` will contain interpretation, limitations and non-claims.
+Each scored run must export machine-readable metrics and metadata under `research/results/`, including repository commit SHA, dataset SHA-256, selection rule/manifest, method configuration, run timestamp and latency measurement. `REPORT.md` will contain interpretation, limitations and non-claims.
