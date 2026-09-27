@@ -8,8 +8,9 @@ This directory contains the research-evidence workflow used to compare a transpa
 - v1 labels: `BENIGN` and `SSH-Patator` only.
 - Deterministic baseline implemented.
 - Binary metrics implemented without external ML dependencies.
+- Deterministic balanced evaluation-row selection implemented.
 - Local-Ollama runner implemented with a label-free input allowlist and strict JSON response validation.
-- No benchmark result is claimed until the exact local dataset file and evaluation rows are frozen.
+- No benchmark result is claimed until the exact local dataset file and model configuration are frozen.
 
 ## 1. Obtain the dataset
 
@@ -22,31 +23,45 @@ python -m research.cicids2017_validate /path/to/labelled_flows.csv \
   --output research/results/dataset_manifest.json
 ```
 
-Review the manifest, then commit the exact SHA-256, row distribution and final evaluation-selection rule before interpreting results.
+Review the manifest and keep the exact file SHA-256.
 
-## 3. Run the deterministic baseline
+## 3. Freeze the exact evaluation rows
+
+Benchmark v1 is preregistered as **100 BENIGN + 100 SSH-Patator** rows. Within each class, the selector chooses the 100 canonical rows with the smallest SHA-256 values, then evaluates the combined set in original source order.
+
+```bash
+python -m research.cicids2017_selection /path/to/labelled_flows.csv \
+  --rows-per-class 100 \
+  --output research/results/evaluation_selection.json
+```
+
+The selection manifest is bound to the exact dataset SHA-256. If the CSV changes, the benchmark refuses to use the old manifest.
+
+## 4. Run the deterministic baseline
 
 ```bash
 python -m research.cicids2017_baseline /path/to/labelled_flows.csv \
+  --selection-manifest research/results/evaluation_selection.json \
   --output research/results/baseline.json
 ```
 
 The baseline is deliberately fixed as TCP destination port 22 -> escalate. Do not tune it after viewing results.
 
-## 4. Run the local AI method
+## 5. Run the local AI method
 
-Start Ollama locally with the preregistered model, then run a bounded evaluation:
+Start Ollama locally with the preregistered model, then run the **same 200 frozen rows**:
 
 ```bash
 python -m research.cicids2017_ai /path/to/labelled_flows.csv \
+  --selection-manifest research/results/evaluation_selection.json \
   --max-scored-rows 200 \
-  --model llama3.2 \
+  --model <frozen-model-identifier> \
   --output research/results/ai.json
 ```
 
-The final value of `--max-scored-rows`, the exact row-selection rule and the model/version identifier must be frozen before a scored comparison is treated as evidence.
+The exact model/version and supported generation configuration must be frozen before a scored comparison is treated as evidence.
 
-## 5. Interpret results
+## 6. Interpret results
 
 Use `REPORT.md`. Report precision, recall, F1, false-positive rate, false-negative rate, latency, model failures and representative failure cases. A negative result is valid evidence; do not post-hoc tune the experiment solely to force the AI method to win.
 
@@ -55,5 +70,6 @@ Use `REPORT.md`. Report precision, recall, F1, false-positive rate, false-negati
 - Dataset labels are never included in the AI prompt.
 - Unsupported CIC-IDS2017 labels are excluded rather than treated as benign.
 - Raw datasets are not committed.
+- Baseline and AI score the exact same frozen rows.
 - AI output is decision support only and must explicitly preserve human validation.
 - No autonomous remediation is evaluated or claimed.
