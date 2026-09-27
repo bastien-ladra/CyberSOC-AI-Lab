@@ -69,8 +69,7 @@ def inspect_dataset(path: Path, max_rows: int | None = None) -> dict[str, Any]:
             label_counts[normalized_label] += 1
 
     supported_counts = {
-        label: label_counts[label]
-        for label in sorted(V1_SUPPORTED_LABELS)
+        label: label_counts[label] for label in sorted(V1_SUPPORTED_LABELS)
     }
 
     return {
