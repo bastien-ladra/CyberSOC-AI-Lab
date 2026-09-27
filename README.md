@@ -22,9 +22,11 @@ CyberSOC-AI-Lab combine détection basée sur règles, preuves structurées, ass
 
 ## Benchmark de recherche reproductible
 
-Le dossier [`research/`](research/README.md) structure désormais une comparaison expérimentale entre une baseline déterministe et une assistance IA locale. La v1 sélectionne CIC-IDS2017 comme source publique, limite explicitement le scoring aux labels `BENIGN` et `SSH-Patator`, exclut le label de l'entrée du modèle et calcule les métriques automatiquement. Aucun résultat n'est revendiqué tant que le fichier source exact, son SHA-256, la sélection des lignes et la configuration du modèle ne sont pas figés.
+Le dossier [`research/`](research/README.md) structure une comparaison expérimentale entre une baseline déterministe et une assistance IA locale. La v1 cible le CSV CIC-IDS2017 du mardi, limite le scoring aux labels `BENIGN` et `SSH-Patator` et fige avant interprétation une sélection équilibrée de **200 lignes** : 100 par classe, déterminées par SHA-256 canonique et liées au SHA-256 exact du dataset. Les deux méthodes évaluent ensuite les mêmes lignes.
 
-Voir [`research/PROTOCOL.md`](research/PROTOCOL.md), [`research/DATASET.md`](research/DATASET.md) et [`research/REPORT.md`](research/REPORT.md).
+Le runner IA exclut le label de vérité terrain, impose la validation humaine, enregistre automatiquement le digest du modèle Ollama, la version du runtime et les paramètres de génération. Un lanceur unique, [`research/run_benchmark.py`](research/run_benchmark.py), produit les manifests et résultats machine. **Aucun résultat quantitatif n'est revendiqué tant que les octets exacts du dataset et le modèle local n'ont pas été exécutés et archivés.**
+
+Voir [`research/PROTOCOL.md`](research/PROTOCOL.md), [`research/DATASET.md`](research/DATASET.md), [`research/README.md`](research/README.md) et [`research/REPORT.md`](research/REPORT.md).
 
 ## Chaîne de traitement
 
@@ -53,6 +55,9 @@ L'assistant IA n'exécute aucune remédiation réelle. Il ne bloque pas d'IP, ne
 | Architecture | [`docs/architecture.md`](docs/architecture.md) |
 | Données et limites | [`docs/DATASET_CARD.md`](docs/DATASET_CARD.md) |
 | Protocole expérimental | [`docs/EXPERIMENT_PROTOCOL.md`](docs/EXPERIMENT_PROTOCOL.md) |
+| Benchmark reproductible | [`research/README.md`](research/README.md) |
+| Protocole benchmark | [`research/PROTOCOL.md`](research/PROTOCOL.md) |
+| Lanceur du benchmark | [`research/run_benchmark.py`](research/run_benchmark.py) |
 | Démo courte | [`docs/RECRUITER_QUICK_DEMO.md`](docs/RECRUITER_QUICK_DEMO.md) |
 | État courant | [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) |
 | CI Python / dépendances | [`.github/workflows/tests.yml`](.github/workflows/tests.yml) |
@@ -153,7 +158,7 @@ Les fichiers de `data/sample_logs/` sont des scénarios synthétiques destinés 
 
 ## Positionnement
 
-Ce projet sert de preuve technique à l'intersection **cybersécurité + IA responsable + engineering**. Il complète mon projet DevSecOps/supply-chain public en montrant une autre problématique : encadrer l'utilisation d'un modèle IA lorsqu'il consomme lui-même des données de sécurité potentiellement hostiles.
+Ce projet sert de preuve technique à l'intersection **cybersécurité + IA responsable + engineering**. Il complète mon projet DevSecOps/supply-chain public en montrant une autre problématique : encadrer l'utilisation d'un modèle IA lorsqu'il consomme lui-même des données de sécurité potentiellement hostiles. La branche de recherche ajoute une démarche expérimentale reproductible où un résultat nul ou négatif de l'IA reste considéré comme un résultat valide si le protocole préenregistré est respecté.
 
 ---
 
@@ -164,6 +169,8 @@ Ce projet sert de preuve technique à l'intersection **cybersécurité + IA resp
 It intentionally uses a constrained scope and synthetic data. It is **not presented as a production SOC, SIEM or EDR**. The core research/engineering question is how an AI assistant can help a security analyst while keeping untrusted log content separated from instructions and preserving human decision authority.
 
 Engineering evidence includes hash-locked dependencies, vulnerability auditing, a digest-pinned non-root container, Trivy scanning, CycloneDX SBOM generation, secret scanning and Python quality gates.
+
+The research branch also preregisters a reproducible CIC-IDS2017 benchmark: a deterministic baseline and local AI method score the same frozen 200-row selection, while dataset SHA-256, Ollama model digest, generation settings and machine-generated metrics are recorded before interpretation. No benchmark result is claimed until the exact local dataset and model have actually been executed.
 
 [French case study](https://bastien-ladra.github.io/portfolio-bastien-ladra/case-study-cybersoc-fr.html) · [English case study](https://bastien-ladra.github.io/portfolio-bastien-ladra/case-study-cybersoc.html) · [Portfolio](https://bastien-ladra.github.io/portfolio-bastien-ladra/?lang=en)
 
