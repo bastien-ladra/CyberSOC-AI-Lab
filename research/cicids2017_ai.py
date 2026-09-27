@@ -6,7 +6,7 @@ from pathlib import Path
 from time import perf_counter
 from typing import Any, Callable
 
-from ai_assistant.llm_client import query_ollama
+from ai_assistant.llm_client import get_ollama_model_metadata, query_ollama
 from research.cicids2017_selection import load_selection_manifest
 from research.metrics import compute_binary_metrics
 from utils.cic_ids2017_sample_parser import (
@@ -15,6 +15,9 @@ from utils.cic_ids2017_sample_parser import (
 )
 
 MAX_AI_SCORED_ROWS = 500
+DEFAULT_AI_TEMPERATURE = 0.0
+DEFAULT_AI_SEED = 20260927
+DEFAULT_AI_NUM_PREDICT = 128
 
 ALLOWED_INPUT_FIELDS = {
     "timestamp",
@@ -107,9 +110,18 @@ def parse_ai_response(response: str) -> tuple[bool, float, str]:
     return decision == "ESCALATE", float(confidence), rationale.strip()
 
 
-def _default_query(model: str, base_url: str) -> AIQuery:
+def _default_query(
+    model: str,
+    base_url: str,
+    generation_options: Mapping[str, Any],
+) -> AIQuery:
     def query(prompt: str) -> str | None:
-        return query_ollama(prompt, model=model, base_url=base_url)
+        return query_ollama(
+            prompt,
+            model=model,
+            base_url=base_url,
+            options=generation_options,
+        )
 
     return query
 
@@ -234,16 +246,40 @@ def main() -> int:
     parser.add_argument("--selection-manifest", type=Path, default=None)
     parser.add_argument("--model", default="llama3.2")
     parser.add_argument("--base-url", default="http://localhost:11434")
+    parser.add_argument("--temperature", type=float, default=DEFAULT_AI_TEMPERATURE)
+    parser.add_argument("--seed", type=int, default=DEFAULT_AI_SEED)
+    parser.add_argument("--num-predict", type=int, default=DEFAULT_AI_NUM_PREDICT)
     parser.add_argument("--output", type=Path, default=None)
     args = parser.parse_args()
+
+    if args.num_predict <= 0:
+        parser.error("--num-predict must be greater than zero")
+
+    model_metadata = get_ollama_model_metadata(args.model, args.base_url)
+    if model_metadata is None:
+        parser.error(
+            "could not resolve the local Ollama model digest; "
+            "refusing to run a scored benchmark without frozen model metadata"
+        )
+
+    generation_options = {
+        "temperature": args.temperature,
+        "seed": args.seed,
+        "num_predict": args.num_predict,
+    }
 
     result = evaluate_ai_method(
         csv_path=args.csv_path,
         max_scored_rows=args.max_scored_rows,
-        query=_default_query(args.model, args.base_url),
+        query=_default_query(
+            args.model,
+            args.base_url,
+            generation_options,
+        ),
         selection_manifest=args.selection_manifest,
     )
-    result["model"] = args.model
+    result["model_runtime"] = model_metadata
+    result["generation_options"] = generation_options
     result["base_url"] = args.base_url
     serialized = json.dumps(result, indent=2, sort_keys=True)
 
