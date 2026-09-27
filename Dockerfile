@@ -8,6 +8,11 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     STREAMLIT_BROWSER_GATHER_USAGE_STATS=false \
     HOME=/home/app
 
+# Patch PCRE2 CVEs reported by Trivy while keeping the security fix version explicit.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libpcre2-8-0=10.42-1+deb12u1 \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN groupadd --gid 65532 app \
     && useradd --uid 65532 --gid app --create-home --home-dir /home/app --shell /usr/sbin/nologin app
 
