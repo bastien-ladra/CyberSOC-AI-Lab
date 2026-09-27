@@ -46,12 +46,19 @@ def evaluate_baseline(
         reader = csv.DictReader(csv_file)
 
         for row_number, row in enumerate(reader, start=1):
-            if selected_row_numbers is None and max_rows is not None and rows_seen >= max_rows:
+            if (
+                selected_row_numbers is None
+                and max_rows is not None
+                and rows_seen >= max_rows
+            ):
                 break
 
             rows_seen += 1
 
-            if selected_row_numbers is not None and row_number not in selected_row_numbers:
+            if (
+                selected_row_numbers is not None
+                and row_number not in selected_row_numbers
+            ):
                 continue
 
             event = parse_cic_ids2017_sample_row(row)
