@@ -1,5 +1,0 @@
-research/metrics.py:59: error: Argument 1 to "_safe_divide" has incompatible type "float"; expected "int"  [arg-type]
-research/metrics.py:59: error: Argument 2 to "_safe_divide" has incompatible type "float"; expected "int"  [arg-type]
-research/cicids2017_validate.py:56: error: Argument 1 to "validate_header" has incompatible type "Sequence[str] | None"; expected "list[str] | None"  [arg-type]
-research/cicids2017_selection.py:61: error: Argument 1 to "validate_header" has incompatible type "Sequence[str] | None"; expected "list[str] | None"  [arg-type]
-Found 4 errors in 3 files (checked 48 source files)
